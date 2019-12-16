@@ -3,3 +3,4 @@
 
 # wt_frontend
 
+[![Coverage Status](https://coveralls.io/repos/github/LABS-EU3/wt_frontend/badge.svg?branch=develop)](https://coveralls.io/github/LABS-EU3/wt_frontend?branch=develop)
