@@ -18,12 +18,3 @@ export const GET_POKEMON_INFO = gql`
   }
 }
 `
-
-// {
-//     //sample code below
-//     const { data, loading, error } = useQuery(GET_POKEMON_INFO)
-//     if (loading) return <p>Loading...</p>;
-//     if (error) return <p>Error</p>;
-//     console.log(data)
-//     //sample code above
-// }
