@@ -10,7 +10,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-    uri: `https://graphql-pokemon.now.sh/`//replace with backend uri
+    uri: process.env.REACT_APP_GraphQL_API //replace with backend uri
 });
 
 const client = new ApolloClient({
