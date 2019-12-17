@@ -8,7 +8,7 @@ function App() {
       <CSSReset />
       <div className="App">
         <header className="App-header">
-          <h1>Welcome to our nameless Workout Tracker</h1>
+          <h1>Welcome to Track Drills</h1>
         </header>
       </div>
     </ThemeProvider>
