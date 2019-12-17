@@ -80,6 +80,9 @@ function Onboarding() {
             </MenuItem>
           </MenuList>
         </Menu>
+        <div>
+          <Button variantColor="orange">Submit</Button>
+        </div>
       </div>
     </Flex>
   );
