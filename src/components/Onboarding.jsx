@@ -36,6 +36,50 @@ function Onboarding() {
           inches
         </Button>
         <p>What is your fitness goal?</p>
+        <Menu>
+          <MenuButton as={Button} rightIcon="chevron-down">
+            Select a goal
+          </MenuButton>
+          <MenuList>
+            <MenuItem>Download</MenuItem>
+            <MenuItem>Create a Copy</MenuItem>
+            <MenuItem>Mark as Draft</MenuItem>
+            <MenuItem>Delete</MenuItem>
+            <MenuItem as="a" href="#">
+              Attend a Workshop
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <p>How experienced are you working out</p>
+        <Menu>
+          <MenuButton as={Button} rightIcon="chevron-down">
+            Select a goal
+          </MenuButton>
+          <MenuList>
+            <MenuItem>Download</MenuItem>
+            <MenuItem>Create a Copy</MenuItem>
+            <MenuItem>Mark as Draft</MenuItem>
+            <MenuItem>Delete</MenuItem>
+            <MenuItem as="a" href="#">
+              Attend a Workshop
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <p>What workout equipment do you have?</p>
+        <Menu>
+          <MenuButton as={Button} rightIcon="chevron-down">
+            Select a goal
+          </MenuButton>
+          <MenuList>
+            <MenuItem>Download</MenuItem>
+            <MenuItem>Create a Copy</MenuItem>
+            <MenuItem>Mark as Draft</MenuItem>
+            <MenuItem>Delete</MenuItem>
+            <MenuItem as="a" href="#">
+              Attend a Workshop
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </div>
     </Flex>
   );
