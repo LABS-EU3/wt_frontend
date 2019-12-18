@@ -5,7 +5,6 @@ import banner from "./assets/banner.jpg";
 
 const SignUpStyle = styled.div`
 
-    // border: 1px solid red;
     width: 100%;
     height: 100vh;
     color: black;
@@ -14,14 +13,12 @@ const SignUpStyle = styled.div`
 
 
     .signup-container{
-        // border: 1px solid yellow;
         width: 100%;
         height: 100%;
         display: flex;
     }
 
    .signup-banner{
-    //    border: 1px solid blue;
        width: 50%;
        opacity: 0.8;
 
@@ -40,22 +37,30 @@ const SignUpStyle = styled.div`
         display: flex;
         align-items: center;
         padding: 0 4rem;
+        
 
-        @media only screen and (max-width: 800px){
+        @media only screen and (max-width: 900px){
             width: 100%;
             text-align: centre;
+            border: 1px solid red;
         }
 
         form{
-            // border: 1px solid white;
             height: auto;
             width: 100%;
             text-align: left;
             padding: 2rem;
             display: flex;
             flex-direction: column;
-            justify-content:center;
-            alignt-items: center;
+            justify-content: center;
+            
+
+            @media only screen and (max-width: 900px){
+                height: 100%;
+                border: 1px solid red;
+                align-items: center;
+            }
+            
 
             a{
                 font-size: 16px;
@@ -72,6 +77,11 @@ const SignUpStyle = styled.div`
                 margin-top: 1rem;
                 width: 80%;
                 background-color: cream;
+
+                @media only screen and (max-width: 800px){
+                    margin: 2rem 0;
+                }
+
             }
 
             input[type=text], input[type=email], input[type=password]{
@@ -79,7 +89,8 @@ const SignUpStyle = styled.div`
             }
 
             h1{
-                
+                font-family: ubuntu;
+                font-weight: bold;
                 margin-bottom:2rem;
             }
 
@@ -115,10 +126,10 @@ function SignUp() {
         <div className="signup-form">
           <form>
             <h1>Sign up</h1>
-            <input name="FIRST NAME" type="text" />
-            <input name="LAST NAME" type="text" />
-            <input name="EMAIL" type="email" />
-            <input name="PASSWORD" type="password" />
+            <input placeholder="FIRST NAME" name="FIRST NAME" type="text" />
+            <input placeholder="LAST NAME" name="LAST NAME" type="text" />
+            <input placeholder="EMAIL" name="EMAIL" type="email" />
+            <input placeholder="PASSWORD" name="PASSWORD" type="password" />
             <Button
               className="signup-form-button"
               variantColor="orange"
