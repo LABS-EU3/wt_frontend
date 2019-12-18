@@ -8,17 +8,14 @@ import {
   Button,
   Input,
   Text,
-  Checkbox,
-  ButtonGroup
+  Checkbox
 } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-import { withFormik, Field, Form, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
 
 function Login(props) {
-  const { errors, touched, isSubmitting } = props;
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -34,20 +31,22 @@ function Login(props) {
         .min(8, "Must be minimum 8 characters")
         .required("Password is required")
     }),
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      console.log(values);
-      //   props.login(values, props.history);
-      //   resetForm();
-      //   setSubmitting(false);
-    }
+    onSubmit: props.onSubmit
   });
 
   return (
     <Flex>
-      <Image src={loginImage} display={{ base: "none", md: "block" }} />
+      <Image
+        src={loginImage}
+        display={{ base: "none", md: "block" }}
+        width="100%"
+        height="700px"
+        maxWidth="600px"
+        objectFit="cover"
+      />
 
       <Box paddingX="80px">
-        <Heading paddingTop="80px" paddingBottom="20px">
+        <Heading paddingTop="100px" paddingBottom="20px" textAlign="left">
           Login
         </Heading>
 
@@ -59,7 +58,6 @@ function Login(props) {
               placeholder="EMAIL"
               variant="filled"
               type="text"
-              //   minWidth="500px"
               onChange={formik.handleChange}
               value={formik.values.email}
               bg="#FFFCF2"
