@@ -6,17 +6,9 @@ import Login from "./components/LogIn";
 
 function App() {
   return (
-    <ThemeProvider
-      theme={{
-        ...theme,
-        fonts: { ...theme.fonts, body: "Roboto", heading: "Ubuntu" }
-      }}
-    >
-      <CSSReset />
-      <Router>
-        <Route exact path="/" component={Login} />
-      </Router>
-    </ThemeProvider>
+    <div className="App">
+      <Route exact path="/" component={Login} />
+    </div>
   );
 }
 
