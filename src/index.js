@@ -8,6 +8,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -22,7 +23,10 @@ const client = new ApolloClient({
 ReactDOM.render(
   <Router>
     <ApolloProvider client={client}>
-      <App />
+      <ThemeProvider>
+        <CSSReset />
+        <App />
+      </ThemeProvider>
     </ApolloProvider>
   </Router>,
   document.getElementById("root")
