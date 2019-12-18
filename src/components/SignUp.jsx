@@ -5,22 +5,29 @@ import banner from "./assets/banner.jpg";
 
 const SignUpStyle = styled.div`
 
-    border: 1px solid red;
+    // border: 1px solid red;
     width: 100%;
     height: 100vh;
     color: black;
+    background-color:white;
+
+
 
     .signup-container{
-        border: 1px solid yellow;
+        // border: 1px solid yellow;
         width: 100%;
         height: 100%;
         display: flex;
     }
 
    .signup-banner{
-       border: 1px solid blue;
+    //    border: 1px solid blue;
        width: 50%;
-       opacity: 0.5;
+       opacity: 0.8;
+
+        @media only screen and (max-width: 800px){
+            display: none;
+        }
 
        img{
            width: 100%;
@@ -29,21 +36,29 @@ const SignUpStyle = styled.div`
     }
 
     .signup-form{
-        border: 1px solid green;
         width: 50%;
         display: flex;
         align-items: center;
+        padding: 0 4rem;
+
+        @media only screen and (max-width: 800px){
+            width: 100%;
+            text-align: centre;
+        }
 
         form{
-            border: 1px solid white;
+            // border: 1px solid white;
             height: auto;
             width: 100%;
             text-align: left;
             padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            alignt-items: center;
 
             a{
                 font-size: 16px;
-                margin-left: 4.5rem;
                 margin-top: 1rem;
                 color: orange;
             }
@@ -54,7 +69,7 @@ const SignUpStyle = styled.div`
 
             input{
                 display: block
-                margin: 1rem auto;
+                margin-top: 1rem;
                 width: 80%;
                 background-color: cream;
             }
@@ -63,8 +78,8 @@ const SignUpStyle = styled.div`
                 background-color: #fffdd0;
             }
 
-            h3{
-                margin-left: 4.5rem;
+            h1{
+                
                 margin-bottom:2rem;
             }
 
@@ -72,7 +87,7 @@ const SignUpStyle = styled.div`
 
             .signup-form-button{
                 width: 80%;
-                margin-left: 4.5rem;
+                margin: 1rem 0;
             }
 
 
@@ -83,7 +98,6 @@ const SignUpStyle = styled.div`
             
         .signup-linked-profiles{
             width: 80%;
-            margin: 0 auto;
         }
 
     }
@@ -100,7 +114,7 @@ function SignUp() {
         </div>
         <div className="signup-form">
           <form>
-            <h3>Sign up</h3>
+            <h1>Sign up</h1>
             <input name="FIRST NAME" type="text" />
             <input name="LAST NAME" type="text" />
             <input name="EMAIL" type="email" />
