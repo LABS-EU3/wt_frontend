@@ -1,17 +1,16 @@
 import React from "react";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { Route } from "react-router-dom";
 import "./App.css";
+import PrivateRoute from "./components/PrivateRoute";
+import Login from "./components/LogIn";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <ThemeProvider>
-      <CSSReset />
-      <div className="App">
-        <header className="App-header">
-          <h1>Welcome to Track Drills</h1>
-        </header>
-      </div>
-    </ThemeProvider>
+    <div className="App" data-testid="App">
+      <Route exact path="/" component={Login} />
+      <PrivateRoute path="/app" component={Dashboard} />
+    </div>
   );
 }
 
