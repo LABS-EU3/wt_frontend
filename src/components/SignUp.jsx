@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "@chakra-ui/core";
-import banner from "./assets/banner.jpg";
+import banner from "../assets/banner.jpg";
 
 const SignUpStyle = styled.div`
 
@@ -42,7 +42,7 @@ const SignUpStyle = styled.div`
         @media only screen and (max-width: 900px){
             width: 100%;
             text-align: centre;
-            border: 1px solid red;
+            
         }
 
         form{
@@ -57,7 +57,6 @@ const SignUpStyle = styled.div`
 
             @media only screen and (max-width: 900px){
                 height: 100%;
-                border: 1px solid red;
                 align-items: center;
             }
             
@@ -105,10 +104,13 @@ const SignUpStyle = styled.div`
             .signup-linked-button{
                 width: 45%;
                 margin: 1rem 1rem 0 0;
+                
             }
             
         .signup-linked-profiles{
             width: 80%;
+            display: flex;
+            justify-content: center;
         }
 
     }
