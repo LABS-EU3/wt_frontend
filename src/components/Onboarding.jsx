@@ -3,20 +3,26 @@ import { Flex } from "@chakra-ui/core";
 import { Heading } from "@chakra-ui/core";
 import { Button } from "@chakra-ui/core";
 import { Select } from "@chakra-ui/core";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuGroup,
-  MenuDivider,
-  MenuOptionGroup,
-  MenuItemOption
-} from "@chakra-ui/core";
 import styled from "styled-components";
 import image from "../images/login_image.png";
+import { RadioButtonGroup } from "@chakra-ui/core";
 
 function Onboarding() {
+  const CustomRadio = React.forwardRef((props, ref) => {
+    const { isChecked, isDisabled, value, ...rest } = props;
+    return (
+      <Button
+        ref={ref}
+        color={isChecked ? "#ff8744" : "#CCC5B9"}
+        borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
+        aria-checked={isChecked}
+        role="radio"
+        isDisabled={isDisabled}
+        {...rest}
+      />
+    );
+  });
+
   return (
     <OnboardingStyled>
       <Flex justify="center">
@@ -28,39 +34,35 @@ function Onboarding() {
             <Heading className="heading" size="lg">
               Preferences
             </Heading>
-            <p>Which weight measurement unit do you prefer?</p>
-            <div className="btnGroup">
-              <Button
-                className="unitButton"
-                variantColor="orange"
-                variant="outline"
+            <div>
+              <p>Which weight measurement unit do you prefer?</p>
+              <RadioButtonGroup
+                className="btnGroup"
+                defaultValue="rad2"
+                onChange={val => console.log(val)}
+                isInline
               >
-                kilogram
-              </Button>
-              <Button
-                className="unitButton"
-                variantColor="orange"
-                variant="outline"
+                <CustomRadio className="unitButton" value="rad1">
+                  kilogram
+                </CustomRadio>
+                <CustomRadio className="unitButton" value="rad2">
+                  pounds
+                </CustomRadio>
+              </RadioButtonGroup>
+              <p>Which height measurement unit do you prefer?</p>
+              <RadioButtonGroup
+                className="btnGroup"
+                defaultValue="rad2"
+                onChange={val => console.log(val)}
+                isInline
               >
-                pounds
-              </Button>
-            </div>
-            <p>Which height measurement unit do you prefer?</p>
-            <div className="btnGroup">
-              <Button
-                className="unitButton"
-                variantColor="orange"
-                variant="outline"
-              >
-                meters
-              </Button>
-              <Button
-                className="unitButton"
-                variantColor="orange"
-                variant="outline"
-              >
-                inches
-              </Button>
+                <CustomRadio className="unitButton" value="rad1">
+                  meters
+                </CustomRadio>
+                <CustomRadio className="unitButton" value="rad2">
+                  inches
+                </CustomRadio>
+              </RadioButtonGroup>
             </div>
             <p>What is your fitness goal?</p>
             <Select className="dropdown" placeholder="Select a goal">
@@ -99,17 +101,17 @@ function Onboarding() {
 
 const OnboardingStyled = styled.div`
   .section-right {
-    margin: 0 auto;
+    margin: auto;
     width: 50vw;
     @media only screen and (max-width: 650px) {
       width: 90%;
     }
     div {
-      margin: 0 auto;
+      margin: auto;
       .btnGroup {
         .unitButton {
-          background-color: #fffcf2;
-          border: 1px solid #ff8744;
+          border: 2px solid;
+          background-color: transparent;
         }
         margin-top: 10px;
         margin-bottom: 15px;
