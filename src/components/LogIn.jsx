@@ -14,6 +14,31 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
+import Axios from "axios";
+
+// Ideally: axios.post("/register", values)
+function register(value) {
+  //   const backendIsReady = false;
+
+  //   if (backendIsReady) {
+  //     return Axios.post("/login", value);
+  //   }
+
+  return new Promise((resolve, reject) => {
+    const networkDelay = 2000; // 2sec
+
+    // mock response
+    const response = {
+      data: {
+        token: "sdfklsdbfsjbdfdsfsd444545"
+      }
+    };
+
+    setTimeout(() => {
+      resolve(response);
+    }, networkDelay);
+  });
+}
 
 function Login(props) {
   const formik = useFormik({
@@ -31,7 +56,15 @@ function Login(props) {
         .min(8, "Must be minimum 8 characters")
         .required("Password is required")
     }),
-    onSubmit: props.onSubmit
+    onSubmit: value => {
+      register(value)
+        .then(res => {
+          debugger;
+          localStorage.setItem("token", res.data.token);
+          props.history.push("/app");
+        })
+        .catch();
+    }
   });
 
   return (
@@ -72,7 +105,7 @@ function Login(props) {
               name="password"
               placeholder="PASSWORD"
               variant="filled"
-              type="text"
+              type="password"
               onChange={formik.handleChange}
               value={formik.values.password}
               bg="#FFFCF2"
