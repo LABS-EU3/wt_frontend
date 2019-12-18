@@ -128,10 +128,25 @@ function SignUp() {
         <div className="signup-form">
           <form>
             <h1>Sign up</h1>
-            <input placeholder="FIRST NAME" name="FIRST NAME" type="text" />
-            <input placeholder="LAST NAME" name="LAST NAME" type="text" />
-            <input placeholder="EMAIL" name="EMAIL" type="email" />
-            <input placeholder="PASSWORD" name="PASSWORD" type="password" />
+            <input
+              required
+              placeholder="FIRST NAME"
+              name="FIRST NAME"
+              type="text"
+            />
+            <input
+              required
+              placeholder="LAST NAME"
+              name="LAST NAME"
+              type="text"
+            />
+            <input required placeholder="EMAIL" name="EMAIL" type="email" />
+            <input
+              required
+              placeholder="PASSWORD"
+              name="PASSWORD"
+              type="password"
+            />
             <Button
               className="signup-form-button"
               variantColor="orange"
