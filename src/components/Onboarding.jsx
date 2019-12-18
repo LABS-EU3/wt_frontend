@@ -101,7 +101,9 @@ const OnboardingStyled = styled.div`
   .section-right {
     margin: 0 auto;
     width: 50vw;
-
+    @media only screen and (max-width: 650px) {
+      width: 90%;
+    }
     div {
       margin: 0 auto;
       .btnGroup {
