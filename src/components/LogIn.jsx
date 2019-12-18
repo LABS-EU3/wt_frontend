@@ -8,7 +8,8 @@ import {
   Button,
   Input,
   Text,
-  Checkbox
+  Checkbox,
+  ButtonGroup
 } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { withFormik, Field, Form, useFormik } from "formik";
@@ -43,23 +44,13 @@ function Login(props) {
 
   return (
     <Flex>
-      <Image src={loginImage} />
-      <Box paddingX="50px"></Box>
-      <Box>
+      <Image src={loginImage} display={{ base: "none", md: "block" }} />
+
+      <Box paddingX="80px">
         <Heading paddingTop="80px" paddingBottom="20px">
           Login
         </Heading>
 
-        {/* <Form>
-          <Stack spacing="40px">
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="checkbox" value="Remember me" /> Remember me<br></br>
-            <input type="submit" value="Login" />
-          </Stack>
-          <input type="submit" value="Login with Google" />
-          <input type="submit" value="Login with Facebook" />
-        </Form> */}
         <form onSubmit={formik.handleSubmit}>
           <Stack spacing="20px">
             <Input
@@ -68,7 +59,7 @@ function Login(props) {
               placeholder="EMAIL"
               variant="filled"
               type="text"
-              minWidth="500px"
+              //   minWidth="500px"
               onChange={formik.handleChange}
               value={formik.values.email}
               bg="#FFFCF2"
@@ -102,28 +93,26 @@ function Login(props) {
             >
               Login
             </Button>
-            <Flex justifyContent="space-between">
+            <Stack direction="row">
               <Button
                 type="submit"
                 variantColor="blue"
                 rightIcon="arrow-forward"
                 size="lg"
-                width="220px"
+                flex="1"
               >
                 Login with Google
               </Button>
               <Button
                 type="submit"
                 variantColor="facebook"
-                // bg="#3b5998"
-                // color="white"
                 rightIcon="arrow-forward"
                 size="lg"
-                width="220px"
+                flex="1"
               >
                 Login with Facebook
               </Button>
-            </Flex>
+            </Stack>
             <Link to="/accountrecovery">
               <Text
                 marginX="auto"
