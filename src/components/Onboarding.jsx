@@ -24,21 +24,43 @@ function Onboarding() {
         </div>
         <Flex className="section-right" flexDirection="column">
           <div>
-            <Heading size="lg">Preferences</Heading>
+            <Heading className="heading" size="lg">
+              Preferences
+            </Heading>
             <p>Which weight measurement unit do you prefer?</p>
-            <Button variantColor="orange" variant="outline">
-              kilogram
-            </Button>
-            <Button variantColor="orange" variant="outline">
-              pounds
-            </Button>
+            <div className="btnGroup">
+              <Button
+                className="unitButton"
+                variantColor="orange"
+                variant="outline"
+              >
+                kilogram
+              </Button>
+              <Button
+                className="unitButton"
+                variantColor="orange"
+                variant="outline"
+              >
+                pounds
+              </Button>
+            </div>
             <p>Which height measurement unit do you prefer?</p>
-            <Button variantColor="orange" variant="outline">
-              meters
-            </Button>
-            <Button variantColor="orange" variant="outline">
-              inches
-            </Button>
+            <div className="btnGroup">
+              <Button
+                className="unitButton"
+                variantColor="orange"
+                variant="outline"
+              >
+                meters
+              </Button>
+              <Button
+                className="unitButton"
+                variantColor="orange"
+                variant="outline"
+              >
+                inches
+              </Button>
+            </div>
             <p>What is your fitness goal?</p>
             <Menu>
               <MenuButton
@@ -105,14 +127,26 @@ const OnboardingStyled = styled.div`
   .section-right {
     margin: auto;
     width: 50vw;
-
     div {
       margin: 0 auto;
-
+      .btnGroup {
+        margin-top: 10px;
+        margin-bottom: 15px;
+        .unitButton:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+      .heading {
+        margin-bottom: 25px;
+      }
+      p {
+        margin-bottom: 10px;
+      }
       .dropdown,
       .submit {
         width: 100%;
         justify-content: space-between;
+        margin-bottom: 15px;
       }
     }
   }
