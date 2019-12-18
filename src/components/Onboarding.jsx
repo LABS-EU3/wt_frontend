@@ -70,13 +70,13 @@ function Onboarding() {
               <option value="option3">Healthy</option>
             </Select>
             <p>How experienced are you working out</p>
-            <Select className="dropdown" placeholder="Select a goal">
+            <Select className="dropdown" placeholder="Select a level">
               <option value="option1">Beginner</option>
               <option value="option3">Intermediate</option>
               <option value="option3">Expert</option>
             </Select>
             <p>What workout equipment do you have?</p>
-            <Select className="dropdown" placeholder="Select a goal">
+            <Select className="dropdown" placeholder="Select equipment">
               <option value="option1">None</option>
               <option value="option3">Some / Home</option>
               <option value="option3">Gym</option>
