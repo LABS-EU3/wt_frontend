@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "@chakra-ui/core";
+import banner from "./assets/banner.jpg";
 
 const SignUpStyle = styled.div`
 
@@ -19,6 +20,12 @@ const SignUpStyle = styled.div`
    .signup-banner{
        border: 1px solid blue;
        width: 50%;
+       opacity: 0.5;
+
+       img{
+           width: 100%;
+           height:100%;
+       }
     }
 
     .signup-form{
@@ -34,10 +41,31 @@ const SignUpStyle = styled.div`
             text-align: left;
             padding: 2rem;
 
+            a{
+                font-size: 16px;
+                margin-left: 4.5rem;
+                margin-top: 1rem;
+                color: orange;
+            }
+
+            a:hover{
+                color: grey;
+            }
+
             input{
                 display: block
                 margin: 1rem auto;
                 width: 80%;
+                background-color: cream;
+            }
+
+            input[type=text], input[type=email], input[type=password]{
+                background-color: #fffdd0;
+            }
+
+            h3{
+                margin-left: 4.5rem;
+                margin-bottom:2rem;
             }
 
            
@@ -60,6 +88,7 @@ const SignUpStyle = styled.div`
 
     }
 
+
 `;
 
 function SignUp() {
@@ -67,7 +96,7 @@ function SignUp() {
     <SignUpStyle>
       <div className="signup-container">
         <div className="signup-banner">
-          <img src="#" alt="banner" />
+          <img src={banner} alt="banner" />
         </div>
         <div className="signup-form">
           <form>
@@ -99,6 +128,7 @@ function SignUp() {
                 Facebook
               </Button>
             </div>
+            <a href="#">Already have an account?</a>
           </form>
         </div>
       </div>
