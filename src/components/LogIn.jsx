@@ -7,21 +7,46 @@ import {
   Heading,
   Button,
   Input,
-  Text
+  Text,
+  Checkbox
 } from "@chakra-ui/core";
-import { withFormik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
+import { withFormik, Field, Form, useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
 
 function Login(props) {
   const { errors, touched, isSubmitting } = props;
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validationSchema: yup.object().shape({
+      email: yup
+        .string()
+        .email()
+        .required("Please enter your email"),
+      password: yup
+        .string()
+        .min(8, "Must be minimum 8 characters")
+        .required("Password is required")
+    }),
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+      console.log(values);
+      //   props.login(values, props.history);
+      //   resetForm();
+      //   setSubmitting(false);
+    }
+  });
+
   return (
     <Flex>
       <Image src={loginImage} />
       <Box paddingX="50px"></Box>
       <Box>
-        <Heading paddingTop="60px" paddingBottom="20px">
+        <Heading paddingTop="80px" paddingBottom="20px">
           Login
         </Heading>
 
@@ -35,63 +60,92 @@ function Login(props) {
           <input type="submit" value="Login with Google" />
           <input type="submit" value="Login with Facebook" />
         </Form> */}
-        <Form>
-          <Stack spacing="20px" marginX="auto" maxWidth="350px">
-            <Box>
-              {errors.email && touched.email && <p>{errors.email}</p>}
-              <Field
-                name="email"
-                render={props => (
-                  <Input placeholder="Email" type="text" {...props.field} />
-                )}
-              />
-            </Box>
+        <form onSubmit={formik.handleSubmit}>
+          <Stack spacing="20px">
+            <Input
+              id="email"
+              name="email"
+              placeholder="EMAIL"
+              variant="filled"
+              type="text"
+              minWidth="500px"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+            />
+            <span>{formik.errors.email}</span>
 
-            <Box>
-              {errors.password && touched.password && <p>{errors.password}</p>}
-              <Field
-                name="password"
-                render={props => (
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    {...props.field}
-                  />
-                )}
-              />
-            </Box>
-
+            <Input
+              id="password"
+              name="password"
+              placeholder="PASSWORD"
+              variant="filled"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+            />
+            <Checkbox size="md" variantColor="orange">
+              Remember me
+            </Checkbox>
             <Button
-              isLoading={isSubmitting}
               type="submit"
+              variantColor="orange"
+              rightIcon="arrow-forward"
               size="lg"
-              variantColor="cyan"
             >
               Login
             </Button>
+            <Flex justifyContent="space-between">
+              <Button
+                type="submit"
+                variantColor="blue"
+                rightIcon="arrow-forward"
+                size="lg"
+                width="220px"
+              >
+                Login with Google
+              </Button>
+              <Button
+                type="submit"
+                variantColor="facebook"
+                // bg="#3b5998"
+                // color="white"
+                rightIcon="arrow-forward"
+                size="lg"
+                width="220px"
+              >
+                Login with Facebook
+              </Button>
+            </Flex>
+            <Link to="/accountrecovery">
+              <Text
+                marginX="auto"
+                marginTop="20px"
+                textAlign="left"
+                color="#D84727"
+              >
+                Forgot your password?
+              </Text>
+            </Link>
+            <Link to="/signup">
+              <Text
+                marginX="auto"
+                marginTop="20px"
+                textAlign="left"
+                color="#403D39"
+              >
+                Don't have an account? Sign up here!
+              </Text>
+            </Link>
           </Stack>
-
-          <Link to="/accountrecovery">
-            <Text
-              marginX="auto"
-              marginTop="20px"
-              textAlign="center"
-              maxWidth="350px"
-            >
-              Forgot your password?
-            </Text>
-          </Link>
-          <Link to="/signup">
-            <Text
-              marginX="auto"
-              marginTop="20px"
-              textAlign="center"
-              maxWidth="350px"
-            >
-              Don't have an account? Sign up here
-            </Text>
-          </Link>
-        </Form>
+        </form>
       </Box>
     </Flex>
   );
