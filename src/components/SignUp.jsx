@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/core";
 import banner from "../assets/banner.jpg";
 import SignUpStyle from "../styles/SignupStyles";
@@ -13,7 +13,7 @@ function SignUp() {
         </div>
         <div className="signup-form">
           <form>
-            <h1>Sign up</h1>
+            <h2>Sign up</h2>
             <input
               required
               placeholder="FIRST NAME"
@@ -56,7 +56,7 @@ function SignUp() {
                 Facebook
               </Button>
             </div>
-            <a href="#">Already have an account?</a>
+            <Link to="/">Already have an account?</Link>
           </form>
         </div>
       </div>

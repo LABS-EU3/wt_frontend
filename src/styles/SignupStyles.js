@@ -61,7 +61,7 @@ background-color:white;
         a{
             font-size: 16px;
             margin-top: 1rem;
-            color: orange;
+            color: #D84727;
         }
 
         a:hover{
@@ -85,10 +85,11 @@ background-color:white;
             background-color: #fffdd0;
         }
 
-        h1{
+        h2{
             font-family: ubuntu;
             font-weight: bold;
-            margin-bottom:2rem;
+            margin-bottom: 2rem;
+            font-size: 1.875rem;
         }
 
        
