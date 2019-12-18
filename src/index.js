@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -21,14 +21,19 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <Router>
-    <ApolloProvider client={client}>
-      <ThemeProvider>
+  <ApolloProvider client={client}>
+    <Router>
+      <ThemeProvider
+        theme={{
+          ...theme,
+          fonts: { ...theme.fonts, body: "Roboto", heading: "Ubuntu" }
+        }}
+      >
         <CSSReset />
         <App />
       </ThemeProvider>
-    </ApolloProvider>
-  </Router>,
+    </Router>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 
