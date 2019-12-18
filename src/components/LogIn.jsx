@@ -16,30 +16,6 @@ import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
 import Axios from "axios";
 
-// Ideally: axios.post("/register", values)
-function register(value) {
-  //   const backendIsReady = false;
-
-  //   if (backendIsReady) {
-  //     return Axios.post("/login", value);
-  //   }
-
-  return new Promise((resolve, reject) => {
-    const networkDelay = 2000; // 2sec
-
-    // mock response
-    const response = {
-      data: {
-        token: "sdfklsdbfsjbdfdsfsd444545"
-      }
-    };
-
-    setTimeout(() => {
-      resolve(response);
-    }, networkDelay);
-  });
-}
-
 function Login(props) {
   const formik = useFormik({
     initialValues: {
@@ -57,9 +33,8 @@ function Login(props) {
         .required("Password is required")
     }),
     onSubmit: value => {
-      register(value)
+      value
         .then(res => {
-          debugger;
           localStorage.setItem("token", res.data.token);
           props.history.push("/app");
         })
