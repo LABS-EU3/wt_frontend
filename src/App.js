@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-testid="App">
       <Route exact path="/" component={Login} />
       <PrivateRoute path="/app" component={Dashboard} />
     </div>
