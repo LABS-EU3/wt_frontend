@@ -99,8 +99,9 @@ function Onboarding() {
 
 const OnboardingStyled = styled.div`
   .section-right {
-    margin: auto;
+    margin: 0 auto;
     width: 50vw;
+
     div {
       margin: 0 auto;
       .btnGroup {
@@ -141,6 +142,9 @@ const OnboardingStyled = styled.div`
     }
   }
   .section-left {
+    @media only screen and (max-width: 650px) {
+      display: none;
+    }
     width: 50vw;
     img {
       width: 100%;
