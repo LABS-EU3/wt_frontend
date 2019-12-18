@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
-import Axios from "axios";
 
 function Login(props) {
   const formik = useFormik({
