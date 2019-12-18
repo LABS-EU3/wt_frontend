@@ -41,7 +41,11 @@ function Onboarding() {
             </Button>
             <p>What is your fitness goal?</p>
             <Menu>
-              <MenuButton as={Button} rightIcon="chevron-down">
+              <MenuButton
+                className="dropdown"
+                as={Button}
+                rightIcon="chevron-down"
+              >
                 Select a goal
               </MenuButton>
               <MenuList>
@@ -53,7 +57,11 @@ function Onboarding() {
             </Menu>
             <p>How experienced are you working out</p>
             <Menu>
-              <MenuButton as={Button} rightIcon="chevron-down">
+              <MenuButton
+                className="dropdown"
+                as={Button}
+                rightIcon="chevron-down"
+              >
                 Select a goal
               </MenuButton>
               <MenuList>
@@ -64,7 +72,11 @@ function Onboarding() {
             </Menu>
             <p>What workout equipment do you have?</p>
             <Menu>
-              <MenuButton as={Button} rightIcon="chevron-down">
+              <MenuButton
+                className="dropdown"
+                as={Button}
+                rightIcon="chevron-down"
+              >
                 Select a goal
               </MenuButton>
               <MenuList>
@@ -74,7 +86,13 @@ function Onboarding() {
               </MenuList>
             </Menu>
             <div>
-              <Button variantColor="orange">Submit</Button>
+              <Button
+                className="submit"
+                variantColor="orange"
+                rightIcon="arrow-forward"
+              >
+                Submit
+              </Button>
             </div>
           </div>
         </Flex>
@@ -90,6 +108,12 @@ const OnboardingStyled = styled.div`
 
     div {
       margin: 0 auto;
+
+      .dropdown,
+      .submit {
+        width: 100%;
+        justify-content: space-between;
+      }
     }
   }
   .section-left {
@@ -97,6 +121,7 @@ const OnboardingStyled = styled.div`
     img {
       width: 100%;
       height: 100vh;
+      object-fit: cover;
     }
   }
 `;
