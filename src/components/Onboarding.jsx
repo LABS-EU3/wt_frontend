@@ -2,6 +2,7 @@ import React from "react";
 import { Flex } from "@chakra-ui/core";
 import { Heading } from "@chakra-ui/core";
 import { Button } from "@chakra-ui/core";
+import { Select } from "@chakra-ui/core";
 import {
   Menu,
   MenuButton,
@@ -62,51 +63,24 @@ function Onboarding() {
               </Button>
             </div>
             <p>What is your fitness goal?</p>
-            <Menu>
-              <MenuButton
-                className="dropdown"
-                as={Button}
-                rightIcon="chevron-down"
-              >
-                Select a goal
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Weight Loss</MenuItem>
-                <MenuItem>Muscle Gain</MenuItem>
-                <MenuItem>Athletic</MenuItem>
-                <MenuItem>Healthy</MenuItem>
-              </MenuList>
-            </Menu>
+            <Select className="dropdown" placeholder="Select a goal">
+              <option value="option1">Weight Loss</option>
+              <option value="option2">Muscle Gain</option>
+              <option value="option3">Athletic</option>
+              <option value="option3">Healthy</option>
+            </Select>
             <p>How experienced are you working out</p>
-            <Menu>
-              <MenuButton
-                className="dropdown"
-                as={Button}
-                rightIcon="chevron-down"
-              >
-                Select a goal
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Beginner</MenuItem>
-                <MenuItem>Intermediate</MenuItem>
-                <MenuItem>Expert</MenuItem>
-              </MenuList>
-            </Menu>
+            <Select className="dropdown" placeholder="Select a goal">
+              <option value="option1">Beginner</option>
+              <option value="option3">Intermediate</option>
+              <option value="option3">Expert</option>
+            </Select>
             <p>What workout equipment do you have?</p>
-            <Menu>
-              <MenuButton
-                className="dropdown"
-                as={Button}
-                rightIcon="chevron-down"
-              >
-                Select a goal
-              </MenuButton>
-              <MenuList>
-                <MenuItem>None</MenuItem>
-                <MenuItem>Some / Home</MenuItem>
-                <MenuItem>Gym</MenuItem>
-              </MenuList>
-            </Menu>
+            <Select className="dropdown" placeholder="Select a goal">
+              <option value="option1">None</option>
+              <option value="option3">Some / Home</option>
+              <option value="option3">Gym</option>
+            </Select>
             <div>
               <Button
                 className="submit"
@@ -130,6 +104,10 @@ const OnboardingStyled = styled.div`
     div {
       margin: 0 auto;
       .btnGroup {
+        .unitButton {
+          background-color: #fffcf2;
+          border: 1px solid #ff8744;
+        }
         margin-top: 10px;
         margin-bottom: 15px;
         .unitButton:not(:last-child) {
@@ -141,12 +119,24 @@ const OnboardingStyled = styled.div`
       }
       p {
         margin-bottom: 10px;
+        font-family: Roboto;
       }
       .dropdown,
       .submit {
         width: 100%;
         justify-content: space-between;
         margin-bottom: 15px;
+      }
+      .submit {
+        background-color: #ff8744;
+      }
+      .dropdown {
+        background: #fffcf2;
+        border: 1px solid #252422;
+        box-sizing: border-box;
+      }
+      .dropdownOptions {
+        width: 30%;
       }
     }
   }
