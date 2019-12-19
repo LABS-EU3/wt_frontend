@@ -8,7 +8,8 @@ import {
 } from "@chakra-ui/core";
 import styled from "styled-components";
 import image from "../images/login_image.png";
-
+import { ONBOARDING } from "../graphql/mutations";
+console.log(ONBOARDING);
 const emptyAnswers = {
   heightUnit: "",
   weightUnit: "",
@@ -17,17 +18,20 @@ const emptyAnswers = {
   equipment: ""
 };
 
-function Onboarding() {
+function Onboarding(props) {
   const [answers, setAnswers] = useState(emptyAnswers);
 
   const handleChange = e => {
-    console.log(e);
-    setAnswers({ ...answers, [e.target.name]: e.target.innerText });
+    setAnswers({
+      ...answers,
+      [e.target.name]:
+        !e.target.value == "" ? e.target.value : e.target.innerText
+    });
   };
   console.log(answers);
 
   const CustomRadio = React.forwardRef((props, ref) => {
-    const { isChecked, isDisabled, value, ...rest } = props;
+    const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
     return (
       <Button
         ref={ref}
@@ -85,7 +89,12 @@ function Onboarding() {
               </RadioButtonGroup>
             </div>
             <p>What is your fitness goal?</p>
-            <Select className="dropdown" placeholder="Select a goal">
+            <Select
+              name="goal"
+              onChange={handleChange}
+              className="dropdown"
+              placeholder="Select a goal"
+            >
               <option value="option1">Weight Loss</option>
               <option value="option2">Muscle Gain</option>
               <option value="option3">Athletic</option>
