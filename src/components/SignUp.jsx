@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 import { Button } from "@chakra-ui/core";
 import banner from "../assets/banner.jpg";
 import SignUpStyle from "../styles/SignupStyles";
+
+//Google set up
+const responseGoogle = response => {
+  console.log(response);
+};
 
 function SignUp() {
   return (
@@ -41,13 +47,13 @@ function SignUp() {
               Sign up
             </Button>
             <div className="signup-linked-profiles">
-              <Button
-                className="signup-linked-button"
-                variantColor="orange"
-                rightIcon="arrow-forward"
-              >
-                Google
-              </Button>
+              <GoogleLogin
+                clientId="970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com"
+                buttonText="Sign up with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
 
               <Button
                 className="signup-linked-button"

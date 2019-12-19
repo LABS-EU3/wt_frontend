@@ -104,14 +104,16 @@ function Login(props) {
             >
               Login
             </Button>
-            <Stack direction="row">
-              <GoogleLogin
-                clientId="970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
+            <Stack direction="row" spacing={10}>
+              <Box>
+                <GoogleLogin
+                  clientId="970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com"
+                  buttonText="Login with Google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  cookiePolicy={"single_host_origin"}
+                />
+              </Box>
               <Button
                 type="submit"
                 variantColor="facebook"
