@@ -7,8 +7,21 @@ import SignUpStyle from "../styles/SignupStyles";
 import { withApollo } from "react-apollo";
 import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
 
+const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+
 function SignUp({ client, history }) {
   const toast = useToast();
+
+  const responseFailureGoogle = error => {
+    console.log(error);
+    toast({
+      title: "An error occurred.",
+      description: "Unable to login to your account.",
+      status: "error",
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
   const responseGoogle = response => {
     console.log(response.accessToken);
@@ -29,21 +42,24 @@ function SignUp({ client, history }) {
         } else {
           history.push("/signup");
         }
+        toast({
+          title: "Sign in Successful.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 9000,
+          isClosable: true
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        toast({
+          title: "An error occurred.",
+          description: "Unable to sign in to your account.",
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
       });
-    toast({
-      title: "Sign in Successful.",
-      description: "We've created your account for you.",
-      status: "success",
-      duration: 9000,
-      isClosable: true
-    }).catch(error => console.log(error));
-    toast({
-      title: "An error occurred.",
-      description: "Unable to sign in to your account.",
-      status: "error",
-      duration: 9000,
-      isClosable: true
-    });
   };
 
   return (
@@ -83,10 +99,10 @@ function SignUp({ client, history }) {
             </Button>
             <div className="signup-linked-profiles">
               <GoogleLogin
-                clientId="970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com"
+                clientId={REACT_APP_GOOGLE_CLIENT_ID}
                 buttonText="Sign up with Google"
                 onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
               />
 
