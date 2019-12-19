@@ -47,7 +47,8 @@ function Login(props) {
         src={loginImage}
         display={{ base: "none", md: "block" }}
         width="100%"
-        height="700px"
+        // height="700px"
+        height="100vh"
         maxWidth="600px"
         objectFit="cover"
       />
