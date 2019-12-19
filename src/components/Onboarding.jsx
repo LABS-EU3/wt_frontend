@@ -7,8 +7,9 @@ import {
   RadioButtonGroup
 } from "@chakra-ui/core";
 import styled from "styled-components";
+import { withApollo } from "react-apollo";
 import image from "../images/login_image.png";
-import { ONBOARDING } from "../graphql/mutations";
+import { ONBOARDING, ONBOARDING_SUDO } from "../graphql/mutations";
 console.log(ONBOARDING);
 const emptyAnswers = {
   heightUnit: "",
@@ -18,17 +19,41 @@ const emptyAnswers = {
   equipment: ""
 };
 
-function Onboarding(props) {
+function Onboarding({ client }) {
+  console.log(client);
   const [answers, setAnswers] = useState(emptyAnswers);
 
   const handleChange = e => {
     setAnswers({
       ...answers,
       [e.target.name]:
-        !e.target.value == "" ? e.target.value : e.target.innerText
+        !e.target.value === "" ? e.target.value : e.target.innerText
     });
   };
   console.log(answers);
+
+  const handleSubmit = async e => {
+    try {
+      e.preventDefault();
+      const res = await client.mutate({
+        mutation: ONBOARDING_SUDO,
+        variables: {
+          id: "5dfa575a243947001755168a",
+          heightUnit: answers.heightUnit,
+          weightUnit: answers.weightUnit,
+          goal: answers.goal,
+          experience: answers.experience,
+          equipment: answers.equipment
+        }
+      });
+
+      setAnswers(res.data);
+      debugger;
+    } catch (err) {
+      console.log(err);
+      debugger;
+    }
+  };
 
   const CustomRadio = React.forwardRef((props, ref) => {
     const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
@@ -49,7 +74,7 @@ function Onboarding(props) {
     <OnboardingStyled>
       <Flex justify="center">
         <div className="section-left">
-          <img src={image} />
+          <img src={image} alt="" />
         </div>
         <Flex className="section-right" flexDirection="column">
           <div>
@@ -127,6 +152,7 @@ function Onboarding(props) {
                 className="submit"
                 variantColor="orange"
                 rightIcon="arrow-forward"
+                onClick={handleSubmit}
               >
                 Submit
               </Button>
@@ -197,4 +223,4 @@ const OnboardingStyled = styled.div`
   }
 `;
 
-export default Onboarding;
+export default withApollo(Onboarding);

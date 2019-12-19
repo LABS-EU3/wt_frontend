@@ -24,3 +24,30 @@ export const ONBOARDING = gql`
     }
   }
 `;
+
+export const ONBOARDING_SUDO = gql`
+  mutation updateUser(
+    $heightUnit: String!
+    $weightUnit: String!
+    $goal: String!
+    $experience: String!
+    $equipment: String!
+  ) {
+    User(
+      input: {
+        id: "5dfa575a243947001755168a"
+        heightUnit: $heightUnit
+        weightUnit: $weightUnit
+        goal: $goal
+        experience: $experience
+        equipment: $equipment
+      }
+    ) {
+      id
+      heightUnit {
+        id
+        name
+      }
+    }
+  }
+`;
