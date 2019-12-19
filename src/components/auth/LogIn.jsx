@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
+
 import {
   Flex,
   Box,
@@ -43,10 +44,11 @@ function Login({ client, history }) {
     onSubmit: value => {
       value
         .then(res => {
+          console.log(res);
           localStorage.setItem("token", res.data.token);
           history.push("/app");
         })
-        .catch();
+        .catch(err => console.log(err));
     }
   });
 
@@ -84,6 +86,7 @@ function Login({ client, history }) {
         } else {
           history.push("/");
         }
+
         toast({
           title: "Login Successful.",
           description: "You can now access your dashboard",

@@ -107,7 +107,6 @@ function SignUp({ client, history }) {
       });
   };
 
-  console.log(firstname);
   return (
     <SignUpStyle>
       <div className="signup-container">
