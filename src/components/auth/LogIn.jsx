@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/core";
 
 import loginImage from "../../assets/login_image.png";
-import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
+import { GOOGLE_AUTH_MUTATION, LOGIN_MUTATION } from "../../graphql/mutations";
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
