@@ -4,13 +4,33 @@ import GoogleLogin from "react-google-login";
 import { Button } from "@chakra-ui/core";
 import banner from "../assets/banner.jpg";
 import SignUpStyle from "../styles/SignupStyles";
+import { withApollo } from "react-apollo";
+import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
 
-//Google set up
-const responseGoogle = response => {
-  console.log(response);
-};
+function SignUp({ client, history }) {
+  const responseGoogle = response => {
+    console.log(response.accessToken);
+    client
+      .mutate({
+        mutation: GOOGLE_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        console.log(res);
+        const { token, isNewUser } = res.data.authGoogle;
+        console.log(token);
+        localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
+        if (isNewUser === true) {
+          history.push("/app");
+        } else {
+          history.push("/signup");
+        }
+      })
 
-function SignUp() {
+      .catch(error => console.log(error));
+  };
   return (
     <SignUpStyle>
       <div className="signup-container">
@@ -71,4 +91,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default withApollo(SignUp);

@@ -15,13 +15,10 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
+import { withApollo } from "react-apollo";
+import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
 
-//Google set up
-const responseGoogle = response => {
-  console.log(response);
-};
-
-function Login(props) {
+function Login({ client, history }) {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -41,11 +38,36 @@ function Login(props) {
       value
         .then(res => {
           localStorage.setItem("token", res.data.token);
-          props.history.push("/app");
+          history.push("/app");
         })
         .catch();
     }
   });
+
+  const responseGoogle = response => {
+    console.log(response.accessToken);
+    client
+      .mutate({
+        mutation: GOOGLE_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        console.log(res);
+        const { token, isNewUser } = res.data.authGoogle;
+        console.log(token);
+        localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
+
+        if (isNewUser === true) {
+          history.push("/app");
+        } else {
+          history.push("/signup");
+        }
+      })
+
+      .catch(error => console.log(error));
+  };
 
   return (
     <Flex>
@@ -151,4 +173,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default withApollo(Login);
