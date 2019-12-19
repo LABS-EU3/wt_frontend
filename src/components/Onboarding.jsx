@@ -9,8 +9,8 @@ import {
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
 import image from "../images/login_image.png";
-import { ONBOARDING, ONBOARDING_SUDO } from "../graphql/mutations";
-console.log(ONBOARDING);
+import { ONBOARDING } from "../graphql/mutations";
+
 const emptyAnswers = {
   heightUnit: "",
   weightUnit: "",
@@ -20,14 +20,14 @@ const emptyAnswers = {
 };
 
 function Onboarding({ client }) {
-  console.log(client);
   const [answers, setAnswers] = useState(emptyAnswers);
 
   const handleChange = e => {
     setAnswers({
       ...answers,
-      [e.target.name]:
-        !e.target.value === "" ? e.target.value : e.target.innerText
+      [e.target.name]: !(e.target.value === "")
+        ? e.target.value
+        : e.target.innerText
     });
   };
   console.log(answers);
@@ -36,23 +36,20 @@ function Onboarding({ client }) {
     try {
       e.preventDefault();
       const res = await client.mutate({
-        mutation: ONBOARDING_SUDO,
+        mutation: ONBOARDING,
         variables: {
-          id: "5dfa575a243947001755168a",
-          heightUnit: "5dfa575a243947001755168a",
-          weightUnit: "5dfa575a243947001755168a",
+          id: JSON.parse(localStorage.getItem("id")),
+          heightUnit: answers.heightUnit,
+          weightUnit: answers.weightUnit,
           goal: answers.goal,
           experience: answers.experience,
-          equipment: "true"
+          equipment: answers.equipment
         }
       });
 
-      setAnswers(res.data);
       console.log(res.data);
-      debugger;
     } catch (err) {
       console.log(err);
-      debugger;
     }
   };
 
@@ -144,9 +141,8 @@ function Onboarding({ client }) {
               className="dropdown"
               placeholder="Select equipment"
             >
-              <option value="None">None</option>
-              <option value="Some / Home">Some / Home</option>
-              <option value="Gym">Gym</option>
+              <option value="false">None</option>
+              <option value="true">Gym</option>
             </Select>
             <div>
               <Button
