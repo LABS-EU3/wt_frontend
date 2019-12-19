@@ -84,21 +84,24 @@ function Login({ client, history }) {
         } else {
           history.push("/app");
         }
+        toast({
+          title: "Login Successful.",
+          description: "You can now access your dashboard",
+          status: "success",
+          duration: 9000,
+          isClosable: true
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        toast({
+          title: "An error occurred.",
+          description: "Unable to login to your account.",
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
       });
-    toast({
-      title: "Login Successful.",
-      description: "You can now access your dashboard",
-      status: "success",
-      duration: 9000,
-      isClosable: true
-    }).catch(error => console.log(error));
-    toast({
-      title: "An error occurred.",
-      description: "Unable to login to your account.",
-      status: "error",
-      duration: 9000,
-      isClosable: true
-    });
   };
 
   return (
