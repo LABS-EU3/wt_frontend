@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleLogin from "react-google-login";
 import {
   Flex,
   Box,
@@ -14,6 +15,11 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
+
+//Google set up
+const responseGoogle = response => {
+  console.log(response);
+};
 
 function Login(props) {
   const formik = useFormik({
@@ -99,15 +105,13 @@ function Login(props) {
               Login
             </Button>
             <Stack direction="row">
-              <Button
-                type="submit"
-                variantColor="blue"
-                rightIcon="arrow-forward"
-                size="lg"
-                flex="1"
-              >
-                Login with Google
-              </Button>
+              <GoogleLogin
+                clientId="970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
               <Button
                 type="submit"
                 variantColor="facebook"
