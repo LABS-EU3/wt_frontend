@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import loginImage from "../assets/login_image.png";
+import { LOGIN_MUTATION } from "../graphql/mutations";
 
 function Login(props) {
   const formik = useFormik({
@@ -47,7 +48,8 @@ function Login(props) {
         src={loginImage}
         display={{ base: "none", md: "block" }}
         width="100%"
-        height="700px"
+        // height="700px"
+        height="100vh"
         maxWidth="600px"
         objectFit="cover"
       />

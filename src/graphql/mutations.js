@@ -2,30 +2,38 @@ import React, { useRef } from "react";
 import { withApollo } from "react-apollo";
 import { gql } from "apollo-boost";
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation addUser(
     $firstname: String!
     $lastname: String!
     $email: String!
     $password: String!
+    $rePassword: String!
   ) {
     addUser(
-      firstname: $firstname
-      lastname: $lastname
-      email: $email
-      password: $password
-    )
+      input: {
+        firstname: $firstname
+        lastname: $lastname
+        email: $email
+        password: $password
+        rePassword: $rePassword
+      }
+    ) {
+      firstname
+      lastname
+      email
+      password
+    }
   }
 `;
 
-const LOGIN_MUTATION = gql`
-  mutation userLogin($email: String!, $password: String!){
-      login($email: String!, $password: String!){
-          id
-          username
-          email
-          token
-      }
+export const LOGIN_MUTATION = gql`
+  mutation userLogin($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      id
+      username
+      email
+      token
+    }
   }
-
 `;

@@ -12,7 +12,7 @@ import * as serviceWorker from "./serviceWorker";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: process.env.REACT_APP_GraphQL_API //replace with backend uri
+  uri: process.env.REACT_APP_GraphQL_API
 });
 
 const client = new ApolloClient({
