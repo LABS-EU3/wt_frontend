@@ -1,26 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
-import { Button, useToast } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/core";
 import banner from "../assets/banner.jpg";
 import SignUpStyle from "../styles/SignupStyles";
 import { withApollo } from "react-apollo";
+
+import Alert from "./common/Alert";
 import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
-  const toast = useToast();
-
   const responseFailureGoogle = error => {
     console.log(error);
-    toast({
-      title: "An error occurred.",
-      description: "Unable to login to your account.",
-      status: "error",
-      duration: 9000,
-      isClosable: true
-    });
+    return (
+      <Alert
+        title="An error occurred."
+        description="Unable to login to your account."
+        status="error"
+      />
+    );
   };
 
   const responseGoogle = response => {
@@ -42,23 +42,25 @@ function SignUp({ client, history }) {
         } else {
           history.push("/signup");
         }
-        toast({
-          title: "Sign in Successful.",
-          description: "We've created your account for you.",
-          status: "success",
-          duration: 9000,
-          isClosable: true
-        });
+
+        return (
+          <Alert
+            title="Sign in Successful."
+            description="We've created your account for you."
+            status="success"
+          />
+        );
       })
       .catch(error => {
         console.log(error);
-        toast({
-          title: "An error occurred.",
-          description: "Unable to sign in to your account.",
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
+
+        return (
+          <Alert
+            title="An error occurred."
+            description="Unable to sign in to your account."
+            status="error"
+          />
+        );
       });
   };
 
