@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Heading,
@@ -9,7 +9,23 @@ import {
 import styled from "styled-components";
 import image from "../images/login_image.png";
 
+const emptyAnswers = {
+  heightUnit: "",
+  weightUnit: "",
+  goal: "",
+  experience: "",
+  equipment: ""
+};
+
 function Onboarding() {
+  const [answers, setAnswers] = useState(emptyAnswers);
+
+  const handleChange = e => {
+    console.log(e);
+    setAnswers({ ...answers, [e.target.name]: e.target.innerText });
+  };
+  console.log(answers);
+
   const CustomRadio = React.forwardRef((props, ref) => {
     const { isChecked, isDisabled, value, ...rest } = props;
     return (
@@ -39,29 +55,31 @@ function Onboarding() {
             <div>
               <p>Which weight measurement unit do you prefer?</p>
               <RadioButtonGroup
+                name="heightUnit"
                 className="btnGroup"
-                defaultValue="rad2"
-                onChange={val => console.log(val)}
+                defaultValue="kilogram"
+                onClick={handleChange}
                 isInline
               >
-                <CustomRadio className="unitButton" value="rad1">
+                <CustomRadio className="unitButton" value="kilogram">
                   kilogram
                 </CustomRadio>
-                <CustomRadio className="unitButton" value="rad2">
+                <CustomRadio className="unitButton" value="pounds">
                   pounds
                 </CustomRadio>
               </RadioButtonGroup>
               <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
+                name="weightUnit"
                 className="btnGroup"
                 defaultValue="rad2"
-                onChange={val => console.log(val)}
+                onClick={handleChange}
                 isInline
               >
-                <CustomRadio className="unitButton" value="rad1">
+                <CustomRadio className="unitButton" value="meters">
                   meters
                 </CustomRadio>
-                <CustomRadio className="unitButton" value="rad2">
+                <CustomRadio className="unitButton" value="inches">
                   inches
                 </CustomRadio>
               </RadioButtonGroup>
