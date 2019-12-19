@@ -23,7 +23,7 @@ function SignUp({ client, history }) {
         console.log(token);
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
-          history.push("/app");
+          history.push("/onboarding");
         } else {
           history.push("/signup");
         }
