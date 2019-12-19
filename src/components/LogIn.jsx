@@ -9,7 +9,8 @@ import {
   Button,
   Input,
   Text,
-  Checkbox
+  Checkbox,
+  useToast
 } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
@@ -19,6 +20,8 @@ import { withApollo } from "react-apollo";
 import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
 
 function Login({ client, history }) {
+  const toast = useToast();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -55,18 +58,33 @@ function Login({ client, history }) {
       })
       .then(res => {
         console.log(res);
-        const { token, isNewUser } = res.data.authGoogle;
+        const { token, isNewUser, id } = res.data.authGoogle;
         console.log(token);
-        localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ token, isNewUser, id })
+        );
 
         if (isNewUser === true) {
-          history.push("/app");
+          history.push("/onboarding");
         } else {
-          history.push("/signup");
+          history.push("/app");
         }
-      })
-
-      .catch(error => console.log(error));
+      });
+    toast({
+      title: "Login Successful.",
+      description: "You can now access your dashboard",
+      status: "success",
+      duration: 9000,
+      isClosable: true
+    }).catch(error => console.log(error));
+    toast({
+      title: "An error occurred.",
+      description: "Unable to login to your account.",
+      status: "error",
+      duration: 9000,
+      isClosable: true
+    });
   };
 
   return (

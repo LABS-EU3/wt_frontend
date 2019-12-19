@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
-import { Button } from "@chakra-ui/core";
+import { Button, useToast } from "@chakra-ui/core";
 import banner from "../assets/banner.jpg";
 import SignUpStyle from "../styles/SignupStyles";
 import { withApollo } from "react-apollo";
 import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
 
 function SignUp({ client, history }) {
+  const toast = useToast();
+
   const responseGoogle = response => {
     console.log(response.accessToken);
     client
@@ -27,10 +29,23 @@ function SignUp({ client, history }) {
         } else {
           history.push("/signup");
         }
-      })
-
-      .catch(error => console.log(error));
+      });
+    toast({
+      title: "Sign in Successful.",
+      description: "We've created your account for you.",
+      status: "success",
+      duration: 9000,
+      isClosable: true
+    }).catch(error => console.log(error));
+    toast({
+      title: "An error occurred.",
+      description: "Unable to sign in to your account.",
+      status: "error",
+      duration: 9000,
+      isClosable: true
+    });
   };
+
   return (
     <SignUpStyle>
       <div className="signup-container">
