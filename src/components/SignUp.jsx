@@ -1,10 +1,70 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@chakra-ui/core";
+import GoogleLogin from "react-google-login";
+import { Button, useToast } from "@chakra-ui/core";
 import banner from "../assets/banner.jpg";
 import SignUpStyle from "../styles/SignupStyles";
+import { withApollo } from "react-apollo";
 
-function SignUp() {
+import { GOOGLE_AUTH_MUTATION } from "../graphql/mutations";
+
+const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+
+function SignUp({ client, history }) {
+  const toast = useToast();
+
+  const responseFailureGoogle = error => {
+    console.log(error);
+    toast({
+      title: "An error occurred.",
+      description: "Unable to login to your account.",
+      status: "error",
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
+  const responseGoogle = response => {
+    console.log(response.accessToken);
+    client
+      .mutate({
+        mutation: GOOGLE_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        console.log(res);
+        const { token, isNewUser } = res.data.authGoogle;
+        console.log(token);
+        localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
+        if (isNewUser === true) {
+          history.push("/onboarding");
+        } else {
+          history.push("/signup");
+        }
+
+        toast({
+          title: "Sign in Successful.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 9000,
+          isClosable: true
+        });
+      })
+      .catch(error => {
+        console.log(error);
+
+        toast({
+          title: "An error occurred.",
+          description: "Unable to login to your account.",
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
+      });
+  };
+
   return (
     <SignUpStyle>
       <div className="signup-container">
@@ -41,13 +101,14 @@ function SignUp() {
               Sign up
             </Button>
             <div className="signup-linked-profiles">
-              <Button
-                className="signup-linked-button"
-                variantColor="orange"
-                rightIcon="arrow-forward"
-              >
-                Google
-              </Button>
+              <GoogleLogin
+                clientId={REACT_APP_GOOGLE_CLIENT_ID}
+                buttonText="Sign up with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseFailureGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+
               <Button
                 className="signup-linked-button"
                 variantColor="orange"
@@ -64,4 +125,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default withApollo(SignUp);

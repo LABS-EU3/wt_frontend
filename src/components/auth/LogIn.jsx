@@ -1,4 +1,9 @@
 import React from "react";
+import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
+import { withApollo } from "react-apollo";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import {
   Flex,
   Box,
@@ -8,14 +13,18 @@ import {
   Button,
   Input,
   Text,
-  Checkbox
+  Checkbox,
+  useToast
 } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import loginImage from "../assets/login_image.png";
 
-function Login(props) {
+import loginImage from "../../assets/login_image.png";
+import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
+
+const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+
+function Login({ client, history }) {
+  const toast = useToast();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -35,11 +44,66 @@ function Login(props) {
       value
         .then(res => {
           localStorage.setItem("token", res.data.token);
-          props.history.push("/app");
+          history.push("/app");
         })
         .catch();
     }
   });
+
+  const responseFailureGoogle = error => {
+    console.log(error);
+    toast({
+      title: "An error occurred.",
+      description: "Unable to login to your account.",
+      status: "error",
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
+  const responseGoogle = response => {
+    console.log(response.accessToken);
+    client
+      .mutate({
+        mutation: GOOGLE_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        console.log(res);
+        const { token, isNewUser, id } = res.data.authGoogle;
+        console.log(token);
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ token, isNewUser, id })
+        );
+
+        if (isNewUser === true) {
+          history.push("/onboarding");
+        } else {
+          history.push("/app");
+        }
+        toast({
+          title: "Login Successful.",
+          description: "You can now access your dashboard",
+          status: "success",
+          duration: 9000,
+          isClosable: true
+        });
+      })
+      .catch(error => {
+        console.log(error);
+
+        toast({
+          title: "An error occurred.",
+          description: "Unable to login to your account.",
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
+      });
+  };
 
   return (
     <Flex>
@@ -47,13 +111,12 @@ function Login(props) {
         src={loginImage}
         display={{ base: "none", md: "block" }}
         width="100%"
-        // height="700px"
         height="100vh"
         maxWidth="600px"
         objectFit="cover"
       />
 
-      <Box paddingX="80px">
+      <Box paddingX="80px" height="100vh">
         <Heading paddingTop="100px" paddingBottom="20px" textAlign="left">
           Login
         </Heading>
@@ -99,16 +162,16 @@ function Login(props) {
             >
               Login
             </Button>
-            <Stack direction="row">
-              <Button
-                type="submit"
-                variantColor="blue"
-                rightIcon="arrow-forward"
-                size="lg"
-                flex="1"
-              >
-                Login with Google
-              </Button>
+            <Stack direction="row" spacing={10}>
+              <Box>
+                <GoogleLogin
+                  clientId={REACT_APP_GOOGLE_CLIENT_ID}
+                  buttonText="Login with Google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseFailureGoogle}
+                  cookiePolicy={"single_host_origin"}
+                />
+              </Box>
               <Button
                 type="submit"
                 variantColor="facebook"
@@ -146,4 +209,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default withApollo(Login);
