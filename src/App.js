@@ -10,10 +10,10 @@ import SignUp from "./components/SignUp";
 function App() {
   return (
     <div className="App" data-testid="App">
-      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
       <Route exact path="/signup" component={SignUp} />
-      <PrivateRoute path="/app" component={Dashboard} />
+      <PrivateRoute path="/" component={Dashboard} />
     </div>
   );
 }
