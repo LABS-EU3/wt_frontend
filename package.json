@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src",
+    "lint": "./node_modules/.bin/eslint src",
     "format": "prettier --write \"./src/**/*.{js,jsx}\"",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
@@ -56,11 +56,12 @@
     ]
   },
   "devDependencies": {
+    "coveralls": "^3.0.9",
+    "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
-    "coveralls": "^3.0.9",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "prettier": "^1.19.1"
   }
 }
