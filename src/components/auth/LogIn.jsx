@@ -13,18 +13,16 @@ import {
   Button,
   Input,
   Text,
-  Checkbox,
-  useToast
+  Checkbox
 } from "@chakra-ui/core";
 
+import Alert from "../common/Alert";
 import loginImage from "../../assets/login_image.png";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function Login({ client, history }) {
-  const toast = useToast();
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -52,13 +50,13 @@ function Login({ client, history }) {
 
   const responseFailureGoogle = error => {
     console.log(error);
-    toast({
-      title: "An error occurred.",
-      description: "Unable to login to your account.",
-      status: "error",
-      duration: 9000,
-      isClosable: true
-    });
+    return (
+      <Alert
+        title="An error occurred."
+        description="Unable to login to your account."
+        status="error"
+      />
+    );
   };
 
   const responseGoogle = response => {
@@ -84,23 +82,23 @@ function Login({ client, history }) {
         } else {
           history.push("/app");
         }
-        toast({
-          title: "Login Successful.",
-          description: "You can now access your dashboard",
-          status: "success",
-          duration: 9000,
-          isClosable: true
-        });
+        return (
+          <Alert
+            title="Login Successful."
+            description="You can now access your dashboard"
+            status="success"
+          />
+        );
       })
       .catch(error => {
         console.log(error);
-        toast({
-          title: "An error occurred.",
-          description: "Unable to login to your account.",
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
+        return (
+          <Alert
+            title="An error occurred."
+            description="Unable to login to your account."
+            status="error"
+          />
+        );
       });
   };
 
