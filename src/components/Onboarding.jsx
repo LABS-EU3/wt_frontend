@@ -95,22 +95,32 @@ function Onboarding(props) {
               className="dropdown"
               placeholder="Select a goal"
             >
-              <option value="option1">Weight Loss</option>
-              <option value="option2">Muscle Gain</option>
-              <option value="option3">Athletic</option>
-              <option value="option3">Healthy</option>
+              <option value="Weight Loss">Weight Loss</option>
+              <option value="Muscle Gain">Muscle Gain</option>
+              <option value="Athletic">Athletic</option>
+              <option value="Healthy">Healthy</option>
             </Select>
             <p>How experienced are you working out</p>
-            <Select className="dropdown" placeholder="Select a level">
-              <option value="option1">Beginner</option>
-              <option value="option3">Intermediate</option>
-              <option value="option3">Expert</option>
+            <Select
+              name="experience"
+              onChange={handleChange}
+              className="dropdown"
+              placeholder="Select a level"
+            >
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Expert">Expert</option>
             </Select>
             <p>What workout equipment do you have?</p>
-            <Select className="dropdown" placeholder="Select equipment">
-              <option value="option1">None</option>
-              <option value="option3">Some / Home</option>
-              <option value="option3">Gym</option>
+            <Select
+              name="equipment"
+              onChange={handleChange}
+              className="dropdown"
+              placeholder="Select equipment"
+            >
+              <option value="None">None</option>
+              <option value="Some / Home">Some / Home</option>
+              <option value="Gym">Gym</option>
             </Select>
             <div>
               <Button
