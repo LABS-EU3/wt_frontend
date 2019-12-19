@@ -1,11 +1,13 @@
 import React from "react";
-import { Flex } from "@chakra-ui/core";
-import { Heading } from "@chakra-ui/core";
-import { Button } from "@chakra-ui/core";
-import { Select } from "@chakra-ui/core";
+import {
+  Flex,
+  Heading,
+  Button,
+  Select,
+  RadioButtonGroup
+} from "@chakra-ui/core";
 import styled from "styled-components";
 import image from "../images/login_image.png";
-import { RadioButtonGroup } from "@chakra-ui/core";
 
 function Onboarding() {
   const CustomRadio = React.forwardRef((props, ref) => {
