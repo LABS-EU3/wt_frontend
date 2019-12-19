@@ -47,12 +47,12 @@ function Login(props) {
         src={loginImage}
         display={{ base: "none", md: "block" }}
         width="100%"
-        height="700px"
+        height="100vh"
         maxWidth="600px"
         objectFit="cover"
       />
 
-      <Box paddingX="80px">
+      <Box paddingX="80px" height="100vh">
         <Heading paddingTop="100px" paddingBottom="20px" textAlign="left">
           Login
         </Heading>
