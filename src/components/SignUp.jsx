@@ -48,6 +48,7 @@ function SignUp() {
               >
                 Google
               </Button>
+
               <Button
                 className="signup-linked-button"
                 variantColor="orange"
