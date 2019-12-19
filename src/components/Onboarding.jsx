@@ -39,15 +39,16 @@ function Onboarding({ client }) {
         mutation: ONBOARDING_SUDO,
         variables: {
           id: "5dfa575a243947001755168a",
-          heightUnit: answers.heightUnit,
-          weightUnit: answers.weightUnit,
+          heightUnit: "5dfa575a243947001755168a",
+          weightUnit: "5dfa575a243947001755168a",
           goal: answers.goal,
           experience: answers.experience,
-          equipment: answers.equipment
+          equipment: "true"
         }
       });
 
       setAnswers(res.data);
+      console.log(res.data);
       debugger;
     } catch (err) {
       console.log(err);

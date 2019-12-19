@@ -27,15 +27,16 @@ export const ONBOARDING = gql`
 
 export const ONBOARDING_SUDO = gql`
   mutation updateUser(
+    $id: String!
     $heightUnit: String!
     $weightUnit: String!
     $goal: String!
     $experience: String!
     $equipment: String!
   ) {
-    User(
+    updateUser(
       input: {
-        id: "5dfa575a243947001755168a"
+        id: $id
         heightUnit: $heightUnit
         weightUnit: $weightUnit
         goal: $goal
@@ -43,7 +44,7 @@ export const ONBOARDING_SUDO = gql`
         equipment: $equipment
       }
     ) {
-      id
+      email
       heightUnit {
         id
         name
