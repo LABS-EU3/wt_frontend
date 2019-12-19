@@ -82,7 +82,7 @@ function Login({ client, history }) {
         if (isNewUser === true) {
           history.push("/onboarding");
         } else {
-          history.push("/app");
+          history.push("/");
         }
         toast({
           title: "Login Successful.",

@@ -1,13 +1,12 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
-import banner from "../assets/banner.jpg";
-import SignUpStyle from "../styles/SignupStyles";
-import { withApollo } from "react-apollo";
 
-import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../graphql/mutations";
-
+import banner from "../../assets/banner.jpg";
+import SignUpStyle from "../../styles/SignupStyles";
+import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
@@ -31,12 +30,26 @@ function SignUp({ client, history }) {
         }
       })
       .then(response => {
-        console.log("Sucess!");
+        console.log(response);
+        toast({
+          title: "Sign up Successful.",
+          description: "Login with account details.",
+          status: "success",
+          duration: 9000,
+          isClosable: true
+        });
         history.push("/login");
       })
       .catch(error => {
-        console.log(error);
-        alert(error);
+        console.log(error.graphQLErrors[0].message);
+
+        toast({
+          title: "Error Sigin you up",
+          description: error.graphQLErrors[0].message,
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
       });
   }
 
@@ -70,7 +83,7 @@ function SignUp({ client, history }) {
         if (isNewUser === true) {
           history.push("/onboarding");
         } else {
-          history.push("/signup");
+          history.push("/");
         }
 
         toast({
@@ -94,6 +107,7 @@ function SignUp({ client, history }) {
       });
   };
 
+  console.log(firstname);
   return (
     <SignUpStyle>
       <div className="signup-container">
