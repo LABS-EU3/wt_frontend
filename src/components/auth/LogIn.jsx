@@ -44,6 +44,7 @@ function Login({ client, history }) {
     }),
 
     onSubmit: value => {
+      console.log(value);
       client
         .mutate({
           mutation: LOGIN_QUERY,
@@ -54,9 +55,8 @@ function Login({ client, history }) {
           }
         })
         .then(response => {
-          console.log(response);
           const { token, isNewUser } = response.data.authForm;
-          console.log(token);
+
           localStorage.setItem(
             "userData",
             JSON.stringify({ token, isNewUser })
@@ -75,7 +75,6 @@ function Login({ client, history }) {
           });
         })
         .catch(error => {
-          console.log(error);
           toast({
             title: "An error occurred.",
             description: "Unable to login to your account.",
@@ -88,7 +87,6 @@ function Login({ client, history }) {
   });
 
   const responseFailureGoogle = error => {
-    console.log(error);
     toast({
       title: "An error occurred.",
       description: "Unable to login to your account.",
@@ -99,7 +97,6 @@ function Login({ client, history }) {
   };
 
   const responseGoogle = response => {
-    console.log(response.accessToken);
     client
       .mutate({
         mutation: GOOGLE_AUTH_MUTATION,
@@ -108,9 +105,7 @@ function Login({ client, history }) {
         }
       })
       .then(res => {
-        console.log(res);
         const { token, isNewUser, id } = res.data.authGoogle;
-        console.log(token);
         localStorage.setItem(
           "userData",
           JSON.stringify({ token, isNewUser, id })
@@ -131,8 +126,6 @@ function Login({ client, history }) {
         });
       })
       .catch(error => {
-        console.log(error);
-
         toast({
           title: "An error occurred.",
           description: "Unable to login to your account.",
@@ -148,7 +141,7 @@ function Login({ client, history }) {
       <Image
         src={loginImage}
         display={{ base: "none", md: "block" }}
-        width="100%"
+        width="100vw"
         height="100vh"
         maxWidth="600px"
         objectFit="cover"
@@ -205,32 +198,47 @@ function Login({ client, history }) {
             >
               Login
             </Button>
-            <Stack direction="row" spacing={10}>
-              <Box>
+            <Flex direction={{ base: "column", md: "row" }}>
+              <Box width="100%">
                 <GoogleLogin
                   clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                  buttonText="Login with Google"
+                  render={renderProps => (
+                    <Button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      color="white"
+                      bg="#4c8bf5"
+                      rightIcon="arrow-forward"
+                      width="259px"
+                      size="lg"
+                    >
+                      Login with Google
+                    </Button>
+                  )}
+                  buttonText="Login"
                   onSuccess={responseGoogle}
-                  onFailure={responseFailureGoogle}
+                  onFailure={responseGoogle}
                   cookiePolicy={"single_host_origin"}
                 />
               </Box>
+              <Box size={4}></Box>
               <Button
                 type="submit"
                 variantColor="facebook"
+                flexShrink="0"
                 rightIcon="arrow-forward"
                 size="lg"
-                flex="1"
               >
                 Login with Facebook
               </Button>
-            </Stack>
+            </Flex>
             <Link to="/accountrecovery">
               <Text
                 marginX="auto"
                 marginTop="20px"
                 textAlign="left"
                 color="#D84727"
+                fontSize="20px"
               >
                 Forgot your password?
               </Text>
@@ -241,6 +249,7 @@ function Login({ client, history }) {
                 marginTop="20px"
                 textAlign="left"
                 color="#403D39"
+                _hover="orange"
               >
                 Don't have an account? Sign up here!
               </Text>
