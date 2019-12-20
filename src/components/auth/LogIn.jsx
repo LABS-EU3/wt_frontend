@@ -44,6 +44,7 @@ function Login({ client, history }) {
     }),
 
     onSubmit: value => {
+      console.log(value);
       client
         .mutate({
           mutation: LOGIN_QUERY,
@@ -54,9 +55,8 @@ function Login({ client, history }) {
           }
         })
         .then(response => {
-          console.log(response);
           const { token, isNewUser } = response.data.authForm;
-          console.log(token);
+
           localStorage.setItem(
             "userData",
             JSON.stringify({ token, isNewUser })
@@ -75,7 +75,6 @@ function Login({ client, history }) {
           });
         })
         .catch(error => {
-          console.log(error);
           toast({
             title: "An error occurred.",
             description: "Unable to login to your account.",
@@ -88,7 +87,6 @@ function Login({ client, history }) {
   });
 
   const responseFailureGoogle = error => {
-    console.log(error);
     toast({
       title: "An error occurred.",
       description: "Unable to login to your account.",
@@ -99,7 +97,6 @@ function Login({ client, history }) {
   };
 
   const responseGoogle = response => {
-    console.log(response.accessToken);
     client
       .mutate({
         mutation: GOOGLE_AUTH_MUTATION,
@@ -108,9 +105,7 @@ function Login({ client, history }) {
         }
       })
       .then(res => {
-        console.log(res);
         const { token, isNewUser, id } = res.data.authGoogle;
-        console.log(token);
         localStorage.setItem(
           "userData",
           JSON.stringify({ token, isNewUser, id })
@@ -131,8 +126,6 @@ function Login({ client, history }) {
         });
       })
       .catch(error => {
-        console.log(error);
-
         toast({
           title: "An error occurred.",
           description: "Unable to login to your account.",

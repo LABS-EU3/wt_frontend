@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
@@ -9,6 +9,7 @@ import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
+  const toast = useToast();
   const firstname = useRef();
   const lastname = useRef();
   const password = useRef();
@@ -28,8 +29,7 @@ function SignUp({ client, history }) {
           email: email.current.value
         }
       })
-      .then(response => {
-        console.log(response);
+      .then(() => {
         toast({
           title: "Sign up Successful.",
           description: "Login with account details.",
@@ -40,8 +40,6 @@ function SignUp({ client, history }) {
         history.push("/login");
       })
       .catch(error => {
-        console.log(error.graphQLErrors[0].message);
-
         toast({
           title: "Error Sigin you up",
           description: error.graphQLErrors[0].message,
@@ -52,10 +50,7 @@ function SignUp({ client, history }) {
       });
   }
 
-  const toast = useToast();
-
   const responseFailureGoogle = error => {
-    console.log(error);
     toast({
       title: "An error occurred.",
       description: "Unable to login to your account.",
@@ -66,7 +61,6 @@ function SignUp({ client, history }) {
   };
 
   const responseGoogle = response => {
-    console.log(response.accessToken);
     client
       .mutate({
         mutation: GOOGLE_AUTH_MUTATION,
@@ -75,12 +69,11 @@ function SignUp({ client, history }) {
         }
       })
       .then(res => {
-        console.log(res);
         const { token, isNewUser } = res.data.authGoogle;
-        console.log(token);
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
-          history.push("/onboarding");
+          return <Redirect to="/onboarding" />;
+          // history.push("/onboarding");
         } else {
           history.push("/");
         }
@@ -94,8 +87,6 @@ function SignUp({ client, history }) {
         });
       })
       .catch(error => {
-        console.log(error);
-
         toast({
           title: "An error occurred.",
           description: "Unable to login to your account.",
