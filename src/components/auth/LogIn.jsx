@@ -76,6 +76,13 @@ function Login({ client, history }) {
         })
         .catch(error => {
           console.log(error);
+          toast({
+            title: "An error occurred.",
+            description: "Unable to login to your account.",
+            status: "error",
+            duration: 9000,
+            isClosable: true
+          });
         });
     }
   });
