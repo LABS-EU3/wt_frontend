@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
-import banner from "../../assets/banner.jpg";
+import banner from "../../assets/banner.png";
 import SignUpStyle from "../../styles/SignupStyles";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
@@ -143,26 +143,43 @@ function SignUp({ client, history }) {
             />
 
             <Button
+              type="submit"
               className="signup-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
               onClick={onSubmit}
+              size="lg"
             >
               Sign up
             </Button>
             <div className="signup-linked-profiles">
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                buttonText="Sign up with Google"
+                render={renderProps => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    color="white"
+                    bg="#4C8BF5"
+                    rightIcon="arrow-forward"
+                    width="45%"
+                    size="lg"
+                  >
+                    Sign Up with Google
+                  </Button>
+                )}
+                buttonText="Login"
                 onSuccess={responseGoogle}
                 onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
               />
 
               <Button
-                className="signup-linked-button"
-                variantColor="orange"
+                type="submit"
+                variantColor="facebook"
                 rightIcon="arrow-forward"
+                size="lg"
+                width="45%"
               >
                 Facebook
               </Button>
