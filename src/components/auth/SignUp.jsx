@@ -39,14 +39,13 @@ function SignUp({ client, history }) {
         history.push("/login");
       })
       .catch(error => {
-        // toast({
-        //   title: "Error Sigin you up",
-        //   description: error.graphQLErrors[0].message,
-        //   status: "error",
-        //   duration: 9000,
-        //   isClosable: true
-        // });
-        console.log(error);
+        toast({
+          title: "Error Sigin you up",
+          description: error.graphQLErrors[0].message,
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
       });
   }
 

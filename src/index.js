@@ -29,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
       }
     };
   }
-  console.link("bb ");
+  console.log("bb ");
   return {
     headers: {
       ...headers
