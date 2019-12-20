@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { withApollo } from "react-apollo";
 import image from "../images/login_image.png";
 import { ONBOARDING } from "../graphql/mutations";
+import { GET_UNIT } from "../graphql/queries";
 
 const emptyAnswers = {
   heightUnit: "",
@@ -35,6 +36,17 @@ function Onboarding({ client }) {
   const handleSubmit = async e => {
     try {
       e.preventDefault();
+      const res = await client.query({
+        query: GET_UNIT
+      });
+      console.log(res.data);
+      debugger;
+    } catch (err) {
+      console.log(err);
+      debugger;
+    }
+    try {
+      e.preventDefault();
       const res = await client.mutate({
         mutation: ONBOARDING,
         variables: {
@@ -46,7 +58,6 @@ function Onboarding({ client }) {
           equipment: answers.equipment
         }
       });
-
       console.log(res.data);
     } catch (err) {
       console.log(err);

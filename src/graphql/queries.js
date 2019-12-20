@@ -18,12 +18,10 @@ export const GET_POKEMON_INFO = gql`
 `;
 
 export const GET_UNIT = gql`
-  {
-    query {
-      units {
-        id
-        name
-      }
+  query {
+    units {
+      id
+      name
     }
   }
 `;
