@@ -148,7 +148,7 @@ function Login({ client, history }) {
       <Image
         src={loginImage}
         display={{ base: "none", md: "block" }}
-        width="100%"
+        width="100vw"
         height="100vh"
         maxWidth="600px"
         objectFit="cover"
@@ -205,32 +205,47 @@ function Login({ client, history }) {
             >
               Login
             </Button>
-            <Stack direction="row" spacing={10}>
-              <Box>
+            <Flex direction={{ base: "column", md: "row" }}>
+              <Box width="100%">
                 <GoogleLogin
                   clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                  buttonText="Login with Google"
+                  render={renderProps => (
+                    <Button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      color="white"
+                      bg="#4c8bf5"
+                      rightIcon="arrow-forward"
+                      width="259px"
+                      size="lg"
+                    >
+                      Login with Google
+                    </Button>
+                  )}
+                  buttonText="Login"
                   onSuccess={responseGoogle}
-                  onFailure={responseFailureGoogle}
+                  onFailure={responseGoogle}
                   cookiePolicy={"single_host_origin"}
                 />
               </Box>
+              <Box size={4}></Box>
               <Button
                 type="submit"
                 variantColor="facebook"
+                flexShrink="0"
                 rightIcon="arrow-forward"
                 size="lg"
-                flex="1"
               >
                 Login with Facebook
               </Button>
-            </Stack>
+            </Flex>
             <Link to="/accountrecovery">
               <Text
                 marginX="auto"
                 marginTop="20px"
                 textAlign="left"
                 color="#D84727"
+                fontSize="20px"
               >
                 Forgot your password?
               </Text>
@@ -241,6 +256,7 @@ function Login({ client, history }) {
                 marginTop="20px"
                 textAlign="left"
                 color="#403D39"
+                _hover="orange"
               >
                 Don't have an account? Sign up here!
               </Text>
