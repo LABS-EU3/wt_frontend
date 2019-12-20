@@ -17,21 +17,9 @@ export const SIGNUP_MUTATION = gql`
         rePassword: $rePassword
       }
     ) {
-      firstname
-      lastname
-      email
-      password
-    }
-  }
-`;
-
-export const LOGIN_MUTATION = gql`
-  mutation userLogin($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
       id
-      username
-      email
       token
+      isNewUser
     }
   }
 `;

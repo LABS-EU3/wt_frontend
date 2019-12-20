@@ -18,7 +18,8 @@ import {
 } from "@chakra-ui/core";
 
 import loginImage from "../../assets/login_image.png";
-import { GOOGLE_AUTH_MUTATION, LOGIN_MUTATION } from "../../graphql/mutations";
+import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
+import { LOGIN_QUERY } from "../../graphql/queries";
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
@@ -28,7 +29,8 @@ function Login({ client, history }) {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: ""
+      password: "",
+      remember: false
     },
     validationSchema: yup.object().shape({
       email: yup
@@ -40,14 +42,48 @@ function Login({ client, history }) {
         .min(8, "Must be minimum 8 characters")
         .required("Password is required")
     }),
+
     onSubmit: value => {
-      value
-        .then(res => {
-          console.log(res);
-          localStorage.setItem("token", res.data.token);
-          history.push("/app");
+      client
+        .mutate({
+          mutation: LOGIN_QUERY,
+          variables: {
+            email: value.email,
+            password: value.password,
+            remember: value.remember
+          }
         })
-        .catch(err => console.log(err));
+        .then(response => {
+          console.log(response);
+          const { token, isNewUser } = response.data.authForm;
+          console.log(token);
+          localStorage.setItem(
+            "userData",
+            JSON.stringify({ token, isNewUser })
+          );
+          if (isNewUser === true) {
+            history.push("/onboarding");
+          } else {
+            history.push("/");
+          }
+          toast({
+            title: "Login Successful.",
+            description: "You can now access your dashboard",
+            status: "success",
+            duration: 9000,
+            isClosable: true
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          toast({
+            title: "An error occurred.",
+            description: "Unable to login to your account.",
+            status: "error",
+            duration: 9000,
+            isClosable: true
+          });
+        });
     }
   });
 
@@ -153,7 +189,12 @@ function Login({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
             />
-            <Checkbox size="md" variantColor="orange">
+            <Checkbox
+              size="md"
+              variantColor="orange"
+              onSelect={formik.handleChange}
+              value={true}
+            >
               Remember me
             </Checkbox>
             <Button

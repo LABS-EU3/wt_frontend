@@ -9,6 +9,65 @@ import {
 import styled from "styled-components";
 import image from "../images/login_image.png";
 
+const OnboardingStyled = styled.div`
+  .section-right {
+    margin: auto;
+    width: 50vw;
+    @media only screen and (max-width: 650px) {
+      width: 90%;
+    }
+    div {
+      margin: auto;
+      .btnGroup {
+        .unitButton {
+          border: 2px solid;
+          background-color: transparent;
+        }
+        margin-top: 10px;
+        margin-bottom: 15px;
+        .unitButton:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+      .heading {
+        margin-bottom: 25px;
+      }
+      p {
+        margin-bottom: 10px;
+        font-family: Roboto;
+      }
+      .dropdown,
+      .submit {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .submit {
+        background-color: #ff8744;
+      }
+      .dropdown {
+        background: #fffcf2;
+        border: 1px solid #252422;
+        box-sizing: border-box;
+      }
+      .dropdownOptions {
+        width: 30%;
+      }
+    }
+  }
+  .section-left {
+    @media only screen and (max-width: 650px) {
+      display: none;
+    }
+    width: 50vw;
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+  }
+`;
+
 function Onboarding() {
   const CustomRadio = React.forwardRef((props, ref) => {
     const { isChecked, isDisabled, value, ...rest } = props;
@@ -100,64 +159,5 @@ function Onboarding() {
     </OnboardingStyled>
   );
 }
-
-const OnboardingStyled = styled.div`
-  .section-right {
-    margin: auto;
-    width: 50vw;
-    @media only screen and (max-width: 650px) {
-      width: 90%;
-    }
-    div {
-      margin: auto;
-      .btnGroup {
-        .unitButton {
-          border: 2px solid;
-          background-color: transparent;
-        }
-        margin-top: 10px;
-        margin-bottom: 15px;
-        .unitButton:not(:last-child) {
-          margin-right: 20px;
-        }
-      }
-      .heading {
-        margin-bottom: 25px;
-      }
-      p {
-        margin-bottom: 10px;
-        font-family: Roboto;
-      }
-      .dropdown,
-      .submit {
-        width: 100%;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
-      .submit {
-        background-color: #ff8744;
-      }
-      .dropdown {
-        background: #fffcf2;
-        border: 1px solid #252422;
-        box-sizing: border-box;
-      }
-      .dropdownOptions {
-        width: 30%;
-      }
-    }
-  }
-  .section-left {
-    @media only screen and (max-width: 650px) {
-      display: none;
-    }
-    width: 50vw;
-    img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-    }
-  }
-`;
 
 export default Onboarding;
