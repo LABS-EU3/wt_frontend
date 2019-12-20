@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
@@ -9,6 +9,7 @@ import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
+  const toast = useToast();
   const firstname = useRef();
   const lastname = useRef();
   const password = useRef();
@@ -49,8 +50,6 @@ function SignUp({ client, history }) {
       });
   }
 
-  const toast = useToast();
-
   const responseFailureGoogle = error => {
     toast({
       title: "An error occurred.",
@@ -73,7 +72,8 @@ function SignUp({ client, history }) {
         const { token, isNewUser } = res.data.authGoogle;
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
-          history.push("/onboarding");
+          return <Redirect to="/onboarding" />;
+          // history.push("/onboarding");
         } else {
           history.push("/");
         }

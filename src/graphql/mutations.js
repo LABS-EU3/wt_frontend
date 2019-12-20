@@ -41,7 +41,7 @@ export const ONBOARDING = gql`
     $weightUnit: String!
     $goal: String!
     $experience: String!
-    $equipment: String!
+    $equipment: Boolean!
   ) {
     updateUser(
       input: {

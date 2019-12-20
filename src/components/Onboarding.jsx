@@ -4,13 +4,14 @@ import {
   Heading,
   Button,
   Select,
-  RadioButtonGroup
+  RadioButtonGroup,
+  useToast
 } from "@chakra-ui/core";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
 import image from "../images/login_image.png";
 import { ONBOARDING } from "../graphql/mutations";
-import { GET_UNIT } from "../graphql/queries";
+// import { GET_UNIT } from "../graphql/queries";
 import { getUserDetails } from "../utils";
 
 const userData = getUserDetails();
@@ -23,7 +24,8 @@ const emptyAnswers = {
   equipment: ""
 };
 
-function Onboarding({ client }) {
+function Onboarding({ client, history }) {
+  const toast = useToast();
   const [answers, setAnswers] = useState(emptyAnswers);
 
   const handleChange = e => {
@@ -49,21 +51,37 @@ function Onboarding({ client }) {
     //   debugger;
     // }
     try {
+      console.log(answers.heightUnit);
       e.preventDefault();
       const res = await client.mutate({
         mutation: ONBOARDING,
         variables: {
           id: userData.user_id,
-          heightUnit: answers.heightUnit,
-          weightUnit: answers.weightUnit,
+          heightUnit: userData.user_id,
+          weightUnit: userData.user_id,
           goal: answers.goal,
           experience: answers.experience,
-          equipment: answers.equipment
+          equipment: true
         }
       });
       console.log(res.data);
+      toast({
+        title: "Onboarding complete",
+        description: "You can now access your dashboard",
+        status: "success",
+        duration: 9000,
+        isClosable: true
+      });
+      history.push("/");
     } catch (err) {
       console.log(err);
+      toast({
+        title: "Unable to complete onboarding",
+        description: "Kindly check input and try again.",
+        status: "error",
+        duration: 9000,
+        isClosable: true
+      });
     }
   };
 
