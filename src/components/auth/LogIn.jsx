@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Input from "../common/Input";
 import {
   Flex,
   Box,
@@ -11,14 +12,13 @@ import {
   Stack,
   Heading,
   Button,
-  Input,
   Text,
   Checkbox,
   useToast
 } from "@chakra-ui/core";
 
 import loginImage from "../../assets/login_image.png";
-import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
+import { GOOGLE_AUTH_MUTATION, LOGIN_MUTATION } from "../../graphql/mutations";
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
@@ -43,10 +43,11 @@ function Login({ client, history }) {
     onSubmit: value => {
       value
         .then(res => {
+          console.log(res);
           localStorage.setItem("token", res.data.token);
           history.push("/app");
         })
-        .catch();
+        .catch(err => console.log(err));
     }
   });
 
@@ -82,8 +83,9 @@ function Login({ client, history }) {
         if (isNewUser === true) {
           history.push("/onboarding");
         } else {
-          history.push("/app");
+          history.push("/");
         }
+
         toast({
           title: "Login Successful.",
           description: "You can now access your dashboard",
