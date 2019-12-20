@@ -164,7 +164,20 @@ function SignUp({ client, history }) {
             <div className="signup-linked-profiles">
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                buttonText="Sign up with Google"
+                render={renderProps => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    color="white"
+                    bg="#4C8BF5"
+                    rightIcon="arrow-forward"
+                    width="45%"
+                    size="lg"
+                  >
+                    Sign Up with Google
+                  </Button>
+                )}
+                buttonText="Login"
                 onSuccess={responseGoogle}
                 onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
@@ -175,6 +188,7 @@ function SignUp({ client, history }) {
                 variantColor="facebook"
                 rightIcon="arrow-forward"
                 size="lg"
+                width="45%"
               >
                 Facebook
               </Button>
