@@ -6,6 +6,7 @@ import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { setContext } from "apollo-link-context";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -15,9 +16,27 @@ const link = new HttpLink({
   uri: process.env.REACT_APP_GraphQL_API
 });
 
+const authLink = setContext((_, { headers }) => {
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  console.log(userData);
+  if (userData.token) {
+    return {
+      headers: {
+        ...headers,
+        authorization: userData.token
+      }
+    };
+  }
+  return {
+    headers: {
+      ...headers
+    }
+  };
+});
+
 const client = new ApolloClient({
   cache,
-  link
+  link: authLink.concat(link)
 });
 
 ReactDOM.render(
