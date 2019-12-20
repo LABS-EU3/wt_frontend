@@ -72,8 +72,7 @@ function SignUp({ client, history }) {
         const { token, isNewUser } = res.data.authGoogle;
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
-          return <Redirect to="/onboarding" />;
-          // history.push("/onboarding");
+          history.push("/onboarding");
         } else {
           history.push("/");
         }
