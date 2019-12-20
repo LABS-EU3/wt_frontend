@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import Input from "../common/Input";
 import {
   Flex,
   Box,
@@ -12,7 +12,6 @@ import {
   Stack,
   Heading,
   Button,
-  Input,
   Text,
   Checkbox,
   useToast

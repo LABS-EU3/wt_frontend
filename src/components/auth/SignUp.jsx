@@ -177,7 +177,7 @@ function SignUp({ client, history }) {
                 Facebook
               </Button>
             </div>
-            <Link to="/">Already have an account?</Link>
+            <Link to="/login">Already have an account?</Link>
           </form>
         </div>
       </div>
