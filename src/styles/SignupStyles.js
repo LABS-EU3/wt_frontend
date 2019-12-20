@@ -46,10 +46,13 @@ const SignUpStyle = styled.div`
       flex-direction: column;
       justify-content: center;
       margin-top: 2rem;
+      align-items: center;
 
       @media only screen and (max-width: 900px) {
-        height: 100%;
+        margin-top: 0;
         align-items: center;
+        justify-content: flex-start;
+        padding: 0;
       }
 
       a {
@@ -71,6 +74,9 @@ const SignUpStyle = styled.div`
 
         @media only screen and (max-width: 800px) {
           margin: 2rem 0;
+          padding: 0.5rem;
+          margin-top: 0;
+          border-radius: 5px;
         }
       }
 
@@ -86,22 +92,39 @@ const SignUpStyle = styled.div`
         margin-bottom: 2rem;
         font-size: 1.875rem;
         text-align: left;
+        width: 100%;
+        margin-left: 7rem;
+
+        @media only screen and (max-width: 800px) {
+          margin-left: 5rem;
+          margin-bottom: 1rem;
+        }
       }
 
       .signup-form-button {
         width: 80%;
         margin: 1rem 0;
-      }
-
-      .signup-linked-button {
-        width: 45%;
-        margin: 1rem 1rem 0 0;
+        @media only screen and (max-width: 800px) {
+          padding: 1rem;
+        }
       }
 
       .signup-linked-profiles {
-        width: 80%;
+        width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
+        align-items: center;
+
+        @media only screen and (max-width: 800px) {
+          flex-direction: column;
+        }
+
+        button {
+          @media only screen and (max-width: 800px) {
+            margin: 1rem 0;
+            width: 80%;
+          }
+        }
       }
     }
   }

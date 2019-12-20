@@ -152,6 +152,7 @@ function SignUp({ client, history }) {
             />
 
             <Button
+              type="submit"
               className="signup-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
@@ -170,8 +171,8 @@ function SignUp({ client, history }) {
               />
 
               <Button
-                className="signup-linked-button"
-                variantColor="orange"
+                type="submit"
+                variantColor="facebook"
                 rightIcon="arrow-forward"
                 size="lg"
               >
