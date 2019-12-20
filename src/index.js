@@ -21,7 +21,6 @@ const link = new HttpLink({
 
 const authLink = setContext((_, { headers }) => {
   if (userData) {
-    console.log("aaa");
     return {
       headers: {
         ...headers,
@@ -29,7 +28,6 @@ const authLink = setContext((_, { headers }) => {
       }
     };
   }
-  console.log("bb ");
   return {
     headers: {
       ...headers
