@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
-import banner from "../../assets/banner.jpg";
+import banner from "../../assets/banner.png";
 import SignUpStyle from "../../styles/SignupStyles";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
@@ -156,6 +156,7 @@ function SignUp({ client, history }) {
               variantColor="orange"
               rightIcon="arrow-forward"
               onClick={onSubmit}
+              size="lg"
             >
               Sign up
             </Button>
@@ -172,6 +173,7 @@ function SignUp({ client, history }) {
                 className="signup-linked-button"
                 variantColor="orange"
                 rightIcon="arrow-forward"
+                size="lg"
               >
                 Facebook
               </Button>

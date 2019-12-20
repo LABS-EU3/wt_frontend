@@ -45,6 +45,7 @@ const SignUpStyle = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-top: 2rem;
 
       @media only screen and (max-width: 900px) {
         height: 100%;
@@ -76,7 +77,7 @@ const SignUpStyle = styled.div`
       input[type="text"],
       input[type="email"],
       input[type="password"] {
-        background-color: #fffdd0;
+        background-color: #fffcf2;
       }
 
       h2 {
@@ -84,6 +85,7 @@ const SignUpStyle = styled.div`
         font-weight: bold;
         margin-bottom: 2rem;
         font-size: 1.875rem;
+        text-align: left;
       }
 
       .signup-form-button {
