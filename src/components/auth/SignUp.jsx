@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";

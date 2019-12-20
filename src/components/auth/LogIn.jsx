@@ -44,7 +44,6 @@ function Login({ client, history }) {
     }),
 
     onSubmit: value => {
-      console.log(value);
       client
         .mutate({
           mutation: LOGIN_QUERY,
@@ -217,7 +216,7 @@ function Login({ client, history }) {
                   )}
                   buttonText="Login"
                   onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
+                  onFailure={responseFailureGoogle}
                   cookiePolicy={"single_host_origin"}
                 />
               </Box>
