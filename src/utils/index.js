@@ -2,6 +2,10 @@ import jwtDecode from "jwt-decode";
 
 export const isLoggedIn = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
+  if (!userData) {
+    return false;
+  }
+
   if (userData.token) {
     const decodedToken = jwtDecode(userData.token);
 
@@ -20,6 +24,10 @@ export const isLoggedIn = () => {
 
 export const getUserDetails = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
+
+  if (!userData) {
+    return null;
+  }
 
   if (userData.token) {
     const { id, exp } = jwtDecode(userData.token);

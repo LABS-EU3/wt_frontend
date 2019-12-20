@@ -44,6 +44,7 @@ function Login({ client, history }) {
     }),
 
     onSubmit: value => {
+      console.log(value);
       client
         .mutate({
           mutation: LOGIN_QUERY,
