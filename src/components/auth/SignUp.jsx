@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
-
 import banner from "../../assets/banner.jpg";
 import SignUpStyle from "../../styles/SignupStyles";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
