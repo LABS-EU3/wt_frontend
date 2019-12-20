@@ -1,6 +1,4 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { gql } from "apollo-boost";
 
 export const GET_POKEMON_INFO = gql`
   {
@@ -14,6 +12,17 @@ export const GET_POKEMON_INFO = gql`
         number
         name
         image
+      }
+    }
+  }
+`;
+
+export const GET_UNIT = gql`
+  {
+    query {
+      units {
+        id
+        name
       }
     }
   }
