@@ -11,6 +11,9 @@ import { withApollo } from "react-apollo";
 import image from "../images/login_image.png";
 import { ONBOARDING } from "../graphql/mutations";
 import { GET_UNIT } from "../graphql/queries";
+import { getUserDetails } from "../utils";
+
+const userData = getUserDetails();
 
 const emptyAnswers = {
   heightUnit: "",
@@ -34,23 +37,23 @@ function Onboarding({ client }) {
   console.log(answers);
 
   const handleSubmit = async e => {
-    try {
-      e.preventDefault();
-      const res = await client.query({
-        query: GET_UNIT
-      });
-      console.log(res.data);
-      debugger;
-    } catch (err) {
-      console.log(err);
-      debugger;
-    }
+    // try {
+    //   e.preventDefault();
+    //   const res = await client.query({
+    //     query: GET_UNIT
+    //   });
+    //   console.log(res.data);
+    //   debugger;
+    // } catch (err) {
+    //   console.log(err);
+    //   debugger;
+    // }
     try {
       e.preventDefault();
       const res = await client.mutate({
         mutation: ONBOARDING,
         variables: {
-          id: JSON.parse(localStorage.getItem("id")),
+          id: userData.user_id,
           heightUnit: answers.heightUnit,
           weightUnit: answers.weightUnit,
           goal: answers.goal,

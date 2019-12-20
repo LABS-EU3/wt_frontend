@@ -28,8 +28,7 @@ function SignUp({ client, history }) {
           email: email.current.value
         }
       })
-      .then(response => {
-        console.log(response);
+      .then(() => {
         toast({
           title: "Sign up Successful.",
           description: "Login with account details.",
@@ -40,8 +39,6 @@ function SignUp({ client, history }) {
         history.push("/login");
       })
       .catch(error => {
-        console.log(error.graphQLErrors[0].message);
-
         toast({
           title: "Error Sigin you up",
           description: error.graphQLErrors[0].message,
@@ -55,7 +52,6 @@ function SignUp({ client, history }) {
   const toast = useToast();
 
   const responseFailureGoogle = error => {
-    console.log(error);
     toast({
       title: "An error occurred.",
       description: "Unable to login to your account.",
@@ -66,7 +62,6 @@ function SignUp({ client, history }) {
   };
 
   const responseGoogle = response => {
-    console.log(response.accessToken);
     client
       .mutate({
         mutation: GOOGLE_AUTH_MUTATION,
@@ -75,9 +70,7 @@ function SignUp({ client, history }) {
         }
       })
       .then(res => {
-        console.log(res);
         const { token, isNewUser } = res.data.authGoogle;
-        console.log(token);
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
           history.push("/onboarding");
@@ -94,8 +87,6 @@ function SignUp({ client, history }) {
         });
       })
       .catch(error => {
-        console.log(error);
-
         toast({
           title: "An error occurred.",
           description: "Unable to login to your account.",

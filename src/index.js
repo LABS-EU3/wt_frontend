@@ -10,6 +10,9 @@ import { setContext } from "apollo-link-context";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { getUserDetails } from "./utils";
+
+const userData = getUserDetails();
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -17,9 +20,7 @@ const link = new HttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  console.log(userData);
-  if (userData.token) {
+  if (userData) {
     return {
       headers: {
         ...headers,
