@@ -18,3 +18,15 @@ export const GET_POKEMON_INFO = gql`
     }
   }
 `;
+
+export const LOGIN_QUERY = gql`
+  query authForm($email: String!, $password: String!, $remember: Boolean!) {
+    authForm(
+      input: { email: $email, password: $password, remember: $remember }
+    ) {
+      id
+      token
+      isNewUser
+    }
+  }
+`;
