@@ -72,7 +72,7 @@ function Onboarding({ client }) {
     <OnboardingStyled>
       <Flex justify="center">
         <div className="section-left">
-          <img src={image} alt="" />
+          <img src={image} alt="Workout" />
         </div>
         <Flex className="section-right" flexDirection="column">
           <div>
