@@ -122,12 +122,6 @@ function Login({ client, history }) {
           JSON.stringify({ token, isNewUser, id })
         );
 
-        if (isNewUser === true) {
-          history.push("/onboarding");
-        } else {
-          history.push("/");
-        }
-
         toast({
           title: "Login Successful.",
           description: "You can now access your dashboard",
@@ -135,6 +129,12 @@ function Login({ client, history }) {
           duration: 9000,
           isClosable: true
         });
+
+        if (isNewUser === true) {
+          setLoginSuccess("/onboarding");
+        } else {
+          setLoginSuccess("/");
+        }
       })
       .catch(error => {
         toast({

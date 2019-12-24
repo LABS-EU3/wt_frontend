@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+import { isLoggedIn } from "../../utils";
 import Input from "../common/Input";
 import Logo from "../common/Logo";
 import Preview from "../common/Preview";
@@ -14,6 +15,7 @@ import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
+  const [signupSuccess, setSignupSuccess] = useState(false);
   const toast = useToast();
 
   const formik = useFormik({
@@ -83,6 +85,17 @@ function SignUp({ client, history }) {
     }
   });
 
+  if (signupSuccess) {
+    history.push(signupSuccess);
+    window.location.reload();
+  }
+
+  // if user is already logged in, redirect to dashboard
+  const isSignedIn = isLoggedIn();
+  if (isSignedIn) {
+    return <Redirect to="/" />;
+  }
+
   const responseFailureGoogle = error => {
     toast({
       title: "An error occurred.",
@@ -105,9 +118,9 @@ function SignUp({ client, history }) {
         const { token, isNewUser } = res.data.authGoogle;
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
-          history.push("/onboarding");
+          setSignupSuccess("/onboarding");
         } else {
-          history.push("/");
+          setSignupSuccess("/");
         }
 
         toast({
