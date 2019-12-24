@@ -7,8 +7,9 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import Input from "../common/Input";
+import Logo from "../common/Logo";
 import banner from "../../assets/banner.png";
-import SignUpStyle from "../../styles/SignupStyles";
+import SignUpStyle from "./SignupStyles";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
@@ -135,6 +136,9 @@ function SignUp({ client, history }) {
           <img src={banner} alt="banner" />
         </div>
         <div className="signup-form">
+          <div className="logo">
+            <Logo />
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <h2>Sign up</h2>
             <Input
@@ -151,13 +155,7 @@ function SignUp({ client, history }) {
               errorBorderColor="crimson"
               error={formik.errors.firstname}
             />
-            {/* <input
-              ref={firstname}
-              required
-              placeholder="FIRST NAME"
-              name="FIRST NAME"
-              type="text"
-            /> */}
+
             <Input
               id="lastname"
               name="lastname"
@@ -172,20 +170,7 @@ function SignUp({ client, history }) {
               errorBorderColor="crimson"
               error={formik.errors.lastname}
             />
-            {/* <input
-              ref={lastname}
-              required
-              placeholder="LAST NAME"
-              name="LAST NAME"
-              type="text"
-            /> */}
-            {/* <input
-              ref={email}
-              required
-              placeholder="EMAIL"
-              name="EMAIL"
-              type="email"
-            /> */}
+
             <Input
               id="email"
               name="email"
@@ -200,13 +185,7 @@ function SignUp({ client, history }) {
               errorBorderColor="crimson"
               error={formik.errors.email}
             />
-            {/* <input
-              ref={password}
-              required
-              placeholder="PASSWORD"
-              name="PASSWORD"
-              type="password"
-            /> */}
+
             <Input
               id="password"
               name="password"
@@ -221,13 +200,7 @@ function SignUp({ client, history }) {
               errorBorderColor="crimson"
               error={formik.errors.password}
             />
-            {/* <input
-              ref={password}
-              required
-              placeholder="RE-ENTER PASSWORD"
-              name=" PASSWORD"
-              type="password"
-            /> */}
+
             <Input
               id="confirmpassword"
               name="confirmpassword"

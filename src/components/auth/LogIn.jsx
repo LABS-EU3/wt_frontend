@@ -17,6 +17,7 @@ import {
   useToast
 } from "@chakra-ui/core";
 
+import Logo from "../common/Logo";
 import loginImage from "../../assets/login_image.png";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";

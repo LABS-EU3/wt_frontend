@@ -15,9 +15,9 @@ const SignUpStyle = styled.div`
   }
 
   .signup-banner {
-    width: 40%;
+    width: 45%;
 
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 850px) {
       display: none;
     }
 
@@ -30,12 +30,30 @@ const SignUpStyle = styled.div`
   .signup-form {
     width: 50%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     padding: 0 4rem;
 
+    @media only screen and (max-width: 1300px) {
+      width: 54%;
+      text-align: center;
+    }
+
     @media only screen and (max-width: 900px) {
       width: 100%;
-      text-align: centre;
+      text-align: center;
+    }
+
+    .logo {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+
+      @media only screen and (max-width: 900px) {
+        justify-content: center;
+        margin: 1rem 0;
+      }
     }
 
     form {
@@ -95,11 +113,32 @@ const SignUpStyle = styled.div`
         justify-content: space-between;
         align-items: center;
 
+        @media only screen and (max-width: 1100px) {
+          flex-direction: column;
+        }
+
+        @media only screen and (max-width: 900px) {
+          flex-direction: row;
+        }
+
         @media only screen and (max-width: 800px) {
           flex-direction: column;
         }
 
         button {
+          @media only screen and (max-width: 1300px) {
+            font-size: 1rem;
+          }
+
+          @media only screen and (max-width: 1100px) {
+            margin: 1rem 0;
+            width: 100%;
+          }
+
+          @media only screen and (max-width: 900px) {
+            width: 45%;
+          }
+
           @media only screen and (max-width: 800px) {
             margin: 1rem 0;
             width: 100%;
