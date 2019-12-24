@@ -4,7 +4,7 @@ import { isLoggedIn } from "../../utils";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isSignedIn = isLoggedIn();
-  console.log(isSignedIn);
+
   if (isSignedIn) {
     return <Route {...rest} render={props => <Component {...props} />} />;
   }

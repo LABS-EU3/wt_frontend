@@ -9,7 +9,7 @@ const CustomStyledInput = styled.div`
   input {
     border: 1.5px solid rgba(0, 0, 0, 0.25);
     border-radius: 0;
-    padding: 2rem;
+    padding: 1.7rem;
   }
   span {
     color: red;

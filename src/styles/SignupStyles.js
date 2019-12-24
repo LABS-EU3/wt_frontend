@@ -16,7 +16,6 @@ const SignUpStyle = styled.div`
 
   .signup-banner {
     width: 40%;
-    opacity: 0.8;
 
     @media only screen and (max-width: 800px) {
       display: none;
@@ -67,27 +66,6 @@ const SignUpStyle = styled.div`
         color: grey;
       }
 
-      /* input {
-        display: block;
-        margin-top: 1rem;
-        width: 80%;
-        background-color: cream;
-        padding: 1rem 0;
-
-        @media only screen and (max-width: 800px) {
-          margin: 2rem 0;
-          padding: 0.5rem;
-          margin-top: 0;
-          border-radius: 5px;
-        }
-      } */
-
-      /* input[type="text"],
-      input[type="email"],
-      input[type="password"] {
-        background-color: #fffcf2;
-      } */
-
       h2 {
         font-family: ubuntu;
         font-weight: bold;
@@ -104,7 +82,7 @@ const SignUpStyle = styled.div`
       }
 
       .signup-form-button {
-        width: 80%;
+        width: 100%;
         margin: 1rem 0;
         @media only screen and (max-width: 800px) {
           padding: 1rem;
@@ -114,7 +92,7 @@ const SignUpStyle = styled.div`
       .signup-linked-profiles {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
 
         @media only screen and (max-width: 800px) {
@@ -124,7 +102,7 @@ const SignUpStyle = styled.div`
         button {
           @media only screen and (max-width: 800px) {
             margin: 1rem 0;
-            width: 80%;
+            width: 100%;
           }
         }
       }

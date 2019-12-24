@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
@@ -14,10 +14,7 @@ const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
   const toast = useToast();
-  // const firstname = useRef();
-  // const lastname = useRef();
-  // const password = useRef();
-  // const email = useRef();
+
   const formik = useFormik({
     initialValues: {
       firstname: "",
@@ -27,6 +24,8 @@ function SignUp({ client, history }) {
       confirmpassword: ""
     },
     validationSchema: yup.object().shape({
+      firstname: yup.string().required("Please enter your First name"),
+      lastname: yup.string().required("Please enter your Last name"),
       email: yup
         .string()
         .email()
@@ -34,7 +33,19 @@ function SignUp({ client, history }) {
       password: yup
         .string()
         .required("Please enter your password")
-        .min(8, "Must be minimum 8 characters")
+        .min(8, "Must be minimum 8 characters"),
+      confirmpassword: yup
+        .string()
+        .required("Please confirm your password")
+        .when("password", {
+          is: val => (val && val.length > 0 ? true : false),
+          then: yup
+            .string()
+            .oneOf(
+              [yup.ref("password")],
+              "Needs to be the same as password value"
+            )
+        })
     }),
 
     onSubmit: value => {
@@ -42,35 +53,27 @@ function SignUp({ client, history }) {
         .mutate({
           mutation: SIGNUP_MUTATION,
           variables: {
-            email: value.email,
+            firstname: value.firstname,
+            lastname: value.lastname,
             password: value.password,
-            remember: value.remember
+            rePassword: value.confirmpassword,
+            email: value.email
           }
         })
-        .then(response => {
-          const { token, isNewUser } = response.data.authForm;
-
-          localStorage.setItem(
-            "userData",
-            JSON.stringify({ token, isNewUser })
-          );
-          if (isNewUser === true) {
-            history.push("/onboarding");
-          } else {
-            history.push("/");
-          }
+        .then(() => {
           toast({
-            title: "Login Successful.",
-            description: "You can now access your dashboard",
+            title: "Sign up Successful.",
+            description: "Login with account details.",
             status: "success",
             duration: 9000,
             isClosable: true
           });
+          history.push("/login");
         })
         .catch(error => {
           toast({
-            title: "An error occurred.",
-            description: "Unable to login to your account.",
+            title: "Error Sigin you up",
+            description: error.graphQLErrors[0].message,
             status: "error",
             duration: 9000,
             isClosable: true
@@ -78,41 +81,6 @@ function SignUp({ client, history }) {
         });
     }
   });
-
-  // function onSubmit(e) {
-  //   e.preventDefault();
-
-  //   client
-  //     .mutate({
-  //       mutation: SIGNUP_MUTATION,
-  //       variables: {
-  //         firstname: firstname.current.value,
-  //         lastname: lastname.current.value,
-  //         password: password.current.value,
-  //         rePassword: password.current.value,
-  //         email: email.current.value
-  //       }
-  //     })
-  //     .then(() => {
-  //       toast({
-  //         title: "Sign up Successful.",
-  //         description: "Login with account details.",
-  //         status: "success",
-  //         duration: 9000,
-  //         isClosable: true
-  //       });
-  //       history.push("/login");
-  //     })
-  //     .catch(error => {
-  //       toast({
-  //         title: "Error Sigin you up",
-  //         description: error.graphQLErrors[0].message,
-  //         status: "error",
-  //         duration: 9000,
-  //         isClosable: true
-  //       });
-  //     });
-  // }
 
   const responseFailureGoogle = error => {
     toast({
@@ -244,7 +212,7 @@ function SignUp({ client, history }) {
               name="password"
               placeholder="PASSWORD"
               variant="filled"
-              type="text"
+              type="password"
               onChange={formik.handleChange}
               value={formik.values.password}
               bg="#FFFCF2"
@@ -265,7 +233,7 @@ function SignUp({ client, history }) {
               name="confirmpassword"
               placeholder="CONFIRM PASSWORD"
               variant="filled"
-              type="text"
+              type="password"
               onChange={formik.handleChange}
               value={formik.values.confirmpassword}
               bg="#FFFCF2"
@@ -280,7 +248,6 @@ function SignUp({ client, history }) {
               className="signup-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
-              // onClick={onSubmit}
               size="lg"
             >
               Sign up
