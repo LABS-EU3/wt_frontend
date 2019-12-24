@@ -111,7 +111,7 @@ const AuthStyle = styled.div`
         width: 100%;
 
         @media only screen and (max-width: 800px) {
-          margin-left: 5rem;
+          text-align: center;
           margin-bottom: 1rem;
         }
       }

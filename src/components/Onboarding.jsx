@@ -95,11 +95,20 @@ function Onboarding({ client, history }) {
     },
     validationSchema: yup.object().shape({
       goal: yup.string().required("Please select your workout goal"),
-      equipment: yup.string().required("Please enter your workout equipment"),
-      experience: yup.string().required("Please enter your workout experience")
+      equipment: yup.string().required("Please select your workout equipment"),
+      experience: yup
+        .string()
+        .required("Please select your workout experience"),
+      heightUnit: yup
+        .string()
+        .required("Please select your workout preferred height unit"),
+      weightUnit: yup
+        .string()
+        .required("Please select your workout preferred weight unit")
     }),
 
     onSubmit: value => {
+      console.log(value);
       client
         .mutate({
           mutation: ONBOARDING,
@@ -212,17 +221,33 @@ function Onboarding({ client, history }) {
   };
 
   const CustomRadio = React.forwardRef((props, ref) => {
-    const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
+    console.log(props, "ppp");
+    const {
+      isChecked,
+      name,
+      isDisabled,
+      value,
+      onClick,
+      onSubmit,
+      error,
+      ...rest
+    } = props;
+    console.log(error, "errrr");
     return (
-      <Button
-        ref={ref}
-        color={isChecked ? "#ff8744" : "#CCC5B9"}
-        borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
-        aria-checked={isChecked}
-        role="radio"
-        isDisabled={isDisabled}
-        {...rest}
-      />
+      <>
+        <Button
+          name={name}
+          color={isChecked ? "#ff8744" : "#CCC5B9"}
+          borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
+          aria-checked={isChecked}
+          role="radio"
+          isDisabled={isDisabled}
+          value={value}
+          onClick={onClick}
+          {...rest}
+        />
+        <span>{error}</span>
+      </>
     );
   });
 
@@ -247,8 +272,10 @@ function Onboarding({ client, history }) {
                 name="heightUnit"
                 className="btnGroup"
                 defaultValue="kilogram"
-                onClick={handleChange}
+                onClick={formik.handleChange}
                 isInline
+                value={formik.values.heightUnit}
+                error={formik.errors.heightUnit}
               >
                 <CustomRadio className="unitButton" value="kilogram">
                   kilogram
@@ -262,8 +289,10 @@ function Onboarding({ client, history }) {
                 name="weightUnit"
                 className="btnGroup"
                 defaultValue="rad2"
-                onClick={handleChange}
+                onClick={formik.handleChange}
                 isInline
+                value={formik.values.weightUnit}
+                error={formik.errors.weightUnit}
               >
                 <CustomRadio className="unitButton" value="meters">
                   meters
