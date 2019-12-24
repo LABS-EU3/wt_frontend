@@ -7,12 +7,17 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { setContext } from "apollo-link-context";
+import ReactGA from "react-ga";
+
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { getUserDetails } from "./utils";
 
 const userData = getUserDetails();
+
+ReactGA.initialize("UA-154765930-1");
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
