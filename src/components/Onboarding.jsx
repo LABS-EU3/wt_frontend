@@ -9,22 +9,15 @@ import AuthStyle from "./auth/AuthStyle";
 import Select from "./common/Select";
 import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
-import { GET_UNIT } from "../graphql/queries";
+// import { GET_UNIT } from "../graphql/queries";
 import { getUserDetails, userOnboardedSuccessfully } from "../utils";
 import { Redirect } from "react-router-dom";
 
 const userData = getUserDetails();
 
-const emptyAnswers = {
-  heightUnit: "",
-  weightUnit: "",
-  goal: "",
-  experience: "",
-  equipment: ""
-};
-
-function Onboarding({ client, history }) {
+const Onboarding = ({ client, history }) => {
   const toast = useToast();
+  // const [heightUnits, setLoginSuccess] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -100,64 +93,6 @@ function Onboarding({ client, history }) {
     });
     return <Redirect to="/" />;
   }
-
-  // const [answers, setAnswers] = useState(emptyAnswers);
-
-  // const handleChange = e => {
-  //   setAnswers({
-  //     ...answers,
-  //     [e.target.name]: !(e.target.value === "")
-  //       ? e.target.value
-  //       : e.target.innerText
-  //   });
-  // };
-
-  // const handleSubmit = async e => {
-  //   // try {
-  //   //   e.preventDefault();
-  //   //   const res = await client.query({
-  //   //     query: GET_UNIT
-  //   //   });
-  //   //   console.log(res.data);
-  //   //   debugger;
-  //   // } catch (err) {
-  //   //   console.log(err);
-  //   //   debugger;
-  //   // }
-  //   try {
-  //     console.log(answers.heightUnit);
-  //     e.preventDefault();
-  //     const res = await client.mutate({
-  //       mutation: ONBOARDING,
-  //       variables: {
-  //         id: userData.user_id,
-  //         heightUnit: userData.user_id,
-  //         weightUnit: userData.user_id,
-  //         goal: answers.goal,
-  //         experience: answers.experience,
-  //         equipment: true
-  //       }
-  //     });
-  //     console.log(res.data);
-  //     toast({
-  //       title: "Onboarding complete",
-  //       description: "You can now access your dashboard",
-  //       status: "success",
-  //       duration: 9000,
-  //       isClosable: true
-  //     });
-  //     history.push("/");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast({
-  //       title: "Unable to complete onboarding",
-  //       description: "Kindly check input and try again.",
-  //       status: "error",
-  //       duration: 9000,
-  //       isClosable: true
-  //     });
-  //   }
-  // };
 
   const CustomRadio = React.forwardRef((props, ref) => {
     const {
@@ -297,6 +232,6 @@ function Onboarding({ client, history }) {
       </div>
     </AuthStyle>
   );
-}
+};
 
 export default withApollo(Onboarding);

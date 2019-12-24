@@ -44,6 +44,10 @@ const AuthStyle = styled.div`
       text-align: center;
     }
 
+    @media only screen and (max-width: 350px) {
+      padding: 0 1rem;
+    }
+
     .logo {
       width: 100%;
       display: flex;
@@ -122,6 +126,10 @@ const AuthStyle = styled.div`
         width: 100%;
         flex-direction: column;
         margin-bottom: 1rem;
+
+        @media only screen and (max-width: 356px) {
+          padding: 0;
+        }
 
         p {
           padding: 1rem 0;
