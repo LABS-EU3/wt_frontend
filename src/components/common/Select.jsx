@@ -9,7 +9,6 @@ const CustomStyledSelect = styled.div`
   select {
     display: block;
     font-size: 16px;
-    /* font-family: "Ubuntu", sans-serif; */
     outline: none;
     color: #a3b1c2;
     line-height: 1.3;
@@ -18,42 +17,18 @@ const CustomStyledSelect = styled.div`
     background-color: #fffcf2;
     background-size: 3em, 100%;
     height: auto;
-    /* margin: 2rem auto; */
     padding: 1.3rem;
     border-style: solid;
-    /* border-image: initial; */
     border-radius: 0;
     background-repeat: no-repeat, repeat;
-    /* background-position: right 0.7em top 50%, 0px 0px; */
-    /* border-color: rgb(247, 229, 35); */
     border: 1.5px solid rgba(0, 0, 0, 0.25);
-    /* border: 1.5px solid rgba(0, 0, 0, 0.25);
-    border-radius: 0;
-    padding: 1.7rem;
-    color: black;
-    background: yellow;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); */
-    /* select.selector {
-      color: red;
-    } */
-    /* option {
-      color: black;
-      background: rgba(0, 0, 0, 0.3);
-      option:not(:checked) {
-        background-color: #fff;
-      }
-    } */
-    /* &:focus {
-      border-color: #ff8744;
-      outline: none;
-    } */
   }
   span {
     color: red;
   }
 `;
 
-const Select = ({ options, name, onChange, placeholder, error }) => {
+const Select = ({ options, name, onChange, placeholder, error, value }) => {
   return (
     <CustomStyledSelect>
       <ChakraSelect
@@ -61,6 +36,7 @@ const Select = ({ options, name, onChange, placeholder, error }) => {
         onChange={onChange}
         className="dropdown"
         placeholder={placeholder}
+        value={value}
         bg="#FFFCF2"
         _hover="black"
         focusBorderColor="#FF8744"
@@ -78,6 +54,15 @@ const Select = ({ options, name, onChange, placeholder, error }) => {
 };
 
 export default Select;
+
+Select.propTypes = {
+  options: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  error: PropTypes.string,
+  value: PropTypes.string
+};
 
 Select.defaultProps = {
   options: []

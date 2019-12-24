@@ -224,7 +224,6 @@ function Onboarding({ client, history }) {
 
   return (
     <AuthStyle>
-      {/* <OnboardingStyled> */}
       <div className="auth-container">
         <div className="auth-banner">
           <Preview pageName="Preferences" />
@@ -273,7 +272,6 @@ function Onboarding({ client, history }) {
             <p>What is your fitness goal?</p>
             <Select
               name="goal"
-              onChange={handleChange}
               className="dropdown"
               placeholder="Select a goal"
               options={[
@@ -283,16 +281,13 @@ function Onboarding({ client, history }) {
                 { value: "Healthy", text: "Healthy" }
               ]}
               error={formik.errors.goal}
+              value={formik.values.goal}
+              onChange={formik.handleChange}
             />
-            {/* <option value="Weight Loss">Weight Loss</option>
-              <option value="Muscle Gain">Muscle Gain</option>
-              <option value="Athletic">Athletic</option>
-              <option value="Healthy">Healthy</option>
-            </Select> */}
+
             <p>How experienced are you working out</p>
             <Select
               name="experience"
-              onChange={handleChange}
               placeholder="Select a Level"
               options={[
                 { value: "Beginner", text: "Beginner" },
@@ -300,15 +295,13 @@ function Onboarding({ client, history }) {
                 { value: "Expert", text: "Expert" }
               ]}
               error={formik.errors.experience}
+              value={formik.values.experience}
+              onChange={formik.handleChange}
             />
-            {/* <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Expert">Expert</option> */}
-            {/* </Select> */}
+
             <p>What workout equipment do you have?</p>
             <Select
               name="equipment"
-              onChange={handleChange}
               className="dropdown"
               placeholder="Select equipment"
               options={[
@@ -316,10 +309,10 @@ function Onboarding({ client, history }) {
                 { value: "true", text: "Gym" }
               ]}
               error={formik.errors.equipment}
+              value={formik.values.equipment}
+              onChange={formik.handleChange}
             />
-            {/* <option value="false">None</option>
-              <option value="true">Gym</option>
-            </Select> */}
+
             <div>
               <Button
                 type="submit"
@@ -332,18 +325,8 @@ function Onboarding({ client, history }) {
               </Button>
             </div>
           </form>
-
-          {/* <Flex justify="center">
-        <div className="section-left">
-          <img src={image} alt="Workout" />
-        </div>
-        <Flex className="section-right" flexDirection="column">
-          
-        </Flex>
-      </Flex> */}
         </div>
       </div>
-      {/* </OnboardingStyled> */}
     </AuthStyle>
   );
 }
