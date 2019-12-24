@@ -8,7 +8,7 @@ import * as yup from "yup";
 
 import Input from "../common/Input";
 import Logo from "../common/Logo";
-import banner from "../../assets/banner.png";
+import Preview from "../common/Preview";
 import AuthStyle from "./AuthStyle";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
@@ -133,7 +133,7 @@ function SignUp({ client, history }) {
     <AuthStyle>
       <div className="auth-container">
         <div className="auth-banner">
-          <img src={banner} alt="banner" />
+          <Preview pageName="Sign up" />
         </div>
         <div className="auth-form">
           <div className="logo">

@@ -49,10 +49,9 @@ const AuthStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-
+      margin-top: 2rem;
       @media only screen and (max-width: 900px) {
         justify-content: center;
-        margin: 1rem 0;
       }
     }
 

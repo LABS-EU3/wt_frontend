@@ -10,7 +10,7 @@ import { Button, Checkbox, useToast } from "@chakra-ui/core";
 
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
-import loginImage from "../../assets/login_image.png";
+import Preview from "../common/Preview";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
@@ -132,7 +132,7 @@ function Login({ client, history }) {
     <AuthStyle>
       <div className="auth-container">
         <div className="auth-banner">
-          <img src={loginImage} alt="banner" />
+          <Preview pageName="Login" />
         </div>
 
         <div className="auth-form">
