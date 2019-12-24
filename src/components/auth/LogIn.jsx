@@ -39,8 +39,8 @@ function Login({ client, history }) {
         .required("Please enter your email"),
       password: yup
         .string()
+        .required("Please enter your password")
         .min(8, "Must be minimum 8 characters")
-        .required("Password is required")
     }),
 
     onSubmit: value => {
@@ -165,8 +165,8 @@ function Login({ client, history }) {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
+              error={formik.errors.email}
             />
-            <span>{formik.errors.email}</span>
 
             <Input
               id="password"
@@ -180,7 +180,9 @@ function Login({ client, history }) {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
+              error={formik.errors.password}
             />
+
             <Checkbox
               size="md"
               variantColor="orange"

@@ -4,9 +4,22 @@ import styled from "styled-components";
 
 const CustomStyledInput = styled.div`
   margin: 1rem 0;
+
+  span {
+    color: red;
+  }
 `;
 
-function Input({ id, name, placeholder, variant, type, onChange, value }) {
+function Input({
+  id,
+  name,
+  placeholder,
+  variant,
+  type,
+  onChange,
+  value,
+  error
+}) {
   return (
     <CustomStyledInput>
       <StyledInput
@@ -22,6 +35,7 @@ function Input({ id, name, placeholder, variant, type, onChange, value }) {
         focusBorderColor="#FF8744"
         errorBorderColor="crimson"
       />
+      <span>{error}</span>
     </CustomStyledInput>
   );
 }
