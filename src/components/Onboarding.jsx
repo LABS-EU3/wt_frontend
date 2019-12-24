@@ -3,7 +3,6 @@ import { withApollo } from "react-apollo";
 import { Button, RadioButtonGroup, useToast } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import styled from "styled-components";
 
 import Preview from "./common/Preview";
 import AuthStyle from "./auth/AuthStyle";
@@ -11,68 +10,10 @@ import Select from "./common/Select";
 import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
 import { GET_UNIT } from "../graphql/queries";
-import { getUserDetails } from "../utils";
+import { getUserDetails, userOnboardedSuccessfully } from "../utils";
+import { Redirect } from "react-router-dom";
 
 const userData = getUserDetails();
-
-const OnboardingStyled = styled.div`
-  .section-right {
-    margin: auto;
-    width: 50vw;
-    @media only screen and (max-width: 650px) {
-      width: 90%;
-    }
-    div {
-      margin: auto;
-      .btnGroup {
-        .unitButton {
-          border: 2px solid;
-          background-color: transparent;
-        }
-        margin-top: 10px;
-        margin-bottom: 15px;
-        .unitButton:not(:last-child) {
-          margin-right: 20px;
-        }
-      }
-      .heading {
-        margin-bottom: 25px;
-      }
-      p {
-        margin-bottom: 10px;
-        font-family: Roboto;
-      }
-      .dropdown,
-      .submit {
-        width: 100%;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
-      .submit {
-        background-color: #ff8744;
-      }
-      .dropdown {
-        background: #fffcf2;
-        border: 1px solid #252422;
-        box-sizing: border-box;
-      }
-      .dropdownOptions {
-        width: 30%;
-      }
-    }
-  }
-  .section-left {
-    @media only screen and (max-width: 650px) {
-      display: none;
-    }
-    width: 50vw;
-    img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-    }
-  }
-`;
 
 const emptyAnswers = {
   heightUnit: "",
@@ -113,42 +54,30 @@ function Onboarding({ client, history }) {
         .mutate({
           mutation: ONBOARDING,
           variables: {
-            email: value.email,
-            password: value.password,
-            remember: value.remember
+            id: userData.user_id,
+            heightUnit: userData.user_id,
+            weightUnit: userData.user_id,
+            goal: value.goal,
+            experience: value.experience,
+            equipment: JSON.parse(value.equipment)
           }
         })
-        .then(response => {
-          const { token, isNewUser } = response.data.authForm;
-          localStorage.setItem(
-            "userData",
-            JSON.stringify({ token, isNewUser })
-          );
-          if (isNewUser === true) {
-            // setLoginSuccess("/onboarding");
-
-            toast({
-              title: "Login Successful.",
-              description: "You can now complete the onboarding process",
-              status: "success",
-              duration: 9000,
-              isClosable: true
-            });
-          } else {
-            // setLoginSuccess("/");
-            toast({
-              title: "Login Successful.",
-              description: "You can now access your dashboard",
-              status: "success",
-              duration: 9000,
-              isClosable: true
-            });
-          }
+        .then(res => {
+          console.log(res);
+          userOnboardedSuccessfully();
+          toast({
+            title: "Onboarding Completed.",
+            description: "You can now access your dashboard",
+            status: "success",
+            duration: 9000,
+            isClosable: true
+          });
+          history.push("/");
         })
-        .catch(error => {
+        .catch(() => {
           toast({
             title: "An error occurred.",
-            description: "Unable to login to your account.",
+            description: "Unable to complete onboarding. Please try again",
             status: "error",
             duration: 9000,
             isClosable: true
@@ -159,83 +88,91 @@ function Onboarding({ client, history }) {
 
   useEffect(() => {
     console.log("running");
-  });
+  }, []);
 
-  const [answers, setAnswers] = useState(emptyAnswers);
-
-  const handleChange = e => {
-    setAnswers({
-      ...answers,
-      [e.target.name]: !(e.target.value === "")
-        ? e.target.value
-        : e.target.innerText
+  if (userData.isNewUser === false) {
+    toast({
+      title: "Onboarding already completed.",
+      description: "Proceed to workout",
+      status: "warning",
+      duration: 9000,
+      isClosable: true
     });
-  };
-  console.log(answers);
+    return <Redirect to="/" />;
+  }
 
-  const handleSubmit = async e => {
-    // try {
-    //   e.preventDefault();
-    //   const res = await client.query({
-    //     query: GET_UNIT
-    //   });
-    //   console.log(res.data);
-    //   debugger;
-    // } catch (err) {
-    //   console.log(err);
-    //   debugger;
-    // }
-    try {
-      console.log(answers.heightUnit);
-      e.preventDefault();
-      const res = await client.mutate({
-        mutation: ONBOARDING,
-        variables: {
-          id: userData.user_id,
-          heightUnit: userData.user_id,
-          weightUnit: userData.user_id,
-          goal: answers.goal,
-          experience: answers.experience,
-          equipment: true
-        }
-      });
-      console.log(res.data);
-      toast({
-        title: "Onboarding complete",
-        description: "You can now access your dashboard",
-        status: "success",
-        duration: 9000,
-        isClosable: true
-      });
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-      toast({
-        title: "Unable to complete onboarding",
-        description: "Kindly check input and try again.",
-        status: "error",
-        duration: 9000,
-        isClosable: true
-      });
-    }
-  };
+  // const [answers, setAnswers] = useState(emptyAnswers);
+
+  // const handleChange = e => {
+  //   setAnswers({
+  //     ...answers,
+  //     [e.target.name]: !(e.target.value === "")
+  //       ? e.target.value
+  //       : e.target.innerText
+  //   });
+  // };
+
+  // const handleSubmit = async e => {
+  //   // try {
+  //   //   e.preventDefault();
+  //   //   const res = await client.query({
+  //   //     query: GET_UNIT
+  //   //   });
+  //   //   console.log(res.data);
+  //   //   debugger;
+  //   // } catch (err) {
+  //   //   console.log(err);
+  //   //   debugger;
+  //   // }
+  //   try {
+  //     console.log(answers.heightUnit);
+  //     e.preventDefault();
+  //     const res = await client.mutate({
+  //       mutation: ONBOARDING,
+  //       variables: {
+  //         id: userData.user_id,
+  //         heightUnit: userData.user_id,
+  //         weightUnit: userData.user_id,
+  //         goal: answers.goal,
+  //         experience: answers.experience,
+  //         equipment: true
+  //       }
+  //     });
+  //     console.log(res.data);
+  //     toast({
+  //       title: "Onboarding complete",
+  //       description: "You can now access your dashboard",
+  //       status: "success",
+  //       duration: 9000,
+  //       isClosable: true
+  //     });
+  //     history.push("/");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast({
+  //       title: "Unable to complete onboarding",
+  //       description: "Kindly check input and try again.",
+  //       status: "error",
+  //       duration: 9000,
+  //       isClosable: true
+  //     });
+  //   }
+  // };
 
   const CustomRadio = React.forwardRef((props, ref) => {
-    console.log(props, "ppp");
     const {
       isChecked,
       name,
       isDisabled,
       value,
       onClick,
-      onSubmit,
       error,
       ...rest
     } = props;
-    console.log(error, "errrr");
     return (
       <>
         <Button
+          ref={ref}
           name={name}
           color={isChecked ? "#ff8744" : "#CCC5B9"}
           borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
@@ -274,8 +211,8 @@ function Onboarding({ client, history }) {
                 defaultValue="kilogram"
                 onClick={formik.handleChange}
                 isInline
+                err={formik.errors.heightUnit}
                 value={formik.values.heightUnit}
-                error={formik.errors.heightUnit}
               >
                 <CustomRadio className="unitButton" value="kilogram">
                   kilogram
