@@ -16,6 +16,65 @@ import { getUserDetails } from "../utils";
 
 const userData = getUserDetails();
 
+const OnboardingStyled = styled.div`
+  .section-right {
+    margin: auto;
+    width: 50vw;
+    @media only screen and (max-width: 650px) {
+      width: 90%;
+    }
+    div {
+      margin: auto;
+      .btnGroup {
+        .unitButton {
+          border: 2px solid;
+          background-color: transparent;
+        }
+        margin-top: 10px;
+        margin-bottom: 15px;
+        .unitButton:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+      .heading {
+        margin-bottom: 25px;
+      }
+      p {
+        margin-bottom: 10px;
+        font-family: Roboto;
+      }
+      .dropdown,
+      .submit {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .submit {
+        background-color: #ff8744;
+      }
+      .dropdown {
+        background: #fffcf2;
+        border: 1px solid #252422;
+        box-sizing: border-box;
+      }
+      .dropdownOptions {
+        width: 30%;
+      }
+    }
+  }
+  .section-left {
+    @media only screen and (max-width: 650px) {
+      display: none;
+    }
+    width: 50vw;
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+  }
+`;
+
 const emptyAnswers = {
   heightUnit: "",
   weightUnit: "",
@@ -25,6 +84,7 @@ const emptyAnswers = {
 };
 
 function Onboarding({ client, history }) {
+  console.log("entered");
   const toast = useToast();
   const [answers, setAnswers] = useState(emptyAnswers);
 
@@ -85,21 +145,21 @@ function Onboarding({ client, history }) {
     }
   };
 
-  const CustomRadio = React.forwardRef((props, ref) => {
-    const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
-    return (
-      <Button
-        ref={ref}
-        color={isChecked ? "#ff8744" : "#CCC5B9"}
-        borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
-        aria-checked={isChecked}
-        role="radio"
-        isDisabled={isDisabled}
-        {...rest}
-      />
-    );
-  });
-
+  // const CustomRadio = React.forwardRef((props, ref) => {
+  //   const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
+  //   return (
+  //     <Button
+  //       ref={ref}
+  //       color={isChecked ? "#ff8744" : "#CCC5B9"}
+  //       borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
+  //       aria-checked={isChecked}
+  //       role="radio"
+  //       isDisabled={isDisabled}
+  //       {...rest}
+  //     />
+  //   );
+  // });
+  console.log("shld be returning");
   return (
     <OnboardingStyled>
       <Flex justify="center">
@@ -113,7 +173,7 @@ function Onboarding({ client, history }) {
             </Heading>
             <div>
               <p>Which weight measurement unit do you prefer?</p>
-              <RadioButtonGroup
+              {/* <RadioButtonGroup
                 name="heightUnit"
                 className="btnGroup"
                 defaultValue="kilogram"
@@ -141,7 +201,7 @@ function Onboarding({ client, history }) {
                 <CustomRadio className="unitButton" value="inches">
                   inches
                 </CustomRadio>
-              </RadioButtonGroup>
+              </RadioButtonGroup> */}
             </div>
             <p>What is your fitness goal?</p>
             <Select
@@ -192,64 +252,5 @@ function Onboarding({ client, history }) {
     </OnboardingStyled>
   );
 }
-
-const OnboardingStyled = styled.div`
-  .section-right {
-    margin: auto;
-    width: 50vw;
-    @media only screen and (max-width: 650px) {
-      width: 90%;
-    }
-    div {
-      margin: auto;
-      .btnGroup {
-        .unitButton {
-          border: 2px solid;
-          background-color: transparent;
-        }
-        margin-top: 10px;
-        margin-bottom: 15px;
-        .unitButton:not(:last-child) {
-          margin-right: 20px;
-        }
-      }
-      .heading {
-        margin-bottom: 25px;
-      }
-      p {
-        margin-bottom: 10px;
-        font-family: Roboto;
-      }
-      .dropdown,
-      .submit {
-        width: 100%;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
-      .submit {
-        background-color: #ff8744;
-      }
-      .dropdown {
-        background: #fffcf2;
-        border: 1px solid #252422;
-        box-sizing: border-box;
-      }
-      .dropdownOptions {
-        width: 30%;
-      }
-    }
-  }
-  .section-left {
-    @media only screen and (max-width: 650px) {
-      display: none;
-    }
-    width: 50vw;
-    img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-    }
-  }
-`;
 
 export default withApollo(Onboarding);

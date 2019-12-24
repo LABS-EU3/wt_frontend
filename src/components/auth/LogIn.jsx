@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 import Input from "../common/Input";
 import { Button, Checkbox, useToast } from "@chakra-ui/core";
-
+import { isLoggedIn } from "../../utils";
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
 import Preview from "../common/Preview";
@@ -18,6 +18,7 @@ const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function Login({ client, history }) {
   const toast = useToast();
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -48,23 +49,30 @@ function Login({ client, history }) {
         })
         .then(response => {
           const { token, isNewUser } = response.data.authForm;
-
           localStorage.setItem(
             "userData",
             JSON.stringify({ token, isNewUser })
           );
           if (isNewUser === true) {
-            history.push("/onboarding");
+            setLoginSuccess("/onboarding");
+
+            toast({
+              title: "Login Successful.",
+              description: "You can now complete the onboarding process",
+              status: "success",
+              duration: 9000,
+              isClosable: true
+            });
           } else {
-            history.push("/");
+            setLoginSuccess("/");
+            toast({
+              title: "Login Successful.",
+              description: "You can now access your dashboard",
+              status: "success",
+              duration: 9000,
+              isClosable: true
+            });
           }
-          toast({
-            title: "Login Successful.",
-            description: "You can now access your dashboard",
-            status: "success",
-            duration: 9000,
-            isClosable: true
-          });
         })
         .catch(error => {
           toast({
@@ -77,6 +85,17 @@ function Login({ client, history }) {
         });
     }
   });
+
+  if (loginSuccess) {
+    history.push(loginSuccess);
+    window.location.reload();
+  }
+
+  // if user is already logged in, redirect to dashboard
+  const isSignedIn = isLoggedIn();
+  if (isSignedIn) {
+    return <Redirect to="/" />;
+  }
 
   const responseFailureGoogle = error => {
     toast({
