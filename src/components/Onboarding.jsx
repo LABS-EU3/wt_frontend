@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { withApollo } from "react-apollo";
 import {
-  Flex,
-  Heading,
   Button,
-  Select,
+  // Select,
   RadioButtonGroup,
   useToast
 } from "@chakra-ui/core";
 import styled from "styled-components";
 import Preview from "./common/Preview";
 import AuthStyle from "./auth/AuthStyle";
+import Select from "./common/Select";
 
 import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
@@ -216,33 +215,47 @@ function Onboarding({ client, history }) {
               onChange={handleChange}
               className="dropdown"
               placeholder="Select a goal"
-            >
-              <option value="Weight Loss">Weight Loss</option>
+              options={[
+                { value: "Weight Loss", text: "Weight Loss" },
+                { value: "Muscle Gain", text: "Muscle Gain" },
+                { value: "Athletic", text: "Athletic" },
+                { value: "Healthy", text: "Healthy" }
+              ]}
+            />
+            {/* <option value="Weight Loss">Weight Loss</option>
               <option value="Muscle Gain">Muscle Gain</option>
               <option value="Athletic">Athletic</option>
               <option value="Healthy">Healthy</option>
-            </Select>
+            </Select> */}
             <p>How experienced are you working out</p>
             <Select
               name="experience"
               onChange={handleChange}
-              className="dropdown"
-              placeholder="Select a level"
-            >
-              <option value="Beginner">Beginner</option>
+              placeholder="Select a Level"
+              options={[
+                { value: "Beginner", text: "Beginner" },
+                { value: "Intermediate", text: "Intermediate" },
+                { value: "Expert", text: "Expert" }
+              ]}
+            />
+            {/* <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
-              <option value="Expert">Expert</option>
-            </Select>
+              <option value="Expert">Expert</option> */}
+            {/* </Select> */}
             <p>What workout equipment do you have?</p>
             <Select
               name="equipment"
               onChange={handleChange}
               className="dropdown"
               placeholder="Select equipment"
-            >
-              <option value="false">None</option>
+              options={[
+                { value: "false", text: "None" },
+                { value: "true", text: "Gym" }
+              ]}
+            />
+            {/* <option value="false">None</option>
               <option value="true">Gym</option>
-            </Select>
+            </Select> */}
             <div>
               <Button
                 type="submit"

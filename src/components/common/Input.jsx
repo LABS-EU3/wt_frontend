@@ -1,5 +1,5 @@
 import React from "react";
-import { Input as StyledInput } from "@chakra-ui/core";
+import { Input as ChakraInput } from "@chakra-ui/core";
 import styled from "styled-components";
 
 const CustomStyledInput = styled.div`
@@ -28,7 +28,7 @@ function Input({
 }) {
   return (
     <CustomStyledInput>
-      <StyledInput
+      <ChakraInput
         id={id}
         name={name}
         placeholder={placeholder}
