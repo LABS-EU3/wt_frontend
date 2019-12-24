@@ -9,7 +9,7 @@ import AuthStyle from "./auth/AuthStyle";
 import Select from "./common/Select";
 import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
-// import { GET_UNIT } from "../graphql/queries";
+import { GET_UNITS } from "../graphql/queries";
 import { getUserDetails, userOnboardedSuccessfully } from "../utils";
 import { Redirect } from "react-router-dom";
 
@@ -17,7 +17,8 @@ const userData = getUserDetails();
 
 const Onboarding = ({ client, history }) => {
   const toast = useToast();
-  // const [heightUnits, setLoginSuccess] = useState(false);
+  const [heightUnits, setHeightUnits] = useState([]);
+  const [weightUnits, setWeightUnits] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -42,14 +43,13 @@ const Onboarding = ({ client, history }) => {
     }),
 
     onSubmit: value => {
-      console.log(value);
       client
         .mutate({
           mutation: ONBOARDING,
           variables: {
             id: userData.user_id,
-            heightUnit: userData.user_id,
-            weightUnit: userData.user_id,
+            heightUnit: value.heightUnit,
+            weightUnit: value.weightUnit,
             goal: value.goal,
             experience: value.experience,
             equipment: JSON.parse(value.equipment)
@@ -80,7 +80,32 @@ const Onboarding = ({ client, history }) => {
   });
 
   useEffect(() => {
-    console.log("running");
+    client
+      .query({
+        query: GET_UNITS
+      })
+      .then(res => {
+        console.log(res);
+        const weightUnit = res.data.units.filter(
+          unit => unit.type === "weight"
+        );
+        const heightUnit = res.data.units.filter(
+          unit => unit.type === "height"
+        );
+        setHeightUnits(heightUnit);
+        setWeightUnits(weightUnit);
+      })
+      .catch(() => {
+        toast({
+          title: "An error occurred.",
+          description:
+            "Unable to complete onboarding. Please reload the page and try again",
+          status: "error",
+          duration: 9000,
+          isClosable: true
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (userData.isNewUser === false) {
@@ -149,12 +174,22 @@ const Onboarding = ({ client, history }) => {
                 err={formik.errors.heightUnit}
                 value={formik.values.heightUnit}
               >
-                <CustomRadio className="unitButton" value="kilogram">
+                {heightUnits.map(heightUnit => (
+                  <CustomRadio
+                    key={heightUnit.name}
+                    className="unitButton"
+                    value={heightUnit.id}
+                  >
+                    {heightUnit.name.charAt(0).toUpperCase() +
+                      heightUnit.name.slice(1)}
+                  </CustomRadio>
+                ))}
+                {/* <CustomRadio className="unitButton" value="kilogram">
                   kilogram
                 </CustomRadio>
                 <CustomRadio className="unitButton" value="pounds">
                   pounds
-                </CustomRadio>
+                </CustomRadio> */}
               </RadioButtonGroup>
               <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
@@ -166,12 +201,22 @@ const Onboarding = ({ client, history }) => {
                 value={formik.values.weightUnit}
                 error={formik.errors.weightUnit}
               >
-                <CustomRadio className="unitButton" value="meters">
+                {/* <CustomRadio className="unitButton" value="meters">
                   meters
                 </CustomRadio>
                 <CustomRadio className="unitButton" value="inches">
                   inches
-                </CustomRadio>
+                </CustomRadio> */}
+                {weightUnits.map(weightUnit => (
+                  <CustomRadio
+                    key={weightUnit.name}
+                    className="unitButton"
+                    value={weightUnit.id}
+                  >
+                    {weightUnit.name.charAt(0).toUpperCase() +
+                      weightUnit.name.slice(1)}
+                  </CustomRadio>
+                ))}
               </RadioButtonGroup>
             </div>
             <p>What is your fitness goal?</p>

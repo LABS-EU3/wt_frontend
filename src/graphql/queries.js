@@ -29,11 +29,12 @@ export const LOGIN_QUERY = gql`
   }
 `;
 
-export const GET_UNIT = gql`
+export const GET_UNITS = gql`
   query {
     units {
       id
       name
+      type
     }
   }
 `;
