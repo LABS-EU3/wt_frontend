@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { withApollo } from "react-apollo";
-import {
-  Button,
-  // Select,
-  RadioButtonGroup,
-  useToast
-} from "@chakra-ui/core";
+import { Button, RadioButtonGroup, useToast } from "@chakra-ui/core";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import styled from "styled-components";
+
 import Preview from "./common/Preview";
 import AuthStyle from "./auth/AuthStyle";
 import Select from "./common/Select";
-
 import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
 // import { GET_UNIT } from "../graphql/queries";
@@ -87,6 +84,70 @@ const emptyAnswers = {
 
 function Onboarding({ client, history }) {
   const toast = useToast();
+
+  const formik = useFormik({
+    initialValues: {
+      goal: "",
+      equipment: "",
+      experience: "",
+      heightUnit: "",
+      weightUnit: ""
+    },
+    validationSchema: yup.object().shape({
+      goal: yup.string().required("Please select your workout goal"),
+      equipment: yup.string().required("Please enter your workout equipment"),
+      experience: yup.string().required("Please enter your workout experience")
+    }),
+
+    onSubmit: value => {
+      client
+        .mutate({
+          mutation: ONBOARDING,
+          variables: {
+            email: value.email,
+            password: value.password,
+            remember: value.remember
+          }
+        })
+        .then(response => {
+          const { token, isNewUser } = response.data.authForm;
+          localStorage.setItem(
+            "userData",
+            JSON.stringify({ token, isNewUser })
+          );
+          if (isNewUser === true) {
+            // setLoginSuccess("/onboarding");
+
+            toast({
+              title: "Login Successful.",
+              description: "You can now complete the onboarding process",
+              status: "success",
+              duration: 9000,
+              isClosable: true
+            });
+          } else {
+            // setLoginSuccess("/");
+            toast({
+              title: "Login Successful.",
+              description: "You can now access your dashboard",
+              status: "success",
+              duration: 9000,
+              isClosable: true
+            });
+          }
+        })
+        .catch(error => {
+          toast({
+            title: "An error occurred.",
+            description: "Unable to login to your account.",
+            status: "error",
+            duration: 9000,
+            isClosable: true
+          });
+        });
+    }
+  });
+
   const [answers, setAnswers] = useState(emptyAnswers);
 
   const handleChange = e => {
@@ -174,7 +235,7 @@ function Onboarding({ client, history }) {
             <Logo />
           </div>
 
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <h2>Preferences</h2>
 
             <div>
@@ -221,6 +282,7 @@ function Onboarding({ client, history }) {
                 { value: "Athletic", text: "Athletic" },
                 { value: "Healthy", text: "Healthy" }
               ]}
+              error={formik.errors.goal}
             />
             {/* <option value="Weight Loss">Weight Loss</option>
               <option value="Muscle Gain">Muscle Gain</option>
@@ -237,6 +299,7 @@ function Onboarding({ client, history }) {
                 { value: "Intermediate", text: "Intermediate" },
                 { value: "Expert", text: "Expert" }
               ]}
+              error={formik.errors.experience}
             />
             {/* <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
@@ -252,6 +315,7 @@ function Onboarding({ client, history }) {
                 { value: "false", text: "None" },
                 { value: "true", text: "Gym" }
               ]}
+              error={formik.errors.equipment}
             />
             {/* <option value="false">None</option>
               <option value="true">Gym</option>

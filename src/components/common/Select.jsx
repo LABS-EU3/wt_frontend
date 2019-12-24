@@ -71,8 +71,8 @@ const Select = ({ options, name, onChange, placeholder, error }) => {
             {option.text}
           </option>
         ))}
-        <span>{error}</span>
       </ChakraSelect>
+      <span>{error}</span>
     </CustomStyledSelect>
   );
 };
