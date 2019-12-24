@@ -9,7 +9,7 @@ import Input from "../common/Input";
 import { Button, Checkbox, useToast } from "@chakra-ui/core";
 
 import Logo from "../common/Logo";
-import Style from "./SignupStyles";
+import AuthStyle from "./AuthStyle";
 import loginImage from "../../assets/login_image.png";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
@@ -129,13 +129,13 @@ function Login({ client, history }) {
   };
 
   return (
-    <Style>
-      <div className="signup-container">
-        <div className="signup-banner">
+    <AuthStyle>
+      <div className="auth-container">
+        <div className="auth-banner">
           <img src={loginImage} alt="banner" />
         </div>
 
-        <div className="signup-form">
+        <div className="auth-form">
           <div className="logo">
             <Logo />
           </div>
@@ -186,14 +186,14 @@ function Login({ client, history }) {
 
             <Button
               type="submit"
-              className="signup-form-button"
+              className="auth-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
               size="lg"
             >
               Login
             </Button>
-            <div className="signup-linked-profiles">
+            <div className="auth-linked-profiles">
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
                 render={renderProps => (
@@ -203,7 +203,7 @@ function Login({ client, history }) {
                     color="white"
                     bg="#4c8bf5"
                     rightIcon="arrow-forward"
-                    width="259px"
+                    width="45%"
                     size="lg"
                   >
                     Login with Google
@@ -232,7 +232,7 @@ function Login({ client, history }) {
           </form>
         </div>
       </div>
-    </Style>
+    </AuthStyle>
   );
 }
 

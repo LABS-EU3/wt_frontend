@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const SignUpStyle = styled.div`
+const AuthStyle = styled.div`
   width: 100%;
   height: 100vh;
   color: black;
   background-color: white;
 
-  .signup-container {
+  .auth-container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -14,7 +14,7 @@ const SignUpStyle = styled.div`
     justify-content: flex-start;
   }
 
-  .signup-banner {
+  .auth-banner {
     width: 45%;
 
     @media only screen and (max-width: 850px) {
@@ -27,7 +27,7 @@ const SignUpStyle = styled.div`
     }
   }
 
-  .signup-form {
+  .auth-form {
     width: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -114,7 +114,7 @@ const SignUpStyle = styled.div`
         }
       }
 
-      .signup-form-button {
+      .auth-form-button {
         width: 100%;
         margin: 1rem 0;
         @media only screen and (max-width: 800px) {
@@ -122,7 +122,7 @@ const SignUpStyle = styled.div`
         }
       }
 
-      .signup-linked-profiles {
+      .auth-linked-profiles {
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -164,4 +164,4 @@ const SignUpStyle = styled.div`
   }
 `;
 
-export default SignUpStyle;
+export default AuthStyle;

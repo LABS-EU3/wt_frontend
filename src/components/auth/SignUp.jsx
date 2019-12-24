@@ -9,7 +9,7 @@ import * as yup from "yup";
 import Input from "../common/Input";
 import Logo from "../common/Logo";
 import banner from "../../assets/banner.png";
-import SignUpStyle from "./SignupStyles";
+import AuthStyle from "./AuthStyle";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
@@ -130,12 +130,12 @@ function SignUp({ client, history }) {
   };
 
   return (
-    <SignUpStyle>
-      <div className="signup-container">
-        <div className="signup-banner">
+    <AuthStyle>
+      <div className="auth-container">
+        <div className="auth-banner">
           <img src={banner} alt="banner" />
         </div>
-        <div className="signup-form">
+        <div className="auth-form">
           <div className="logo">
             <Logo />
           </div>
@@ -218,14 +218,14 @@ function SignUp({ client, history }) {
 
             <Button
               type="submit"
-              className="signup-form-button"
+              className="auth-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
               size="lg"
             >
               Sign up
             </Button>
-            <div className="signup-linked-profiles">
+            <div className="auth-linked-profiles">
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
                 render={renderProps => (
@@ -261,7 +261,7 @@ function SignUp({ client, history }) {
           </form>
         </div>
       </div>
-    </SignUpStyle>
+    </AuthStyle>
   );
 }
 
