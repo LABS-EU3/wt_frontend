@@ -84,7 +84,6 @@ const emptyAnswers = {
 };
 
 function Onboarding({ client, history }) {
-  console.log("entered");
   const toast = useToast();
   const [answers, setAnswers] = useState(emptyAnswers);
 
@@ -145,21 +144,21 @@ function Onboarding({ client, history }) {
     }
   };
 
-  // const CustomRadio = React.forwardRef((props, ref) => {
-  //   const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
-  //   return (
-  //     <Button
-  //       ref={ref}
-  //       color={isChecked ? "#ff8744" : "#CCC5B9"}
-  //       borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
-  //       aria-checked={isChecked}
-  //       role="radio"
-  //       isDisabled={isDisabled}
-  //       {...rest}
-  //     />
-  //   );
-  // });
-  console.log("shld be returning");
+  const CustomRadio = React.forwardRef((props, ref) => {
+    const { isChecked, isDisabled, value, onSubmit, ...rest } = props;
+    return (
+      <Button
+        ref={ref}
+        color={isChecked ? "#ff8744" : "#CCC5B9"}
+        borderColor={isChecked ? "#ff8744" : "#CCC5B9"}
+        aria-checked={isChecked}
+        role="radio"
+        isDisabled={isDisabled}
+        {...rest}
+      />
+    );
+  });
+
   return (
     <OnboardingStyled>
       <Flex justify="center">
@@ -173,7 +172,7 @@ function Onboarding({ client, history }) {
             </Heading>
             <div>
               <p>Which weight measurement unit do you prefer?</p>
-              {/* <RadioButtonGroup
+              <RadioButtonGroup
                 name="heightUnit"
                 className="btnGroup"
                 defaultValue="kilogram"
@@ -201,7 +200,7 @@ function Onboarding({ client, history }) {
                 <CustomRadio className="unitButton" value="inches">
                   inches
                 </CustomRadio>
-              </RadioButtonGroup> */}
+              </RadioButtonGroup>
             </div>
             <p>What is your fitness goal?</p>
             <Select
