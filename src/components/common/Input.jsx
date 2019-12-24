@@ -4,7 +4,13 @@ import styled from "styled-components";
 
 const CustomStyledInput = styled.div`
   margin: 1rem 0;
+  width: 100%;
 
+  input {
+    border: 1.5px solid rgba(0, 0, 0, 0.25);
+    border-radius: 0;
+    padding: 2rem;
+  }
   span {
     color: red;
   }

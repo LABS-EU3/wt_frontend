@@ -10,10 +10,12 @@ const SignUpStyle = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .signup-banner {
-    width: 50%;
+    width: 40%;
     opacity: 0.8;
 
     @media only screen and (max-width: 800px) {
@@ -65,7 +67,7 @@ const SignUpStyle = styled.div`
         color: grey;
       }
 
-      input {
+      /* input {
         display: block;
         margin-top: 1rem;
         width: 80%;
@@ -78,13 +80,13 @@ const SignUpStyle = styled.div`
           margin-top: 0;
           border-radius: 5px;
         }
-      }
+      } */
 
-      input[type="text"],
+      /* input[type="text"],
       input[type="email"],
       input[type="password"] {
         background-color: #fffcf2;
-      }
+      } */
 
       h2 {
         font-family: ubuntu;
