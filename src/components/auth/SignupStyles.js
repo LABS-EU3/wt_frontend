@@ -75,13 +75,28 @@ const SignUpStyle = styled.div`
       }
 
       a {
+        display: flex;
+        width: 100%;
         font-size: 16px;
         margin-top: 1rem;
         color: #d84727;
+
+        a:hover {
+          color: grey;
+        }
       }
 
-      a:hover {
+      .link-recovery {
         color: grey;
+
+        a:hover {
+          color: #d84727;
+        }
+      }
+
+      .checkbox {
+        display: flex;
+        width: 100%;
       }
 
       h2 {

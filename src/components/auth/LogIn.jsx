@@ -4,20 +4,12 @@ import { Link } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
+
 import Input from "../common/Input";
-import {
-  Flex,
-  Box,
-  Image,
-  Stack,
-  Heading,
-  Button,
-  Text,
-  Checkbox,
-  useToast
-} from "@chakra-ui/core";
+import { Button, Checkbox, useToast } from "@chakra-ui/core";
 
 import Logo from "../common/Logo";
+import Style from "./SignupStyles";
 import loginImage from "../../assets/login_image.png";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
@@ -137,23 +129,20 @@ function Login({ client, history }) {
   };
 
   return (
-    <Flex>
-      <Image
-        src={loginImage}
-        display={{ base: "none", md: "block" }}
-        width="100vw"
-        height="100vh"
-        maxWidth="600px"
-        objectFit="cover"
-      />
+    <Style>
+      <div className="signup-container">
+        <div className="signup-banner">
+          <img src={loginImage} alt="banner" />
+        </div>
 
-      <Box paddingX="80px" height="100vh">
-        <Heading paddingTop="100px" paddingBottom="20px" textAlign="left">
-          Login
-        </Heading>
+        <div className="signup-form">
+          <div className="logo">
+            <Logo />
+          </div>
 
-        <form onSubmit={formik.handleSubmit}>
-          <Stack spacing="20px">
+          <form onSubmit={formik.handleSubmit}>
+            <h2>Login</h2>
+
             <Input
               id="email"
               name="email"
@@ -184,46 +173,47 @@ function Login({ client, history }) {
               error={formik.errors.password}
             />
 
-            <Checkbox
-              size="md"
-              variantColor="orange"
-              onSelect={formik.handleChange}
-              value={true}
-            >
-              Remember me
-            </Checkbox>
+            <div className="checkbox">
+              <Checkbox
+                size="md"
+                variantColor="orange"
+                onSelect={formik.handleChange}
+                value={true}
+              >
+                Remember me
+              </Checkbox>
+            </div>
+
             <Button
               type="submit"
+              className="signup-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
               size="lg"
             >
               Login
             </Button>
-            <Flex direction={{ base: "column", md: "row" }}>
-              <Box width="100%">
-                <GoogleLogin
-                  clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                  render={renderProps => (
-                    <Button
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                      color="white"
-                      bg="#4c8bf5"
-                      rightIcon="arrow-forward"
-                      width="259px"
-                      size="lg"
-                    >
-                      Login with Google
-                    </Button>
-                  )}
-                  buttonText="Login"
-                  onSuccess={responseGoogle}
-                  onFailure={responseFailureGoogle}
-                  cookiePolicy={"single_host_origin"}
-                />
-              </Box>
-              <Box size={4}></Box>
+            <div className="signup-linked-profiles">
+              <GoogleLogin
+                clientId={REACT_APP_GOOGLE_CLIENT_ID}
+                render={renderProps => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    color="white"
+                    bg="#4c8bf5"
+                    rightIcon="arrow-forward"
+                    width="259px"
+                    size="lg"
+                  >
+                    Login with Google
+                  </Button>
+                )}
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseFailureGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
               <Button
                 type="submit"
                 variantColor="facebook"
@@ -233,33 +223,16 @@ function Login({ client, history }) {
               >
                 Login with Facebook
               </Button>
-            </Flex>
-            <Link to="/accountrecovery">
-              <Text
-                marginX="auto"
-                marginTop="20px"
-                textAlign="left"
-                color="#D84727"
-                fontSize="20px"
-              >
-                Forgot your password?
-              </Text>
+            </div>
+
+            <Link to="/accountrecovery">Forgot Password?</Link>
+            <Link to="/signup" className="link-recovery">
+              Don't have an account?
             </Link>
-            <Link to="/signup">
-              <Text
-                marginX="auto"
-                marginTop="20px"
-                textAlign="left"
-                color="#403D39"
-                _hover="orange"
-              >
-                Don't have an account? Sign up here!
-              </Text>
-            </Link>
-          </Stack>
-        </form>
-      </Box>
-    </Flex>
+          </form>
+        </div>
+      </div>
+    </Style>
   );
 }
 
