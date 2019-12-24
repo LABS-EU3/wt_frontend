@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import { Button, RadioButtonGroup, useToast } from "@chakra-ui/core";
 import { useFormik } from "formik";
@@ -10,7 +10,7 @@ import AuthStyle from "./auth/AuthStyle";
 import Select from "./common/Select";
 import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
-// import { GET_UNIT } from "../graphql/queries";
+import { GET_UNIT } from "../graphql/queries";
 import { getUserDetails } from "../utils";
 
 const userData = getUserDetails();
@@ -148,6 +148,10 @@ function Onboarding({ client, history }) {
     }
   });
 
+  useEffect(() => {
+    console.log("running");
+  });
+
   const [answers, setAnswers] = useState(emptyAnswers);
 
   const handleChange = e => {
@@ -237,7 +241,7 @@ function Onboarding({ client, history }) {
           <form onSubmit={formik.handleSubmit}>
             <h2>Preferences</h2>
 
-            <div>
+            <div className="body-status">
               <p>Which weight measurement unit do you prefer?</p>
               <RadioButtonGroup
                 name="heightUnit"
@@ -313,17 +317,15 @@ function Onboarding({ client, history }) {
               onChange={formik.handleChange}
             />
 
-            <div>
-              <Button
-                type="submit"
-                variantColor="orange"
-                rightIcon="arrow-forward"
-                className="auth-form-button"
-                size="lg"
-              >
-                Submit
-              </Button>
-            </div>
+            <Button
+              type="submit"
+              variantColor="orange"
+              rightIcon="arrow-forward"
+              className="auth-form-button"
+              size="lg"
+            >
+              Submit
+            </Button>
           </form>
         </div>
       </div>

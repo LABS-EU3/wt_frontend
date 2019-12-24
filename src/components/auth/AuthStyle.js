@@ -98,6 +98,10 @@ const AuthStyle = styled.div`
         width: 100%;
       }
 
+      p {
+        width: 100%;
+      }
+
       h2 {
         font-family: ubuntu;
         font-weight: bold;
@@ -105,11 +109,22 @@ const AuthStyle = styled.div`
         font-size: 1.875rem;
         text-align: left;
         width: 100%;
-        margin-left: 7rem;
 
         @media only screen and (max-width: 800px) {
           margin-left: 5rem;
           margin-bottom: 1rem;
+        }
+      }
+
+      .body-status {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 1rem;
+
+        p {
+          padding: 1rem 0;
         }
       }
 
