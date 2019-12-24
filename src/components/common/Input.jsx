@@ -1,15 +1,34 @@
 import React from "react";
-import { Input as StyledInput } from "@chakra-ui/core";
+import { Input as ChakraInput } from "@chakra-ui/core";
 import styled from "styled-components";
 
 const CustomStyledInput = styled.div`
   margin: 1rem 0;
+  width: 100%;
+
+  input {
+    border: 1.5px solid rgba(0, 0, 0, 0.25);
+    border-radius: 0;
+    padding: 1.7rem;
+  }
+  span {
+    color: red;
+  }
 `;
 
-function Input({ id, name, placeholder, variant, type, onChange, value }) {
+function Input({
+  id,
+  name,
+  placeholder,
+  variant,
+  type,
+  onChange,
+  value,
+  error
+}) {
   return (
     <CustomStyledInput>
-      <StyledInput
+      <ChakraInput
         id={id}
         name={name}
         placeholder={placeholder}
@@ -22,6 +41,7 @@ function Input({ id, name, placeholder, variant, type, onChange, value }) {
         focusBorderColor="#FF8744"
         errorBorderColor="crimson"
       />
+      <span>{error}</span>
     </CustomStyledInput>
   );
 }

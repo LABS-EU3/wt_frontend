@@ -7,16 +7,23 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { setContext } from "apollo-link-context";
+import ReactGA from "react-ga";
+
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { getUserDetails } from "./utils";
 
 const userData = getUserDetails();
+const { REACT_APP_GOOGLE_ANALYTICS_KEY, REACT_APP_GraphQL_API } = process.env;
+
+// Initialize google analytics
+ReactGA.initialize(REACT_APP_GOOGLE_ANALYTICS_KEY);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: process.env.REACT_APP_GraphQL_API
+  uri: REACT_APP_GraphQL_API
 });
 
 const authLink = setContext((_, { headers }) => {

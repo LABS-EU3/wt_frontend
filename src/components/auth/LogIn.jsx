@@ -1,23 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Input from "../common/Input";
-import {
-  Flex,
-  Box,
-  Image,
-  Stack,
-  Heading,
-  Button,
-  Text,
-  Checkbox,
-  useToast
-} from "@chakra-ui/core";
 
-import loginImage from "../../assets/login_image.png";
+import Input from "../common/Input";
+import { Button, Checkbox, useToast } from "@chakra-ui/core";
+import { isLoggedIn } from "../../utils";
+import Logo from "../common/Logo";
+import AuthStyle from "./AuthStyle";
+import Preview from "../common/Preview";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
@@ -25,6 +18,7 @@ const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function Login({ client, history }) {
   const toast = useToast();
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -39,12 +33,11 @@ function Login({ client, history }) {
         .required("Please enter your email"),
       password: yup
         .string()
+        .required("Please enter your password")
         .min(8, "Must be minimum 8 characters")
-        .required("Password is required")
     }),
 
     onSubmit: value => {
-      console.log(value);
       client
         .mutate({
           mutation: LOGIN_QUERY,
@@ -56,23 +49,30 @@ function Login({ client, history }) {
         })
         .then(response => {
           const { token, isNewUser } = response.data.authForm;
-
           localStorage.setItem(
             "userData",
             JSON.stringify({ token, isNewUser })
           );
           if (isNewUser === true) {
-            history.push("/onboarding");
+            setLoginSuccess("/onboarding");
+
+            toast({
+              title: "Login Successful.",
+              description: "You can now complete the onboarding process",
+              status: "success",
+              duration: 9000,
+              isClosable: true
+            });
           } else {
-            history.push("/");
+            setLoginSuccess("/");
+            toast({
+              title: "Login Successful.",
+              description: "You can now access your dashboard",
+              status: "success",
+              duration: 9000,
+              isClosable: true
+            });
           }
-          toast({
-            title: "Login Successful.",
-            description: "You can now access your dashboard",
-            status: "success",
-            duration: 9000,
-            isClosable: true
-          });
         })
         .catch(error => {
           toast({
@@ -85,6 +85,17 @@ function Login({ client, history }) {
         });
     }
   });
+
+  if (loginSuccess) {
+    history.push(loginSuccess);
+    window.location.reload();
+  }
+
+  // if user is already logged in, redirect to dashboard
+  const isSignedIn = isLoggedIn();
+  if (isSignedIn) {
+    return <Redirect to="/" />;
+  }
 
   const responseFailureGoogle = error => {
     toast({
@@ -111,12 +122,6 @@ function Login({ client, history }) {
           JSON.stringify({ token, isNewUser, id })
         );
 
-        if (isNewUser === true) {
-          history.push("/onboarding");
-        } else {
-          history.push("/");
-        }
-
         toast({
           title: "Login Successful.",
           description: "You can now access your dashboard",
@@ -124,6 +129,12 @@ function Login({ client, history }) {
           duration: 9000,
           isClosable: true
         });
+
+        if (isNewUser === true) {
+          setLoginSuccess("/onboarding");
+        } else {
+          setLoginSuccess("/");
+        }
       })
       .catch(error => {
         toast({
@@ -137,23 +148,20 @@ function Login({ client, history }) {
   };
 
   return (
-    <Flex>
-      <Image
-        src={loginImage}
-        display={{ base: "none", md: "block" }}
-        width="100vw"
-        height="100vh"
-        maxWidth="600px"
-        objectFit="cover"
-      />
+    <AuthStyle>
+      <div className="auth-container">
+        <div className="auth-banner">
+          <Preview pageName="Login" />
+        </div>
 
-      <Box paddingX="80px" height="100vh">
-        <Heading paddingTop="100px" paddingBottom="20px" textAlign="left">
-          Login
-        </Heading>
+        <div className="auth-form">
+          <div className="logo">
+            <Logo />
+          </div>
 
-        <form onSubmit={formik.handleSubmit}>
-          <Stack spacing="20px">
+          <form onSubmit={formik.handleSubmit}>
+            <h2>Login</h2>
+
             <Input
               id="email"
               name="email"
@@ -166,8 +174,8 @@ function Login({ client, history }) {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
+              error={formik.errors.email}
             />
-            <span>{formik.errors.email}</span>
 
             <Input
               id="password"
@@ -181,47 +189,50 @@ function Login({ client, history }) {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
+              error={formik.errors.password}
             />
-            <Checkbox
-              size="md"
-              variantColor="orange"
-              onSelect={formik.handleChange}
-              value={true}
-            >
-              Remember me
-            </Checkbox>
+
+            <div className="checkbox">
+              <Checkbox
+                size="md"
+                variantColor="orange"
+                onSelect={formik.handleChange}
+                value={true}
+              >
+                Remember me
+              </Checkbox>
+            </div>
+
             <Button
               type="submit"
+              className="auth-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
               size="lg"
             >
               Login
             </Button>
-            <Flex direction={{ base: "column", md: "row" }}>
-              <Box width="100%">
-                <GoogleLogin
-                  clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                  render={renderProps => (
-                    <Button
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                      color="white"
-                      bg="#4c8bf5"
-                      rightIcon="arrow-forward"
-                      width="259px"
-                      size="lg"
-                    >
-                      Login with Google
-                    </Button>
-                  )}
-                  buttonText="Login"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  cookiePolicy={"single_host_origin"}
-                />
-              </Box>
-              <Box size={4}></Box>
+            <div className="auth-linked-profiles">
+              <GoogleLogin
+                clientId={REACT_APP_GOOGLE_CLIENT_ID}
+                render={renderProps => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    color="white"
+                    bg="#4c8bf5"
+                    rightIcon="arrow-forward"
+                    width="45%"
+                    size="lg"
+                  >
+                    Login with Google
+                  </Button>
+                )}
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseFailureGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
               <Button
                 type="submit"
                 variantColor="facebook"
@@ -231,33 +242,16 @@ function Login({ client, history }) {
               >
                 Login with Facebook
               </Button>
-            </Flex>
-            <Link to="/accountrecovery">
-              <Text
-                marginX="auto"
-                marginTop="20px"
-                textAlign="left"
-                color="#D84727"
-                fontSize="20px"
-              >
-                Forgot your password?
-              </Text>
+            </div>
+
+            <Link to="/accountrecovery">Forgot Password?</Link>
+            <Link to="/signup" className="link-recovery">
+              Don't have an account?
             </Link>
-            <Link to="/signup">
-              <Text
-                marginX="auto"
-                marginTop="20px"
-                textAlign="left"
-                color="#403D39"
-                _hover="orange"
-              >
-                Don't have an account? Sign up here!
-              </Text>
-            </Link>
-          </Stack>
-        </form>
-      </Box>
-    </Flex>
+          </form>
+        </div>
+      </div>
+    </AuthStyle>
   );
 }
 

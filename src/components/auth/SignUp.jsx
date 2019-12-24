@@ -1,53 +1,99 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
-import banner from "../../assets/banner.png";
-import SignUpStyle from "../../styles/SignupStyles";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+import { isLoggedIn } from "../../utils";
+import Input from "../common/Input";
+import Logo from "../common/Logo";
+import Preview from "../common/Preview";
+import AuthStyle from "./AuthStyle";
 import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
+  const [signupSuccess, setSignupSuccess] = useState(false);
   const toast = useToast();
-  const firstname = useRef();
-  const lastname = useRef();
-  const password = useRef();
-  const email = useRef();
 
-  function onSubmit(e) {
-    e.preventDefault();
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmpassword: ""
+    },
+    validationSchema: yup.object().shape({
+      firstname: yup.string().required("Please enter your First name"),
+      lastname: yup.string().required("Please enter your Last name"),
+      email: yup
+        .string()
+        .email()
+        .required("Please enter your email"),
+      password: yup
+        .string()
+        .required("Please enter your password")
+        .min(8, "Must be minimum 8 characters"),
+      confirmpassword: yup
+        .string()
+        .required("Please confirm your password")
+        .when("password", {
+          is: val => (val && val.length > 0 ? true : false),
+          then: yup
+            .string()
+            .oneOf(
+              [yup.ref("password")],
+              "Needs to be the same as password value"
+            )
+        })
+    }),
 
-    client
-      .mutate({
-        mutation: SIGNUP_MUTATION,
-        variables: {
-          firstname: firstname.current.value,
-          lastname: lastname.current.value,
-          password: password.current.value,
-          rePassword: password.current.value,
-          email: email.current.value
-        }
-      })
-      .then(() => {
-        toast({
-          title: "Sign up Successful.",
-          description: "Login with account details.",
-          status: "success",
-          duration: 9000,
-          isClosable: true
+    onSubmit: value => {
+      client
+        .mutate({
+          mutation: SIGNUP_MUTATION,
+          variables: {
+            firstname: value.firstname,
+            lastname: value.lastname,
+            password: value.password,
+            rePassword: value.confirmpassword,
+            email: value.email
+          }
+        })
+        .then(() => {
+          toast({
+            title: "Sign up Successful.",
+            description: "Login with account details.",
+            status: "success",
+            duration: 9000,
+            isClosable: true
+          });
+          history.push("/login");
+        })
+        .catch(error => {
+          toast({
+            title: "Error Sigin you up",
+            description: error.graphQLErrors[0].message,
+            status: "error",
+            duration: 9000,
+            isClosable: true
+          });
         });
-        history.push("/login");
-      })
-      .catch(error => {
-        toast({
-          title: "Error Sigin you up",
-          description: error.graphQLErrors[0].message,
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
-      });
+    }
+  });
+
+  if (signupSuccess) {
+    history.push(signupSuccess);
+    window.location.reload();
+  }
+
+  // if user is already logged in, redirect to dashboard
+  const isSignedIn = isLoggedIn();
+  if (isSignedIn) {
+    return <Redirect to="/" />;
   }
 
   const responseFailureGoogle = error => {
@@ -72,10 +118,9 @@ function SignUp({ client, history }) {
         const { token, isNewUser } = res.data.authGoogle;
         localStorage.setItem("userData", JSON.stringify({ token, isNewUser }));
         if (isNewUser === true) {
-          return <Redirect to="/onboarding" />;
-          // history.push("/onboarding");
+          setSignupSuccess("/onboarding");
         } else {
-          history.push("/");
+          setSignupSuccess("/");
         }
 
         toast({
@@ -98,61 +143,102 @@ function SignUp({ client, history }) {
   };
 
   return (
-    <SignUpStyle>
-      <div className="signup-container">
-        <div className="signup-banner">
-          <img src={banner} alt="banner" />
+    <AuthStyle>
+      <div className="auth-container">
+        <div className="auth-banner">
+          <Preview pageName="Sign up" />
         </div>
-        <div className="signup-form">
-          <form>
+        <div className="auth-form">
+          <div className="logo">
+            <Logo />
+          </div>
+          <form onSubmit={formik.handleSubmit}>
             <h2>Sign up</h2>
-            <input
-              ref={firstname}
-              required
-              placeholder="FIRST NAME"
-              name="FIRST NAME"
+            <Input
+              id="firstname"
+              name="firstname"
+              placeholder="FIRSTNAME"
+              variant="filled"
               type="text"
+              onChange={formik.handleChange}
+              value={formik.values.firstname}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+              error={formik.errors.firstname}
             />
-            <input
-              ref={lastname}
-              required
-              placeholder="LAST NAME"
-              name="LAST NAME"
+
+            <Input
+              id="lastname"
+              name="lastname"
+              placeholder="LASTNAME"
+              variant="filled"
               type="text"
+              onChange={formik.handleChange}
+              value={formik.values.lastname}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+              error={formik.errors.lastname}
             />
-            <input
-              ref={email}
-              required
+
+            <Input
+              id="email"
+              name="email"
               placeholder="EMAIL"
-              name="EMAIL"
+              variant="filled"
               type="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+              error={formik.errors.email}
             />
-            <input
-              ref={password}
-              required
+
+            <Input
+              id="password"
+              name="password"
               placeholder="PASSWORD"
-              name="PASSWORD"
+              variant="filled"
               type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+              error={formik.errors.password}
             />
-            <input
-              ref={password}
-              required
-              placeholder="RE-ENTER PASSWORD"
-              name=" PASSWORD"
+
+            <Input
+              id="confirmpassword"
+              name="confirmpassword"
+              placeholder="CONFIRM PASSWORD"
+              variant="filled"
               type="password"
+              onChange={formik.handleChange}
+              value={formik.values.confirmpassword}
+              bg="#FFFCF2"
+              _hover="black"
+              focusBorderColor="#FF8744"
+              errorBorderColor="crimson"
+              error={formik.errors.confirmpassword}
             />
 
             <Button
               type="submit"
-              className="signup-form-button"
+              className="auth-form-button"
               variantColor="orange"
               rightIcon="arrow-forward"
-              onClick={onSubmit}
               size="lg"
             >
               Sign up
             </Button>
-            <div className="signup-linked-profiles">
+            <div className="auth-linked-profiles">
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
                 render={renderProps => (
@@ -188,7 +274,7 @@ function SignUp({ client, history }) {
           </form>
         </div>
       </div>
-    </SignUpStyle>
+    </AuthStyle>
   );
 }
 

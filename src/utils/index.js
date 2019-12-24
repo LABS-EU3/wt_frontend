@@ -39,6 +39,26 @@ export const getUserDetails = () => {
       localStorage.removeItem("userData");
       return null;
     }
-    return { token: userData.token, user_id: id };
+    return {
+      token: userData.token,
+      user_id: id,
+      isNewUser: userData.isNewUser
+    };
+  }
+};
+
+export const userOnboardedSuccessfully = () => {
+  try {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      return false;
+    }
+
+    if (userData.isNewUser) {
+      userData.isNewUser = false;
+    }
+    localStorage.setItem("userData", JSON.stringify(userData));
+  } catch (error) {
+    return false;
   }
 };
