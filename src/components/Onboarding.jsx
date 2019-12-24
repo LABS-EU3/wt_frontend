@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withApollo } from "react-apollo";
 import {
   Flex,
   Heading,
@@ -8,8 +9,10 @@ import {
   useToast
 } from "@chakra-ui/core";
 import styled from "styled-components";
-import { withApollo } from "react-apollo";
-import image from "../images/login_image.png";
+import Preview from "./common/Preview";
+import AuthStyle from "./auth/AuthStyle";
+
+import Logo from "./common/Logo";
 import { ONBOARDING } from "../graphql/mutations";
 // import { GET_UNIT } from "../graphql/queries";
 import { getUserDetails } from "../utils";
@@ -160,16 +163,21 @@ function Onboarding({ client, history }) {
   });
 
   return (
-    <OnboardingStyled>
-      <Flex justify="center">
-        <div className="section-left">
-          <img src={image} alt="Workout" />
+    <AuthStyle>
+      {/* <OnboardingStyled> */}
+      <div className="auth-container">
+        <div className="auth-banner">
+          <Preview pageName="Preferences" />
         </div>
-        <Flex className="section-right" flexDirection="column">
-          <div>
-            <Heading className="heading" size="lg">
-              Preferences
-            </Heading>
+
+        <div className="auth-form">
+          <div className="logo">
+            <Logo />
+          </div>
+
+          <form>
+            <h2>Preferences</h2>
+
             <div>
               <p>Which weight measurement unit do you prefer?</p>
               <RadioButtonGroup
@@ -237,18 +245,29 @@ function Onboarding({ client, history }) {
             </Select>
             <div>
               <Button
-                className="submit"
+                type="submit"
                 variantColor="orange"
                 rightIcon="arrow-forward"
-                onClick={handleSubmit}
+                className="auth-form-button"
+                size="lg"
               >
                 Submit
               </Button>
             </div>
-          </div>
+          </form>
+
+          {/* <Flex justify="center">
+        <div className="section-left">
+          <img src={image} alt="Workout" />
+        </div>
+        <Flex className="section-right" flexDirection="column">
+          
         </Flex>
-      </Flex>
-    </OnboardingStyled>
+      </Flex> */}
+        </div>
+      </div>
+      {/* </OnboardingStyled> */}
+    </AuthStyle>
   );
 }
 
