@@ -8,6 +8,15 @@ const StyledPreview = styled.div`
   @media (max-width: 900px) {
     display: none;
   }
+
+  .view {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
   .content {
     display: flex;
     padding: 3rem 3rem;
@@ -27,14 +36,9 @@ const Preview = ({ pageName }) => {
   return (
     <StyledPreview>
       <div
-        className="view overlay category-detail"
+        className="view"
         style={{
-          backgroundImage: `url(${banner})`,
-          height: "100%",
-          width: "100%",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundImage: `url(${banner})`
         }}
       >
         <div className="content">
