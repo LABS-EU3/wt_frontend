@@ -56,7 +56,6 @@ const Onboarding = ({ client, history }) => {
           }
         })
         .then(res => {
-          console.log(res);
           userOnboardedSuccessfully();
           toast({
             title: "Onboarding Completed.",
@@ -85,7 +84,6 @@ const Onboarding = ({ client, history }) => {
         query: GET_UNITS
       })
       .then(res => {
-        console.log(res);
         const weightUnit = res.data.units.filter(
           unit => unit.type === "weight"
         );
