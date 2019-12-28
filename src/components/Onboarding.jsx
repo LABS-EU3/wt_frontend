@@ -118,15 +118,7 @@ const Onboarding = ({ client, history }) => {
   }
 
   const CustomRadio = React.forwardRef((props, ref) => {
-    const {
-      isChecked,
-      name,
-      isDisabled,
-      value,
-      onClick,
-      error,
-      ...rest
-    } = props;
+    const { isChecked, name, isDisabled, value, onClick, ...rest } = props;
     return (
       <>
         <Button
@@ -141,7 +133,6 @@ const Onboarding = ({ client, history }) => {
           onClick={onClick}
           {...rest}
         />
-        <span>{error}</span>
       </>
     );
   });
@@ -182,13 +173,9 @@ const Onboarding = ({ client, history }) => {
                       heightUnit.name.slice(1)}
                   </CustomRadio>
                 ))}
-                {/* <CustomRadio className="unitButton" value="kilogram">
-                  kilogram
-                </CustomRadio>
-                <CustomRadio className="unitButton" value="pounds">
-                  pounds
-                </CustomRadio> */}
               </RadioButtonGroup>
+              <span>{formik.errors.heightUnit}</span>
+
               <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
                 name="weightUnit"
@@ -199,12 +186,6 @@ const Onboarding = ({ client, history }) => {
                 value={formik.values.weightUnit}
                 error={formik.errors.weightUnit}
               >
-                {/* <CustomRadio className="unitButton" value="meters">
-                  meters
-                </CustomRadio>
-                <CustomRadio className="unitButton" value="inches">
-                  inches
-                </CustomRadio> */}
                 {weightUnits.map(weightUnit => (
                   <CustomRadio
                     key={weightUnit.name}
@@ -216,6 +197,7 @@ const Onboarding = ({ client, history }) => {
                   </CustomRadio>
                 ))}
               </RadioButtonGroup>
+              <span>{formik.errors.weightUnit}</span>
             </div>
             <p>What is your fitness goal?</p>
             <Select

@@ -48,6 +48,10 @@ const AuthStyle = styled.div`
       padding: 0 1rem;
     }
 
+    span {
+      color: red;
+    }
+
     .logo {
       width: 100%;
       display: flex;
