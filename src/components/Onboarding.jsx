@@ -20,6 +20,16 @@ const Onboarding = ({ client, history }) => {
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
 
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       goal: "",
@@ -57,23 +67,19 @@ const Onboarding = ({ client, history }) => {
         })
         .then(res => {
           userOnboardedSuccessfully();
-          toast({
-            title: "Onboarding Completed.",
-            description: "You can now access your dashboard",
-            status: "success",
-            duration: 9000,
-            isClosable: true
-          });
+          alert(
+            "Onboarding Completed.",
+            "You can now access your dashboard",
+            "success"
+          );
           history.push("/");
         })
         .catch(() => {
-          toast({
-            title: "An error occurred.",
-            description: "Unable to complete onboarding. Please try again",
-            status: "error",
-            duration: 9000,
-            isClosable: true
-          });
+          alert(
+            "An error occurred.",
+            "Unable to complete onboarding. Please try again",
+            "error"
+          );
         });
     }
   });
@@ -94,26 +100,17 @@ const Onboarding = ({ client, history }) => {
         setWeightUnits(weightUnit);
       })
       .catch(() => {
-        toast({
-          title: "An error occurred.",
-          description:
-            "Unable to complete onboarding. Please reload the page and try again",
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
+        alert(
+          "An error occurred.",
+          "Unable to complete onboarding. Please reload the page and try again",
+          "error"
+        );
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (userData.isNewUser === false) {
-    toast({
-      title: "Onboarding already completed.",
-      description: "Proceed to workout",
-      status: "warning",
-      duration: 9000,
-      isClosable: true
-    });
+    alert("Onboarding already completed.", "Proceed to workout", "warning");
     return <Redirect to="/" />;
   }
 

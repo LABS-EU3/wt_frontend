@@ -20,6 +20,15 @@ function Login({ client, history }) {
   const toast = useToast();
   const [loginSuccess, setLoginSuccess] = useState(false);
 
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -56,32 +65,23 @@ function Login({ client, history }) {
           if (isNewUser === true) {
             setLoginSuccess("/onboarding");
 
-            toast({
-              title: "Login Successful.",
-              description: "You can now complete the onboarding process",
-              status: "success",
-              duration: 9000,
-              isClosable: true
-            });
+            alert(
+              "Login Successful.",
+              "You can now complete the onboarding process",
+              "success"
+            );
           } else {
             setLoginSuccess("/");
-            toast({
-              title: "Login Successful.",
-              description: "You can now access your dashboard",
-              status: "success",
-              duration: 9000,
-              isClosable: true
-            });
+            alert(
+              "Login Successful.",
+              "You can now access your dashboard",
+              "success"
+            );
           }
         })
         .catch(error => {
-          toast({
-            title: "An error occurred.",
-            description: "Unable to login to your account.",
-            status: "error",
-            duration: 9000,
-            isClosable: true
-          });
+          console.log(error.graphQLErrors);
+          alert("An error occurred.", error.graphQLErrors[0].message, "error");
         });
     }
   });
@@ -98,13 +98,7 @@ function Login({ client, history }) {
   }
 
   const responseFailureGoogle = error => {
-    toast({
-      title: "An error occurred.",
-      description: "Unable to login to your account.",
-      status: "error",
-      duration: 9000,
-      isClosable: true
-    });
+    alert("An error occurred.", "Unable to login to your account.", "error");
   };
 
   const responseGoogle = response => {
@@ -121,14 +115,11 @@ function Login({ client, history }) {
           "userData",
           JSON.stringify({ token, isNewUser, id })
         );
-
-        toast({
-          title: "Login Successful.",
-          description: "You can now access your dashboard",
-          status: "success",
-          duration: 9000,
-          isClosable: true
-        });
+        alert(
+          "Login Successful.",
+          "You can now access your dashboard",
+          "success"
+        );
 
         if (isNewUser === true) {
           setLoginSuccess("/onboarding");
@@ -137,13 +128,11 @@ function Login({ client, history }) {
         }
       })
       .catch(error => {
-        toast({
-          title: "An error occurred.",
-          description: "Unable to login to your account.",
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
+        alert(
+          "An error occurred.",
+          "Unable to login to your account.",
+          "error"
+        );
       });
   };
 

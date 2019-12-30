@@ -18,6 +18,16 @@ function SignUp({ client, history }) {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const toast = useToast();
 
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       firstname: "",
@@ -64,23 +74,15 @@ function SignUp({ client, history }) {
           }
         })
         .then(() => {
-          toast({
-            title: "Sign up Successful.",
-            description: "Login with account details.",
-            status: "success",
-            duration: 9000,
-            isClosable: true
-          });
+          alert(
+            "Sign up Successful.",
+            "Login with account details.",
+            "success"
+          );
           history.push("/login");
         })
         .catch(error => {
-          toast({
-            title: "Error Sigin you up",
-            description: error.graphQLErrors[0].message,
-            status: "error",
-            duration: 9000,
-            isClosable: true
-          });
+          alert("Error Sigin you up", error.graphQLErrors[0].message, "error");
         });
     }
   });
@@ -97,13 +99,7 @@ function SignUp({ client, history }) {
   }
 
   const responseFailureGoogle = error => {
-    toast({
-      title: "An error occurred.",
-      description: "Unable to login to your account.",
-      status: "error",
-      duration: 9000,
-      isClosable: true
-    });
+    alert("An error occurred.", "Unable to signup your account.", "error");
   };
 
   const responseGoogle = response => {
@@ -123,22 +119,14 @@ function SignUp({ client, history }) {
           setSignupSuccess("/");
         }
 
-        toast({
-          title: "Sign in Successful.",
-          description: "We've created your account for you.",
-          status: "success",
-          duration: 9000,
-          isClosable: true
-        });
+        alert(
+          "Sign up Successful.",
+          "We've created your account for you.",
+          "success"
+        );
       })
-      .catch(error => {
-        toast({
-          title: "An error occurred.",
-          description: "Unable to login to your account.",
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
+      .catch(() => {
+        alert("An error occurred.", "Unable to signup your account.", "error");
       });
   };
 
