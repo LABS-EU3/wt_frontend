@@ -20,6 +20,16 @@ const Onboarding = ({ client, history }) => {
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
 
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       goal: "",
@@ -57,23 +67,19 @@ const Onboarding = ({ client, history }) => {
         })
         .then(res => {
           userOnboardedSuccessfully();
-          toast({
-            title: "Onboarding Completed.",
-            description: "You can now access your dashboard",
-            status: "success",
-            duration: 9000,
-            isClosable: true
-          });
+          alert(
+            "Onboarding Completed.",
+            "You can now access your dashboard",
+            "success"
+          );
           history.push("/");
         })
         .catch(() => {
-          toast({
-            title: "An error occurred.",
-            description: "Unable to complete onboarding. Please try again",
-            status: "error",
-            duration: 9000,
-            isClosable: true
-          });
+          alert(
+            "An error occurred.",
+            "Unable to complete onboarding. Please try again",
+            "error"
+          );
         });
     }
   });
@@ -94,39 +100,22 @@ const Onboarding = ({ client, history }) => {
         setWeightUnits(weightUnit);
       })
       .catch(() => {
-        toast({
-          title: "An error occurred.",
-          description:
-            "Unable to complete onboarding. Please reload the page and try again",
-          status: "error",
-          duration: 9000,
-          isClosable: true
-        });
+        alert(
+          "An error occurred.",
+          "Unable to complete onboarding. Please reload the page and try again",
+          "error"
+        );
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (userData.isNewUser === false) {
-    toast({
-      title: "Onboarding already completed.",
-      description: "Proceed to workout",
-      status: "warning",
-      duration: 9000,
-      isClosable: true
-    });
+    alert("Onboarding already completed.", "Proceed to workout", "warning");
     return <Redirect to="/" />;
   }
 
   const CustomRadio = React.forwardRef((props, ref) => {
-    const {
-      isChecked,
-      name,
-      isDisabled,
-      value,
-      onClick,
-      error,
-      ...rest
-    } = props;
+    const { isChecked, name, isDisabled, value, onClick, ...rest } = props;
     return (
       <>
         <Button
@@ -141,7 +130,6 @@ const Onboarding = ({ client, history }) => {
           onClick={onClick}
           {...rest}
         />
-        <span>{error}</span>
       </>
     );
   });
@@ -182,13 +170,9 @@ const Onboarding = ({ client, history }) => {
                       heightUnit.name.slice(1)}
                   </CustomRadio>
                 ))}
-                {/* <CustomRadio className="unitButton" value="kilogram">
-                  kilogram
-                </CustomRadio>
-                <CustomRadio className="unitButton" value="pounds">
-                  pounds
-                </CustomRadio> */}
               </RadioButtonGroup>
+              <span>{formik.errors.heightUnit}</span>
+
               <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
                 name="weightUnit"
@@ -199,12 +183,6 @@ const Onboarding = ({ client, history }) => {
                 value={formik.values.weightUnit}
                 error={formik.errors.weightUnit}
               >
-                {/* <CustomRadio className="unitButton" value="meters">
-                  meters
-                </CustomRadio>
-                <CustomRadio className="unitButton" value="inches">
-                  inches
-                </CustomRadio> */}
                 {weightUnits.map(weightUnit => (
                   <CustomRadio
                     key={weightUnit.name}
@@ -216,6 +194,7 @@ const Onboarding = ({ client, history }) => {
                   </CustomRadio>
                 ))}
               </RadioButtonGroup>
+              <span>{formik.errors.weightUnit}</span>
             </div>
             <p>What is your fitness goal?</p>
             <Select
