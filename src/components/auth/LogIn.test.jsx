@@ -1,10 +1,22 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import Login from "./LogIn";
+import { shallow } from "enzyme";
 
-describe("<Login/>", () => {
-  it("should match snapshot", () => {
-    const login = render.create(<Login />).toJSON();
-    expect(login).toMatchSnapshot();
+import LogIn from "./LogIn";
+
+describe("<LogIn />", () => {
+  let wrapper;
+
+  const props = {
+    location: { search: jest.mock() },
+    client: { mutate: jest.fn(), query: jest.fn() },
+    history: { push: jest.fn() }
+  };
+
+  beforeEach(() => {
+    wrapper = shallow(<LogIn {...props} />);
+  });
+
+  it("renders the LogIn component correctly", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

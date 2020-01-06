@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders the App component correctly 1`] = `
+<div
+  className="App"
+  data-testid="App"
+>
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/login"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/onboarding"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/signup"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/"
+  />
+</div>
+`;

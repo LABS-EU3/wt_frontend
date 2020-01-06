@@ -1,13 +1,22 @@
 import React from "react";
-import * as rtl from "@testing-library/react";
+import { shallow } from "enzyme";
+
 import SignUp from "./SignUp";
 
-beforeEach(() => {
-  rtl.cleanup();
-});
-
 describe("<SignUp />", () => {
-  it(" shows SignUp form", () => {
-    rtl.render(<SignUp />);
+  let wrapper;
+
+  const props = {
+    location: { search: jest.mock() },
+    client: { mutate: jest.fn(), query: jest.fn() },
+    history: { push: jest.fn() }
+  };
+
+  beforeEach(() => {
+    wrapper = shallow(<SignUp {...props} />);
+  });
+
+  it("renders the SignUp component correctly", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });
