@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import { Button, RadioButtonGroup, useToast } from "@chakra-ui/core";
+import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -12,6 +12,7 @@ import { ONBOARDING } from "../graphql/mutations";
 import { GET_UNITS } from "../graphql/queries";
 import { getUserDetails, userOnboardedSuccessfully } from "../utils";
 import { Redirect } from "react-router-dom";
+import CustomSpinner from "./common/Spinner";
 
 const userData = getUserDetails();
 
@@ -19,6 +20,7 @@ const Onboarding = ({ client, history }) => {
   const toast = useToast();
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const alert = (title, description, status) => {
     toast({
@@ -98,8 +100,10 @@ const Onboarding = ({ client, history }) => {
         );
         setHeightUnits(heightUnit);
         setWeightUnits(weightUnit);
+        setIsLoading(false);
       })
       .catch(() => {
+        setIsLoading(false);
         alert(
           "An error occurred.",
           "Unable to complete onboarding. Please reload the page and try again",
@@ -134,6 +138,20 @@ const Onboarding = ({ client, history }) => {
     );
   });
 
+  if (isLoading) {
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
+    );
+  }
   return (
     <AuthStyle>
       <div className="auth-container">
