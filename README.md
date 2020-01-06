@@ -4,7 +4,7 @@
 
 # wt_frontend
 
-![About Trackdrills](src/public/trackdrills_banner "Trackdrills")
+<img src="src/assets/trackdrills_banner.png" />
 
 # About Trackdrills
 
