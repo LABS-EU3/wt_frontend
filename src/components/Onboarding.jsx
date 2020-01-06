@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import { Button, RadioButtonGroup, useToast } from "@chakra-ui/core";
+import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -140,12 +140,16 @@ const Onboarding = ({ client, history }) => {
 
   if (isLoading) {
     return (
-      <CustomSpinner
-        thickness="6px"
-        emptyColor="gray.200"
-        color="orange.400"
-        size="xl"
-      />
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
     );
   }
   return (
