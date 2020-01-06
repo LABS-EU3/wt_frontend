@@ -1,5 +1,6 @@
 import React from "react";
 import { Spinner, Box } from "@chakra-ui/core";
+import PropTypes from "prop-types";
 
 function CustomSpinner({ thickness, size, text }) {
   return (
@@ -14,5 +15,12 @@ function CustomSpinner({ thickness, size, text }) {
     </Box>
   );
 }
+
+//adding proptypes
+CustomSpinner.propTypes = {
+  thicknessProp: PropTypes.string,
+  sizeProp: PropTypes.string,
+  textProp: PropTypes.string
+};
 
 export default CustomSpinner;
