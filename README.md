@@ -16,20 +16,21 @@ Trackdrills is a web application that gives you access to over 500 workout and e
   - [Running](#running)
 - [Environment Variables](#environment-variables)
 - [Tech-Stack](#tech-stack)
-  - [Back-End Dependencies `(Production)`](#front-end-dependencies-production)
+  - [Front-End Dependencies `(Production)`](#front-end-dependencies-production)
     - [React](#react)
     - [GraphQL](#graphql)
     - [React Apollo](#react-apollo)
     - [Dotenv](#dotenv)
-    - [Styled-Components](#styled-components)
-    - [Chakra UI](#chakra-ui)
+    - [Styled-
+    Components](#styled-components)
+    - [Chakra-UI](#chakra-ui)
     - [Prop-Types](#prop-types)
     - [JWT-Decode](#jwt-decode)
     - [Coveralls](#coveralls)
 - [Front-End Dependencies `(Development)`](#front-end-dependencies-development)
     - [Eslint](#eslint-1)
     - [Prettier](#prettier)
-    - [Lint-Staged](#lint-staged)
+    - [Lint Staged](#lint-staged)
     - [Husky](#husky)
 
 # Scripts
@@ -66,11 +67,11 @@ React Apollo allows you to fetch data from your GraphQL server and use it in bui
 
 Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology. | [View Dependency](https://www.npmjs.com/package/dotenv)
 
-### Styled Components
+### Styled-Components
 
 Has a thriving community and offers the ability to directly style multiple components within a file. The syntax used is familiar to JavaScript and improves code cleanliness and makes it easy to get up and going for those without a lot of css experience. Styled components are also very efficient, improving load time for users. | [View Dependency](https://www.styled-components.com/docs/)
 
-### Chakra UI
+### Chakra-UI
 
 Chakra UI is a simple, modular and accessible component library that gives you all the building blocks you need to build your React applications. | [View Dependency](https://chakra-ui.com/)
 
