@@ -12,6 +12,7 @@ import { ONBOARDING } from "../graphql/mutations";
 import { GET_UNITS } from "../graphql/queries";
 import { getUserDetails, userOnboardedSuccessfully } from "../utils";
 import { Redirect } from "react-router-dom";
+import CustomSpinner from "./common/Spinner";
 
 const userData = getUserDetails();
 
@@ -19,6 +20,7 @@ const Onboarding = ({ client, history }) => {
   const toast = useToast();
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const alert = (title, description, status) => {
     toast({
@@ -98,8 +100,10 @@ const Onboarding = ({ client, history }) => {
         );
         setHeightUnits(heightUnit);
         setWeightUnits(weightUnit);
+        setIsLoading(false);
       })
       .catch(() => {
+        setIsLoading(false);
         alert(
           "An error occurred.",
           "Unable to complete onboarding. Please reload the page and try again",
@@ -134,6 +138,16 @@ const Onboarding = ({ client, history }) => {
     );
   });
 
+  if (isLoading) {
+    return (
+      <CustomSpinner
+        thickness="6px"
+        emptyColor="gray.200"
+        color="orange.400"
+        size="xl"
+      />
+    );
+  }
   return (
     <AuthStyle>
       <div className="auth-container">
