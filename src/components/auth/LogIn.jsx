@@ -7,6 +7,7 @@ import * as yup from "yup";
 
 import Input from "../common/Input";
 import { Button, Checkbox, useToast } from "@chakra-ui/core";
+import PropTypes from "prop-types";
 import { isLoggedIn } from "../../utils";
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
@@ -245,3 +246,8 @@ function Login({ client, history }) {
 }
 
 export default withApollo(Login);
+
+Login.propTypes = {
+  client: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};

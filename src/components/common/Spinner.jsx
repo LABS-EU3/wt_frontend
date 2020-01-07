@@ -18,9 +18,9 @@ function CustomSpinner({ thickness, size, text }) {
 
 //adding proptypes
 CustomSpinner.propTypes = {
-  thicknessProp: PropTypes.string,
-  sizeProp: PropTypes.string,
-  textProp: PropTypes.string
+  thickness: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+  text: PropTypes.string
 };
 
 export default CustomSpinner;

@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import { Button, useToast } from "@chakra-ui/core";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -267,3 +268,8 @@ function SignUp({ client, history }) {
 }
 
 export default withApollo(SignUp);
+
+SignUp.propTypes = {
+  client: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};

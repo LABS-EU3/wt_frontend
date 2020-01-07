@@ -3,16 +3,17 @@ import { withApollo } from "react-apollo";
 import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import PropTypes from "prop-types";
 
-import Preview from "./common/Preview";
-import AuthStyle from "./auth/AuthStyle";
-import Select from "./common/Select";
-import Logo from "./common/Logo";
-import { ONBOARDING } from "../graphql/mutations";
-import { GET_UNITS } from "../graphql/queries";
-import { getUserDetails, userOnboardedSuccessfully } from "../utils";
+import Preview from "../common/Preview";
+import AuthStyle from "./AuthStyle";
+import Select from "../common/Select";
+import Logo from "../common/Logo";
+import { ONBOARDING } from "../../graphql/mutations";
+import { GET_UNITS } from "../../graphql/queries";
+import { getUserDetails, userOnboardedSuccessfully } from "../../utils";
 import { Redirect } from "react-router-dom";
-import CustomSpinner from "./common/Spinner";
+import CustomSpinner from "../common/Spinner";
 
 const userData = getUserDetails();
 
@@ -275,3 +276,8 @@ const Onboarding = ({ client, history }) => {
 };
 
 export default withApollo(Onboarding);
+
+Onboarding.propTypes = {
+  client: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};

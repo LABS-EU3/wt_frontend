@@ -1,6 +1,8 @@
 import React from "react";
 import banner from "../../assets/banner.jpg";
 import styled from "styled-components";
+import PropTypes from "prop-types";
+
 const StyledPreview = styled.div`
   display: flex;
   width: 100%;
@@ -49,4 +51,9 @@ const Preview = ({ pageName }) => {
     </StyledPreview>
   );
 };
+
 export default Preview;
+
+Preview.propTypes = {
+  pageName: PropTypes.string.isRequired
+};

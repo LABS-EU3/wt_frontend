@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Spinner /> renders the Spinner component correctly 1`] = `
+<Box>
+  <Spinner
+    color="orange.400"
+    emptyColor="gray.200"
+    size="1rem"
+    thickness="thick"
+  />
+</Box>
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Preview /> renders the Preview component correctly 1`] = `
+<styled.div>
+  <div
+    className="view"
+    style={
+      Object {
+        "backgroundImage": "url(banner.jpg)",
+      }
+    }
+  >
+    <div
+      className="content"
+    >
+      <i
+        className="fas  fa-2x fa-bars"
+      />
+      <h2 />
+    </div>
+  </div>
+</styled.div>
+`;
