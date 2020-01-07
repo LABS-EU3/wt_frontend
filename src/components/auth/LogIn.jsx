@@ -248,10 +248,6 @@ function Login({ client, history }) {
 export default withApollo(Login);
 
 Login.propTypes = {
-  email: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  password: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  error: PropTypes.string,
-  value: PropTypes.string
+  client: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
