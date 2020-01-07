@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Onboarding /> renders the Onboarding component correctly 1`] = `
+<ApolloConsumer>
+  <Component />
+</ApolloConsumer>
+`;
