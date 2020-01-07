@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Box, Text } from "@chakra-ui/core";
+import { Image, Box, Text, Heading, Flex } from "@chakra-ui/core";
 
 function WorkoutCard({ name, intensity, type }) {
   return (
@@ -8,14 +8,18 @@ function WorkoutCard({ name, intensity, type }) {
         src="https://a0.muscache.com/im/pictures/b8cb989e-5c19-45ef-b478-1dc93ae8d3f3.jpg?aki_policy=poster"
         height="250px"
         width="100%"
-        maxWidth="300px"
+        // maxWidth="300px"
         objectFit="cover"
         bg="gray.100"
         marginBottom="12px"
       />
-      <Text>{name}</Text>
-      <Text>{intensity}</Text>
-      <Text>{type}</Text>
+      <Heading size="sm" textAlign="left">
+        {name}
+      </Heading>
+      <Flex marginTop="5px" justifyContent="space-between">
+        <Text>Intensity: {intensity}</Text>
+        <Text>Type: {type}</Text>
+      </Flex>
     </Box>
   );
 }
