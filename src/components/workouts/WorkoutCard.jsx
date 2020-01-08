@@ -3,7 +3,7 @@ import { Image, Box, Text, Heading, Flex } from "@chakra-ui/core";
 
 function WorkoutCard({ name, intensity, type }) {
   return (
-    <Box>
+    <Box margin="0 auto">
       <Image
         src="https://a0.muscache.com/im/pictures/b8cb989e-5c19-45ef-b478-1dc93ae8d3f3.jpg?aki_policy=poster"
         height="250px"
@@ -13,7 +13,7 @@ function WorkoutCard({ name, intensity, type }) {
         bg="gray.100"
         marginBottom="12px"
       />
-      <Heading size="sm" textAlign="left">
+      <Heading size="sm" textAlign="left" color="orange.400">
         {name}
       </Heading>
       <Flex marginTop="5px" justifyContent="space-between">
