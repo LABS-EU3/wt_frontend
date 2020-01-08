@@ -1,12 +1,12 @@
 import React from "react";
-import { Heading, Text } from "@chakra-ui/core";
+import { Heading, Text, Box } from "@chakra-ui/core";
 
 function SideTitle({ heading, subheading }) {
   return (
-    <div>
+    <Box textAlign="left" marginBottom="60px">
       <Heading size="lg">{heading}</Heading>
-      <Text>{subheading}</Text>
-    </div>
+      {subheading ? <Text>{subheading}</Text> : null}
+    </Box>
   );
 }
 

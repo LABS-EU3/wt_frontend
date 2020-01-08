@@ -8,6 +8,7 @@ import CustomSpinner from "../common/Spinner";
 import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
 import DetailList from "./DetailList";
 import SideTitle from "../common/SideTitle";
+import WorkoutDetail from "./WorkoutDetail";
 
 function WorkoutList({ client }) {
   const [data, setData] = useState([]);
@@ -68,7 +69,7 @@ function WorkoutList({ client }) {
       <Button marginY="50px" variantColor="orange" size="lg">
         View More
       </Button>
-      <SideTitle heading="Workout" subheading="my work" />
+      <WorkoutDetail />
     </Box>
   );
 }

@@ -1,12 +1,24 @@
 import React from "react";
-import { Heading, Text } from "@chakra-ui/core";
+import {
+  Heading,
+  Text,
+  Box,
+  Stack,
+  Divider,
+  SimpleGrid
+} from "@chakra-ui/core";
 
 function DetailList({ heading, text }) {
   return (
-    <div>
-      <Heading>{heading}</Heading>
-      <Text>{text}</Text>
-    </div>
+    <Box>
+      <Stack isInline spacing={16}>
+        <Text textAlign="left">{text}</Text>
+        <Heading textAlign="left" size="sm">
+          {heading}
+        </Heading>
+      </Stack>
+      <Divider width="70%" />
+    </Box>
   );
 }
 
