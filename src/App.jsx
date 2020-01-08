@@ -8,10 +8,12 @@ import Dashboard from "./components/Dashboard";
 import SignUp from "./components/auth/SignUp";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseCard from "./components/exercise/ExerciseCard";
+import Navigation from "./components/common/Navigation";
 
 function App() {
   return (
     <div className="App" data-testid="App">
+      <Navigation />
       {/* <Route exact path="/login" component={Login} /> */}
       <Route exact path="/login" component={ExerciseCard} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
