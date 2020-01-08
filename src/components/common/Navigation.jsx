@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import SideNav, { MenuIcon } from "react-simple-sidenav";
+import { Link } from "react-router-dom";
+import SideNav from "react-simple-sidenav";
 import Logo from "./Logo";
 
 const StyledNavigation = styled.div`
+  color: #ff8744;
+
   .nav {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 1rem 0;
-    padding: 0 2rem;
+    margin-bottom: 1rem 0;
+    padding: 1rem 2rem;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 5px 0px #ff8744;
+    -moz-box-shadow: 0px 0px 5px 0px #ff8744;
+    box-shadow: 0px 0px 5px 0px #ff8744;
   }
 `;
 
@@ -32,32 +39,19 @@ function Navigation() {
             <i class="fas fa-times"></i>
           </div>
         }
-        titleStyle={{ backgroundColor: "#d84727" }}
+        titleStyle={{ backgroundColor: "#ff8744" }}
         items={[
-          <a
-            target="_blank"
-            href="https://github.com/gauravchl/react-simple-sidenav"
-          >
-            Dashboard
-          </a>,
-          <a
-            target="_blank"
-            href="https://github.com/gauravchl/react-simple-sidenav"
-          >
-            Excercises
-          </a>,
-          <a
-            target="_blank"
-            href="https://www.npmjs.com/package/react-simple-sidenav"
-          >
-            Workouts
-          </a>,
-          <a
-            target="_blank"
-            href="https://gauravchl.github.io/react-simple-sidenav/demo/"
-          >
-            Profile
-          </a>
+          <Link to="/dashboard">Dashboard &nbsp;</Link>,
+          <Link to="/excercises">Excercises &nbsp;</Link>,
+          <Link to="/workouts">
+            Workouts &nbsp; <i class="fas fa-dumbbell"></i>
+          </Link>,
+          <Link to="/profile">
+            Profile &nbsp; <i class="far fa-user"></i>
+          </Link>,
+          <Link to="/settings">
+            Settings &nbsp; <i class="fas fa-cogs"></i>
+          </Link>
         ]}
       />
     </StyledNavigation>
