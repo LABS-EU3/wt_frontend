@@ -9,6 +9,7 @@ import SignUp from "./components/auth/SignUp";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseCard from "./components/exercise/ExerciseCard";
 import Navigation from "./components/common/Navigation";
+import WorkoutHistory from "./components/WorkoutHistory";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
       <Route exact path="/signup" component={SignUp} />
       <PrivateRoute exact path="/" component={Dashboard} />
+      <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
     </div>
   );
 }
