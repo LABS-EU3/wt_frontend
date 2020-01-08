@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import SideNav from "react-simple-sidenav";
-import Logo from "./Logo";
+import PropTypes from "prop-types";
 
+import Logo from "./Logo";
 import { isLoggedIn } from "../../utils";
 
 const isSignedIn = isLoggedIn();
@@ -65,7 +66,7 @@ const Navigation = ({ location }) => {
               Settings &nbsp; <i className="fas fa-cogs"></i>
             </Link>,
             <Link to="#" onClick={logout}>
-              Logout &nbsp; <i class="fas fa-sign-out-alt"></i>
+              Logout &nbsp; <i className="fas fa-sign-out-alt"></i>
             </Link>
           ]}
         />
@@ -77,3 +78,7 @@ const Navigation = ({ location }) => {
 };
 
 export default withRouter(Navigation);
+
+Navigation.propTypes = {
+  location: PropTypes.object.isRequired
+};
