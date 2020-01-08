@@ -99,7 +99,7 @@ function WorkoutHistory(client, history) {
         </Flex>
       </Box>
     );
-  } else if (!workouts && !dummyData) {
+  } else if (dummyData.length === 0) {
     return (
       <HistoryStyle>
         <header>
