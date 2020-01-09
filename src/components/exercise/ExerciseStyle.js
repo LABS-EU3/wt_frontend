@@ -124,6 +124,7 @@ export const ExerciseStyle = styled.div`
 
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    color: #ff8744;
   }
 
   @media only screen and (max-width: 1000px) {

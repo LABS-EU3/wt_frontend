@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
+import { WorkoutsStyle } from "./WorkoutStyle";
 
 function Workouts({ client }) {
   const [data, setData] = useState([]);
@@ -44,16 +45,27 @@ function Workouts({ client }) {
     );
   }
 
-  return (
-    <Box>
-      <SimpleGrid columns={3} spacingX={5}>
+  if (data.length > 0) {
+    return (
+      <WorkoutsStyle>
         {data.map(item => (
           <WorkoutCard key={item.id} data={item} />
         ))}
-      </SimpleGrid>
-      <Button marginY="50px" variantColor="orange" size="lg">
-        View More
-      </Button>
+
+        <div className="more">
+          <Button marginY="50px" variantColor="orange" size="lg">
+            View More
+          </Button>
+        </div>
+      </WorkoutsStyle>
+    );
+  }
+
+  return (
+    <Box>
+      <Flex width="100vw" height="100vh" justifyContent="center" align="center">
+        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+      </Flex>
     </Box>
   );
 }

@@ -25,7 +25,7 @@ const Search = ({ placeholder }) => {
       <h3>Search</h3>
       <Input
         type="text"
-        placeholder={"Look for a specific excercise"}
+        placeholder={placeholder}
         id="search"
         name="search"
         variant="filled"
