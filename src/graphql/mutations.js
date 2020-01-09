@@ -72,3 +72,11 @@ export const ONBOARDING = gql`
     }
   }
 `;
+
+export const SAVE = gql`
+  mutation($file: Upload!) {
+    updateCompletedWorkout(file: $file) {
+      filename
+    }
+  }
+`;
