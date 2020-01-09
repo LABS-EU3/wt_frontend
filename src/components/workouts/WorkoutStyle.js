@@ -71,3 +71,92 @@ export const WorkoutStyle = styled.div`
     }
   }
 `;
+
+export const WorkoutDetailStyle = styled.div`
+  min-height: 100vh;
+  width: 80vw;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .exerciseCard-header {
+    text-align: left;
+    padding: 0.5rem 0;
+    h2 {
+      font-weight: bold;
+      font-size: 4vw;
+    }
+    p {
+      color: grey;
+    }
+  }
+
+  .exerciseCard-banner {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    /* opacity: 0.8; */
+    margin: 1rem 0;
+    justify-content: center;
+    img {
+      width: auto;
+    }
+  }
+
+  .exerciseCard-information {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+
+    .exerciseCard-instruction {
+      width: 55%;
+      text-align: left;
+
+      h3 {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: 90%;
+      }
+    }
+
+    .exerciseCard-data {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 3rem;
+      .exerciseCard-data-tab {
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+
+        .exerciseCard-data-value {
+          font-weight: Bold;
+          width: 67%;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: 90%;
+        margin: 1rem 0;
+      }
+    }
+  }
+
+  .excercise-video {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+`;

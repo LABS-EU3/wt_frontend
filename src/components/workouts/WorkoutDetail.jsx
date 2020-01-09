@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { FaPlayCircle, FaStopCircle } from "react-icons/fa";
+import { Redirect } from "react-router-dom";
 
 import SideTitle from "../common/SideTitle";
 import DetailList from "./DetailList";
@@ -48,6 +49,7 @@ function WorkoutDetail({ client }) {
         setIsLoading(false);
         setError(true);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
@@ -63,6 +65,11 @@ function WorkoutDetail({ client }) {
         </Flex>
       </Box>
     );
+  }
+
+  if (error) {
+    alert("An error occurred.", "Unable to load workout detail", "error");
+    return <Redirect to="/workouts" />;
   }
 
   const {
@@ -178,14 +185,7 @@ function WorkoutDetail({ client }) {
 
 //adding proptypes
 WorkoutDetail.propTypes = {
-  name: PropTypes.string.isRequired,
-  intensity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  avgTime: PropTypes.number.isRequired,
-  equipment: PropTypes.string.isRequired,
-  muscles: PropTypes.string.isRequired,
-  exercises: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired
 };
 
 export default withApollo(WorkoutDetail);
