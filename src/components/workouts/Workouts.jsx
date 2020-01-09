@@ -31,7 +31,6 @@ function Workouts({ client }) {
         query: GET_WORKOUT_DETAILS
       })
       .then(res => {
-        console.log(res.data.workouts);
         setData(res.data.workouts);
         setIsLoading(false);
       })
@@ -89,5 +88,5 @@ function Workouts({ client }) {
 export default withApollo(Workouts);
 
 Workouts.propTypes = {
-  data: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired
 };

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Heading } from "@chakra-ui/core";
 import { WorkoutStyle } from "./WorkoutStyle";
 
-function WorkoutCard({ data }) {
+function Workout({ data }) {
   const { name, intensity, types, id } = data;
 
   return (
@@ -32,11 +32,8 @@ function WorkoutCard({ data }) {
 }
 
 //adding proptypes
-WorkoutCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  intensity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+Workout.propTypes = {
+  data: PropTypes.object.isRequired
 };
 
-export default WorkoutCard;
+export default Workout;
