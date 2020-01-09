@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/core";
 
 import { ExercisesStyle } from "./ExerciseStyle";
 import CustomSpinner from "../common/Spinner";
-import { GET_EXCERCISES } from "../../graphql/queries";
+import { GET_EXERCISES } from "../../graphql/queries";
 import Excercise from "./Exercise";
 
 const Excercises = ({ client }) => {
@@ -27,18 +27,14 @@ const Excercises = ({ client }) => {
     setLoading(true);
     client
       .query({
-        query: GET_EXCERCISES
+        query: GET_EXERCISES
       })
       .then(res => {
         setExercises(res.data.exercises);
         setLoading(false);
       })
       .catch(err => {
-        alert(
-          "An error occurred.",
-          "Unable to load excercises. Please reload the page and try again",
-          "error"
-        );
+        alert("An error occurred.", "Unable to load excercises", "error");
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps

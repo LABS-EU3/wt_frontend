@@ -39,7 +39,7 @@ export const GET_UNITS = gql`
   }
 `;
 
-export const GET_EXCERCISES = gql`
+export const GET_EXERCISES = gql`
   query {
     exercises {
       id
@@ -53,6 +53,23 @@ export const GET_EXCERCISES = gql`
       muscle
       name
       time
+    }
+  }
+`;
+
+export const GET_EXERCISE = gql`
+  query excercise($id: String!) {
+    exercise(id: $id) {
+      id
+      video
+      difficulty
+      pictureOne
+      pictureTwo
+      rating
+      equipment
+      type
+      muscle
+      name
     }
   }
 `;

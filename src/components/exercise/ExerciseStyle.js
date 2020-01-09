@@ -25,11 +25,13 @@ export const ExercisesStyle = styled.div`
   }
 `;
 
-export const ExerciseCardStyle = styled.div`
+export const ExerciseDetailStyle = styled.div`
   min-height: 100vh;
   width: 70vw;
   margin: 0 auto;
   margin-bottom: 5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 1rem;
 
   .exerciseCard-header {
     text-align: left;
@@ -84,6 +86,14 @@ export const ExerciseCardStyle = styled.div`
         }
       }
     }
+  }
+
+  .excercise-video {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin: 1rem 0;
   }
 `;
 

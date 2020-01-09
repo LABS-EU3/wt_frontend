@@ -1,51 +1,110 @@
-import React from "react";
-import { ExercisesStyle, ExerciseCardStyle } from "./ExerciseStyle";
+import React, { useState, useEffect } from "react";
+import { withApollo } from "react-apollo";
+import { useToast } from "@chakra-ui/core";
 
-function ExerciseCard() {
-  return (
-    <ExerciseCardStyle>
-      <div className="exerciseCard-container">
-        <div className="exerciseCard-header">
-          <h2>Total Upper Body Exercise</h2>
-          <p>Created by amira adediran</p>
-        </div>
-        <div className="exerciseCard-banner">
-          <img src="http://static-10.sinclairstoryline.com/resources/media/e87328a1-cca8-408f-b0bf-a56df96b2ea2-large16x9_GettyImages912603144.jpg?1546036005283" />
-        </div>
-        <div className="exerciseCard-information">
-          <div className="exerciseCard-instruction">
-            <h3>Instructions</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos,
-              illum soluta minus magni vitae incidunt sequi, dolorum nisi
-              temporibus, dicta fugit eaque! Aliquam quas dolorem atque deserunt
-              officia ratione culpa tempora excepturi, itaque velit aspernatur,
-              consectetur labore quo iure voluptatum aut, magni numquam
-              necessitatibus eos! Exercitationem animi consequatur autem et?
-            </p>
-          </div>
-          <div className="exerciseCard-data">
-            <div className="exerciseCard-data-tab">
-              <p>Difficulty</p>
-              <p className="exerciseCard-data-value">Intermediate</p>
-            </div>
-            <div className="exerciseCard-data-tab">
-              <p>Types</p>
-              <p className="exerciseCard-data-value">Strength, Weight Loss</p>
-            </div>
-            <div className="exerciseCard-data-tab">
-              <p>Equipment</p>
-              <p className="exerciseCard-data-value">Dumbell, Bench</p>
-            </div>
-            <div className="exerciseCard-data-tab">
-              <p>Muscles</p>
-              <p className="exerciseCard-data-value">Chest, Biceps</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ExerciseCardStyle>
-  );
-}
+import { ExerciseDetailStyle } from "./ExerciseStyle";
+import { GET_EXERCISE } from "../../graphql/queries";
+import CustomSpinner from "../common/Spinner";
+import ReactPlayer from "react-player";
 
-export default ExerciseCard;
+const ExerciseCard = ({ client, match }) => {
+  const toast = useToast();
+  const [exercise, setExercise] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
+  useEffect(() => {
+    const { id } = match.params;
+    setLoading(true);
+    client
+      .query({
+        query: GET_EXERCISE,
+        variables: { id }
+      })
+      .then(res => {
+        setExercise(res.data.exercise);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        alert("An error occurred.", "Unable to load excercise detail", "error");
+        setLoading(false);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(exercise);
+  if (loading) {
+    return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+  }
+
+  if (exercise) {
+    const {
+      name,
+      pictureTwo,
+      description,
+      muscle,
+      difficulty,
+      equipment,
+      type,
+      rating,
+      video
+    } = exercise;
+    return (
+      <ExerciseDetailStyle>
+        <div className="exerciseCard-container">
+          <div className="exerciseCard-header">
+            <h2>{name}</h2>
+            <p>Created by amira adediran</p>
+          </div>
+          <div className="exerciseCard-banner">
+            <img src={pictureTwo} alt={name} />
+          </div>
+          <div className="exerciseCard-information">
+            <div className="exerciseCard-instruction">
+              <h3>Instructions</h3>
+              <p>{description}</p>
+            </div>
+            <div className="exerciseCard-data">
+              <div className="exerciseCard-data-tab">
+                <p>Difficulty</p>
+                <p className="exerciseCard-data-value">{difficulty}</p>
+              </div>
+              <div className="exerciseCard-data-tab">
+                <p>Types</p>
+                <p className="exerciseCard-data-value">{type}</p>
+              </div>
+              <div className="exerciseCard-data-tab">
+                <p>Equipment</p>
+                <p className="exerciseCard-data-value">{equipment}</p>
+              </div>
+              <div className="exerciseCard-data-tab">
+                <p>Muscles</p>
+                <p className="exerciseCard-data-value">{muscle}</p>
+              </div>
+              <div className="exerciseCard-data-tab">
+                <p>Ratings</p>
+                <p className="exerciseCard-data-value">{rating}</p>
+              </div>
+            </div>
+          </div>
+          <div className="excercise-video">
+            <ReactPlayer url={video} playing controls />
+          </div>
+        </div>
+      </ExerciseDetailStyle>
+    );
+  }
+
+  return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+};
+
+export default withApollo(ExerciseCard);
