@@ -22,6 +22,7 @@ const StyledNavigation = styled.div`
     padding: 1rem 2rem;
     background-color: white;
     box-shadow: 0px 0px 5px 0px #ff8744;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -50,7 +51,7 @@ const Navigation = ({ location }) => {
           title={<div>Hello name,</div>}
           titleStyle={{ backgroundColor: "#ff8744" }}
           items={[
-            <Link to="/dashboard">
+            <Link to="/">
               Dashboard &nbsp; <i className="fas fa-chart-line"></i>
             </Link>,
             <Link to="/excercises">
