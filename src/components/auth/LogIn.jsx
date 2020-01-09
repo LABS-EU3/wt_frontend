@@ -82,7 +82,13 @@ function Login({ client, history }) {
         })
         .catch(error => {
           console.log(error.graphQLErrors);
-          alert("An error occurred.", error.graphQLErrors[0].message, "error");
+          if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+            alert(
+              "An error occurred.",
+              error.graphQLErrors[0].message,
+              "error"
+            );
+          }
         });
     }
   });

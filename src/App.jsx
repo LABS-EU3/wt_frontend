@@ -6,6 +6,8 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/LogIn";
 import Dashboard from "./components/Dashboard";
 import SignUp from "./components/auth/SignUp";
+import WorkoutList from "./components/workouts/WorkoutList";
+import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseCard from "./components/exercise/ExerciseCard";
 import Navigation from "./components/common/Navigation";
@@ -20,6 +22,8 @@ function App() {
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
       <Route exact path="/signup" component={SignUp} />
       <PrivateRoute exact path="/" component={Dashboard} />
+      <PrivateRoute exact path="/workouts" component={WorkoutList} />
+      <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
     </div>
   );
