@@ -153,7 +153,7 @@ export const ExerciseStyle = styled.div`
 
     .excercise-ratings {
       i {
-        color: #d84727;
+        color: #ff8744;
         padding: 0 0.3rem;
       }
     }
