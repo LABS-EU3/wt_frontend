@@ -27,7 +27,7 @@ export const GET_WORKOUT_DETAILS = gql`
     workouts {
       name
       intensity
-      type
+      types
       id
     }
   }
@@ -38,7 +38,7 @@ export const GET_WORKOUT_DETAIL = gql`
     workout(id: $id) {
       name
       intensity
-      type
+      types
       description
       avgTime
       equipment
