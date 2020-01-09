@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import { ExerciseStyle } from "./ExerciseStyle";
 
 const Excercise = ({ excercise }) => {
-  console.log(excercise);
-  const { name, rating, pictureOne, equipment } = excercise;
+  const { id, name, rating, pictureOne, equipment } = excercise;
   return (
     <ExerciseStyle>
-      <Link to="">
+      <Link to={`/excercise/${id}`}>
         <img src={pictureOne} alt={name} />
 
         <div className="excersie-detail">
