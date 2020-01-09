@@ -44,7 +44,7 @@ const Preview = ({ pageName }) => {
         }}
       >
         <div className="content">
-          <i className="fas  fa-2x fa-bars"></i>
+          {/* <i className="fas  fa-2x fa-bars"></i> */}
           <h2>{pageName}</h2>
         </div>
       </div>

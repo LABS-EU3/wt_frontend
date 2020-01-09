@@ -17,10 +17,10 @@ import {
   Progress
 } from "@chakra-ui/core";
 
-import CustomSpinner from "./common/Spinner";
+import CustomSpinner from "../common/Spinner";
 import WorkoutHistoryCard from "./WorkoutHistoryCard";
 import HistoryStyle from "./WorkoutHistoryStyle";
-import { GET_COMPLETED_WORKOUTS } from "../graphql/queries";
+import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
 
 function WorkoutHistory({ client, history }) {
   const toast = useToast();
@@ -98,6 +98,7 @@ function WorkoutHistory({ client, history }) {
             onOpen={onOpen}
             key={workout.workoutId.id}
             workout={workout}
+            history={history}
           />
         ))}
 

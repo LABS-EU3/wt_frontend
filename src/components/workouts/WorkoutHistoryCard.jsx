@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Flex, Box, Image } from "@chakra-ui/core";
 
-import Logo from "../images/login_image.png";
+import Logo from "../../images/login_image.png";
 
-function WorkoutHistoryCard({ workout, onOpen }) {
+function WorkoutHistoryCard({ workout, onOpen, history }) {
   const dateCompleted = new Date(workout.endDate).toLocaleDateString();
 
   const style = {
@@ -34,9 +35,11 @@ function WorkoutHistoryCard({ workout, onOpen }) {
             <p>{workout.workoutId.intensity}</p>
             <p>{workout.workoutId.avgTime}</p>
           </section>
-          <Button variantColor="orange" marginTop="30px">
-            View Details
-          </Button>
+          <Link to={`/workout/${workout.workoutId.id}`}>
+            <Button variantColor="orange" marginTop="30px">
+              View Details
+            </Button>
+          </Link>
         </Flex>
       </Box>
     </>

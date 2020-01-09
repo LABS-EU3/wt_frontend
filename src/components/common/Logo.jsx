@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import LogoImage from "../../assets/logo.png";
 
 const StyledLogo = styled.div`
@@ -12,7 +12,9 @@ const StyledLogo = styled.div`
 const Logo = () => {
   return (
     <StyledLogo>
-      <img src={LogoImage} alt="Logo" />
+      <Link to="/">
+        <img src={LogoImage} alt="Logo" />
+      </Link>
     </StyledLogo>
   );
 };
