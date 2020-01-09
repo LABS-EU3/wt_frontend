@@ -21,6 +21,7 @@ import CustomSpinner from "../common/Spinner";
 import WorkoutHistoryCard from "./WorkoutHistoryCard";
 import HistoryStyle from "./WorkoutHistoryStyle";
 import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
+import { UPLOAD_PROGRESS_PICTURE } from "../../graphql/mutations";
 
 function WorkoutHistory({ client, history }) {
   const toast = useToast();
@@ -57,6 +58,20 @@ function WorkoutHistory({ client, history }) {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onChange = e => {
+    const file = e.target.files[0];
+    console.log(file);
+    client
+      .mutate({
+        variables: {
+          file
+        },
+        mutation: UPLOAD_PROGRESS_PICTURE
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   if (isLoading) {
     return (
@@ -117,6 +132,7 @@ function WorkoutHistory({ client, history }) {
                 height="150px"
               >
                 Drag files here or browse
+                <input type="file" name="Uplad" onChange={onChange} />
               </Box>
             </ModalBody>
             <ModalFooter>

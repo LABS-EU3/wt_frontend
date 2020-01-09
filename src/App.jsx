@@ -11,14 +11,12 @@ import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseDetail from "./components/exercise/ExerciseDetail";
 import Navigation from "./components/common/Navigation";
-import Testing from "./components/common/Testing";
 import WorkoutHistory from "./components/workouts/WorkoutHistory";
 
 function App() {
   return (
     <div className="App" data-testid="App">
       <Navigation />
-      <Testing />
       <Route exact path="/login" component={Login} />
       <PrivateRoute exact path="/excercises" component={Exercises} />
       <PrivateRoute exact path="/excercise/:id" component={ExerciseDetail} />
