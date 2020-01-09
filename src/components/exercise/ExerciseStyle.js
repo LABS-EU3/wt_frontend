@@ -72,7 +72,7 @@ export const ExerciseDetailStyle = styled.div`
 
       h3 {
         font-weight: bold;
-        font-size: 2vw;
+        font-size: 1.5rem;
       }
 
       @media only screen and (max-width: 600px) {

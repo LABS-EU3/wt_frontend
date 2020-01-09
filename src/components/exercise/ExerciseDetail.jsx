@@ -59,7 +59,6 @@ const ExerciseCard = ({ client, match }) => {
     } = exercise;
     return (
       <ExerciseDetailStyle>
-        {/* <div className="exerciseCard-container"> */}
         <div className="exerciseCard-header">
           <h2>{name}</h2>
         </div>
@@ -97,7 +96,6 @@ const ExerciseCard = ({ client, match }) => {
         <div className="excercise-video">
           <ReactPlayer url={video} playing controls />
         </div>
-        {/* </div> */}
       </ExerciseDetailStyle>
     );
   }
