@@ -106,7 +106,7 @@ function WorkoutDetail({ client }) {
 
       <ButtonGroup spacing={4} textAlign="left" marginY="30px">
         <Button
-          leftIcon={FaPlayCircle}
+          rightIcon={FaPlayCircle}
           variantColor="green"
           variant="solid"
           size="lg"
