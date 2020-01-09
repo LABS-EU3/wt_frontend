@@ -96,6 +96,34 @@ export const ExerciseStyle = styled.div`
 
   img {
     width: 300px;
-    height: 300px;
+    height: 250px;
+  }
+
+  .excersie-detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.5rem;
+    margin: 1rem 0;
+
+    h4 {
+      font-family: "Roboto";
+    }
+
+    .excercise-ratings {
+      i {
+        color: #d84727;
+        padding: 0 0.3rem;
+      }
+    }
+  }
+
+  .excercise-equipment {
+    padding: 0 0.5rem;
+
+    p {
+      background-color: #e5e5e5;
+    }
   }
 `;
