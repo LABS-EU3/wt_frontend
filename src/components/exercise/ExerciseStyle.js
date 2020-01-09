@@ -91,11 +91,17 @@ export const ExerciseStyle = styled.div`
   width: 30%;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid blue;
   margin: 1rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
 
   img {
-    width: 300px;
+    width: 100%;
     height: 250px;
   }
 
@@ -108,7 +114,7 @@ export const ExerciseStyle = styled.div`
     margin: 1rem 0;
 
     h4 {
-      font-family: "Roboto";
+      font-family: "Ubuntu";
     }
 
     .excercise-ratings {
@@ -121,9 +127,14 @@ export const ExerciseStyle = styled.div`
 
   .excercise-equipment {
     padding: 0 0.5rem;
-
+    display: flex;
     p {
       background-color: #e5e5e5;
+      padding: 0.4rem;
+      border-radius: 5px;
+      font-size: 0.7rem;
+      margin-bottom: 1rem;
+      font-family: "Roboto";
     }
   }
 `;
