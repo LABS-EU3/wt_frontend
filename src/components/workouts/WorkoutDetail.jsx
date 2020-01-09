@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
+import { FaPlayCircle, FaStopCircle } from "react-icons/fa";
 
 import SideTitle from "../common/SideTitle";
 import DetailList from "./DetailList";
@@ -15,7 +16,9 @@ import {
   AccordionItem,
   AccordionHeader,
   AccordionPanel,
-  AccordionIcon
+  AccordionIcon,
+  Button,
+  ButtonGroup
 } from "@chakra-ui/core";
 
 import CustomSpinner from "../common/Spinner";
@@ -96,11 +99,29 @@ function WorkoutDetail({ client }) {
           marginBottom="12px"
         />
       </Flex>
-      <Heading size="md" marginY="30px" textAlign="left">
+      <Heading size="md" marginTop="60px" textAlign="center">
         Check the description and video instructions of an exercise and start
         working out!
       </Heading>
 
+      <ButtonGroup spacing={4} textAlign="left" marginY="30px">
+        <Button
+          leftIcon={FaPlayCircle}
+          variantColor="green"
+          variant="solid"
+          size="lg"
+        >
+          Start
+        </Button>
+        <Button
+          rightIcon={FaStopCircle}
+          variantColor="red"
+          variant="outline"
+          size="lg"
+        >
+          Stop
+        </Button>
+      </ButtonGroup>
       {exercises &&
         exercises.map(exercise => (
           <Accordion
