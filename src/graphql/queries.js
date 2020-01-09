@@ -41,7 +41,7 @@ export const GET_UNITS = gql`
 
 export const GET_WORKOUT_DETAILS = gql`
   query {
-    workouts(input: { search: "", field: ["name"] }) {
+    workouts {
       name
       intensity
       type
