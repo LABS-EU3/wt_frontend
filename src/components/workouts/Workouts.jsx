@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Flex, SimpleGrid } from "@chakra-ui/core";
+import { Box, Button, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
@@ -9,9 +10,20 @@ import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
 
 function Workouts({ client }) {
+  const toast = useToast();
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
   useEffect(() => {
     client
@@ -45,6 +57,10 @@ function Workouts({ client }) {
     );
   }
 
+  if (error) {
+    alert("An error occurred.", "Unable to load workouts", "error");
+    return <Redirect to="/" />;
+  }
   if (data.length > 0) {
     return (
       <WorkoutsStyle>
