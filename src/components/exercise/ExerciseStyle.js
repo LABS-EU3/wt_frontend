@@ -5,6 +5,9 @@ export const ExercisesStyle = styled.div`
   min-height: 100vh;
   width: 70vw;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .search-container {
     border: 1px solid red;
@@ -81,5 +84,18 @@ export const ExerciseCardStyle = styled.div`
         }
       }
     }
+  }
+`;
+
+export const ExerciseStyle = styled.div`
+  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid blue;
+  margin: 1rem;
+
+  img {
+    width: 300px;
+    height: 300px;
   }
 `;

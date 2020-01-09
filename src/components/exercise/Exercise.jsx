@@ -1,8 +1,14 @@
 import React from "react";
+import { ExerciseStyle } from "./ExerciseStyle";
 
 const Excercise = ({ excercise }) => {
   console.log(excercise);
-  return <div></div>;
+  const { rating, pictureOne } = excercise;
+  return (
+    <ExerciseStyle>
+      <img src={pictureOne} alt="" />
+    </ExerciseStyle>
+  );
 };
 
 export default Excercise;
