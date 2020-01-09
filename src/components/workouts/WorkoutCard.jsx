@@ -11,7 +11,6 @@ function WorkoutCard({ data }) {
           src="https://a0.muscache.com/im/pictures/b8cb989e-5c19-45ef-b478-1dc93ae8d3f3.jpg?aki_policy=poster"
           height="250px"
           width="100%"
-          // maxWidth="300px"
           objectFit="cover"
           bg="gray.100"
           marginBottom="12px"
