@@ -11,7 +11,7 @@ import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseDetail from "./components/exercise/ExerciseDetail";
 import Navigation from "./components/common/Navigation";
-import WorkoutHistory from "./components/WorkoutHistory";
+import WorkoutHistory from "./components/workouts/WorkoutHistory";
 
 function App() {
   return (

@@ -17,74 +17,46 @@ import {
   Progress
 } from "@chakra-ui/core";
 
-import CustomSpinner from "./common/Spinner";
+import CustomSpinner from "../common/Spinner";
 import WorkoutHistoryCard from "./WorkoutHistoryCard";
 import HistoryStyle from "./WorkoutHistoryStyle";
+import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
 
-const dummyData = [
-  {
-    id: 1,
-    dateCompleted: "12-12-19",
-    name: "Full Body Workout",
-    timeTaken: "1hr",
-    duration: "20min",
-    intensity: "beginner",
-    completed: false
-  },
-  {
-    id: 2,
-    dateCompleted: "12-12-19",
-    name: "Full Body Workout",
-    timeTaken: "1hr",
-    duration: "20min",
-    intensity: "beginner",
-    completed: true
-  },
-  {
-    id: 3,
-    dateCompleted: "12-12-19",
-    name: "Full Body Workout",
-    timeTaken: "1hr",
-    duration: "20min",
-    intensity: "beginner",
-    completed: true
-  }
-];
-
-function WorkoutHistory(client, history) {
+function WorkoutHistory({ client, history }) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // const alert = (title, description, status) => {
-  //     toast({
-  //       title,
-  //       description,
-  //       status,
-  //       duration: 9000,
-  //       isClosable: true
-  //     });
-  // };
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
-  // useEffect(() => {
-  //     client
-  //   .query({
-  //     query: "GET_WORKOUTS"
-  //   })
-  //   .then(res => {
-  //     setWorkouts(res.data);
-  //     setIsLoading(false);
-  //   })
-  //   .catch(() => {
-  //     setIsLoading(false);
-  //     alert(
-  //       "An error occurred.",
-  //       "Unable to load your completed workouts. Please reload the page and try again",
-  //       "error"
-  //     );
-  //   });
-  // })
+  useEffect(() => {
+    client
+      .query({
+        query: GET_COMPLETED_WORKOUTS
+      })
+      .then(res => {
+        setWorkouts(res.data.completedWorkouts);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        alert(
+          "An error occurred.",
+          "Unable to load your completed workouts. Please reload the page and try again",
+          "error"
+        );
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (isLoading) {
     return (
@@ -99,11 +71,13 @@ function WorkoutHistory(client, history) {
         </Flex>
       </Box>
     );
-  } else if (!workouts && !dummyData) {
+  } else if (workouts.length === 0) {
     return (
       <HistoryStyle>
         <header>
-          <Heading>Your Workout History</Heading>
+          <Heading size="lg" fontSize="50px">
+            Your Workout History
+          </Heading>
           <p>Check out all your completed workouts!</p>
           <p>You can upload progress pictures and track your development!</p>
         </header>
@@ -119,11 +93,12 @@ function WorkoutHistory(client, history) {
           <p>You can upload progress pictures and track your development!</p>
         </header>
 
-        {dummyData.map(workout => (
+        {workouts.map(workout => (
           <WorkoutHistoryCard
             onOpen={onOpen}
-            key={workout.id}
+            key={workout.workoutId.id}
             workout={workout}
+            history={history}
           />
         ))}
 
@@ -162,4 +137,4 @@ function WorkoutHistory(client, history) {
   }
 }
 
-export default WorkoutHistory; //withApollo(WorkoutHistory);
+export default withApollo(WorkoutHistory);
