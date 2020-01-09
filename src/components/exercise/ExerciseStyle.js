@@ -27,11 +27,14 @@ export const ExercisesStyle = styled.div`
 
 export const ExerciseDetailStyle = styled.div`
   min-height: 100vh;
-  width: 70vw;
+  width: 80vw;
   margin: 0 auto;
   margin-bottom: 5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .exerciseCard-header {
     text-align: left;
@@ -46,7 +49,10 @@ export const ExerciseDetailStyle = styled.div`
   }
 
   .exerciseCard-banner {
-    opacity: 0.8;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    /* opacity: 0.8; */
     margin: 1rem 0;
 
     img {
@@ -56,7 +62,9 @@ export const ExerciseDetailStyle = styled.div`
 
   .exerciseCard-information {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
 
     .exerciseCard-instruction {
       width: 55%;
@@ -65,6 +73,10 @@ export const ExerciseDetailStyle = styled.div`
       h3 {
         font-weight: bold;
         font-size: 2vw;
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: 90%;
       }
     }
 
@@ -84,6 +96,11 @@ export const ExerciseDetailStyle = styled.div`
           font-weight: Bold;
           width: 67%;
         }
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: 90%;
+        margin: 1rem 0;
       }
     }
   }
