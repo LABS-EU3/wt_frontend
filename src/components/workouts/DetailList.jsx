@@ -5,19 +5,22 @@ import {
   Box,
   Stack,
   Divider,
+  Flex,
   SimpleGrid
 } from "@chakra-ui/core";
 
-function DetailList({ heading, text }) {
+function DetailList({ value, label }) {
   return (
     <Box>
-      <Stack isInline spacing={16}>
-        <Text textAlign="left">{text}</Text>
+      <Flex>
+        <Text textAlign="left" minWidth="180px">
+          {label}
+        </Text>
         <Heading textAlign="left" size="sm">
-          {heading}
+          {value}
         </Heading>
-      </Stack>
-      <Divider width="70%" />
+      </Flex>
+      <Divider />
     </Box>
   );
 }

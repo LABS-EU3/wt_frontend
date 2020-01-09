@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Flex, SimpleGrid, Box, Button } from "@chakra-ui/core";
+import { Box, Button, Flex, SimpleGrid } from "@chakra-ui/core";
+import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
-
-import WorkoutCard from "./WorkoutCard";
-import CustomSpinner from "../common/Spinner";
-
 import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
-import DetailList from "./DetailList";
-import SideTitle from "../common/SideTitle";
-import WorkoutDetail from "./WorkoutDetail";
+import CustomSpinner from "../common/Spinner";
+import WorkoutCard from "./WorkoutCard";
 
 function WorkoutList({ client }) {
   const [data, setData] = useState([]);
@@ -47,29 +42,13 @@ function WorkoutList({ client }) {
   return (
     <Box>
       <SimpleGrid columns={3} spacingX={5}>
-        {/* {data.map(item => (
-        <WorkoutCard key={item.id} data={data} />
-      ))} */}
-        <WorkoutCard
-          name="Total Body Strength Workout"
-          intensity="beginner"
-          type="chest"
-        />
-        <WorkoutCard
-          name="Total Body Strength Workout"
-          intensity="beginner"
-          type="chest"
-        />
-        <WorkoutCard
-          name="Total Body Strength Workout"
-          intensity="beginner"
-          type="chest"
-        />
+        {data.map(item => (
+          <WorkoutCard key={item.id} data={item} />
+        ))}
       </SimpleGrid>
       <Button marginY="50px" variantColor="orange" size="lg">
         View More
       </Button>
-      <WorkoutDetail />
     </Box>
   );
 }

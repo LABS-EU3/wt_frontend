@@ -41,10 +41,38 @@ export const GET_UNITS = gql`
 
 export const GET_WORKOUT_DETAILS = gql`
   query {
-    workouts(input: { search: "" }) {
+    workouts(input: { search: "", field: ["name"] }) {
       name
       intensity
       type
+      id
+    }
+  }
+`;
+
+export const GET_WORKOUT_DETAIL = gql`
+  query($id: String!) {
+    workout(id: $id) {
+      name
+      intensity
+      type
+      description
+      avgTime
+      equipment
+      muscles
+      exercises {
+        id
+        video
+        difficulty
+        pictureOne
+        pictureTwo
+        rating
+        equipment
+        type
+        muscle
+        name
+        time
+      }
     }
   }
 `;
