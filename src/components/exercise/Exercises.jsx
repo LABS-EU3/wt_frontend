@@ -4,12 +4,13 @@ import { useToast } from "@chakra-ui/core";
 
 import CustomSpinner from "../common/Spinner";
 import { GET_EXCERCISES } from "../../graphql/queries";
+import Excercise from "./Exercise";
 
 const Excercises = ({ client }) => {
   const toast = useToast();
 
   const [loading, setLoading] = useState(false);
-  const [excercises, setExcercises] = useState([]);
+  const [exercises, setExercises] = useState([]);
 
   const alert = (title, description, status) => {
     toast({
@@ -28,8 +29,7 @@ const Excercises = ({ client }) => {
         query: GET_EXCERCISES
       })
       .then(res => {
-        console.log(res.data);
-        setExcercises(res.data.exercises);
+        setExercises(res.data.exercises);
         setLoading(false);
       })
       .catch(err => {
@@ -47,8 +47,14 @@ const Excercises = ({ client }) => {
   if (loading) {
     return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
   }
-  console.log(excercises);
-  return <div>s</div>;
+  console.log(exercises);
+  if (exercises.length > 0) {
+    return exercises.map(excercise => (
+      <Excercise excercise={excercise} key={excercise.id} />
+    ));
+  }
+
+  return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
 };
 
 export default withApollo(Excercises);

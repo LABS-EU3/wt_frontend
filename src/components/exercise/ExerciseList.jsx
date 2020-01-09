@@ -1,6 +1,6 @@
 import React from "react";
 
-import Excercises from "./Excercises";
+import Excercises from "./Exercises";
 import { ExercisesStyle } from "./ExerciseStyle";
 import Search from "../common/Search";
 
