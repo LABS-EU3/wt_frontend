@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import SideNav from "react-simple-sidenav";
 import PropTypes from "prop-types";
+import { useToast } from "@chakra-ui/core";
 
 import Logo from "./Logo";
 import { isLoggedIn } from "../../utils";
@@ -27,11 +28,25 @@ const StyledNavigation = styled.div`
 `;
 
 const Navigation = ({ location }) => {
+  const toast = useToast();
   const [showNav3, setshowNav3] = useState(false);
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
   const logout = () => {
     localStorage.removeItem("userData");
-    window.location.reload();
+    alert("Logged out successfully", "Expecting you soon 😀", "success");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   if (isSignedIn === true && location.pathname !== "/onboarding") {
