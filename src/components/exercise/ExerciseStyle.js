@@ -54,9 +54,9 @@ export const ExerciseDetailStyle = styled.div`
     width: 100%;
     /* opacity: 0.8; */
     margin: 1rem 0;
-
+    justify-content: center;
     img {
-      width: 100%;
+      width: auto;
     }
   }
 
