@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
-import WorkoutCard from "./WorkoutCard";
+import WorkoutCard from "./Workout";
 
 function Workouts({ client }) {
   const [data, setData] = useState([]);
