@@ -1,21 +1,19 @@
 import React from "react";
-import { Input } from "@chakra-ui/core";
-import { ExercisesStyle } from "./ExerciseStyle";
 
-function Exercises(props) {
+import Excercises from "./Excercises";
+import { ExercisesStyle } from "./ExerciseStyle";
+import Search from "../common/Search";
+
+function Exercises() {
   return (
-    <div exercise-list-container>
+    <div>
       <ExercisesStyle>
-        <nav></nav>
-        <div className="search-container">
-          <h4>Search</h4>
-          <p>Find an exercise</p>
-          <Input variant="filled" />
-        </div>
-        <div className="recommendations-container">
+        <Search />
+        <Excercises />
+        {/* <div className="recommendations-container">
           <p>See recommended exercises</p>
           <p>These exercises were suggested based on your current progress</p>
-        </div>
+        </div> */}
       </ExercisesStyle>
     </div>
   );

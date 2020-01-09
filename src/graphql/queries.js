@@ -38,3 +38,21 @@ export const GET_UNITS = gql`
     }
   }
 `;
+
+export const GET_EXCERCISES = gql`
+  query {
+    exercises {
+      id
+      video
+      difficulty
+      pictureOne
+      pictureTwo
+      rating
+      equipment
+      type
+      muscle
+      name
+      time
+    }
+  }
+`;
