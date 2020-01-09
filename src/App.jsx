@@ -9,7 +9,7 @@ import SignUp from "./components/auth/SignUp";
 import WorkoutList from "./components/workouts/WorkoutList";
 import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
-import ExerciseCard from "./components/exercise/ExerciseCard";
+import ExerciseDetail from "./components/exercise/ExerciseDetail";
 import Navigation from "./components/common/Navigation";
 import WorkoutHistory from "./components/WorkoutHistory";
 
@@ -18,7 +18,8 @@ function App() {
     <div className="App" data-testid="App">
       <Navigation />
       <Route exact path="/login" component={Login} />
-      {/* <Route exact path="/login" component={ExerciseCard} /> */}
+      <PrivateRoute exact path="/excercises" component={Exercises} />
+      <PrivateRoute exact path="/excercise/:id" component={ExerciseDetail} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
       <Route exact path="/signup" component={SignUp} />
       <PrivateRoute exact path="/" component={Dashboard} />
