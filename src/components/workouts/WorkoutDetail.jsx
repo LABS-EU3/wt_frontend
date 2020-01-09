@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
+import PropTypes from "prop-types";
 
 import SideTitle from "../common/SideTitle";
 import DetailList from "./DetailList";
@@ -152,5 +153,17 @@ function WorkoutDetail({ client }) {
     </Box>
   );
 }
+
+//adding proptypes
+WorkoutDetail.propTypes = {
+  name: PropTypes.string.isRequired,
+  intensity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  avgTime: PropTypes.number.isRequired,
+  equipment: PropTypes.string.isRequired,
+  muscles: PropTypes.string.isRequired,
+  exercises: PropTypes.object.isRequired
+};
 
 export default withApollo(WorkoutDetail);

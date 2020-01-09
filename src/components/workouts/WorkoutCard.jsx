@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import { Image, Box, Text, Heading, Flex } from "@chakra-ui/core";
 
 function WorkoutCard({ data }) {
@@ -27,5 +29,13 @@ function WorkoutCard({ data }) {
     </Link>
   );
 }
+
+//adding proptypes
+WorkoutCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  intensity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
+};
 
 export default WorkoutCard;

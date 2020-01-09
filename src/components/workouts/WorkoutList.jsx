@@ -1,6 +1,8 @@
 import { Box, Button, Flex, SimpleGrid } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
+import PropTypes from "prop-types";
+
 import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./WorkoutCard";
@@ -52,5 +54,10 @@ function WorkoutList({ client }) {
     </Box>
   );
 }
+
+//adding proptypes
+WorkoutList.propTypes = {
+  data: PropTypes.object.isRequired
+};
 
 export default withApollo(WorkoutList);
