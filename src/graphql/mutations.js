@@ -73,7 +73,7 @@ export const ONBOARDING = gql`
   }
 `;
 
-export const SAVE = gql`
+export const UPLOAD_PROGRESS_PICTURE = gql`
   mutation($file: Upload!) {
     updateCompletedWorkout(file: $file) {
       filename
