@@ -74,10 +74,10 @@ function WorkoutDetail({ client }) {
   } = data;
 
   return (
-    <Box>
+    <Box marginY="30px">
       <Flex alignItems="start" justifyContent="space-around">
         <Box maxWidth="40%">
-          <SideTitle heading={name} />
+          <SideTitle heading={name} size="lg" />
           <DetailList label="Average Time" value={avgTime} />
           <DetailList label="Intensity" value={intensity} />
           <DetailList label="Types" value={type} />
@@ -96,29 +96,30 @@ function WorkoutDetail({ client }) {
           marginBottom="12px"
         />
       </Flex>
-      <Heading textAlign="left" size="md" marginTop="40px">
+      <Heading size="md" marginY="30px" textAlign="left">
         Check the description and video instructions of an exercise and start
         working out!
       </Heading>
+
       {exercises &&
         exercises.map(exercise => (
           <Accordion
-            marginTop="60px"
             defaultIndex={[0]}
             allowMultiple
             key={exercise.id}
             exercises={exercise}
           >
             <AccordionItem>
-              <AccordionHeader>
+              <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
                 <Image
                   src={exercise.pictureOne}
                   height="100px"
                   objectFit="cover"
+                  minWidth="200px"
                   paddingRight="50px"
                 />
                 <Box flex="1" textAlign="left">
-                  <Text>{exercise.name}</Text>
+                  <Text fontWeight="800">{exercise.name}</Text>
                   <Stack isInline spacing={8}>
                     <Text>{exercise.muscle}</Text>
                     <Text>{exercise.time}s</Text>
@@ -128,7 +129,7 @@ function WorkoutDetail({ client }) {
                 <AccordionIcon />
               </AccordionHeader>
               <AccordionPanel pb={4}>
-                <Flex bg="#FFFCF2">
+                <Flex justifyContent="space-around" alignItems="center">
                   <Text textAlign="left" maxWidth="50%">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna

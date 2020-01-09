@@ -23,7 +23,7 @@ function WorkoutCard({ data }) {
         </Heading>
         <Flex marginTop="5px" justifyContent="space-between">
           <Text>Intensity: {intensity}</Text>
-          <Text>Type: {type}</Text>
+          <Text minWidth="300px">Type: {type}</Text>
         </Flex>
       </Box>
     </Link>
