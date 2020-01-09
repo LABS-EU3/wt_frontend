@@ -34,14 +34,13 @@ const ExerciseCard = ({ client, match }) => {
         setExercise(res.data.exercise);
         setLoading(false);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
         alert("An error occurred.", "Unable to load excercise detail", "error");
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(exercise);
+
   if (loading) {
     return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
   }
@@ -63,7 +62,6 @@ const ExerciseCard = ({ client, match }) => {
         <div className="exerciseCard-container">
           <div className="exerciseCard-header">
             <h2>{name}</h2>
-            <p>Created by amira adediran</p>
           </div>
           <div className="exerciseCard-banner">
             <img src={pictureTwo} alt={name} />
