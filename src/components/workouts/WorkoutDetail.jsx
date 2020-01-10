@@ -125,7 +125,8 @@ function WorkoutDetail({ client }) {
           working out!
         </Heading>
 
-        <WorkoutActionItems timer={20} exercises={exercises} />
+        <WorkoutActionItems timer={20} exercises={exercises} workout={data} />
+
         <Accordion defaultIndex={[0]} allowMultiple>
           {exercises &&
             exercises.map(exercise => (

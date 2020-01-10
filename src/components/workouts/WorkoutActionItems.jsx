@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Button, ButtonGroup, useToast } from "@chakra-ui/core";
+import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
-import Timer from "../common/Timer";
+// import Timer from "../common/Timer";
+
+import { START_WORKOUT, END_WORKOUT } from "../../graphql/mutations";
+import { getUserDetails } from "../../utils";
+
+const { user_id } = getUserDetails();
 
 const StyledWorkoutItems = styled.div`
   display: flex;
@@ -25,7 +30,7 @@ const StyledWorkoutItems = styled.div`
   }
 `;
 
-const WorkoutActionItems = ({ exercises }) => {
+const WorkoutActionItems = ({ client, exercises, workout }) => {
   console.log(exercises);
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
@@ -47,9 +52,26 @@ const WorkoutActionItems = ({ exercises }) => {
   }, []);
 
   const handleStart = () => {
-    setStart("isHidden");
-    setPause("isVisible");
-    setStop("isVisible");
+    client
+      .mutate({
+        mutation: START_WORKOUT,
+        variables: {
+          userId: user_id,
+          workoutId: workout.id,
+          exerciseId: exercises[0].id,
+          exerciseTimer: exercises[0].time
+        }
+      })
+      .then(res => {
+        setStart("isHidden");
+        setPause("isVisible");
+        setStop("isVisible");
+        alert("Workout started", "🏋🏾‍♀️", "success");
+      })
+      .catch(error => {
+        console.log(error);
+        alert("An error occurred.", "Unable to start workout ☹️", "error");
+      });
   };
 
   const handlePause = () => {
@@ -59,9 +81,27 @@ const WorkoutActionItems = ({ exercises }) => {
   };
 
   const handleStop = () => {
-    setStart("isVisible");
-    setPause("isHidden");
-    setStop("isHidden");
+    client
+      .mutate({
+        mutation: END_WORKOUT,
+        variables: {
+          userId: user_id,
+          workoutId: workout.id,
+          exerciseId: exercises[0].id,
+          exerciseTimer: exercises[0].time,
+          end: true
+        }
+      })
+      .then(res => {
+        setStart("isVisible");
+        setPause("isHidden");
+        setStop("isHidden");
+        alert("Workout ended", "🏋🏾‍♀️", "success");
+      })
+      .catch(error => {
+        console.log(error);
+        alert("An error occurred.", "Unable to start workout ☹️", "error");
+      });
   };
   return (
     <StyledWorkoutItems>

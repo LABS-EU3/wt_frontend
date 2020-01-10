@@ -80,3 +80,59 @@ export const UPLOAD_PROGRESS_PICTURE = gql`
     }
   }
 `;
+
+export const START_WORKOUT = gql`
+  mutation workoutSession(
+    $userId: String!
+    $workoutId: String!
+    $exerciseId: String!
+    $exerciseTimer: Float!
+  ) {
+    workoutSession(
+      input: {
+        userId: $userId
+        workoutId: $workoutId
+        exerciseId: $exerciseId
+        exerciseTimer: $exerciseTimer
+      }
+    ) {
+      userId
+      workoutId {
+        id
+        name
+      }
+      startDate
+      endDate
+      pause
+    }
+  }
+`;
+
+export const END_WORKOUT = gql`
+  mutation workoutSession(
+    $userId: String!
+    $workoutId: String!
+    $exerciseId: String!
+    $exerciseTimer: Float!
+    $end: Boolean!
+  ) {
+    workoutSession(
+      input: {
+        userId: $userId
+        workoutId: $workoutId
+        exerciseId: $exerciseId
+        exerciseTimer: $exerciseTimer
+        end: $end
+      }
+    ) {
+      userId
+      workoutId {
+        id
+        name
+      }
+      startDate
+      endDate
+      pause
+    }
+  }
+`;

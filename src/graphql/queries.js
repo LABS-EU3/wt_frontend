@@ -61,6 +61,7 @@ export const GET_WORKOUT_DETAIL = gql`
       name
       intensity
       types
+      id
       description
       avgTime
       equipment
