@@ -8,7 +8,7 @@ import { withApollo } from "react-apollo";
 import { START_WORKOUT, END_WORKOUT } from "../../graphql/mutations";
 import { getUserDetails } from "../../utils";
 
-const { user_id } = getUserDetails();
+const userData = getUserDetails();
 
 const StyledWorkoutItems = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       .mutate({
         mutation: START_WORKOUT,
         variables: {
-          userId: user_id,
+          userId: userData.user_id,
           workoutId: workout.id,
           exerciseId: exercises[0].id,
           exerciseTimer: exercises[0].time
@@ -85,7 +85,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       .mutate({
         mutation: END_WORKOUT,
         variables: {
-          userId: user_id,
+          userId: userData.user_id,
           workoutId: workout.id,
           exerciseId: exercises[0].id,
           exerciseTimer: exercises[0].time,
