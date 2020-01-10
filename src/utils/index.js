@@ -30,7 +30,7 @@ export const getUserDetails = () => {
   }
 
   if (userData.token) {
-    const { id, exp } = jwtDecode(userData.token);
+    const { id, exp, firstname } = jwtDecode(userData.token);
 
     const currentTime = Date.now() / 1000;
 
@@ -42,7 +42,8 @@ export const getUserDetails = () => {
     return {
       token: userData.token,
       user_id: id,
-      isNewUser: userData.isNewUser
+      isNewUser: userData.isNewUser,
+      firstname
     };
   }
 };

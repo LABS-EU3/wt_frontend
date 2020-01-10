@@ -91,7 +91,8 @@ function WorkoutDetail({ client }) {
     avgTime,
     equipment,
     muscles,
-    exercises
+    exercises,
+    picture
   } = data;
 
   return (
@@ -110,7 +111,7 @@ function WorkoutDetail({ client }) {
             </Text>
           </Box>
           <Image
-            src="https://a0.muscache.com/im/pictures/b8cb989e-5c19-45ef-b478-1dc93ae8d3f3.jpg?aki_policy=poster"
+            src={picture}
             height="500px"
             width="100%"
             maxWidth="600px"
@@ -124,17 +125,11 @@ function WorkoutDetail({ client }) {
           working out!
         </Heading>
 
-        <WorkoutActionItems />
-
-        {exercises &&
-          exercises.map(exercise => (
-            <Accordion
-              defaultIndex={[0]}
-              allowMultiple
-              key={exercise.id}
-              exercises={exercise}
-            >
-              <AccordionItem>
+        <WorkoutActionItems timer={20} exercises={exercises} />
+        <Accordion defaultIndex={[0]} allowMultiple>
+          {exercises &&
+            exercises.map(exercise => (
+              <AccordionItem key={exercise.id}>
                 <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
                   <Image
                     src={exercise.pictureOne}
@@ -174,8 +169,8 @@ function WorkoutDetail({ client }) {
                   </Flex>
                 </AccordionPanel>
               </AccordionItem>
-            </Accordion>
-          ))}
+            ))}{" "}
+        </Accordion>
       </Box>
     </WorkoutDetailStyle>
   );

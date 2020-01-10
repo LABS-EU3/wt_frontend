@@ -6,15 +6,12 @@ import { Heading } from "@chakra-ui/core";
 import { WorkoutStyle } from "./WorkoutStyle";
 
 function Workout({ data }) {
-  const { name, intensity, types, id } = data;
+  const { name, intensity, types, id, picture } = data;
 
   return (
     <WorkoutStyle>
       <Link to={`/workout/${id}`}>
-        <img
-          src="https://a0.muscache.com/im/pictures/b8cb989e-5c19-45ef-b478-1dc93ae8d3f3.jpg?aki_policy=poster"
-          alt={name}
-        />
+        <img src={picture} alt={name} />
 
         <div className="workout-details">
           <Heading size="sm" textAlign="left">

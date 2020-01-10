@@ -62,9 +62,12 @@ const ExerciseCard = ({ client, match }) => {
         <div className="exerciseCard-header">
           <h2>{name}</h2>
         </div>
-        <div className="exerciseCard-banner">
-          <img src={pictureTwo} alt={name} />
+        {/* <div className="exerciseCard-banner"> */}
+        {/* <img src={pictureTwo} alt={name} /> */}
+        <div className="excercise-video">
+          <ReactPlayer url={video} controls />
         </div>
+        {/* </div> */}
         <div className="exerciseCard-information">
           <div className="exerciseCard-instruction">
             <h3>Instructions</h3>
@@ -92,9 +95,6 @@ const ExerciseCard = ({ client, match }) => {
               <p className="exerciseCard-data-value">{rating}</p>
             </div>
           </div>
-        </div>
-        <div className="excercise-video">
-          <ReactPlayer url={video} playing controls />
         </div>
       </ExerciseDetailStyle>
     );

@@ -111,6 +111,10 @@ export const ExerciseDetailStyle = styled.div`
     width: 100%;
     justify-content: center;
     margin: 1rem 0;
+
+    div {
+      width: 100%;
+    }
   }
 `;
 

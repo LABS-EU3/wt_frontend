@@ -50,6 +50,7 @@ export const GET_WORKOUT_DETAILS = gql`
       intensity
       types
       id
+      picture
     }
   }
 `;
@@ -64,6 +65,7 @@ export const GET_WORKOUT_DETAIL = gql`
       avgTime
       equipment
       muscles
+      picture
       exercises {
         id
         video
@@ -112,6 +114,7 @@ export const GET_EXERCISE = gql`
       type
       muscle
       name
+      description
     }
   }
 `;

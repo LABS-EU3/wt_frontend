@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 import { useToast } from "@chakra-ui/core";
 
 import Logo from "./Logo";
-import { isLoggedIn } from "../../utils";
+import { isLoggedIn, getUserDetails } from "../../utils";
 
 const isSignedIn = isLoggedIn();
-// const userData = getUserDetails()
+const userData = getUserDetails();
 
 const StyledNavigation = styled.div`
   color: #ff8744;
@@ -63,7 +63,7 @@ const Navigation = ({ location }) => {
         <SideNav
           showNav={showNav3}
           onHideNav={() => setshowNav3(false)}
-          title={<div>Hello name,</div>}
+          title={<div>Hello {userData.firstname},</div>}
           titleStyle={{ backgroundColor: "#ff8744" }}
           items={[
             <Link to="/">
