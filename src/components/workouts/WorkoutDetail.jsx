@@ -122,15 +122,10 @@ function WorkoutDetail({ client }) {
           Stop
         </Button>
       </ButtonGroup>
-      {exercises &&
-        exercises.map(exercise => (
-          <Accordion
-            defaultIndex={[0]}
-            allowMultiple
-            key={exercise.id}
-            exercises={exercise}
-          >
-            <AccordionItem>
+      <Accordion>
+        {exercises &&
+          exercises.map(exercise => (
+            <AccordionItem key={exercise.id}>
               <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
                 <Image
                   src={exercise.pictureOne}
@@ -170,8 +165,8 @@ function WorkoutDetail({ client }) {
                 </Flex>
               </AccordionPanel>
             </AccordionItem>
-          </Accordion>
-        ))}
+          ))}
+      </Accordion>
     </Box>
   );
 }
