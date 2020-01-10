@@ -5,10 +5,21 @@ exports[`<App /> renders the App component correctly 1`] = `
   className="App"
   data-testid="App"
 >
+  <withRouter(Navigation) />
   <Route
     component={[Function]}
     exact={true}
     path="/login"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/excercises"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/excercise/:id"
   />
   <PrivateRoute
     component={[Function]}
@@ -24,6 +35,21 @@ exports[`<App /> renders the App component correctly 1`] = `
     component={[Function]}
     exact={true}
     path="/"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/workouts"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/workout/:id"
+  />
+  <PrivateRoute
+    component={[Function]}
+    exact={true}
+    path="/workouthistory"
   />
 </div>
 `;

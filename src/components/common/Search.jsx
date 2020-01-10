@@ -18,14 +18,14 @@ const StyledSearch = styled.div`
   }
 `;
 
-const Search = () => {
+const Search = ({ placeholder }) => {
   const onChange = () => {};
   return (
     <StyledSearch>
       <h3>Search</h3>
       <Input
         type="text"
-        placeholder="Look for a specific excercise"
+        placeholder={placeholder}
         id="search"
         name="search"
         variant="filled"

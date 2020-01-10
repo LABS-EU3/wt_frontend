@@ -1,12 +1,16 @@
 import React from "react";
 import Workouts from "./Workouts";
 
-function WorkoutList() {
+import { WorkoutsStyle } from "./WorkoutStyle";
+import Search from "../common/Search";
+
+const WorkoutList = () => {
   return (
-    <div>
+    <WorkoutsStyle>
+      <Search placeholder="Look for a specific workout" />
       <Workouts />
-    </div>
+    </WorkoutsStyle>
   );
-}
+};
 
 export default WorkoutList;

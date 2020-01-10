@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import { useToast } from "@chakra-ui/core";
+import { useToast, Box, Flex } from "@chakra-ui/core";
 
 import { ExercisesStyle } from "./ExerciseStyle";
 import CustomSpinner from "../common/Spinner";
@@ -41,7 +41,18 @@ const Excercises = ({ client }) => {
   }, []);
 
   if (loading) {
-    return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
+    );
   }
 
   if (exercises.length > 0) {
@@ -54,7 +65,13 @@ const Excercises = ({ client }) => {
     );
   }
 
-  return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+  return (
+    <Box>
+      <Flex width="100vw" height="100vh" justifyContent="center" align="center">
+        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+      </Flex>
+    </Box>
+  );
 };
 
 export default withApollo(Excercises);
