@@ -151,10 +151,7 @@ function WorkoutDetail({ client }) {
                 <AccordionPanel pb={4}>
                   <Flex justifyContent="space-around" alignItems="center">
                     <Text textAlign="left" maxWidth="50%">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      {exercise.description}
                     </Text>
 
                     <Box

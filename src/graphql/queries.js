@@ -75,6 +75,7 @@ export const GET_WORKOUT_DETAIL = gql`
         rating
         equipment
         type
+        description
         muscle
         name
         time

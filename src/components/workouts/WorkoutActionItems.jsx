@@ -10,8 +10,8 @@ const StyledWorkoutItems = styled.div`
   flex-wrap: wrap;
   width: 100%;
 
-  position: sticky;
-  top: 0;
+  /* position: sticky;
+  top: 0; */
 
   button {
     margin: 1rem;
