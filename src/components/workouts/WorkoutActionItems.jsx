@@ -31,7 +31,7 @@ const StyledWorkoutItems = styled.div`
 `;
 
 const WorkoutActionItems = ({ client, exercises, workout }) => {
-  console.log(exercises);
+  console.log(workout);
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");
@@ -99,7 +99,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
         alert("Workout ended", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        console.log(error);
         alert("An error occurred.", "Unable to start workout ☹️", "error");
       });
   };

@@ -65,6 +65,7 @@ export const GET_WORKOUT_DETAIL = gql`
       description
       avgTime
       equipment
+
       muscles
       picture
       exercises {
