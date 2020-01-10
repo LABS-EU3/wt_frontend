@@ -86,7 +86,7 @@ function WorkoutDetail({ client }) {
   const {
     name,
     intensity,
-    type,
+    types,
     description,
     avgTime,
     equipment,
@@ -102,7 +102,7 @@ function WorkoutDetail({ client }) {
             <SideTitle heading={name} size="lg" />
             <DetailList label="Average Time" value={avgTime} />
             <DetailList label="Intensity" value={intensity} />
-            <DetailList label="Types" value={type} />
+            <DetailList label="Types" value={types} />
             <DetailList label="Equipment" value={equipment} />
             <DetailList label="Muscles" value={muscles} />
             <Text textAlign="left" marginY="30px">
