@@ -20,6 +20,7 @@ const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 function Login({ client, history }) {
   const toast = useToast();
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const alert = (title, description, status) => {
     toast({
@@ -48,6 +49,7 @@ function Login({ client, history }) {
     }),
 
     onSubmit: value => {
+      setLoading(true);
       client
         .mutate({
           mutation: LOGIN_QUERY,
@@ -63,6 +65,7 @@ function Login({ client, history }) {
             "userData",
             JSON.stringify({ token, isNewUser })
           );
+          setLoading(false);
           if (isNewUser === true) {
             setLoginSuccess("/onboarding");
 
@@ -81,7 +84,7 @@ function Login({ client, history }) {
           }
         })
         .catch(error => {
-          console.log(error.graphQLErrors);
+          setLoading(false);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(
               "An error occurred.",
@@ -205,6 +208,7 @@ function Login({ client, history }) {
               variantColor="orange"
               rightIcon="arrow-forward"
               size="lg"
+              isLoading={loading}
             >
               Login
             </Button>
