@@ -91,7 +91,7 @@ function WorkoutDetail({ client }) {
           </Text>
         </Box>
         <Image
-          src="https://a0.muscache.com/im/pictures/b8cb989e-5c19-45ef-b478-1dc93ae8d3f3.jpg?aki_policy=poster"
+          src="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
           height="500px"
           width="100%"
           maxWidth="600px"
