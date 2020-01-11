@@ -25,6 +25,7 @@ export const GET_UNITS = gql`
 export const GET_COMPLETED_WORKOUTS = gql`
   query {
     completedWorkouts {
+      id
       userId
       workoutId {
         id

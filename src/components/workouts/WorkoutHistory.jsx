@@ -26,6 +26,7 @@ import { UPLOAD_PROGRESS_PICTURE } from "../../graphql/mutations";
 function WorkoutHistory({ client, history }) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
+  const [uploadId, setUploadId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -59,12 +60,18 @@ function WorkoutHistory({ client, history }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onOpenUpload = (id, e) => {
+    setUploadId(id);
+    onOpen(e);
+  };
+
   const onChange = e => {
     const file = e.target.files[0];
     console.log(file);
     client
       .mutate({
         variables: {
+          sessionId: uploadId,
           file
         },
         mutation: UPLOAD_PROGRESS_PICTURE
@@ -110,8 +117,8 @@ function WorkoutHistory({ client, history }) {
 
         {workouts.map(workout => (
           <WorkoutHistoryCard
-            onOpen={onOpen}
-            key={workout.workoutId.id}
+            onOpen={e => onOpenUpload(workout.id, e)}
+            key={workout.id}
             workout={workout}
             history={history}
           />
