@@ -25,7 +25,12 @@ function WorkoutHistoryCard({ workout, onOpen, history }) {
         borderRadius="5px"
       >
         <Flex justify="space-between">
-          <Image src={Logo} alt="workout thumbnail" size="100px" />
+          <Image
+            src={workout.picture}
+            alt="workout thumbnail"
+            size="100px"
+            style={{ objectFit: "contain" }}
+          />
           <section style={style}>
             <p>
               {dateCompleted} -{" "}

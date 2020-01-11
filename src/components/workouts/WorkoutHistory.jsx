@@ -27,6 +27,7 @@ function WorkoutHistory({ client, history }) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
   const [uploadId, setUploadId] = useState("");
+  const [uploadFile, setUploadFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -60,23 +61,37 @@ function WorkoutHistory({ client, history }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onChange = e => {
+    const file = e.target.files[0];
+    setUploadFile(file);
+    console.log(file);
+  };
+
   const onOpenUpload = (id, e) => {
     setUploadId(id);
     onOpen(e);
   };
 
-  const onChange = e => {
-    const file = e.target.files[0];
-    console.log(file);
+  const onUpload = e => {
+    e.preventDefault();
     client
       .mutate({
         variables: {
           sessionId: uploadId,
-          file
+          file: uploadFile
         },
         mutation: UPLOAD_PROGRESS_PICTURE
       })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        const { id, picture } = res.data.updateCompletedWorkout;
+        setWorkouts(
+          workouts.map(workout => {
+            if (workout.id === id) return { ...workout, picture };
+            return workout;
+          })
+        );
+      })
       .catch(err => console.log(err));
   };
 
@@ -143,7 +158,9 @@ function WorkoutHistory({ client, history }) {
               </Box>
             </ModalBody>
             <ModalFooter>
-              <Button variant="orange">Save</Button>
+              <Button variant="orange" onClick={onUpload}>
+                Save
+              </Button>
               <Button
                 variantColor="orange"
                 variant="outline"

@@ -77,6 +77,7 @@ export const UPLOAD_PROGRESS_PICTURE = gql`
   mutation($sessionId: String!, $file: Upload!) {
     updateCompletedWorkout(input: { sessionId: $sessionId, file: $file }) {
       id
+      picture
     }
   }
 `;

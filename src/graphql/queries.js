@@ -40,6 +40,7 @@ export const GET_COMPLETED_WORKOUTS = gql`
       startDate
       endDate
       pause
+      picture
     }
   }
 `;
