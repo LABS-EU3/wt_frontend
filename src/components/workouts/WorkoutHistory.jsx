@@ -91,6 +91,7 @@ function WorkoutHistory({ client, history }) {
             return workout;
           })
         );
+        alert("Progress picture uploaded successfully", "🚀", "success");
       })
       .catch(err =>
         alert(
