@@ -83,80 +83,51 @@ export const WorkoutDetailStyle = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  .exerciseCard-header {
-    text-align: left;
-    padding: 0.5rem 0;
-    h2 {
-      font-weight: bold;
-      font-size: 4vw;
-    }
-    p {
-      color: grey;
-    }
-  }
-
-  .exerciseCard-banner {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    /* opacity: 0.8; */
-    margin: 1rem 0;
-    justify-content: center;
-    img {
-      width: auto;
-    }
-  }
-
-  .exerciseCard-information {
+  .workout {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-around;
+    align-items: center;
 
-    .exerciseCard-instruction {
-      width: 55%;
-      text-align: left;
-
-      h3 {
-        font-weight: bold;
-        font-size: 1.5rem;
-      }
-
-      @media only screen and (max-width: 600px) {
-        width: 90%;
-      }
-    }
-
-    .exerciseCard-data {
-      width: 40%;
-      display: flex;
+    @media only screen and (max-width: 800px) {
       flex-direction: column;
-      justify-content: space-between;
-      line-height: 3rem;
-      .exerciseCard-data-tab {
-        border-bottom: 1px solid black;
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
+    }
 
-        .exerciseCard-data-value {
-          font-weight: Bold;
-          width: 67%;
-        }
+    .workout-detail {
+      width: 45%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+
+      @media only screen and (max-width: 800px) {
+        width: 75%;
       }
 
-      @media only screen and (max-width: 600px) {
-        width: 90%;
-        margin: 1rem 0;
+      @media only screen and (max-width: 550px) {
+        width: 95%;
       }
     }
-  }
 
-  .excercise-video {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    margin: 1rem 0;
+    .workout-image {
+      width: 45%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+      @media only screen and (max-width: 800px) {
+        width: 75%;
+      }
+
+      @media only screen and (max-width: 550px) {
+        width: 95%;
+      }
+
+      img {
+        height: 400px;
+      }
+    }
   }
 `;

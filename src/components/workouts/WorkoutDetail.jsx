@@ -98,8 +98,9 @@ function WorkoutDetail({ client }) {
   return (
     <WorkoutDetailStyle>
       <Box marginY="30px">
-        <Flex alignItems="start" justifyContent="space-around">
-          <Box maxWidth="40%">
+        <div className="workout">
+          <div className="workout-detail">
+            {/* <Box maxWidth="40%"> */}
             <SideTitle heading={name} size="lg" />
             <DetailList label="Average Time" value={avgTime} />
             <DetailList label="Intensity" value={intensity} />
@@ -109,16 +110,13 @@ function WorkoutDetail({ client }) {
             <Text textAlign="left" marginY="30px">
               {description}
             </Text>
-          </Box>
-          <Image
-            src={picture}
-            height="500px"
-            width="100%"
-            maxWidth="600px"
-            objectFit="cover"
-            marginBottom="12px"
-          />
-        </Flex>
+            {/* </Box> */}
+          </div>
+
+          <div className="workout-image">
+            <img src={picture} maxWidth="600px" alt="workout" />
+          </div>
+        </div>
 
         <Heading size="md" marginTop="60px" textAlign="center">
           Check the description and video instructions of an exercise and start
