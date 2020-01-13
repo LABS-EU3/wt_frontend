@@ -54,7 +54,7 @@ function WorkoutHistory({ client, history }) {
         setIsLoading(false);
         alert(
           "An error occurred.",
-          "Unable to load your completed workouts. Please reload the page and try again",
+          "Unable to load your completed workouts☹️.",
           "error"
         );
       });
@@ -92,7 +92,13 @@ function WorkoutHistory({ client, history }) {
           })
         );
       })
-      .catch(err => console.log(err));
+      .catch(err =>
+        alert(
+          "An error occurred.",
+          "Unable to upload your progress picture ☹️.",
+          "error"
+        )
+      );
   };
 
   if (isLoading) {

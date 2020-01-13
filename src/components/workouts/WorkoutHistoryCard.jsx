@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Flex, Box, Image } from "@chakra-ui/core";
 
-import Logo from "../../images/login_image.png";
+import DefaultImage from "../../images/login_image.png";
 
 function WorkoutHistoryCard({ workout, onOpen, history }) {
   const dateCompleted = new Date(workout.endDate).toLocaleDateString();
@@ -26,7 +26,7 @@ function WorkoutHistoryCard({ workout, onOpen, history }) {
       >
         <Flex justify="space-between">
           <Image
-            src={workout.picture}
+            src={workout.picture || DefaultImage}
             alt="workout thumbnail"
             size="100px"
             style={{ objectFit: "contain" }}
