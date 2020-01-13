@@ -74,9 +74,10 @@ export const ONBOARDING = gql`
 `;
 
 export const UPLOAD_PROGRESS_PICTURE = gql`
-  mutation($file: Upload!) {
-    updateCompletedWorkout(file: $file) {
-      filename
+  mutation($sessionId: String!, $file: Upload!) {
+    updateCompletedWorkout(input: { sessionId: $sessionId, file: $file }) {
+      id
+      picture
     }
   }
 `;

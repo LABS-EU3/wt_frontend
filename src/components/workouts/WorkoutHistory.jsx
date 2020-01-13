@@ -26,6 +26,8 @@ import { UPLOAD_PROGRESS_PICTURE } from "../../graphql/mutations";
 function WorkoutHistory({ client, history }) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
+  const [uploadId, setUploadId] = useState("");
+  const [uploadFile, setUploadFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -52,7 +54,7 @@ function WorkoutHistory({ client, history }) {
         setIsLoading(false);
         alert(
           "An error occurred.",
-          "Unable to load your completed workouts. Please reload the page and try again",
+          "Unable to load your completed workouts☹️.",
           "error"
         );
       });
@@ -61,16 +63,43 @@ function WorkoutHistory({ client, history }) {
 
   const onChange = e => {
     const file = e.target.files[0];
+    setUploadFile(file);
     console.log(file);
+  };
+
+  const onOpenUpload = (id, e) => {
+    setUploadId(id);
+    onOpen(e);
+  };
+
+  const onUpload = e => {
+    e.preventDefault();
     client
       .mutate({
         variables: {
-          file
+          sessionId: uploadId,
+          file: uploadFile
         },
         mutation: UPLOAD_PROGRESS_PICTURE
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .then(res => {
+        console.log(res);
+        const { id, picture } = res.data.updateCompletedWorkout;
+        setWorkouts(
+          workouts.map(workout => {
+            if (workout.id === id) return { ...workout, picture };
+            return workout;
+          })
+        );
+        alert("Progress picture uploaded successfully", "🚀", "success");
+      })
+      .catch(err =>
+        alert(
+          "An error occurred.",
+          "Unable to upload your progress picture ☹️.",
+          "error"
+        )
+      );
   };
 
   if (isLoading) {
@@ -110,8 +139,8 @@ function WorkoutHistory({ client, history }) {
 
         {workouts.map(workout => (
           <WorkoutHistoryCard
-            onOpen={onOpen}
-            key={workout.workoutId.id}
+            onOpen={e => onOpenUpload(workout.id, e)}
+            key={workout.id}
             workout={workout}
             history={history}
           />
@@ -136,7 +165,9 @@ function WorkoutHistory({ client, history }) {
               </Box>
             </ModalBody>
             <ModalFooter>
-              <Button variant="orange">Save</Button>
+              <Button variant="orange" onClick={onUpload}>
+                Save
+              </Button>
               <Button
                 variantColor="orange"
                 variant="outline"
