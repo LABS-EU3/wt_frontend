@@ -83,6 +83,10 @@ export const WorkoutDetailStyle = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
+  @media only screen and (max-width: 400px) {
+    width: 97vw;
+  }
+
   .workout {
     display: flex;
     flex-wrap: wrap;
@@ -108,6 +112,10 @@ export const WorkoutDetailStyle = styled.div`
       @media only screen and (max-width: 550px) {
         width: 95%;
       }
+
+      @media only screen and (max-width: 400px) {
+        width: 100%;
+      }
     }
 
     .workout-image {
@@ -125,9 +133,62 @@ export const WorkoutDetailStyle = styled.div`
         width: 95%;
       }
 
+      @media only screen and (max-width: 400px) {
+        width: 100%;
+      }
+
       img {
         height: 400px;
       }
+    }
+  }
+
+  .exercise {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+
+    .exercise-detail {
+      width: 45%;
+
+      @media only screen and (max-width: 800px) {
+        width: 95%;
+      }
+    }
+
+    .exercise-video {
+      width: 45%;
+
+      div {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: 800px) {
+        width: 95%;
+      }
+    }
+  }
+
+  .exercise-preview {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+
+    @media only screen and (max-width: 400px) {
+      flex-direction: column;
+    }
+
+    img {
+      width: 150px;
+      height: 100px;
+    }
+
+    .exercise-preview-detail {
+      padding: 1rem;
     }
   }
 `;

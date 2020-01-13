@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
+import ReactPlayer from "react-player";
 
 import { WorkoutDetailStyle } from "./WorkoutStyle";
 import SideTitle from "../common/SideTitle";
@@ -97,77 +98,64 @@ function WorkoutDetail({ client }) {
 
   return (
     <WorkoutDetailStyle>
-      <Box marginY="30px">
-        <div className="workout">
-          <div className="workout-detail">
-            {/* <Box maxWidth="40%"> */}
-            <SideTitle heading={name} size="lg" />
-            <DetailList label="Average Time" value={avgTime} />
-            <DetailList label="Intensity" value={intensity} />
-            <DetailList label="Types" value={types} />
-            <DetailList label="Equipment" value={equipment} />
-            <DetailList label="Muscles" value={muscles} />
-            <Text textAlign="left" marginY="30px">
-              {description}
-            </Text>
-            {/* </Box> */}
-          </div>
-
-          <div className="workout-image">
-            <img src={picture} maxWidth="600px" alt="workout" />
-          </div>
+      <div className="workout">
+        <div className="workout-detail">
+          <SideTitle heading={name} size="lg" />
+          <DetailList label="Average Time" value={avgTime} />
+          <DetailList label="Intensity" value={intensity} />
+          <DetailList label="Types" value={types} />
+          <DetailList label="Equipment" value={equipment} />
+          <DetailList label="Muscles" value={muscles} />
+          <Text textAlign="left" marginY="30px">
+            {description}
+          </Text>
         </div>
 
-        <Heading size="md" marginTop="60px" textAlign="center">
-          Check the description and video instructions of an exercise and start
-          working out!
-        </Heading>
+        <div className="workout-image">
+          <img src={picture} alt="workout" />
+        </div>
+      </div>
 
-        <WorkoutActionItems timer={20} exercises={exercises} workout={data} />
+      <Heading size="md" marginTop="60px" textAlign="center">
+        Check the description and video instructions of an exercise and start
+        working out!
+      </Heading>
 
-        <Accordion defaultIndex={[0]} allowMultiple>
-          {exercises &&
-            exercises.map(exercise => (
-              <AccordionItem key={exercise.id}>
-                <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
-                  <Image
-                    src={exercise.pictureOne}
-                    height="100px"
-                    objectFit="cover"
-                    minWidth="200px"
-                    paddingRight="50px"
-                  />
-                  <Box flex="1" textAlign="left">
+      <WorkoutActionItems timer={20} exercises={exercises} workout={data} />
+
+      <Accordion>
+        {exercises &&
+          exercises.map(exercise => (
+            <AccordionItem key={exercise.id}>
+              <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
+                <div className="exercise-preview">
+                  <img src={exercise.pictureOne} alt={exercise.name} />
+
+                  <div className="exercise-preview-detail">
                     <Text fontWeight="800">{exercise.name}</Text>
                     <Stack isInline spacing={8}>
                       <Text>{exercise.muscle}</Text>
                       <Text>{exercise.time}s</Text>
                     </Stack>
-                  </Box>
+                  </div>
+                </div>
 
-                  <AccordionIcon />
-                </AccordionHeader>
-                <AccordionPanel pb={4}>
-                  <Flex justifyContent="space-around" alignItems="center">
-                    <Text textAlign="left" maxWidth="50%">
-                      {exercise.description}
-                    </Text>
+                <AccordionIcon />
+              </AccordionHeader>
+              <AccordionPanel pb={4}>
+                <div className="exercise">
+                  <div className="exercise-detail">
+                    <Text>{exercise.description}</Text>
+                  </div>
 
-                    <Box
-                      as="video"
-                      height="300px"
-                      width="100%"
-                      maxWidth="400px"
-                      controls
-                    >
-                      <source src={exercise.video} type="video/mp4" />
-                    </Box>
-                  </Flex>
-                </AccordionPanel>
-              </AccordionItem>
-            ))}{" "}
-        </Accordion>
-      </Box>
+                  <div className="exercise-video">
+                    <ReactPlayer width="100%" url={exercise.video} controls />
+                  </div>
+                </div>
+              </AccordionPanel>
+            </AccordionItem>
+          ))}
+      </Accordion>
     </WorkoutDetailStyle>
   );
 }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import { useToast } from "@chakra-ui/core";
+import ReactPlayer from "react-player";
 
 import { ExerciseDetailStyle } from "./ExerciseStyle";
 import { GET_EXERCISE } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
-import ReactPlayer from "react-player";
 
 const ExerciseCard = ({ client, match }) => {
   const toast = useToast();
@@ -62,12 +62,11 @@ const ExerciseCard = ({ client, match }) => {
         <div className="exerciseCard-header">
           <h2>{name}</h2>
         </div>
-        {/* <div className="exerciseCard-banner"> */}
-        {/* <img src={pictureTwo} alt={name} /> */}
+
         <div className="excercise-video">
           <ReactPlayer url={video} controls />
         </div>
-        {/* </div> */}
+
         <div className="exerciseCard-information">
           <div className="exerciseCard-instruction">
             <h3>Instructions</h3>
