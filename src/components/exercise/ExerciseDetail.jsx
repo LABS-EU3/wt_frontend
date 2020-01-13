@@ -48,7 +48,6 @@ const ExerciseCard = ({ client, match }) => {
   if (exercise) {
     const {
       name,
-      pictureTwo,
       description,
       muscle,
       difficulty,

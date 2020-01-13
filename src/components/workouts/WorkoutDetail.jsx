@@ -10,7 +10,6 @@ import DetailList from "./DetailList";
 import {
   Flex,
   Box,
-  Image,
   Text,
   Stack,
   Heading,
