@@ -123,3 +123,15 @@ export const GET_EXERCISE = gql`
     }
   }
 `;
+
+export const GET_SCHEDULE = gql`
+  query {
+    userSchedule {
+      id
+      userId
+      workoutId
+      startDate
+      routine
+    }
+  }
+`;
