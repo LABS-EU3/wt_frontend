@@ -4,9 +4,9 @@ exports[`<ExerciseList /> renders the ExerciseList component correctly 1`] = `
 <div>
   <styled.div>
     <Search
-      placeholder="Look for a specific excercise"
+      placeholder="Look for a specific exercise"
     />
-    <withApollo(Excercises) />
+    <withApollo(Exercises) />
   </styled.div>
 </div>
 `;
