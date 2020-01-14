@@ -13,13 +13,16 @@ import {
   ModalCloseButton,
   ModalFooter,
   ModalBody,
-  Button,
-  Progress
+  Button
 } from "@chakra-ui/core";
 
 import CustomSpinner from "../common/Spinner";
 import WorkoutHistoryCard from "./WorkoutHistoryCard";
-import HistoryStyle from "./WorkoutHistoryStyle";
+import {
+  HistoryStyle,
+  ModalFooter as StyledModalFooter,
+  ModalContentArea
+} from "./WorkoutHistoryStyle";
 import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
 import { UPLOAD_PROGRESS_PICTURE } from "../../graphql/mutations";
 
@@ -152,30 +155,31 @@ function WorkoutHistory({ client, history }) {
             <ModalHeader>Upload your progress picture </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Progress />
-              <Box
-                maxW="sm"
-                borderWidth="1px"
-                rounded="lg"
-                overflow="hidden"
-                height="150px"
+              <ModalContentArea
+              // maxW="sm"
+              // borderWidth="1px"
+              // rounded="lg"
+              // overflow="hidden"
+              // height="150px"
               >
-                Drag files here or browse
+                {/* Drag files here or browse */}
                 <input type="file" name="Uplad" onChange={onChange} />
-              </Box>
+              </ModalContentArea>
             </ModalBody>
             <ModalFooter>
-              <Button variant="orange" onClick={onUpload}>
-                Save
-              </Button>
-              <Button
-                variantColor="orange"
-                variant="outline"
-                mr={3}
-                onClick={onClose}
-              >
-                Cancel
-              </Button>
+              <StyledModalFooter>
+                <Button variantColor="green" onClick={onUpload}>
+                  Save
+                </Button>
+                <Button
+                  variantColor="orange"
+                  variant="outline"
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Cancel
+                </Button>
+              </StyledModalFooter>
             </ModalFooter>
           </ModalContent>
         </Modal>
