@@ -84,7 +84,6 @@ export const WorkoutHistoryCard = styled.div`
   cursor: pointer;
   border-top: 1px solid #ccc5b9;
   border-bottom: 1px solid #ccc5b9;
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
 
   .history {
     display: flex;
