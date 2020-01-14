@@ -12,6 +12,7 @@ import Exercises from "./components/exercise/ExerciseList";
 import ExerciseDetail from "./components/exercise/ExerciseDetail";
 import Navigation from "./components/common/Navigation";
 import WorkoutHistory from "./components/workouts/WorkoutHistory";
+import Schedule from "./components/schedule/Schedule";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
       <Route exact path="/signup" component={SignUp} />
       <PrivateRoute exact path="/" component={Dashboard} />
+      <PrivateRoute exact path="/schedule" component={Schedule} />
       <PrivateRoute exact path="/workouts" component={WorkoutList} />
       <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
