@@ -40,6 +40,10 @@ export const ExerciseDetailStyle = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
+  @media only screen and (max-width: 500px) {
+    width: 95vw;
+  }
+
   .exerciseCard-header {
     text-align: left;
     padding: 0.5rem 0;
@@ -56,7 +60,6 @@ export const ExerciseDetailStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    /* opacity: 0.8; */
     margin: 1rem 0;
     justify-content: center;
     img {
