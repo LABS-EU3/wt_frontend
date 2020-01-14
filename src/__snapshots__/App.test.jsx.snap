@@ -14,12 +14,12 @@ exports[`<App /> renders the App component correctly 1`] = `
   <PrivateRoute
     component={[Function]}
     exact={true}
-    path="/excercises"
+    path="/exercises"
   />
   <PrivateRoute
     component={[Function]}
     exact={true}
-    path="/excercise/:id"
+    path="/exercise/:id"
   />
   <PrivateRoute
     component={[Function]}

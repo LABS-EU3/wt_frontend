@@ -13,13 +13,16 @@ import {
   ModalCloseButton,
   ModalFooter,
   ModalBody,
-  Button,
-  Progress
+  Button
 } from "@chakra-ui/core";
 
 import CustomSpinner from "../common/Spinner";
 import WorkoutHistoryCard from "./WorkoutHistoryCard";
-import HistoryStyle from "./WorkoutHistoryStyle";
+import {
+  HistoryStyle,
+  ModalFooter as StyledModalFooter,
+  ModalContentArea
+} from "./WorkoutHistoryStyle";
 import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
 import { UPLOAD_PROGRESS_PICTURE } from "../../graphql/mutations";
 
@@ -64,7 +67,6 @@ function WorkoutHistory({ client, history }) {
   const onChange = e => {
     const file = e.target.files[0];
     setUploadFile(file);
-    console.log(file);
   };
 
   const onOpenUpload = (id, e) => {
@@ -140,7 +142,7 @@ function WorkoutHistory({ client, history }) {
         {workouts.map(workout => (
           <WorkoutHistoryCard
             onOpen={e => onOpenUpload(workout.id, e)}
-            key={workout.id}
+            key={workout.startDate}
             workout={workout}
             history={history}
           />
@@ -152,30 +154,24 @@ function WorkoutHistory({ client, history }) {
             <ModalHeader>Upload your progress picture </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Progress />
-              <Box
-                maxW="sm"
-                borderWidth="1px"
-                rounded="lg"
-                overflow="hidden"
-                height="150px"
-              >
-                Drag files here or browse
+              <ModalContentArea>
                 <input type="file" name="Uplad" onChange={onChange} />
-              </Box>
+              </ModalContentArea>
             </ModalBody>
             <ModalFooter>
-              <Button variant="orange" onClick={onUpload}>
-                Save
-              </Button>
-              <Button
-                variantColor="orange"
-                variant="outline"
-                mr={3}
-                onClick={onClose}
-              >
-                Cancel
-              </Button>
+              <StyledModalFooter>
+                <Button variantColor="green" onClick={onUpload}>
+                  Save
+                </Button>
+                <Button
+                  variantColor="orange"
+                  variant="outline"
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Cancel
+                </Button>
+              </StyledModalFooter>
             </ModalFooter>
           </ModalContent>
         </Modal>

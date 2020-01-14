@@ -7,7 +7,7 @@ describe("<Preview />", () => {
   let wrapper;
 
   const props = {
-    pagename: "Login"
+    pageName: "Login"
   };
 
   beforeEach(() => {

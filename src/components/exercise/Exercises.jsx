@@ -5,9 +5,9 @@ import { useToast, Box, Flex } from "@chakra-ui/core";
 import { ExercisesStyle } from "./ExerciseStyle";
 import CustomSpinner from "../common/Spinner";
 import { GET_EXERCISES } from "../../graphql/queries";
-import Excercise from "./Exercise";
+import Exercise from "./Exercise";
 
-const Excercises = ({ client }) => {
+const Exercises = ({ client }) => {
   const toast = useToast();
 
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ const Excercises = ({ client }) => {
         setLoading(false);
       })
       .catch(err => {
-        alert("An error occurred.", "Unable to load excercises", "error");
+        alert("An error occurred.", "Unable to load exercises", "error");
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,8 +58,8 @@ const Excercises = ({ client }) => {
   if (exercises.length > 0) {
     return (
       <ExercisesStyle>
-        {exercises.map(excercise => (
-          <Excercise excercise={excercise} key={excercise.id} />
+        {exercises.map(exercise => (
+          <Exercise exercise={exercise} key={exercise.id} />
         ))}
       </ExercisesStyle>
     );
@@ -74,4 +74,4 @@ const Excercises = ({ client }) => {
   );
 };
 
-export default withApollo(Excercises);
+export default withApollo(Exercises);
