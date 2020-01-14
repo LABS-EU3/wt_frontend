@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WorkoutList /> renders the WorkoutList component correctly 1`] = `
+<styled.div>
+  <Search
+    placeholder="Look for a specific workout"
+  />
+  <withApollo(Workouts) />
+</styled.div>
+`;
