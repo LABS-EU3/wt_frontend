@@ -155,14 +155,7 @@ function WorkoutHistory({ client, history }) {
             <ModalHeader>Upload your progress picture </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <ModalContentArea
-              // maxW="sm"
-              // borderWidth="1px"
-              // rounded="lg"
-              // overflow="hidden"
-              // height="150px"
-              >
-                {/* Drag files here or browse */}
+              <ModalContentArea>
                 <input type="file" name="Uplad" onChange={onChange} />
               </ModalContentArea>
             </ModalBody>

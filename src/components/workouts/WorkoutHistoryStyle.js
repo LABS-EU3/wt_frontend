@@ -64,3 +64,10 @@ export const ModalContentArea = styled.div`
   align-items: center;
   border-radius: 0.8rem;
 `;
+
+export const WorkoutHistoryCard = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  cursor: pointer;
+`;

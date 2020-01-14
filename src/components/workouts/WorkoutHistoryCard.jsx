@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Flex, Box, Image } from "@chakra-ui/core";
 
 import DefaultImage from "../../images/login_image.png";
+import { WorkoutHistoryCard as StyledWorkoutHistoryCard } from "./WorkoutHistoryStyle";
 
 function WorkoutHistoryCard({ workout, onOpen, history }) {
   const dateCompleted = new Date(workout.endDate).toLocaleDateString();
@@ -15,7 +16,7 @@ function WorkoutHistoryCard({ workout, onOpen, history }) {
   };
 
   return (
-    <>
+    <StyledWorkoutHistoryCard>
       <Box
         w="100%"
         onClick={onOpen}
@@ -47,7 +48,7 @@ function WorkoutHistoryCard({ workout, onOpen, history }) {
           </Link>
         </Flex>
       </Box>
-    </>
+    </StyledWorkoutHistoryCard>
   );
 }
 
