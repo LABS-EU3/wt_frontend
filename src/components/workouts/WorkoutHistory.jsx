@@ -140,7 +140,7 @@ function WorkoutHistory({ client, history }) {
         {workouts.map(workout => (
           <WorkoutHistoryCard
             onOpen={e => onOpenUpload(workout.id, e)}
-            key={workout.id}
+            key={workout.startDate}
             workout={workout}
             history={history}
           />
