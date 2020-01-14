@@ -69,8 +69,8 @@ const Navigation = ({ location }) => {
             <Link to="/">
               Dashboard &nbsp; <i className="fas fa-chart-line"></i>
             </Link>,
-            <Link to="/excercises">
-              Excercises &nbsp; <i className="fas fa-running"></i>
+            <Link to="/exercises">
+              Exercises &nbsp; <i className="fas fa-running"></i>
             </Link>,
             <Link to="/workouts">
               Workouts &nbsp; <i className="fas fa-dumbbell"></i>

@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 
 import { ExerciseStyle } from "./ExerciseStyle";
 
-const Excercise = ({ excercise }) => {
-  const { id, name, rating, pictureOne, equipment } = excercise;
+const Exercise = ({ exercise }) => {
+  const { id, name, rating, pictureOne, equipment } = exercise;
   return (
     <ExerciseStyle>
-      <Link to={`/excercise/${id}`}>
+      <Link to={`/exercise/${id}`}>
         <img src={pictureOne} alt={name} />
 
-        <div className="excersie-detail">
+        <div className="exersie-detail">
           <h4>{name}</h4>
 
-          <div className="excercise-ratings">
+          <div className="exercise-ratings">
             <i className="fas fa-star"></i>
             {rating}
           </div>
         </div>
 
         {equipment ? (
-          <div className="excercise-equipment">
+          <div className="exercise-equipment">
             <p>{equipment}</p>
           </div>
         ) : (
@@ -31,4 +31,4 @@ const Excercise = ({ excercise }) => {
   );
 };
 
-export default Excercise;
+export default Exercise;

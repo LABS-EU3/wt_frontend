@@ -35,7 +35,7 @@ const ExerciseCard = ({ client, match }) => {
         setLoading(false);
       })
       .catch(() => {
-        alert("An error occurred.", "Unable to load excercise detail", "error");
+        alert("An error occurred.", "Unable to load exercise detail", "error");
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +62,7 @@ const ExerciseCard = ({ client, match }) => {
           <h2>{name}</h2>
         </div>
 
-        <div className="excercise-video">
+        <div className="exercise-video">
           <ReactPlayer url={video} controls />
         </div>
 

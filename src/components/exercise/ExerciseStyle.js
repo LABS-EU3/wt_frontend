@@ -109,7 +109,7 @@ export const ExerciseDetailStyle = styled.div`
     }
   }
 
-  .excercise-video {
+  .exercise-video {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -153,7 +153,7 @@ export const ExerciseStyle = styled.div`
     height: 250px;
   }
 
-  .excersie-detail {
+  .exersie-detail {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -165,7 +165,7 @@ export const ExerciseStyle = styled.div`
       font-family: "Ubuntu";
     }
 
-    .excercise-ratings {
+    .exercise-ratings {
       i {
         color: #ff8744;
         padding: 0 0.3rem;
@@ -173,7 +173,7 @@ export const ExerciseStyle = styled.div`
     }
   }
 
-  .excercise-equipment {
+  .exercise-equipment {
     padding: 0 0.5rem;
     display: flex;
     p {
