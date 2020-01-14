@@ -31,7 +31,6 @@ const StyledWorkoutItems = styled.div`
 `;
 
 const WorkoutActionItems = ({ client, exercises, workout }) => {
-  console.log(workout);
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");

@@ -10,14 +10,14 @@ describe("<Input />", () => {
     location: { search: jest.mock() },
     client: { mutate: jest.fn(), query: jest.fn() },
     history: { push: jest.fn() },
-    id: jest.mock(),
-    name: jest.mock(),
-    placeholder: jest.mock(),
-    variant: jest.mock(),
-    type: jest.mock(),
+    id: "search",
+    name: "search",
+    placeholder: "Search",
+    variant: "jest.mock()",
+    type: "text",
     onChange: jest.fn(),
-    value: jest.mock(),
-    error: jest.mock()
+    value: "",
+    error: ""
   };
 
   beforeEach(() => {

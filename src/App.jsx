@@ -19,8 +19,8 @@ function App() {
     <div className="App" data-testid="App">
       <Navigation />
       <Route exact path="/login" component={Login} />
-      <PrivateRoute exact path="/excercises" component={Exercises} />
-      <PrivateRoute exact path="/excercise/:id" component={ExerciseDetail} />
+      <PrivateRoute exact path="/exercises" component={Exercises} />
+      <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
       <Route exact path="/signup" component={SignUp} />
       <PrivateRoute exact path="/" component={Dashboard} />

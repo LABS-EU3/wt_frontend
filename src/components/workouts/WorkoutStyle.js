@@ -83,80 +83,112 @@ export const WorkoutDetailStyle = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  .exerciseCard-header {
-    text-align: left;
-    padding: 0.5rem 0;
-    h2 {
-      font-weight: bold;
-      font-size: 4vw;
-    }
-    p {
-      color: grey;
-    }
+  @media only screen and (max-width: 400px) {
+    width: 97vw;
   }
 
-  .exerciseCard-banner {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    /* opacity: 0.8; */
-    margin: 1rem 0;
-    justify-content: center;
-    img {
-      width: auto;
-    }
-  }
-
-  .exerciseCard-information {
+  .workout {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-around;
+    align-items: center;
 
-    .exerciseCard-instruction {
-      width: 55%;
-      text-align: left;
+    @media only screen and (max-width: 800px) {
+      flex-direction: column;
+    }
 
-      h3 {
-        font-weight: bold;
-        font-size: 1.5rem;
+    .workout-detail {
+      width: 45%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+
+      @media only screen and (max-width: 800px) {
+        width: 75%;
       }
 
-      @media only screen and (max-width: 600px) {
-        width: 90%;
+      @media only screen and (max-width: 550px) {
+        width: 95%;
+      }
+
+      @media only screen and (max-width: 400px) {
+        width: 100%;
       }
     }
 
-    .exerciseCard-data {
-      width: 40%;
+    .workout-image {
+      width: 45%;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      line-height: 3rem;
-      .exerciseCard-data-tab {
-        border-bottom: 1px solid black;
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
 
-        .exerciseCard-data-value {
-          font-weight: Bold;
-          width: 67%;
-        }
+      @media only screen and (max-width: 800px) {
+        width: 75%;
       }
 
-      @media only screen and (max-width: 600px) {
-        width: 90%;
-        margin: 1rem 0;
+      @media only screen and (max-width: 550px) {
+        width: 95%;
+      }
+
+      @media only screen and (max-width: 400px) {
+        width: 100%;
+      }
+
+      img {
+        height: 400px;
       }
     }
   }
 
-  .excercise-video {
+  .exercise {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
-    margin: 1rem 0;
+    justify-content: space-around;
+    align-items: center;
+
+    .exercise-detail {
+      width: 45%;
+
+      @media only screen and (max-width: 800px) {
+        width: 95%;
+      }
+    }
+
+    .exercise-video {
+      width: 45%;
+
+      div {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: 800px) {
+        width: 95%;
+      }
+    }
+  }
+
+  .exercise-preview {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+
+    @media only screen and (max-width: 400px) {
+      flex-direction: column;
+    }
+
+    img {
+      width: 150px;
+      height: 100px;
+    }
+
+    .exercise-preview-detail {
+      padding: 1rem;
+    }
   }
 `;
