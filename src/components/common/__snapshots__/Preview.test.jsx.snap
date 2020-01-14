@@ -13,10 +13,9 @@ exports[`<Preview /> renders the Preview component correctly 1`] = `
     <div
       className="content"
     >
-      <i
-        className="fas  fa-2x fa-bars"
-      />
-      <h2 />
+      <h2>
+        Login
+      </h2>
     </div>
   </div>
 </styled.div>
