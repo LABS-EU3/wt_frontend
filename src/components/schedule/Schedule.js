@@ -1,26 +1,57 @@
-import styled from "styled-components";
+import React from "react";
+// import PropTypes from "prop-types";
+// import { Link } from "react-router-dom";
 
-export const ScheduleStyle = styled.div`
-  width: 80vw;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  padding: 2rem 0;
+//dependencies for @fullcalendar
+import FullCalendar from "@fullcalendar/react";
+import interactionPlugin from "@fullcalendar/interaction"; // for selectable
+import timeGridPlugin from "@fullcalendar/timegrid"; // for timeGrid view
 
-  .search-container {
-    border: 1px solid red;
-    width: 70%;
-    text-align: left;
+//chakra-ui dependencies
+// import {
+//   Flex,
+//   Box,
+//   Image,
+//   Text,
+//   Stack,
+//   Heading,
+//   Accordion,
+//   AccordionItem,
+//   AccordionHeader,
+//   AccordionPanel,
+//   AccordionIcon,
+//   useToast
+// } from "@chakra-ui/core";
+// import CustomSpinner from "../common/Spinner";
+import { ScheduleStyle } from "./ScheduleStyle";
 
-    h4 {
-      font-weight: bold;
-    }
+const Schedule = ({ schedule }) => {
+  const { startDate } = schedule;
+  return (
+    <div>
+      <h1>Schedule Calendar</h1>
+      <ScheduleStyle>
+        <FullCalendar
+          defaultView="timeGridWeek"
+          plugins={[interactionPlugin, timeGridPlugin]}
+          events={[
+            {
+              title: "Schdeuled Workout",
+              start: { startDate },
+              end: "2020-01-14T13:30:00Z",
+              allDay: false
+            }
+          ]}
+          selectable={true}
+          dateClick={function(info) {
+            alert("Current view: " + info.view.type);
+            // change the day's background color just for fun
+            info.dayEl.style.backgroundColor = "pink";
+          }}
+        />
+      </ScheduleStyle>
+    </div>
+  );
+};
 
-    p {
-      color: grey;
-      padding: 0.2rem 0;
-    }
-  }
-`;
+export default Schedule;

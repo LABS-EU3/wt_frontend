@@ -6,7 +6,6 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import timeGridPlugin from "@fullcalendar/timegrid"; // for timeGrid view
-import "../../../src/App.css";
 
 //chakra-ui dependencies
 // import {
@@ -24,10 +23,10 @@ import "../../../src/App.css";
 //   useToast
 // } from "@chakra-ui/core";
 // import CustomSpinner from "../common/Spinner";
-import { ScheduleStyle } from "./Schedule";
+import { ScheduleStyle } from "./ScheduleStyle";
 
-const Schedule = () => {
-  // const { userId, workoutId, startDate } = schedule;
+const Schedule = ({ schedule }) => {
+  const { startDate } = schedule;
   return (
     <div>
       <h1>Schedule Calendar</h1>
@@ -38,13 +37,11 @@ const Schedule = () => {
           events={[
             {
               title: "Schdeuled Workout",
-              start: "2020-01-14T12:30:00Z",
+              start: { startDate },
               end: "2020-01-14T13:30:00Z",
               allDay: false
             }
           ]}
-          // height={200}
-          // aspectRatio={5}
           selectable={true}
           dateClick={function(info) {
             alert("Current view: " + info.view.type);

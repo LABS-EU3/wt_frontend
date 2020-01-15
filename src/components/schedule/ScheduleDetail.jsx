@@ -30,7 +30,7 @@ const ScheduleDetail = ({ client }) => {
       })
       .then(res => {
         setSchedule(res.data.userSchedule);
-        console.log(setSchedule);
+        console.log(res.data.userSchedule);
         setLoading(false);
       })
       .catch(() => {
@@ -56,7 +56,8 @@ const ScheduleDetail = ({ client }) => {
   return (
     <Box>
       <Flex width="100vw" height="100vh" justifyContent="center" align="center">
-        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        {/* <h1>You have no Scheduled Workouts</h1> */}
+        <Schedule key={schedule.id} schedule={schedule} />
       </Flex>
     </Box>
   );
