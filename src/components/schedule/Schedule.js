@@ -27,6 +27,7 @@ import { ScheduleStyle } from "./ScheduleStyle";
 
 const Schedule = ({ schedule }) => {
   const { startDate } = schedule;
+  console.log(schedule);
   return (
     <div>
       <h1>Schedule Calendar</h1>
@@ -37,7 +38,7 @@ const Schedule = ({ schedule }) => {
           events={[
             {
               title: "Schdeuled Workout",
-              start: { startDate },
+              start: new Date(startDate),
               end: "2020-01-14T13:30:00Z",
               allDay: false
             }
