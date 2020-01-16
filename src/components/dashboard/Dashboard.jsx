@@ -1,43 +1,66 @@
-import React from "react";
-import { Flex, Box, Heading, Avatar } from "@chakra-ui/core";
+import React, { useEffect, useState } from "react";
+import { withApollo } from "react-apollo";
+import { Flex, Box, Heading, Avatar, useToast } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-import {
-  AreaChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Area
-} from "recharts";
 
 import logoImage from "../../images/login_image.png";
 import DashboardStyle from "./DashboardStyle";
 import RecommendedWorkouts from "./RecommendedWorkouts";
+import Charts from "./Charts";
+import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
+import CustomSpinner from "../common/Spinner";
 
-const data = [
-  {
-    name: "Week 1",
-    numberOfWorkouts: 15
-  },
-  {
-    name: "Week 2",
-    numberOfWorkouts: 5
-  },
-  {
-    name: "Week 3",
-    numberOfWorkouts: 10
-  },
-  {
-    name: "Week 4",
-    numberOfWorkouts: 35
+function Dashboard({ client, history }) {
+  const [dashboardData, setDashboardData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
+  useEffect(() => {
+    client
+      .query({
+        query: GET_DASHBOARD_DETAILS
+      })
+      .then(res => {
+        console.log(res.data);
+        setDashboardData(res.data.dashboard);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        alert("An error occurred.", "Unable to load", "error");
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
+    );
   }
-];
 
-function Dashboard() {
   return (
     <DashboardStyle>
       <Heading marginBottom="25px" textAlign="left">
-        Hello Amira! Welcome to Workout Tracker ...
+        Hello {dashboardData.user.firstname}! Welcome to Workout Tracker ...
       </Heading>
       <div>
         <Box
@@ -59,7 +82,10 @@ function Dashboard() {
           <Flex borderTop="1px solid grey" borderBottom="1px solid grey">
             <Box width="50%" d="flex" flexDirection="column">
               <p className="colorOrange">Weight</p>
-              <p>150lbs</p>
+              <p>
+                {dashboardData.user.weight}
+                {dashboardData.user.weightUnit.name}
+              </p>
             </Box>
             <Box
               width="50%"
@@ -68,7 +94,10 @@ function Dashboard() {
               borderLeft="1px solid grey"
             >
               <p className="colorOrange">Height</p>
-              <p>120cm</p>
+              <p>
+                {dashboardData.user.height}
+                {dashboardData.user.heightUnit.name}
+              </p>
             </Box>
           </Flex>
 
@@ -84,7 +113,7 @@ function Dashboard() {
             <span role="img" aria-label="fire-emoji">
               🔥🔥🔥
             </span>{" "}
-            You have a 6 days streak. Keep it up!
+            You have a {dashboardData.streak} days streak. Keep it up!
           </Box>
         </Box>
 
@@ -104,7 +133,7 @@ function Dashboard() {
           <section>
             <p className="colorOrange alignText">Goal</p>
             <Heading as="h4" size="md">
-              Marathon Training
+              {dashboardData.user.goal}
             </Heading>
           </section>
           <section>
@@ -112,35 +141,11 @@ function Dashboard() {
             <RecommendedWorkouts />
           </section>
 
-          <AreaChart
-            width={730}
-            height={250}
-            data={data}
-            margin={{ top: 40, right: 30, left: 0, bottom: 0 }}
-          >
-            <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="numberOfWorkouts"
-              stroke="#8884d8"
-              fillOpacity={1}
-              fill="url(#colorUv)"
-            />
-          </AreaChart>
-          <p>Data view</p>
+          <Charts graphs={dashboardData.graphs} />
         </div>
       </div>
     </DashboardStyle>
   );
 }
 
-export default Dashboard;
+export default withApollo(Dashboard);
