@@ -44,6 +44,14 @@ const Time = () => {
     setHour(newHour);
   };
 
+  const setCurrentZone = () => {
+    if (zone === "AM") {
+      setZone("PM");
+    } else {
+      setZone("AM");
+    }
+  };
+
   return (
     <StyledTime>
       <div className="time-content">
@@ -71,12 +79,17 @@ const Time = () => {
       </div>
 
       <div className="time-content">
-        <i className="fas fa-arrow-up"></i>
+        <i className="fas fa-arrow-up" onClick={setCurrentZone}></i>
         <div>
-          <input type="text" disabled defaultValue={zone} />
+          <input
+            type="text"
+            disabled
+            onChange={e => setZone(e.target.value)}
+            value={zone}
+          />
         </div>
 
-        <i className="fas fa-arrow-down"></i>
+        <i className="fas fa-arrow-down" onClick={setCurrentZone}></i>
       </div>
     </StyledTime>
   );
