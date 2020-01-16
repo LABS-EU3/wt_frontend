@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledTime = styled.div`
@@ -32,24 +32,51 @@ const StyledTime = styled.div`
   }
 `;
 
-const Time = () => {
+const Time = ({ setTime }) => {
   let [hour, setHour] = useState(1);
-  let [minute, setMinute] = useState(0);
+  let [minute, setMinute] = useState("00");
   let [zone, setZone] = useState("AM");
+
+  useEffect(() => {
+    const newTime = `${hour}:${minute} ${zone}`;
+    setTime(newTime);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const increaseHour = () => {
     console.log("yyy");
     const newHour = parseInt(hour) + 1;
     console.log(newHour);
     setHour(newHour);
+    const newTime = `${newHour}:${minute} ${zone}`;
+    setTime(newTime);
+  };
+
+  const increaseMinute = () => {
+    console.log("yyy");
+    let newMinute = "00";
+    if (minute === "00") {
+      newMinute = "30";
+    } else {
+      newMinute = "00";
+    }
+
+    setMinute(newMinute);
+    const newTime = `${hour}:${newMinute} ${zone}`;
+    setTime(newTime);
   };
 
   const setCurrentZone = () => {
+    let newZone = "AM";
     if (zone === "AM") {
-      setZone("PM");
+      newZone = "PM";
     } else {
-      setZone("AM");
+      newZone = "AM";
     }
+
+    setZone(newZone);
+    const newTime = `${hour}:${minute} ${newZone}`;
+    setTime(newTime);
   };
 
   return (
@@ -70,10 +97,15 @@ const Time = () => {
         <i className="fas fa-arrow-down"></i>
       </div>
 
-      <div className="time-content">
+      <div className="time-content" onClick={increaseMinute}>
         <i className="fas fa-arrow-up"></i>
         <div>
-          <input type="number" defaultValue={"00"} />
+          <input
+            type="number"
+            value={minute}
+            onChange={e => setMinute(e.target.value)}
+            disabled
+          />
           <span> :</span>
         </div>
 

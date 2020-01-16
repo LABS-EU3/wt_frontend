@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
@@ -57,8 +57,12 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [stop, setStop] = useState("isHidden");
   const [reminder, setReminder] = useState("10");
   const [routine, setRoutine] = useState("No");
+  const [date, setDate] = useState(false);
+  const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  console.log(date, "date");
+  console.log(time, "time");
   const alert = (title, description, status) => {
     toast({
       title,
@@ -68,10 +72,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       isClosable: true
     });
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleStart = () => {
     client
@@ -126,11 +126,14 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   };
 
   const scheduleWorkout = () => {
+    let dateTime = `${date} ${time}`;
+    console.log(dateTime);
+    const startTime = new Date(dateTime).getTime();
     client
       .mutate({
         mutation: SCHEDULE_WORKOUT,
         variables: {
-          startDate: new Date().getTime(),
+          startDate: startTime,
           workoutId: workout.id,
           reminderTime: parseInt(reminder),
           routine
@@ -204,11 +207,11 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
             <ModalContentArea>
               <div className="schedule">
                 <div className="calendar">
-                  <Calendar />
+                  <Calendar setDate={setDate} />
                 </div>
 
                 <div className="time">
-                  <Time />
+                  <Time setTime={setTime} />
                 </div>
 
                 <div className="schedule-content">
