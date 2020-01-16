@@ -99,14 +99,39 @@ export const ModalContentArea = styled.div`
       flex-wrap: wrap;
       width: 100%;
       justify-content: flex-start;
-      align-items: center;
       margin: 1rem 0;
+      flex-direction: column;
+      padding: 1rem;
 
       .routine {
-        width: 50%;
-        border: 1px solid red;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
+        margin: 1rem 0;
+
+        p {
+          padding-right: 1rem;
+        }
+      }
+
+      .notification {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        p {
+          padding-right: 1rem;
+        }
+
+        input {
+          border: 1px solid black;
+          width: 40px;
+          text-align: center;
+          margin-right: 1rem;
+        }
+
+        select {
+        }
       }
     }
   }

@@ -7,18 +7,8 @@ import { withApollo } from "react-apollo";
 
 import Calendar from "../common/Calendar";
 import Time from "../common/Time";
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper
-} from "@chakra-ui/core";
 
 import {
-  Box,
-  Flex,
-  Heading,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -189,7 +179,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Upload your progress picture </ModalHeader>
+          <ModalHeader>{workout.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ModalContentArea>
@@ -211,30 +201,22 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
                       <option value="Daily">Daily</option>
                       <option value="Weekly">Weekly</option>
                     </select>
+                  </div>
 
-                    <div className="notification">
-                      <p>
-                        Notification
-                        <input
-                          type="number"
-                          name="notif"
-                          placeholder="10"
-                          value="10"
-                        />
-                        {/* <NumberInput defaultValue={15} min={10} max={20}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                              <NumberIncrementStepper />
-                              <NumberDecrementStepper />
-                            </NumberInputStepper>
-                          </NumberInput> */}
-                      </p>
+                  <div className="notification">
+                    <p>Notification</p>
 
-                      <select name="" id="">
-                        <option value="Mins">Mins</option>
-                        <option value="Hours">Hours</option>
-                      </select>
-                    </div>
+                    <input
+                      type="number"
+                      name="notif"
+                      placeholder="10"
+                      defaultValue="10"
+                    />
+
+                    <select name="" id="">
+                      <option value="Mins">Mins</option>
+                      <option value="Hours">Hours</option>
+                    </select>
                   </div>
                 </div>
               </div>
