@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/core";
 
 import {
-  HistoryStyle,
+  // HistoryStyle,
   ModalFooter as StyledModalFooter,
   ModalContentArea
 } from "./WorkoutHistoryStyle";
