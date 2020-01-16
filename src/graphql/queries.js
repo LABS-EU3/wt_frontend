@@ -134,3 +134,17 @@ export const GET_RECOMMENDED_WORKOUTS = gql`
     }
   }
 `;
+
+export const GET_SCHEDULE = gql`
+  query {
+    userSchedule {
+      id
+      userId
+      workoutId {
+        name
+      }
+      startDate
+      routine
+    }
+  }
+`;
