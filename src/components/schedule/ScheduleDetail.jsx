@@ -32,6 +32,7 @@ const ScheduleDetail = ({ client }) => {
         query: GET_SCHEDULE
       })
       .then(res => {
+        console.log(res.data);
         const newSchedule = res.data.userSchedule.map(item => {
           item["title"] = item.workoutId.name;
           item["date"] = new Date(item.startDate);
