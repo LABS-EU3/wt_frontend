@@ -137,3 +137,27 @@ export const END_WORKOUT = gql`
     }
   }
 `;
+
+export const SCHEDULE_WORKOUT = gql`
+  mutation scheduleWorkout(
+    $workoutId: String!
+    $startDate: String!
+    $reminderTime: Number!
+    $routine: Boolean!
+  ) {
+    scheduleWorkout(
+      input: {
+        workoutId: $workoutId
+        startDate: $startDate
+        reminderTime: $reminderTime
+        routine: $routine
+      }
+    ) {
+      id
+      userId
+      workoutId
+      startDate
+      routine
+    }
+  }
+`;

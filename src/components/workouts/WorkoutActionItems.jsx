@@ -7,7 +7,7 @@ import { withApollo } from "react-apollo";
 
 import Calendar from "../common/Calendar";
 import Time from "../common/Time";
-
+import { SCHEDULE_WORKOUT } from "../../graphql/mutations";
 import {
   useDisclosure,
   Modal,
@@ -55,6 +55,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");
   const [stop, setStop] = useState("isHidden");
+  const [reminder, setReminder] = useState("10");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const alert = (title, description, status) => {
@@ -123,7 +124,20 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       });
   };
 
-  const scheduleWorkout = () => {};
+  const scheduleWorkout = () => {
+    client
+      .mutate({
+        mutation: SCHEDULE_WORKOUT,
+        variables: {
+          startDate: new Date().getTime(),
+          workoutId: workout.id,
+          reminderTime: parseInt(reminder),
+          routine: false
+        }
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   return (
     <StyledWorkoutItems>
@@ -209,14 +223,15 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
                     <input
                       type="number"
                       name="notif"
+                      onChange={e => setReminder(e.target.value)}
                       placeholder="10"
-                      defaultValue="10"
+                      defaultValue={reminder}
                     />
-
-                    <select name="" id="">
+                    <p>mins</p>
+                    {/* <select name="" id="">
                       <option value="Mins">Mins</option>
                       <option value="Hours">Hours</option>
-                    </select>
+                    </select> */}
                   </div>
                 </div>
               </div>
