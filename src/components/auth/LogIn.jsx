@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
@@ -21,6 +21,7 @@ function Login({ client, history }) {
   const toast = useToast();
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const alert = (title, description, status) => {
     toast({
@@ -68,7 +69,6 @@ function Login({ client, history }) {
           setLoading(false);
           if (isNewUser === true) {
             setLoginSuccess("/onboarding");
-
             alert(
               "Login Successful.",
               "You can now complete the onboarding process",
@@ -96,14 +96,24 @@ function Login({ client, history }) {
     }
   });
 
+  useEffect(() => {
+    const isSignedIn = isLoggedIn();
+    // if user is already logged in, redirect to dashboard
+    if (isSignedIn === true && loginSuccess === false) {
+      setIsSignedIn(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (loginSuccess) {
+    console.log(loginSuccess);
     history.push(loginSuccess);
     window.location.reload();
   }
 
   // if user is already logged in, redirect to dashboard
-  const isSignedIn = isLoggedIn();
-  if (isSignedIn) {
+  if (isSignedIn === true) {
     return <Redirect to="/" />;
   }
 
