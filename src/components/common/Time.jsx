@@ -5,16 +5,63 @@ const StyledTime = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  background-color: grey;
-  min-height: 100px;
+  padding: 1rem;
+  justify-content: space-evenly;
+
+  .time-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    i {
+      margin: 0.5rem 0;
+      color: #ff8744;
+    }
+
+    div {
+      input {
+        width: 40px;
+        border: 1px solid black;
+        text-align: center;
+        border-radius: 5px;
+      }
+    }
+  }
 `;
 
 const Time = () => {
   return (
     <StyledTime>
-      <input type="number" value="0" />
-      <input type="number" value="0" />
-      <input type="number" value="0" />
+      <div className="time-content">
+        <i class="fas fa-arrow-up"></i>
+        <div>
+          <input type="number" defaultValue="1" />
+          <span> :</span>
+        </div>
+
+        <i class="fas fa-arrow-down"></i>
+      </div>
+
+      <div className="time-content">
+        <i class="fas fa-arrow-up"></i>
+        <div>
+          <input type="number" defaultValue="00" />
+          <span> :</span>
+        </div>
+
+        <i class="fas fa-arrow-down"></i>
+      </div>
+
+      <div className="time-content">
+        <i class="fas fa-arrow-up"></i>
+        <div>
+          <input type="text" disabled defaultValue="AM" />
+        </div>
+
+        <i class="fas fa-arrow-down"></i>
+      </div>
     </StyledTime>
   );
 };

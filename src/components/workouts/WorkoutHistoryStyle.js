@@ -81,6 +81,8 @@ export const ModalContentArea = styled.div`
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
+    align-items: center;
+
     .calendar {
       width: 55%;
 
@@ -91,7 +93,7 @@ export const ModalContentArea = styled.div`
 
     .time {
       width: 40%;
-      border: 1px solid blue;
+      border: 1px solid #ccc5b9;
     }
 
     .schedule-content {
