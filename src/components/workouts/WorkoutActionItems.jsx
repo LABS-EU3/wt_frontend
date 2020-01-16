@@ -56,6 +56,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [pause, setPause] = useState("isHidden");
   const [stop, setStop] = useState("isHidden");
   const [reminder, setReminder] = useState("10");
+  const [routine, setRoutine] = useState("No");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const alert = (title, description, status) => {
@@ -132,11 +133,15 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
           startDate: new Date().getTime(),
           workoutId: workout.id,
           reminderTime: parseInt(reminder),
-          routine: false
+          routine
         }
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .then(res => {
+        console.log(res);
+        onClose();
+        alert("Workout scheduled successfully", "🚀", "success");
+      })
+      .catch(err => alert("Unable to schedule workout", "☹️", "error"));
   };
 
   return (
@@ -210,7 +215,11 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
                   <div className="routine">
                     <p>Set as routine</p>
 
-                    <select name="" id="">
+                    <select
+                      onChange={e => setRoutine(e.target.value)}
+                      name=""
+                      id=""
+                    >
                       <option value="No">No</option>
                       <option value="Daily">Daily</option>
                       <option value="Weekly">Weekly</option>
