@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const StyledTime = styled.div`
@@ -18,6 +18,7 @@ const StyledTime = styled.div`
     i {
       margin: 0.5rem 0;
       color: #ff8744;
+      cursor: pointer;
     }
 
     div {
@@ -32,35 +33,50 @@ const StyledTime = styled.div`
 `;
 
 const Time = () => {
+  let [hour, setHour] = useState(1);
+  let [minute, setMinute] = useState(0);
+  let [zone, setZone] = useState("AM");
+
+  const increaseHour = () => {
+    console.log("yyy");
+    const newHour = parseInt(hour) + 1;
+    console.log(newHour);
+    setHour(newHour);
+  };
+
   return (
     <StyledTime>
       <div className="time-content">
-        <i class="fas fa-arrow-up"></i>
+        <i className="fas fa-arrow-up" onClick={increaseHour}></i>
         <div>
-          <input type="number" defaultValue="1" />
+          <input
+            type="number"
+            onChange={e => setHour(e.target.value)}
+            value={hour}
+          />
           <span> :</span>
         </div>
 
-        <i class="fas fa-arrow-down"></i>
+        <i className="fas fa-arrow-down"></i>
       </div>
 
       <div className="time-content">
-        <i class="fas fa-arrow-up"></i>
+        <i className="fas fa-arrow-up"></i>
         <div>
-          <input type="number" defaultValue="00" />
+          <input type="number" defaultValue={"00"} />
           <span> :</span>
         </div>
 
-        <i class="fas fa-arrow-down"></i>
+        <i className="fas fa-arrow-down"></i>
       </div>
 
       <div className="time-content">
-        <i class="fas fa-arrow-up"></i>
+        <i className="fas fa-arrow-up"></i>
         <div>
-          <input type="text" disabled defaultValue="AM" />
+          <input type="text" disabled defaultValue={zone} />
         </div>
 
-        <i class="fas fa-arrow-down"></i>
+        <i className="fas fa-arrow-down"></i>
       </div>
     </StyledTime>
   );
