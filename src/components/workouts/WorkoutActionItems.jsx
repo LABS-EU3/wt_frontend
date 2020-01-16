@@ -98,7 +98,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
         alert("Workout ended", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        alert("An error occurred.", "Unable to start workout ☹️", "error");
+        alert("An error occurred.", "Unable to stop workout ☹️", "error");
       });
   };
   return (
