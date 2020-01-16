@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import { useToast, Box, Flex } from "@chakra-ui/core";
 
-import { ExercisesStyle } from "../exercise/ExerciseStyle";
+import FullCalendar from "@fullcalendar/react";
+import interactionPlugin from "@fullcalendar/interaction"; // for selectable
+import timeGridPlugin from "@fullcalendar/timegrid"; // for timeGrid view
+import { ScheduleStyle } from "./ScheduleStyle";
+
 import { GET_SCHEDULE } from "../../graphql/queries";
-import Schedule from "./Schedule";
 import CustomSpinner from "../common/Spinner";
 
 const ScheduleDetail = ({ client }) => {
   const toast = useToast();
-  const [schedule, setSchedule] = useState({});
+  const [schedule, setSchedule] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const alert = (title, description, status) => {
@@ -29,12 +32,18 @@ const ScheduleDetail = ({ client }) => {
         query: GET_SCHEDULE
       })
       .then(res => {
-        setSchedule(res.data.userSchedule);
-        console.log(res.data.userSchedule);
+        const newSchedule = res.data.userSchedule.map(item => {
+          item["title"] = item.workoutId.name;
+          item["date"] = new Date(item.startDate);
+          return item;
+        });
+        setSchedule(newSchedule);
+        console.log(newSchedule);
         setLoading(false);
       })
-      .catch(() => {
+      .catch(err => {
         alert("An error occurred.", "Unable to load Schedule", "error");
+        console.log(err);
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,18 +55,24 @@ const ScheduleDetail = ({ client }) => {
 
   if (schedule.length > 0) {
     return (
-      <ExercisesStyle>
-        {schedule.map(schedule => (
-          <Schedule key={schedule.id} schedule={schedule} />
-        ))}
-      </ExercisesStyle>
+      <ScheduleStyle>
+        <FullCalendar
+          defaultView="timeGridWeek"
+          plugins={[interactionPlugin, timeGridPlugin]}
+          events={schedule}
+          selectable={true}
+        />
+      </ScheduleStyle>
     );
   }
+  console.log("Schedule");
+
   return (
     <Box>
       <Flex width="100vw" height="100vh" justifyContent="center" align="center">
-        {/* <h1>You have no Scheduled Workouts</h1> */}
-        <Schedule key={schedule.id} schedule={schedule} />
+        <div>
+          <h1>You have no Scheduled Workouts</h1>
+        </div>
       </Flex>
     </Box>
   );
