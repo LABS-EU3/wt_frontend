@@ -134,3 +134,36 @@ export const GET_RECOMMENDED_WORKOUTS = gql`
     }
   }
 `;
+
+export const GET_DASHBOARD_DETAILS = gql`
+  query {
+    dashboard {
+      graphs {
+        name
+        data {
+          date
+          value
+        }
+      }
+      stats {
+        reps
+        sets
+        amountLifted
+      }
+      streak
+      user {
+        id
+        firstname
+        goal
+        height
+        weight
+        heightUnit {
+          name
+        }
+        weightUnit {
+          name
+        }
+      }
+    }
+  }
+`;
