@@ -129,7 +129,9 @@ export const GET_SCHEDULE = gql`
     userSchedule {
       id
       userId
-      workoutId
+      workoutId {
+        name
+      }
       startDate
       routine
     }
