@@ -32,13 +32,15 @@ const ScheduleDetail = ({ client }) => {
         query: GET_SCHEDULE
       })
       .then(res => {
-        const newSchedule = res.data.userSchedule.map(item => {
-          item["title"] = item.workoutId.name;
-          item["date"] = new Date(item.startDate);
-          return item;
-        });
-        setSchedule(newSchedule);
-        console.log(newSchedule);
+        console.log(res.data);
+        // const newSchedule = res.data.userSchedule.map(item => {
+        //   item["title"] = item.workoutId.name;
+        //   item["date"] = new Date(item.startDate);
+        //   // console.log(item)
+        //   return item;
+        // });
+        // setSchedule(newSchedule);
+        // console.log(newSchedule);
         setLoading(false);
       })
       .catch(err => {
