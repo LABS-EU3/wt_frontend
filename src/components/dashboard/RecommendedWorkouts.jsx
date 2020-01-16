@@ -45,7 +45,7 @@ const RecommendedWorkouts = ({ client, history }) => {
     <Flex
       justifyContent="space-between"
       alignItems="center"
-      marginBottom="20px"
+      marginBottom="50px"
     >
       {workouts.map((workout, indx) => {
         while (indx < 3) {

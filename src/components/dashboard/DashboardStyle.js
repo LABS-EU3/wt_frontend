@@ -12,6 +12,34 @@ const DashboardStyle = styled.div`
     text-align: left;
   }
 
+  .pointer {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+
+    &:hover {
+      background-color: #8884d8;
+      color: black;
+    }
+  }
+
+  .slide {
+    -webkit-animation-name: slide;
+    -webkit-animation-duration: 1.5s;
+    animation-name: slide;
+    animation-duration: 1.5s;
+  }
+
+  .mySlides {
+    display: none;
+
+    section {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0px;
+    }
+  }
+
   > div {
     display: flex;
     /* justify-content: space-between; */
