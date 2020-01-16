@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
@@ -7,7 +7,7 @@ import { withApollo } from "react-apollo";
 
 import Calendar from "../common/Calendar";
 import Time from "../common/Time";
-
+import { SCHEDULE_WORKOUT } from "../../graphql/mutations";
 import {
   useDisclosure,
   Modal,
@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/core";
 
 import {
-  HistoryStyle,
+  // HistoryStyle,
   ModalFooter as StyledModalFooter,
   ModalContentArea
 } from "./WorkoutHistoryStyle";
@@ -55,6 +55,10 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");
   const [stop, setStop] = useState("isHidden");
+  const [reminder, setReminder] = useState("10");
+  const [routine, setRoutine] = useState("No");
+  const [date, setDate] = useState(false);
+  const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const alert = (title, description, status) => {
@@ -66,10 +70,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       isClosable: true
     });
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleStart = () => {
     client
@@ -89,7 +89,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
         alert("Workout started", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        console.log(error);
         alert("An error occurred.", "Unable to start workout ☹️", "error");
       });
   };
@@ -123,7 +122,25 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       });
   };
 
-  const scheduleWorkout = () => {};
+  const scheduleWorkout = () => {
+    let dateTime = `${date} ${time}`;
+    const startTime = new Date(dateTime).getTime();
+    client
+      .mutate({
+        mutation: SCHEDULE_WORKOUT,
+        variables: {
+          startDate: startTime,
+          workoutId: workout.id,
+          reminderTime: parseInt(reminder),
+          routine
+        }
+      })
+      .then(res => {
+        onClose();
+        alert("Workout scheduled successfully", "🚀", "success");
+      })
+      .catch(err => alert("Unable to schedule workout", "☹️", "error"));
+  };
 
   return (
     <StyledWorkoutItems>
@@ -185,18 +202,22 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
             <ModalContentArea>
               <div className="schedule">
                 <div className="calendar">
-                  <Calendar />
+                  <Calendar setDate={setDate} />
                 </div>
 
                 <div className="time">
-                  <Time />
+                  <Time setTime={setTime} />
                 </div>
 
                 <div className="schedule-content">
                   <div className="routine">
                     <p>Set as routine</p>
 
-                    <select name="" id="">
+                    <select
+                      onChange={e => setRoutine(e.target.value)}
+                      name=""
+                      id=""
+                    >
                       <option value="No">No</option>
                       <option value="Daily">Daily</option>
                       <option value="Weekly">Weekly</option>
@@ -208,15 +229,16 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
 
                     <input
                       type="number"
-                      name="notif"
+                      name="notifificatino"
+                      onChange={e => setReminder(e.target.value)}
+                      value={reminder}
                       placeholder="10"
-                      defaultValue="10"
                     />
-
-                    <select name="" id="">
+                    <p>mins</p>
+                    {/* <select name="" id="">
                       <option value="Mins">Mins</option>
                       <option value="Hours">Hours</option>
-                    </select>
+                    </select> */}
                   </div>
                 </div>
               </div>
