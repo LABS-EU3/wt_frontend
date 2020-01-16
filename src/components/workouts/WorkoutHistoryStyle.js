@@ -75,6 +75,41 @@ export const ModalContentArea = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 0.8rem;
+
+  .schedule {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    .calendar {
+      width: 55%;
+
+      .react-calendar {
+        width: 100%;
+      }
+    }
+
+    .time {
+      width: 40%;
+      border: 1px solid blue;
+    }
+
+    .schedule-content {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 1rem 0;
+
+      .routine {
+        width: 50%;
+        border: 1px solid red;
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+  }
 `;
 
 export const WorkoutHistoryCard = styled.div`

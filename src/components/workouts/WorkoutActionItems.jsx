@@ -4,6 +4,17 @@ import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
 // import Timer from "../common/Timer";
+
+import Calendar from "../common/Calendar";
+import Time from "../common/Time";
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper
+} from "@chakra-ui/core";
+
 import {
   Box,
   Flex,
@@ -170,43 +181,63 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       </Button>
       {/* </ButtonGroup> */}
       {/* <Timer time={20}/> */}
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        blockScrollOnMount={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Upload your progress picture </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ModalContentArea>
-              <div className="calendar">
-                <div className="routine">
-                  <p>Set as routine</p>
-
-                  <select name="" id="">
-                    <option value="No">No</option>
-                    <option value="Daily">Daily</option>
-                    <option value="Weekly">Weekly</option>
-                  </select>
+              <div className="schedule">
+                <div className="calendar">
+                  <Calendar />
                 </div>
 
-                <div className="notification">
-                  <p>
-                    Notification{" "}
-                    <input
-                      type="number"
-                      name="notif"
-                      placeholder="10"
-                      value="10"
-                    />
-                  </p>
+                <div className="time">
+                  <Time />
+                </div>
 
-                  <select name="" id="">
-                    <option value="Mins">Mins</option>
-                    <option value="Hours">Hours</option>
-                  </select>
+                <div className="schedule-content">
+                  <div className="routine">
+                    <p>Set as routine</p>
+
+                    <select name="" id="">
+                      <option value="No">No</option>
+                      <option value="Daily">Daily</option>
+                      <option value="Weekly">Weekly</option>
+                    </select>
+
+                    <div className="notification">
+                      <p>
+                        Notification
+                        <input
+                          type="number"
+                          name="notif"
+                          placeholder="10"
+                          value="10"
+                        />
+                        {/* <NumberInput defaultValue={15} min={10} max={20}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput> */}
+                      </p>
+
+                      <select name="" id="">
+                        <option value="Mins">Mins</option>
+                        <option value="Hours">Hours</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="time">Time goes here</div>
             </ModalContentArea>
           </ModalBody>
           <ModalFooter>
