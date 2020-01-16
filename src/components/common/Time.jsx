@@ -33,7 +33,7 @@ const StyledTime = styled.div`
 `;
 
 const Time = ({ setTime }) => {
-  let [hour, setHour] = useState(1);
+  let [hour, setHour] = useState("00");
   let [minute, setMinute] = useState("00");
   let [zone, setZone] = useState("AM");
 
@@ -44,16 +44,31 @@ const Time = ({ setTime }) => {
   }, []);
 
   const increaseHour = () => {
-    console.log("yyy");
-    const newHour = parseInt(hour) + 1;
-    console.log(newHour);
+    let newHour = hour;
+
+    if (parseInt(newHour) >= 23) {
+      newHour = "00";
+    } else {
+      newHour = parseInt(hour) + 1;
+    }
+    setHour(newHour);
+    const newTime = `${newHour}:${minute} ${zone}`;
+    setTime(newTime);
+  };
+
+  const decreaseHour = () => {
+    let newHour = hour;
+    if (parseInt(newHour) <= 0) {
+      newHour = 23;
+    } else {
+      newHour = parseInt(hour) - 1;
+    }
     setHour(newHour);
     const newTime = `${newHour}:${minute} ${zone}`;
     setTime(newTime);
   };
 
   const increaseMinute = () => {
-    console.log("yyy");
     let newMinute = "00";
     if (minute === "00") {
       newMinute = "30";
@@ -87,14 +102,13 @@ const Time = ({ setTime }) => {
           <input
             type="number"
             onChange={e => setHour(e.target.value)}
-            min="1"
-            max="12"
+            disabled
             value={hour}
           />
           <span> :</span>
         </div>
 
-        <i className="fas fa-arrow-down"></i>
+        <i className="fas fa-arrow-down" onClick={decreaseHour}></i>
       </div>
 
       <div className="time-content" onClick={increaseMinute}>

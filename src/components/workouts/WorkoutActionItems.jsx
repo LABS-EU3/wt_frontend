@@ -61,8 +61,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(date, "date");
-  console.log(time, "time");
   const alert = (title, description, status) => {
     toast({
       title,
@@ -91,7 +89,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
         alert("Workout started", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        console.log(error);
         alert("An error occurred.", "Unable to start workout ☹️", "error");
       });
   };
@@ -127,7 +124,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
 
   const scheduleWorkout = () => {
     let dateTime = `${date} ${time}`;
-    console.log(dateTime);
     const startTime = new Date(dateTime).getTime();
     client
       .mutate({
@@ -140,7 +136,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
         }
       })
       .then(res => {
-        console.log(res);
         onClose();
         alert("Workout scheduled successfully", "🚀", "success");
       })
@@ -234,10 +229,10 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
 
                     <input
                       type="number"
-                      name="notif"
+                      name="notifificatino"
                       onChange={e => setReminder(e.target.value)}
+                      value={reminder}
                       placeholder="10"
-                      defaultValue={reminder}
                     />
                     <p>mins</p>
                     {/* <select name="" id="">
