@@ -60,6 +60,8 @@ const Time = () => {
           <input
             type="number"
             onChange={e => setHour(e.target.value)}
+            min="1"
+            max="12"
             value={hour}
           />
           <span> :</span>
