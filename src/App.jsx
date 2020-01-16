@@ -4,7 +4,7 @@ import Onboarding from "./components/auth/Onboarding";
 import "./App.css";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/LogIn";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import SignUp from "./components/auth/SignUp";
 import WorkoutList from "./components/workouts/WorkoutList";
 import WorkoutDetail from "./components/workouts/WorkoutDetail";
