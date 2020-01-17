@@ -32,11 +32,9 @@ const ScheduleDetail = ({ client }) => {
         query: GET_SCHEDULE
       })
       .then(res => {
-        console.log(res.data);
         const newSchedule = res.data.userSchedule.map(item => {
           item["title"] = item.workoutId.name;
           item["date"] = new Date(item.startDate);
-          // console.log(item)
           return item;
         });
         setSchedule(newSchedule);
@@ -45,7 +43,6 @@ const ScheduleDetail = ({ client }) => {
       })
       .catch(err => {
         alert("An error occurred.", "Unable to load Schedule", "error");
-        console.log(err);
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,7 +64,6 @@ const ScheduleDetail = ({ client }) => {
       </ScheduleStyle>
     );
   }
-  console.log("Schedule");
 
   return (
     <Box>
