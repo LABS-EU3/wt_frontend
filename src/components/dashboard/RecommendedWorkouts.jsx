@@ -48,24 +48,19 @@ const RecommendedWorkouts = ({ client, history }) => {
       {workouts.map((workout, indx) => {
         while (indx < 3) {
           return (
-            <Box key={workout.id} width="25%" height="150px">
+            <div key={workout.id} className="recomended-workout-detail">
               <Link to={`/workout/${workout.id}`}>
-                <Image
-                  src={workout.picture}
-                  alt={workout.name}
-                  height="120px"
-                  width="200px"
-                />
-                <Heading size="sm" textAlign="left">
+                <img src={workout.picture} alt={workout.name} />
+                {/* <Heading size="sm" textAlign="left">
                   {workout.name}
-                </Heading>
+                </Heading> */}
               </Link>
-            </Box>
+            </div>
           );
         }
         return null;
       })}
-      <Box>
+      {/* <Box>
         <Link to="/workouts">
           <IconButton
             variant="outline"
@@ -74,7 +69,7 @@ const RecommendedWorkouts = ({ client, history }) => {
             icon="add"
           />
         </Link>
-      </Box>
+      </Box> */}
     </StyledRecomendedWorkout>
   );
 };
