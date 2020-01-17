@@ -131,14 +131,15 @@ function Dashboard({ client, history }) {
                 ”
               </Heading>
             </section>
-            <section>
-              <p className="colorOrange alignText">Goal</p>
+
+            <section className="goal">
+              <p>Goal</p>
               <Heading as="h4" size="md">
                 {dashboardData.user.goal}
               </Heading>
             </section>
-            <section>
-              <p className="colorOrange alignText">Recommended For You</p>
+            <section className="recomended-workouts">
+              <p className="colorOrange alignText">Recommended Workouts</p>
               <RecommendedWorkouts />
             </section>
 

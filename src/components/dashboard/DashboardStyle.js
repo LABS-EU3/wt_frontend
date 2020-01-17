@@ -42,6 +42,47 @@ const DashboardStyle = styled.div`
           border-radius: 10px;
         }
       }
+
+      .goal {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        p {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          color: #ff8744;
+          font-family: Ubuntu;
+          font-style: normal;
+          font-weight: normal;
+        }
+
+        h4 {
+          width: 100%;
+          padding-left: 7rem;
+          font-family: Ubuntu;
+          font-style: normal;
+          font-weight: normal;
+          margin: 0.5rem 0;
+          font-size: 2rem;
+        }
+      }
+
+      .recomended-workouts {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        p {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          color: #ff8744;
+          font-family: Ubuntu;
+          margin: 1rem 0;
+        }
+      }
     }
   }
 
