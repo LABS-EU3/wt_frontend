@@ -33,7 +33,7 @@ const Charts = ({ graphs }) => {
     <div>
       {graphs.map(graphData => (
         <Chart
-          key={graphData.date}
+          key={graphData.name}
           graphData={graphData}
           changeSlides={changeSlides}
         />

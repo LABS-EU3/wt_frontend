@@ -61,20 +61,15 @@ function Dashboard({ client, history }) {
   if (dashboardData) {
     return (
       <DashboardStyle>
-        <Heading marginBottom="25px" textAlign="left">
-          Hello {dashboardData.user.firstname}! Welcome to Workout Tracker ...
-        </Heading>
-        <div>
-          <Box
-            width="30%"
-            height="100vh"
-            d="flex"
-            flexDirection="column"
-            borderWidth="1px"
-            rounded="lg"
-            marginRight="50px"
-          >
-            <Link>Edit</Link>
+        <div className="welcome">
+          <Heading marginBottom="25px" textAlign="left">
+            Hello {dashboardData.user.firstname}! Welcome to Workout Tracker ...
+          </Heading>
+        </div>
+
+        <div className="dashboard-content">
+          <div className="user-detail">
+            <Link to={`/profile=`}>Edit</Link>
             <Avatar
               src={logoImage}
               size="2xl"
@@ -117,11 +112,15 @@ function Dashboard({ client, history }) {
               </span>{" "}
               You have a {dashboardData.streak} days streak. Keep it up!
             </Box>
-          </Box>
+          </div>
 
-          <div>
-            <section>
-              <Heading fontFamily="initial" className="alignText">
+          <div className="dasboard-detail">
+            <section className="quotes">
+              <Heading
+                fontFamily="initial"
+                textAlign="left"
+                className="alignText"
+              >
                 “
               </Heading>
               <p>
