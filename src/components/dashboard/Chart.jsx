@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Icon, Stack } from "@chakra-ui/core";
+import { Heading, Icon } from "@chakra-ui/core";
 import {
   AreaChart,
   XAxis,

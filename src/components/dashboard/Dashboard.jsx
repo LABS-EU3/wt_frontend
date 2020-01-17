@@ -9,6 +9,7 @@ import RecommendedWorkouts from "./RecommendedWorkouts";
 import Charts from "./Charts";
 import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
+import Quotes from "../common/Quotes";
 
 function Dashboard({ client, history }) {
   const [dashboardData, setDashboardData] = useState([]);
@@ -35,7 +36,6 @@ function Dashboard({ client, history }) {
         setIsLoading(false);
       })
       .catch(err => {
-        console.log(err);
         setIsLoading(false);
         alert("An error occurred.", "Unable to load", "error");
       });
@@ -56,7 +56,6 @@ function Dashboard({ client, history }) {
       </Box>
     );
   }
-  console.log(dashboardData);
 
   if (dashboardData) {
     return (
@@ -123,10 +122,8 @@ function Dashboard({ client, history }) {
               >
                 “
               </Heading>
-              <p>
-                The clock is ticking. Are you becoming the person you want to to
-                be?
-              </p>
+              <Quotes />
+
               <Heading fontFamily="initial" textAlign="right" width="100%">
                 ”
               </Heading>
