@@ -1,10 +1,101 @@
 import styled from "styled-components";
 
 const DashboardStyle = styled.div`
+  width: 95vw;
   margin: 0 auto;
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 2rem;
 
-  .colorOrange {
+  .welcome {
+    width: 100%;
+  }
+
+  .dashboard-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+
+    .user-detail {
+      width: 30%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      border-radius: 10px;
+      padding: 0.5rem;
+
+      a {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+    }
+
+    .dasboard-detail {
+      width: 65%;
+      display: flex;
+      flex-wrap: wrap;
+
+      .quotes {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        p {
+          background: #fffcf2;
+          padding: 1.5rem;
+          border-radius: 10px;
+        }
+      }
+
+      .goal {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        p {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          color: #ff8744;
+          font-family: Ubuntu;
+          font-style: normal;
+          font-weight: normal;
+        }
+
+        h4 {
+          width: 100%;
+          padding-left: 7rem;
+          font-family: Ubuntu;
+          font-style: normal;
+          font-weight: normal;
+          margin: 0.5rem 0;
+          font-size: 2rem;
+        }
+      }
+
+      .recomended-workouts {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        p {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          color: #ff8744;
+          font-family: Ubuntu;
+          margin: 1rem 0;
+        }
+      }
+    }
+  }
+
+  /* .colorOrange {
     color: orange;
   }
 
@@ -42,7 +133,7 @@ const DashboardStyle = styled.div`
 
   > div {
     display: flex;
-    /* justify-content: space-between; */
+
 
     a {
       margin-left: 90%;
@@ -55,12 +146,12 @@ const DashboardStyle = styled.div`
 
       section:first-child {
         p {
-          /* margin-left: 20%; */
+
           width: 100%;
         }
       }
     }
-  }
+  } */
 `;
 
 export default DashboardStyle;

@@ -218,9 +218,9 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
                       name=""
                       id=""
                     >
-                      <option value="No">No</option>
-                      <option value="Daily">Daily</option>
-                      <option value="Weekly">Weekly</option>
+                      <option value="no">No</option>
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
                     </select>
                   </div>
 
