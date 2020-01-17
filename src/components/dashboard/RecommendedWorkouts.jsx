@@ -10,6 +10,8 @@ import {
   IconButton
 } from "@chakra-ui/core";
 
+import StyledRecomendedWorkout from "./StyledRecomendedWorkout";
+
 import { GET_RECOMMENDED_WORKOUTS } from "../../graphql/queries";
 
 const RecommendedWorkouts = ({ client, history }) => {
@@ -42,11 +44,7 @@ const RecommendedWorkouts = ({ client, history }) => {
   }, []);
 
   return (
-    <Flex
-      justifyContent="space-between"
-      alignItems="center"
-      marginBottom="50px"
-    >
+    <StyledRecomendedWorkout>
       {workouts.map((workout, indx) => {
         while (indx < 3) {
           return (
@@ -77,7 +75,7 @@ const RecommendedWorkouts = ({ client, history }) => {
           />
         </Link>
       </Box>
-    </Flex>
+    </StyledRecomendedWorkout>
   );
 };
 

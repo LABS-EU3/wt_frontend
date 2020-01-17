@@ -16,17 +16,26 @@ const DashboardStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     .user-detail {
       width: 30%;
-      border: 1px solid red;
       display: flex;
       flex-wrap: wrap;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      border-radius: 10px;
+      padding: 0.5rem;
+
+      a {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
     }
 
     .dasboard-detail {
-      width: 55%;
+      width: 65%;
       display: flex;
       flex-wrap: wrap;
 
