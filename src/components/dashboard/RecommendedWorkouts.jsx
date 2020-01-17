@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import { Link } from "react-router-dom";
-import {
-  Flex,
-  Box,
-  Heading,
-  useToast,
-  Image,
-  IconButton
-} from "@chakra-ui/core";
+import { useToast } from "@chakra-ui/core";
 
 import StyledRecomendedWorkout from "./StyledRecomendedWorkout";
 
@@ -34,7 +27,6 @@ const RecommendedWorkouts = ({ client, history }) => {
         query: GET_RECOMMENDED_WORKOUTS
       })
       .then(res => {
-        console.log(res.data.suggestionsByExperience);
         setWorkouts(res.data.suggestionsByExperience);
       })
       .catch(err => {

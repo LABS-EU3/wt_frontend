@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Icon, Stack } from "@chakra-ui/core";
+import { Heading, Icon } from "@chakra-ui/core";
 import {
   AreaChart,
   XAxis,
@@ -15,26 +15,26 @@ const Chart = ({ graphData, changeSlides }) => {
   );
 
   return (
-    <div className="mySlides slide">
-      <section>
-        <Heading className="colorOrange" as="h4" size="md">
-          {graphData.name}
-        </Heading>
-        <Stack isInline>
-          <Icon
-            className="pointer"
-            onClick={() => changeSlides(-1)}
-            name="chevron-left"
-            size="24px"
-          />
-          <Icon
-            className="pointer"
-            onClick={() => changeSlides(1)}
-            name="chevron-right"
-            size="24px"
-          />
-        </Stack>
-      </section>
+    <div className="chart mySlides slide">
+      {/* <section> */}
+      <Heading className="colorOrange" as="h4" size="md">
+        {graphData.name}
+      </Heading>
+      <div className="chart-nav">
+        <Icon
+          className="pointer"
+          onClick={() => changeSlides(-1)}
+          name="chevron-left"
+          size="24px"
+        />
+        <Icon
+          className="pointer"
+          onClick={() => changeSlides(1)}
+          name="chevron-right"
+          size="24px"
+        />
+      </div>
+      {/* </section> */}
       <AreaChart
         width={730}
         height={250}
