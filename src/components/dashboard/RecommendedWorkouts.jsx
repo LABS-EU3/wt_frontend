@@ -27,7 +27,6 @@ const RecommendedWorkouts = ({ client, history }) => {
         query: GET_RECOMMENDED_WORKOUTS
       })
       .then(res => {
-        console.log(res.data.suggestionsByExperience);
         setWorkouts(res.data.suggestionsByExperience);
       })
       .catch(err => {
