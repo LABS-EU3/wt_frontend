@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Chart from "./Chart";
 
+import StyledCharts from "./StyledChart";
+
 const Charts = ({ graphs }) => {
   let slideIndex = 1;
 
@@ -30,7 +32,7 @@ const Charts = ({ graphs }) => {
   }
 
   return (
-    <div>
+    <StyledCharts>
       {graphs.map(graphData => (
         <Chart
           key={graphData.name}
@@ -39,7 +41,7 @@ const Charts = ({ graphs }) => {
         />
       ))}
       <p>Data view</p>
-    </div>
+    </StyledCharts>
   );
 };
 
