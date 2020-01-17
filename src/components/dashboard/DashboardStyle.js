@@ -49,6 +49,7 @@ const DashboardStyle = styled.div`
           background: #fffcf2;
           padding: 1.5rem;
           border-radius: 10px;
+          transition: all 0.2s ease-in-out;
         }
       }
 

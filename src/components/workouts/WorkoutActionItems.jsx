@@ -124,6 +124,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
 
   const scheduleWorkout = () => {
     let dateTime = `${date} ${time}`;
+
     const startTime = new Date(dateTime).getTime();
     client
       .mutate({
@@ -186,7 +187,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       >
         Stop
       </Button>
-      {/* </ButtonGroup> */}
       {/* <Timer time={20}/> */}
       <Modal
         blockScrollOnMount={false}
@@ -235,10 +235,6 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
                       placeholder="10"
                     />
                     <p>mins</p>
-                    {/* <select name="" id="">
-                      <option value="Mins">Mins</option>
-                      <option value="Hours">Hours</option>
-                    </select> */}
                   </div>
                 </div>
               </div>

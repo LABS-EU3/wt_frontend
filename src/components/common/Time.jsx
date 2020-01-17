@@ -46,8 +46,8 @@ const Time = ({ setTime }) => {
   const increaseHour = () => {
     let newHour = hour;
 
-    if (parseInt(newHour) >= 23) {
-      newHour = "00";
+    if (parseInt(newHour) >= 12) {
+      newHour = "01";
     } else {
       newHour = parseInt(hour) + 1;
     }
@@ -59,7 +59,7 @@ const Time = ({ setTime }) => {
   const decreaseHour = () => {
     let newHour = hour;
     if (parseInt(newHour) <= 0) {
-      newHour = 23;
+      newHour = 12;
     } else {
       newHour = parseInt(hour) - 1;
     }
