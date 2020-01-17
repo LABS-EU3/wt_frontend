@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const quotesData = [
   {
@@ -45,12 +45,67 @@ const quotesData = [
   {
     id: "10",
     quote: "Action is the foundational key to all success."
+  },
+  {
+    id: "11",
+    quote:
+      "Things may come to those who wait, but only the things left by those who hustle."
+  },
+  {
+    id: "12",
+    quote: "Well done is better than well said."
+  },
+  {
+    id: "13",
+    quote: "Well done is better than well said."
+  },
+  {
+    id: "14",
+    quote: "All our dreams can come true if we have the courage to pursue them."
+  },
+  {
+    id: "15",
+    quote: "A champion is someone who gets up when they can’t."
+  },
+  {
+    id: "16",
+    quote: "What hurts today makes you stronger tomorrow."
+  },
+  {
+    id: "17",
+    quote:
+      "If something stands between you and your success, move it. Never be denied."
+  },
+  {
+    id: "18",
+    quote:
+      "If you want something you’ve never had, you must be willing to do something you’ve never done."
+  },
+  {
+    id: "19",
+    quote:
+      "Success is walking from failure to failure with no loss of enthusiasm."
+  },
+  {
+    id: "20",
+    quote:
+      "You have to think it before you can do it. The mind is what makes it all possible."
   }
 ];
-const randomQuote = quotesData[Math.floor(Math.random() * quotesData.length)];
+let randomQuote = quotesData[Math.floor(Math.random() * quotesData.length)];
 
 const Quotes = () => {
-  return <p>{randomQuote.quote}</p>;
+  const [quote, setQuote] = useState(randomQuote);
+
+  useEffect(() => {
+    setInterval(() => {
+      randomQuote = quotesData[Math.floor(Math.random() * quotesData.length)];
+      setQuote(randomQuote);
+    }, 5000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return <p>{quote.quote}</p>;
 };
 
 export default Quotes;
