@@ -22,11 +22,12 @@ export const WorkoutStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.2);
     color: #ff8744;
   }
 
