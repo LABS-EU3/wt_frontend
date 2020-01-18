@@ -4,7 +4,7 @@ export const HistoryStyle = styled.div`
   width: 80vw;
   margin: 0 auto;
   margin-bottom: 5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   padding: 1rem 2rem;
   display: flex;
   flex-wrap: wrap;
