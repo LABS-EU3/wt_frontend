@@ -3,7 +3,7 @@
 exports[`<Logo /> renders the Logo component correctly 1`] = `
 <styled.div>
   <Link
-    to="/"
+    to="/login"
   >
     <img
       alt="Logo"
