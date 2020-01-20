@@ -4,15 +4,16 @@ import { useToast, Box, Flex, Button } from "@chakra-ui/core";
 
 import { ExercisesStyle } from "./ExerciseStyle";
 import CustomSpinner from "../common/Spinner";
-import { GET_EXERCISES } from "../../graphql/queries";
+import { GET_EXERCISES, EXERCISES_BY_FIELDS } from "../../graphql/queries";
 import Exercise from "./Exercise";
 
-const Exercises = ({ client }) => {
+const Exercises = ({ client, exerciseQuery, exerciseName }) => {
   const toast = useToast();
 
   const [loading, setLoading] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [limitedExercises, setLimitedExercises] = useState([]);
+  const [limit, setLimit] = useState(3);
 
   const alert = (title, description, status) => {
     toast({
@@ -26,15 +27,34 @@ const Exercises = ({ client }) => {
 
   useEffect(() => {
     setLoading(true);
-    client
-      .query({
+    let promise;
+    if (exerciseQuery === "RECOMENDED_EXERCISES") {
+      promise = client.query({
+        query: EXERCISES_BY_FIELDS,
+        variables: {
+          search: "Beginner",
+          fields: ["difficulty"]
+        }
+      });
+    } else if (exerciseQuery === "TOP_RATED_EXERCISES") {
+      promise = client.query({
+        query: EXERCISES_BY_FIELDS,
+        variables: {
+          search: "9",
+          fields: ["id", "rating", "name", "pictureOne", "equipment"]
+        }
+      });
+    } else {
+      promise = client.query({
         query: GET_EXERCISES
-      })
-      .then(res => {
-        setExercises(res.data.exercises.slice(0, 3));
-        // const arr = res.data.exercises.slice(0, 10);
-        // console.log(arr)
+      });
+    }
 
+    promise
+      .then(res => {
+        setExercises(res.data.exercises);
+        const limitExercises = res.data.exercises.slice(0, limit);
+        setLimitedExercises(limitExercises);
         setLoading(false);
       })
       .catch(err => {
@@ -43,6 +63,13 @@ const Exercises = ({ client }) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const loadMore = () => {
+    const newLimit = limit + 3;
+    const limitExercises = exercises.slice(0, newLimit);
+    setLimitedExercises(limitExercises);
+    setLimit(newLimit);
+  };
 
   if (loading) {
     return (
@@ -59,15 +86,16 @@ const Exercises = ({ client }) => {
     );
   }
 
-  if (exercises.length > 0) {
+  if (limitedExercises.length > 0) {
     return (
       <ExercisesStyle>
-        {exercises.map(exercise => (
+        <h3>{exerciseName}</h3>
+        {limitedExercises.map(exercise => (
           <Exercise exercise={exercise} key={exercise.id} />
         ))}
 
         <div className="load-more">
-          <Button variantColor="#ff8744">Load More</Button>
+          <Button onClick={loadMore}>Load More</Button>
         </div>
       </ExercisesStyle>
     );

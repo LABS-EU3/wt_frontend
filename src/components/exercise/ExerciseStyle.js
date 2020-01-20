@@ -1,16 +1,33 @@
 import styled from "styled-components";
 
+export const ExerciseListStyle = styled.div`
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+  width: 90vw;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 export const ExercisesStyle = styled.div`
   width: 90vw;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   padding: 2rem 0;
 
   @media only screen and (max-width: 500px) {
     width: 95vw;
+  }
+
+  h3 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    padding: 0 2rem;
   }
 
   .search-container {
@@ -32,6 +49,12 @@ export const ExercisesStyle = styled.div`
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+      background-color: #ff8744;
+      color: white;
+    }
   }
 `;
 
@@ -139,7 +162,7 @@ export const ExerciseStyle = styled.div`
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   justify-content: center;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 
   &:hover {
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.2);

@@ -1,17 +1,26 @@
 import React from "react";
 
 import Exercises from "./Exercises";
-import { ExercisesStyle } from "./ExerciseStyle";
+import { ExercisesStyle, ExerciseListStyle } from "./ExerciseStyle";
 import Search from "../common/Search";
 
 const ExerciseList = () => {
   return (
-    <div>
+    <ExerciseListStyle>
       <ExercisesStyle>
         <Search placeholder="Look for a specific exercise" />
-        <Exercises />
+
+        <Exercises
+          exerciseQuery="RECOMENDED_EXERCISES"
+          exerciseName="Recommended Exercises"
+        />
+
+        <Exercises
+          exerciseQuery="TOP_RATED_EXERCISES"
+          exerciseName="Top Rated Exercises"
+        />
       </ExercisesStyle>
-    </div>
+    </ExerciseListStyle>
   );
 };
 
