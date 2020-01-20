@@ -48,6 +48,19 @@ export const getUserDetails = () => {
   }
 };
 
+export const isNewUser = () => {
+  try {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      return null;
+    }
+
+    return userData.isNewUser;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const userOnboardedSuccessfully = () => {
   try {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -59,6 +72,7 @@ export const userOnboardedSuccessfully = () => {
       userData.isNewUser = false;
     }
     localStorage.setItem("userData", JSON.stringify(userData));
+    return true;
   } catch (error) {
     return false;
   }

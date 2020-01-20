@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isLoggedIn, userOnboardedSuccessfully } from "../../utils";
+import { isLoggedIn } from "../../utils";
+import { isNewUser } from "../../utils";
 
 const isValidPath = path => {
   if (path === "/login" || path === "/signup" || path === "/onboarding") {
@@ -12,8 +13,9 @@ const isValidPath = path => {
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isSignedIn = isLoggedIn();
   if (isSignedIn) {
-    const onBoarded = userOnboardedSuccessfully();
-    if (onBoarded || isValidPath(rest.path))
+    const onBoarded = isNewUser();
+
+    if (onBoarded === false || isValidPath(rest.path))
       return <Route {...rest} render={props => <Component {...props} />} />;
     else {
       return <Redirect to="/onboarding" />;

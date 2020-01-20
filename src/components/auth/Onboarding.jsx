@@ -82,13 +82,14 @@ const Onboarding = ({ client, history }) => {
           }
         })
         .then(res => {
-          userOnboardedSuccessfully();
+          userOnboardedSuccessfully("yes");
           alert(
             "Onboarding Completed.",
             "You can now access your dashboard",
             "success"
           );
           history.push("/");
+          window.location.reload();
         })
         .catch(() => {
           alert(
@@ -127,7 +128,7 @@ const Onboarding = ({ client, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (userData.isNewUser === false && userOnboardedSuccessfully()) {
+  if (userData.isNewUser === false) {
     alert("Onboarding already completed.", "Proceed to workout", "warning");
     return <Redirect to="/" />;
   }
