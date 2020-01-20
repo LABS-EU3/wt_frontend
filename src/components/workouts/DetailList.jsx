@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Heading,
-  Text,
-  Box,
-  Stack,
-  Divider,
-  Flex,
-  SimpleGrid
-} from "@chakra-ui/core";
+import { Heading, Text, Box, Divider, Flex } from "@chakra-ui/core";
 
 function DetailList({ value, label }) {
   return (

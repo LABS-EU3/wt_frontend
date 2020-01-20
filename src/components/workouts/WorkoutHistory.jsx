@@ -13,18 +13,24 @@ import {
   ModalCloseButton,
   ModalFooter,
   ModalBody,
-  Button,
-  Progress
+  Button
 } from "@chakra-ui/core";
 
 import CustomSpinner from "../common/Spinner";
 import WorkoutHistoryCard from "./WorkoutHistoryCard";
-import HistoryStyle from "./WorkoutHistoryStyle";
+import {
+  HistoryStyle,
+  ModalFooter as StyledModalFooter,
+  ModalContentArea
+} from "./WorkoutHistoryStyle";
 import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
+import { UPLOAD_PROGRESS_PICTURE } from "../../graphql/mutations";
 
 function WorkoutHistory({ client, history }) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
+  const [uploadId, setUploadId] = useState("");
+  const [uploadFile, setUploadFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -51,12 +57,52 @@ function WorkoutHistory({ client, history }) {
         setIsLoading(false);
         alert(
           "An error occurred.",
-          "Unable to load your completed workouts. Please reload the page and try again",
+          "Unable to load your completed workouts☹️.",
           "error"
         );
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onChange = e => {
+    const file = e.target.files[0];
+    setUploadFile(file);
+  };
+
+  const onOpenUpload = (id, e) => {
+    setUploadId(id);
+    onOpen(e);
+  };
+
+  const onUpload = e => {
+    e.preventDefault();
+    client
+      .mutate({
+        variables: {
+          sessionId: uploadId,
+          file: uploadFile
+        },
+        mutation: UPLOAD_PROGRESS_PICTURE
+      })
+      .then(res => {
+        console.log(res);
+        const { id, picture } = res.data.updateCompletedWorkout;
+        setWorkouts(
+          workouts.map(workout => {
+            if (workout.id === id) return { ...workout, picture };
+            return workout;
+          })
+        );
+        alert("Progress picture uploaded successfully", "🚀", "success");
+      })
+      .catch(err =>
+        alert(
+          "An error occurred.",
+          "Unable to upload your progress picture ☹️.",
+          "error"
+        )
+      );
+  };
 
   if (isLoading) {
     return (
@@ -95,8 +141,8 @@ function WorkoutHistory({ client, history }) {
 
         {workouts.map(workout => (
           <WorkoutHistoryCard
-            onOpen={onOpen}
-            key={workout.workoutId.id}
+            onOpen={e => onOpenUpload(workout.id, e)}
+            key={workout.startDate}
             workout={workout}
             history={history}
           />
@@ -108,27 +154,24 @@ function WorkoutHistory({ client, history }) {
             <ModalHeader>Upload your progress picture </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Progress />
-              <Box
-                maxW="sm"
-                borderWidth="1px"
-                rounded="lg"
-                overflow="hidden"
-                height="150px"
-              >
-                Drag files here or browse
-              </Box>
+              <ModalContentArea>
+                <input type="file" name="Uplad" onChange={onChange} />
+              </ModalContentArea>
             </ModalBody>
             <ModalFooter>
-              <Button variant="orange">Save</Button>
-              <Button
-                variantColor="orange"
-                variant="outline"
-                mr={3}
-                onClick={onClose}
-              >
-                Cancel
-              </Button>
+              <StyledModalFooter>
+                <Button variantColor="green" onClick={onUpload}>
+                  Save
+                </Button>
+                <Button
+                  variantColor="orange"
+                  variant="outline"
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Cancel
+                </Button>
+              </StyledModalFooter>
             </ModalFooter>
           </ModalContent>
         </Modal>

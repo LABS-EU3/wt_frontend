@@ -4,7 +4,7 @@ import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
+import { createUploadLink } from "apollo-upload-client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { setContext } from "apollo-link-context";
 import ReactGA from "react-ga";
@@ -21,8 +21,12 @@ const { REACT_APP_GOOGLE_ANALYTICS_KEY, REACT_APP_GraphQL_API } = process.env;
 ReactGA.initialize(REACT_APP_GOOGLE_ANALYTICS_KEY);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
-const cache = new InMemoryCache();
-const link = new HttpLink({
+const cache = new InMemoryCache({
+  dataIdFromObject: object => {
+    return Math.random();
+  }
+});
+const link = new createUploadLink({
   uri: REACT_APP_GraphQL_API
 });
 

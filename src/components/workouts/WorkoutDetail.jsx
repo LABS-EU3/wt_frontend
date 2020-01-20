@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
-import { FaPlayCircle, FaStopCircle } from "react-icons/fa";
+import { Redirect } from "react-router-dom";
+import ReactPlayer from "react-player";
 
+import { WorkoutDetailStyle } from "./WorkoutStyle";
 import SideTitle from "../common/SideTitle";
 import DetailList from "./DetailList";
 import {
   Flex,
   Box,
-  Image,
   Text,
   Stack,
   Heading,
@@ -17,13 +18,13 @@ import {
   AccordionHeader,
   AccordionPanel,
   AccordionIcon,
-  Button,
-  ButtonGroup
+  useToast
 } from "@chakra-ui/core";
 
 import CustomSpinner from "../common/Spinner";
 import { GET_WORKOUT_DETAIL } from "../../graphql/queries";
 import { useRouteMatch } from "react-router-dom";
+import WorkoutActionItems from "./WorkoutActionItems";
 
 function WorkoutDetail({ client }) {
   const [data, setServerData] = useState([]);
@@ -31,6 +32,17 @@ function WorkoutDetail({ client }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const match = useRouteMatch();
+  const toast = useToast();
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
   useEffect(() => {
     client
@@ -48,6 +60,7 @@ function WorkoutDetail({ client }) {
         setIsLoading(false);
         setError(true);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
@@ -65,122 +78,90 @@ function WorkoutDetail({ client }) {
     );
   }
 
+  if (error) {
+    alert("An error occurred.", "Unable to load workout detail", "error");
+    return <Redirect to="/workouts" />;
+  }
+
   const {
     name,
     intensity,
-    type,
+    types,
     description,
     avgTime,
     equipment,
     muscles,
-    exercises
+    exercises,
+    picture
   } = data;
 
   return (
-    <Box marginY="30px">
-      <Flex alignItems="start" justifyContent="space-around">
-        <Box maxWidth="40%">
+    <WorkoutDetailStyle>
+      <div className="workout">
+        <div className="workout-detail">
           <SideTitle heading={name} size="lg" />
           <DetailList label="Average Time" value={avgTime} />
           <DetailList label="Intensity" value={intensity} />
-          <DetailList label="Types" value={type} />
+          <DetailList label="Types" value={types} />
           <DetailList label="Equipment" value={equipment} />
           <DetailList label="Muscles" value={muscles} />
           <Text textAlign="left" marginY="30px">
             {description}
           </Text>
-        </Box>
-        <Image
-          src="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-          height="500px"
-          width="100%"
-          maxWidth="600px"
-          objectFit="cover"
-          marginBottom="12px"
-        />
-      </Flex>
+        </div>
+
+        <div className="workout-image">
+          <img src={picture} alt="workout" />
+        </div>
+      </div>
+
       <Heading size="md" marginTop="60px" textAlign="center">
         Check the description and video instructions of an exercise and start
         working out!
       </Heading>
 
-      <ButtonGroup spacing={4} textAlign="left" marginY="30px">
-        <Button
-          rightIcon={FaPlayCircle}
-          variantColor="green"
-          variant="solid"
-          size="lg"
-        >
-          Start
-        </Button>
-        <Button
-          rightIcon={FaStopCircle}
-          variantColor="red"
-          variant="outline"
-          size="lg"
-        >
-          Stop
-        </Button>
-      </ButtonGroup>
+      <WorkoutActionItems timer={20} exercises={exercises} workout={data} />
+
       <Accordion>
         {exercises &&
           exercises.map(exercise => (
             <AccordionItem key={exercise.id}>
               <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
-                <Image
-                  src={exercise.pictureOne}
-                  height="100px"
-                  objectFit="cover"
-                  minWidth="200px"
-                  paddingRight="50px"
-                />
-                <Box flex="1" textAlign="left">
-                  <Text fontWeight="800">{exercise.name}</Text>
-                  <Stack isInline spacing={8}>
-                    <Text>{exercise.muscle}</Text>
-                    <Text>{exercise.time}s</Text>
-                  </Stack>
-                </Box>
+                <div className="exercise-preview">
+                  <img src={exercise.pictureOne} alt={exercise.name} />
+
+                  <div className="exercise-preview-detail">
+                    <Text fontWeight="800">{exercise.name}</Text>
+                    <Stack isInline spacing={8}>
+                      <Text>{exercise.muscle}</Text>
+                      <Text>{exercise.time}s</Text>
+                    </Stack>
+                  </div>
+                </div>
 
                 <AccordionIcon />
               </AccordionHeader>
               <AccordionPanel pb={4}>
-                <Flex justifyContent="space-around" alignItems="center">
-                  <Text textAlign="left" maxWidth="50%">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </Text>
+                <div className="exercise">
+                  <div className="exercise-detail">
+                    <Text>{exercise.description}</Text>
+                  </div>
 
-                  <Box
-                    as="video"
-                    height="300px"
-                    width="100%"
-                    maxWidth="400px"
-                    controls
-                  >
-                    <source src={exercise.video} type="video/mp4" />
-                  </Box>
-                </Flex>
+                  <div className="exercise-video">
+                    <ReactPlayer width="100%" url={exercise.video} controls />
+                  </div>
+                </div>
               </AccordionPanel>
             </AccordionItem>
           ))}
       </Accordion>
-    </Box>
+    </WorkoutDetailStyle>
   );
 }
 
 //adding proptypes
 WorkoutDetail.propTypes = {
-  name: PropTypes.string.isRequired,
-  intensity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  avgTime: PropTypes.number.isRequired,
-  equipment: PropTypes.string.isRequired,
-  muscles: PropTypes.string.isRequired,
-  exercises: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired
 };
 
 export default withApollo(WorkoutDetail);

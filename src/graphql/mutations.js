@@ -72,3 +72,94 @@ export const ONBOARDING = gql`
     }
   }
 `;
+
+export const UPLOAD_PROGRESS_PICTURE = gql`
+  mutation($sessionId: String!, $file: Upload!) {
+    updateCompletedWorkout(input: { sessionId: $sessionId, file: $file }) {
+      id
+      picture
+    }
+  }
+`;
+
+export const START_WORKOUT = gql`
+  mutation workoutSession(
+    $userId: String!
+    $workoutId: String!
+    $exerciseId: String!
+    $exerciseTimer: Float!
+  ) {
+    workoutSession(
+      input: {
+        userId: $userId
+        workoutId: $workoutId
+        exerciseId: $exerciseId
+        exerciseTimer: $exerciseTimer
+      }
+    ) {
+      userId
+      workoutId {
+        id
+        name
+      }
+      startDate
+      endDate
+      pause
+    }
+  }
+`;
+
+export const END_WORKOUT = gql`
+  mutation workoutSession(
+    $userId: String!
+    $workoutId: String!
+    $exerciseId: String!
+    $exerciseTimer: Float!
+    $end: Boolean!
+  ) {
+    workoutSession(
+      input: {
+        userId: $userId
+        workoutId: $workoutId
+        exerciseId: $exerciseId
+        exerciseTimer: $exerciseTimer
+        end: $end
+      }
+    ) {
+      userId
+      workoutId {
+        id
+        name
+      }
+      startDate
+      endDate
+      pause
+    }
+  }
+`;
+
+export const SCHEDULE_WORKOUT = gql`
+  mutation scheduleWorkout(
+    $workoutId: String!
+    $startDate: Float!
+    $reminderTime: Float!
+    $routine: String!
+  ) {
+    scheduleWorkout(
+      input: {
+        workoutId: $workoutId
+        startDate: $startDate
+        reminderTime: $reminderTime
+        routine: $routine
+      }
+    ) {
+      id
+      userId
+      workoutId {
+        id
+      }
+      startDate
+      routine
+    }
+  }
+`;

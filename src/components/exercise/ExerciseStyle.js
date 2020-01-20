@@ -6,8 +6,12 @@ export const ExercisesStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   padding: 2rem 0;
+
+  @media only screen and (max-width: 500px) {
+    width: 95vw;
+  }
 
   .search-container {
     border: 1px solid red;
@@ -36,6 +40,10 @@ export const ExerciseDetailStyle = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
+  @media only screen and (max-width: 500px) {
+    width: 95vw;
+  }
+
   .exerciseCard-header {
     text-align: left;
     padding: 0.5rem 0;
@@ -52,7 +60,6 @@ export const ExerciseDetailStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    /* opacity: 0.8; */
     margin: 1rem 0;
     justify-content: center;
     img {
@@ -105,12 +112,16 @@ export const ExerciseDetailStyle = styled.div`
     }
   }
 
-  .excercise-video {
+  .exercise-video {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
     margin: 1rem 0;
+
+    div {
+      width: 100%;
+    }
   }
 `;
 
@@ -119,11 +130,14 @@ export const ExerciseStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.2);
+    color: #ff8744;
   }
 
   @media only screen and (max-width: 1000px) {
@@ -134,12 +148,16 @@ export const ExerciseStyle = styled.div`
     width: 75%;
   }
 
+  @media only screen and (max-width: 500px) {
+    width: 95%;
+  }
+
   img {
     width: 100%;
     height: 250px;
   }
 
-  .excersie-detail {
+  .exersie-detail {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -151,7 +169,7 @@ export const ExerciseStyle = styled.div`
       font-family: "Ubuntu";
     }
 
-    .excercise-ratings {
+    .exercise-ratings {
       i {
         color: #ff8744;
         padding: 0 0.3rem;
@@ -159,7 +177,7 @@ export const ExerciseStyle = styled.div`
     }
   }
 
-  .excercise-equipment {
+  .exercise-equipment {
     padding: 0 0.5rem;
     display: flex;
     p {

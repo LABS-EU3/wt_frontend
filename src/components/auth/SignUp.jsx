@@ -17,6 +17,8 @@ const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function SignUp({ client, history }) {
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const toast = useToast();
 
   const alert = (title, description, status) => {
@@ -63,6 +65,7 @@ function SignUp({ client, history }) {
     }),
 
     onSubmit: value => {
+      setLoading(true);
       client
         .mutate({
           mutation: SIGNUP_MUTATION,
@@ -80,9 +83,11 @@ function SignUp({ client, history }) {
             "Login with account details.",
             "success"
           );
+          setLoading(false);
           history.push("/login");
         })
         .catch(error => {
+          setLoading(false);
           alert("Error Sigin you up", error.graphQLErrors[0].message, "error");
         });
     }
@@ -224,6 +229,7 @@ function SignUp({ client, history }) {
               variantColor="orange"
               rightIcon="arrow-forward"
               size="lg"
+              isLoading={loading}
             >
               Sign up
             </Button>

@@ -169,7 +169,7 @@ const Onboarding = ({ client, history }) => {
             <h2>Preferences</h2>
 
             <div className="body-status">
-              <p>Which weight measurement unit do you prefer?</p>
+              <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
                 name="heightUnit"
                 className="btnGroup"
@@ -192,7 +192,7 @@ const Onboarding = ({ client, history }) => {
               </RadioButtonGroup>
               <span>{formik.errors.heightUnit}</span>
 
-              <p>Which height measurement unit do you prefer?</p>
+              <p>Which weight measurement unit do you prefer?</p>
               <RadioButtonGroup
                 name="weightUnit"
                 className="btnGroup"

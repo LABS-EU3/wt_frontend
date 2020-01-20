@@ -1,22 +1,18 @@
 import React from "react";
 
-import Excercises from "./Exercises";
+import Exercises from "./Exercises";
 import { ExercisesStyle } from "./ExerciseStyle";
 import Search from "../common/Search";
 
-function Exercises() {
+const ExerciseList = () => {
   return (
     <div>
       <ExercisesStyle>
-        <Search />
-        <Excercises />
-        {/* <div className="recommendations-container">
-          <p>See recommended exercises</p>
-          <p>These exercises were suggested based on your current progress</p>
-        </div> */}
+        <Search placeholder="Look for a specific exercise" />
+        <Exercises />
       </ExercisesStyle>
     </div>
   );
-}
+};
 
-export default Exercises;
+export default ExerciseList;

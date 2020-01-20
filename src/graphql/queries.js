@@ -50,6 +50,7 @@ export const GET_WORKOUT_DETAILS = gql`
       intensity
       types
       id
+      picture
     }
   }
 `;
@@ -60,10 +61,15 @@ export const GET_WORKOUT_DETAIL = gql`
       name
       intensity
       types
+      id
       description
       avgTime
       equipment
+      session {
+        pause
+      }
       muscles
+      picture
       exercises {
         id
         video
@@ -73,6 +79,7 @@ export const GET_WORKOUT_DETAIL = gql`
         rating
         equipment
         type
+        description
         muscle
         name
         time
@@ -112,6 +119,65 @@ export const GET_EXERCISE = gql`
       type
       muscle
       name
+      description
+    }
+  }
+`;
+
+export const GET_RECOMMENDED_WORKOUTS = gql`
+  query {
+    suggestionsByExperience {
+      id
+      name
+      picture
+      experience
+    }
+  }
+`;
+
+export const GET_SCHEDULE = gql`
+  query {
+    userSchedule {
+      id
+      userId
+      workoutId {
+        name
+      }
+      startDate
+      routine
+    }
+  }
+`;
+
+export const GET_DASHBOARD_DETAILS = gql`
+  query {
+    dashboard {
+      graphs {
+        name
+        data {
+          date
+          value
+        }
+      }
+      stats {
+        reps
+        sets
+        amountLifted
+      }
+      streak
+      user {
+        id
+        firstname
+        goal
+        height
+        weight
+        heightUnit {
+          name
+        }
+        weightUnit {
+          name
+        }
+      }
     }
   }
 `;

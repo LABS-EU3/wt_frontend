@@ -2,9 +2,13 @@
 
 exports[`<Logo /> renders the Logo component correctly 1`] = `
 <styled.div>
-  <img
-    alt="Logo"
-    src="logo.png"
-  />
+  <Link
+    to="/"
+  >
+    <img
+      alt="Logo"
+      src="logo.png"
+    />
+  </Link>
 </styled.div>
 `;
