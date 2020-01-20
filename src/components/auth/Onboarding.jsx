@@ -127,7 +127,7 @@ const Onboarding = ({ client, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (userData.isNewUser === false) {
+  if (userData.isNewUser === false && userOnboardedSuccessfully()) {
     alert("Onboarding already completed.", "Proceed to workout", "warning");
     return <Redirect to="/" />;
   }
