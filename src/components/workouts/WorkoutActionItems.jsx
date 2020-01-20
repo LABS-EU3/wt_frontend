@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
@@ -25,7 +25,11 @@ import {
   ModalContentArea
 } from "./WorkoutHistoryStyle";
 
-import { START_WORKOUT, END_WORKOUT } from "../../graphql/mutations";
+import {
+  START_WORKOUT,
+  PAUSE_WORKOUT,
+  END_WORKOUT
+} from "../../graphql/mutations";
 import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
@@ -35,8 +39,9 @@ const StyledWorkoutItems = styled.div`
   flex-wrap: wrap;
   width: 100%;
 
-  /* position: sticky;
-  top: 0; */
+  position: sticky;
+  top: 0;
+  background-color: #fff;
 
   button {
     margin: 1rem;
@@ -50,7 +55,7 @@ const StyledWorkoutItems = styled.div`
   }
 `;
 
-const WorkoutActionItems = ({ client, exercises, workout }) => {
+const WorkoutActionItems = ({ client, workout, timerExercise }) => {
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");
@@ -60,6 +65,7 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [date, setDate] = useState(false);
   const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [currTime, setCurrTime] = useState(0); // used on timer component
 
   const alert = (title, description, status) => {
     toast({
@@ -71,15 +77,27 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
     });
   };
 
+  const getExerciseIndexById = id => {
+    const exerciseIds = Object.values(workout.exercises).map(
+      exercise => exercise.id
+    );
+    return exerciseIds.indexOf(timerExercise.current);
+  };
+
+  const getCurrentExercise = () => {
+    return workout.exercises[getExerciseIndexById(timerExercise.current)];
+  };
+
   const handleStart = () => {
+    const currentExercise = getCurrentExercise();
     client
       .mutate({
         mutation: START_WORKOUT,
         variables: {
           userId: userData.user_id,
           workoutId: workout.id,
-          exerciseId: exercises[0].id,
-          exerciseTimer: exercises[0].time
+          exerciseId: currentExercise.id,
+          exerciseTimer: currentExercise.time
         }
       })
       .then(res => {
@@ -94,37 +112,64 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   };
 
   const handlePause = () => {
+    const currentExercise = getCurrentExercise();
     setStart("isVisible");
     setPause("isHidden");
     setStop("isVisible");
+    client
+      .mutate({
+        mutation: PAUSE_WORKOUT,
+        variables: {
+          userId: userData.user_id,
+          workoutId: workout.id,
+          exerciseId: currentExercise.id,
+          exerciseTimer: currTime,
+          pause: true
+        }
+      })
+      .then(res => {
+        alert("Workout paused!", "🏋🏾‍♀️", "success");
+      })
+      .catch(error => {
+        console.log(error);
+        alert("An error occurred.", "Unable to pause workout ☹️", "error");
+      });
   };
 
   const handleStop = () => {
+    const currentExercise = getCurrentExercise();
+    setStart("isVisible");
+    setPause("isHidden");
+    setStop("isHidden");
+    console.log({
+      userId: userData.user_id,
+      workoutId: workout.id,
+      exerciseId: currentExercise.id,
+      exerciseTimer: currTime,
+      end: true
+    });
     client
       .mutate({
         mutation: END_WORKOUT,
         variables: {
           userId: userData.user_id,
           workoutId: workout.id,
-          exerciseId: exercises[0].id,
-          exerciseTimer: exercises[0].time,
+          exerciseId: currentExercise.id,
+          exerciseTimer: currentExercise.time,
           end: true
         }
       })
       .then(res => {
-        setStart("isVisible");
-        setPause("isHidden");
-        setStop("isHidden");
-        alert("Workout ended", "🏋🏾‍♀️", "success");
+        alert("Workout ended!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
+        console.log(error);
         alert("An error occurred.", "Unable to stop workout ☹️", "error");
       });
   };
 
   const scheduleWorkout = () => {
     let dateTime = `${date} ${time}`;
-
     const startTime = new Date(dateTime).getTime();
     client
       .mutate({
@@ -142,6 +187,47 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       })
       .catch(err => alert("Unable to schedule workout", "☹️", "error"));
   };
+
+  useEffect(() => {
+    let updateTimer;
+    const currentExercise = getCurrentExercise();
+    console.log("current exercise", timerExercise.current, start, pause, stop);
+    if (start === "isHidden") {
+      if (currTime < currentExercise.time) {
+        console.log("timer", currTime);
+        updateTimer = setTimeout(() => {
+          setCurrTime(currTime => currTime + 1);
+        }, 1000);
+      } else {
+        clearTimeout(updateTimer);
+        const currIndex = getExerciseIndexById(timerExercise.current);
+        if (currIndex < workout.exercises.length) {
+          // go to next exercise
+          console.log("next exercise");
+          timerExercise.current = workout.exercises[currIndex + 1].id;
+          // scroll to timerExercise div
+          console.log("scroll to exercise", timerExercise);
+          // open timerExercise div
+          console.log("open exercise and start over");
+          // continue timer
+          setCurrTime(currTime => 0);
+        } else {
+          alert("Workout completed!", "🚀", "success");
+        }
+      }
+    } else {
+      clearTimeout(updateTimer);
+    }
+    return () => clearTimeout(updateTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timerExercise, start, pause, stop, currTime]);
+
+  useEffect(() => {
+    setStart(workout.session.startDate ? "isVisible" : "isHidden");
+    setPause(workout.session.endDate ? "isVisible" : "isHidden");
+    setStop(workout.session.pause ? "isVisible" : "isHidden");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StyledWorkoutItems>

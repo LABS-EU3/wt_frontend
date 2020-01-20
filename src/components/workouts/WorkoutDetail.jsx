@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
@@ -27,9 +27,10 @@ import { useRouteMatch } from "react-router-dom";
 import WorkoutActionItems from "./WorkoutActionItems";
 
 function WorkoutDetail({ client }) {
-  const [data, setServerData] = useState([]);
+  const [workout, setWorkout] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [timerExercise, setTimerExercise] = useState(null);
 
   const match = useRouteMatch();
   const toast = useToast();
@@ -53,7 +54,10 @@ function WorkoutDetail({ client }) {
         }
       })
       .then(res => {
-        setServerData(res.data.workout);
+        setWorkout(res.data.workout);
+        setTimerExercise(
+          workout.session ? workout.session.exerciseId : workout.exercises[0].id
+        );
         setIsLoading(false);
       })
       .catch(err => {
@@ -93,7 +97,7 @@ function WorkoutDetail({ client }) {
     muscles,
     exercises,
     picture
-  } = data;
+  } = workout;
 
   return (
     <WorkoutDetailStyle>
@@ -120,9 +124,13 @@ function WorkoutDetail({ client }) {
         working out!
       </Heading>
 
-      <WorkoutActionItems timer={20} exercises={exercises} workout={data} />
+      <WorkoutActionItems
+        setTimerExercise={setTimerExercise}
+        timerExercise={timerExercise}
+        workout={workout}
+      />
 
-      <Accordion>
+      <Accordion activeKey={timerExercise}>
         {exercises &&
           exercises.map(exercise => (
             <AccordionItem key={exercise.id}>
