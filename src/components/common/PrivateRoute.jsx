@@ -3,12 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { isLoggedIn, userOnboardedSuccessfully } from "../../utils";
 
 const isValidPath = path => {
-  if (
-    path === "/" ||
-    path === "/login" ||
-    path === "/signup" ||
-    path === "/onboarding"
-  ) {
+  if (path === "/login" || path === "/signup" || path === "/onboarding") {
     return true;
   } else {
     return false;
