@@ -8,7 +8,7 @@ const WorkoutList = () => {
   return (
     <WorkoutsStyleList>
       <Search placeholder="Look for a specific workout" />
-      <Workouts workoutName="Custom Workout" />
+      <Workouts workoutName="New Workouts" />
     </WorkoutsStyleList>
   );
 };

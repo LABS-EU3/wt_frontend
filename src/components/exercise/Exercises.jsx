@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import { useToast, Box, Flex, Button } from "@chakra-ui/core";
+import { Redirect } from "react-router-dom";
 
 import { ExercisesStyle } from "./ExerciseStyle";
 import CustomSpinner from "../common/Spinner";
@@ -14,6 +15,7 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
   const [exercises, setExercises] = useState([]);
   const [limitedExercises, setLimitedExercises] = useState([]);
   const [limit, setLimit] = useState(3);
+  const [error, setError] = useState(false);
 
   const alert = (title, description, status) => {
     toast({
@@ -65,8 +67,8 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
         setLoading(false);
       })
       .catch(err => {
-        alert("An error occurred.", "Unable to load exercises", "error");
         setLoading(false);
+        setError(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -83,6 +85,11 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
     setLimitedExercises(limitExercises);
     setLimit(newLimit);
   };
+
+  if (error) {
+    alert("An error occurred.", "Unable to load exercises", "error");
+    return <Redirect to="/" />;
+  }
 
   if (loading) {
     return (

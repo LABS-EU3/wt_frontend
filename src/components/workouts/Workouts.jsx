@@ -9,11 +9,13 @@ import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
 
-function Workouts({ client, workoutName }) {
+function Workouts({ client, workoutName, workoutQuery }) {
   const toast = useToast();
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [limitedWorkouts, setLimitedWorkouts] = useState([]);
+  const [limit, setLimit] = useState(3);
 
   const alert = (title, description, status) => {
     toast({
@@ -26,12 +28,19 @@ function Workouts({ client, workoutName }) {
   };
 
   useEffect(() => {
-    client
-      .query({
+    let promise;
+    if (workoutQuery === "NORMAL") {
+    } else {
+      promise = client.query({
         query: GET_WORKOUT_DETAILS
-      })
+      });
+    }
+
+    promise
       .then(res => {
+        let limitWorkouts = res.data.workouts.slice(0, limit);
         setData(res.data.workouts);
+        setLimitedWorkouts(limitWorkouts);
         setIsLoading(false);
       })
       .catch(err => {
@@ -42,15 +51,15 @@ function Workouts({ client, workoutName }) {
   }, []);
 
   const loadMore = () => {
-    // const newLimit = limit + 3;
-    // let limitExercises = exercises.slice(0, newLimit);
+    const newLimit = limit + 3;
+    let limitWorkouts = data.slice(0, newLimit);
     // if (exerciseQuery === "TOP_RATED_EXERCISES") {
     //   limitExercises = limitExercises.sort(
     //     (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
     //   );
     // }
-    // setLimitedExercises(limitExercises);
-    // setLimit(newLimit);
+    setLimitedWorkouts(limitWorkouts);
+    setLimit(newLimit);
   };
 
   if (isLoading) {
@@ -72,11 +81,12 @@ function Workouts({ client, workoutName }) {
     alert("An error occurred.", "Unable to load workouts", "error");
     return <Redirect to="/" />;
   }
-  if (data.length > 0) {
+
+  if (limitedWorkouts.length > 0) {
     return (
       <WorkoutsStyle>
         <h3>{workoutName}</h3>
-        {data.map(item => (
+        {limitedWorkouts.map(item => (
           <WorkoutCard key={item.id} data={item} />
         ))}
 
