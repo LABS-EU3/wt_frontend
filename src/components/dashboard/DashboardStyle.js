@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const DashboardStyle = styled.div`
   width: 95vw;
-  margin: 0 auto;
+  margin: 1rem auto;
   display: flex;
   flex-wrap: wrap;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);

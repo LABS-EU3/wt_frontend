@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import { useToast, Box, Flex } from "@chakra-ui/core";
+import { useToast, Box, Flex, Button } from "@chakra-ui/core";
 
 import { ExercisesStyle } from "./ExerciseStyle";
 import CustomSpinner from "../common/Spinner";
@@ -12,6 +12,7 @@ const Exercises = ({ client }) => {
 
   const [loading, setLoading] = useState(false);
   const [exercises, setExercises] = useState([]);
+  const [limitedExercises, setLimitedExercises] = useState([]);
 
   const alert = (title, description, status) => {
     toast({
@@ -30,7 +31,10 @@ const Exercises = ({ client }) => {
         query: GET_EXERCISES
       })
       .then(res => {
-        setExercises(res.data.exercises);
+        setExercises(res.data.exercises.slice(0, 3));
+        // const arr = res.data.exercises.slice(0, 10);
+        // console.log(arr)
+
         setLoading(false);
       })
       .catch(err => {
@@ -61,6 +65,10 @@ const Exercises = ({ client }) => {
         {exercises.map(exercise => (
           <Exercise exercise={exercise} key={exercise.id} />
         ))}
+
+        <div className="load-more">
+          <Button variantColor="#ff8744">Load More</Button>
+        </div>
       </ExercisesStyle>
     );
   }

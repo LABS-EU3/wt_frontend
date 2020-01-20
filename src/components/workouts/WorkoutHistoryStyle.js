@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HistoryStyle = styled.div`
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   margin-bottom: 5rem;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);

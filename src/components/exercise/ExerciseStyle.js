@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ExercisesStyle = styled.div`
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -26,6 +26,12 @@ export const ExercisesStyle = styled.div`
       color: grey;
       padding: 0.2rem 0;
     }
+  }
+
+  .load-more {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
   }
 `;
 
