@@ -107,7 +107,6 @@ function Login({ client, history }) {
   }, []);
 
   if (loginSuccess) {
-    console.log(loginSuccess);
     history.push(loginSuccess);
     window.location.reload();
   }
@@ -205,8 +204,9 @@ function Login({ client, history }) {
               <Checkbox
                 size="md"
                 variantColor="orange"
-                onSelect={formik.handleChange}
-                value={true}
+                onChange={() =>
+                  formik.setFieldValue("remember", !formik.values.remember)
+                }
               >
                 Remember me
               </Checkbox>
