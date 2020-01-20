@@ -1,19 +1,42 @@
 import styled from "styled-components";
 
-export const WorkoutsStyle = styled.div`
+export const WorkoutsStyleList = styled.div`
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   width: 90vw;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const WorkoutsStyle = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   padding: 2rem 0;
 
-  .more {
+  h3 {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    padding: 0 2rem;
+  }
+
+  .load-more {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
     justify-content: center;
+    margin: 1rem 0;
+
+    button {
+      background-color: #ff8744;
+      color: white;
+    }
   }
 `;
 
@@ -41,6 +64,14 @@ export const WorkoutStyle = styled.div`
 
   @media only screen and (max-width: 710px) {
     width: 65%;
+  }
+
+  @media only screen and (max-width: 550px) {
+    width: 85%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 95%;
   }
 
   img {

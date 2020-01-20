@@ -181,3 +181,21 @@ export const GET_DASHBOARD_DETAILS = gql`
     }
   }
 `;
+
+export const EXERCISES_BY_FIELDS = gql`
+  query exercises($search: String!, $fields: [String!]!) {
+    exercises(input: { search: $search, fields: $fields }) {
+      id
+      video
+      difficulty
+      pictureOne
+      pictureTwo
+      rating
+      equipment
+      type
+      muscle
+      name
+      time
+    }
+  }
+`;

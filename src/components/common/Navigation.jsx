@@ -43,7 +43,7 @@ const Navigation = ({ location }) => {
 
   const logout = () => {
     localStorage.removeItem("userData");
-    alert("Logged out successfully", "Expecting you soon 😀", "success");
+    alert("Logged out successfully", "Come back soon 😀", "success");
     setTimeout(() => {
       window.location.reload();
     }, 1000);
