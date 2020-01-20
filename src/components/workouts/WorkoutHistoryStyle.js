@@ -4,7 +4,7 @@ export const HistoryStyle = styled.div`
   width: 80vw;
   margin: 0 auto;
   margin-bottom: 5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   padding: 1rem 2rem;
   display: flex;
   flex-wrap: wrap;
@@ -75,6 +75,68 @@ export const ModalContentArea = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 0.8rem;
+
+  .schedule {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .calendar {
+      width: 55%;
+
+      .react-calendar {
+        width: 100%;
+      }
+    }
+
+    .time {
+      width: 40%;
+      border: 1px solid #ccc5b9;
+    }
+
+    .schedule-content {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: flex-start;
+      margin: 1rem 0;
+      flex-direction: column;
+      padding: 1rem;
+
+      .routine {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+
+        p {
+          padding-right: 1rem;
+        }
+      }
+
+      .notification {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        p {
+          padding-right: 1rem;
+        }
+
+        input {
+          border: 1px solid black;
+          width: 40px;
+          text-align: center;
+          margin-right: 1rem;
+        }
+
+        select {
+        }
+      }
+    }
+  }
 `;
 
 export const WorkoutHistoryCard = styled.div`

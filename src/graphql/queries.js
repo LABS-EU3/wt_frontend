@@ -123,3 +123,61 @@ export const GET_EXERCISE = gql`
     }
   }
 `;
+
+export const GET_RECOMMENDED_WORKOUTS = gql`
+  query {
+    suggestionsByExperience {
+      id
+      name
+      picture
+      experience
+    }
+  }
+`;
+
+export const GET_SCHEDULE = gql`
+  query {
+    userSchedule {
+      id
+      userId
+      workoutId {
+        name
+      }
+      startDate
+      routine
+    }
+  }
+`;
+
+export const GET_DASHBOARD_DETAILS = gql`
+  query {
+    dashboard {
+      graphs {
+        name
+        data {
+          date
+          value
+        }
+      }
+      stats {
+        reps
+        sets
+        amountLifted
+      }
+      streak
+      user {
+        id
+        firstname
+        goal
+        height
+        weight
+        heightUnit {
+          name
+        }
+        weightUnit {
+          name
+        }
+      }
+    }
+  }
+`;

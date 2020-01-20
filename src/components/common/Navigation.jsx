@@ -22,7 +22,7 @@ const StyledNavigation = styled.div`
     margin-bottom: 1rem 0;
     padding: 1rem 2rem;
     background-color: white;
-    box-shadow: 0px 0px 5px 0px #ff8744;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
     margin-bottom: 3rem;
   }
 `;
