@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
+import {
+  Button,
+  RadioButtonGroup,
+  useToast,
+  Box,
+  Flex,
+  Input
+} from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import PropTypes from "prop-types";
@@ -39,7 +46,9 @@ const Onboarding = ({ client, history }) => {
       equipment: "",
       experience: "",
       heightUnit: "",
-      weightUnit: ""
+      weightUnit: "",
+      height: "",
+      weight: ""
     },
     validationSchema: yup.object().shape({
       goal: yup.string().required("Please select your workout goal"),
@@ -52,7 +61,9 @@ const Onboarding = ({ client, history }) => {
         .required("Please select your workout preferred height unit"),
       weightUnit: yup
         .string()
-        .required("Please select your workout preferred weight unit")
+        .required("Please select your workout preferred weight unit"),
+      weight: yup.number().required("Please enter your weight"),
+      height: yup.number().required("Please enter your height")
     }),
 
     onSubmit: value => {
@@ -65,7 +76,9 @@ const Onboarding = ({ client, history }) => {
             weightUnit: value.weightUnit,
             goal: value.goal,
             experience: value.experience,
-            equipment: JSON.parse(value.equipment)
+            equipment: JSON.parse(value.equipment),
+            weight: value.weight,
+            height: value.height
           }
         })
         .then(res => {
@@ -114,7 +127,7 @@ const Onboarding = ({ client, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (userData.isNewUser === false) {
+  if (userData.isNewUser === false && userOnboardedSuccessfully()) {
     alert("Onboarding already completed.", "Proceed to workout", "warning");
     return <Redirect to="/" />;
   }
@@ -168,6 +181,17 @@ const Onboarding = ({ client, history }) => {
           <form onSubmit={formik.handleSubmit}>
             <h2>Preferences</h2>
 
+            <p>What is your height?</p>
+            <Input
+              name="height"
+              error={formik.errors.height}
+              value={formik.values.height}
+              onChange={formik.handleChange}
+              type="number"
+              bg="#fffcf2"
+              focusBorderColor="#dd6b20"
+            />
+
             <div className="body-status">
               <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
@@ -191,6 +215,17 @@ const Onboarding = ({ client, history }) => {
                 ))}
               </RadioButtonGroup>
               <span>{formik.errors.heightUnit}</span>
+
+              <p>What is your weight?</p>
+              <Input
+                name="weight"
+                error={formik.errors.weight}
+                value={formik.values.weight}
+                onChange={formik.handleChange}
+                type="number"
+                bg="#fffcf2"
+                focusBorderColor="#dd6b20"
+              />
 
               <p>Which weight measurement unit do you prefer?</p>
               <RadioButtonGroup
