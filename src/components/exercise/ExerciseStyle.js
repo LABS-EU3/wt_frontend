@@ -56,6 +56,13 @@ export const ExercisesStyle = styled.div`
       color: white;
     }
   }
+
+  .line {
+    margin: 1rem;
+    min-height: 1px;
+    width: 100%;
+    border-bottom: 1px solid grey;
+  }
 `;
 
 export const ExerciseDetailStyle = styled.div`
