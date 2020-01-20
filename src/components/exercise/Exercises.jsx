@@ -59,7 +59,7 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
             (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
           );
         }
-        console.log(limitExercises, "limitedsorted");
+
         setExercises(res.data.exercises);
         // limitExercises = res.data.exercises.slice(0, limit);
         setLimitedExercises(limitExercises);
