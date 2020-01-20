@@ -15,8 +15,6 @@ const ExerciseList = () => {
           exerciseName="Recommended Exercises"
         />
 
-        {/* <div className="line"></div> */}
-
         <Exercises
           exerciseQuery="TOP_RATED_EXERCISES"
           exerciseName="Top Rated Exercises"

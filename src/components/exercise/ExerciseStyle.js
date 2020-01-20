@@ -10,7 +10,7 @@ export const ExerciseListStyle = styled.div`
 `;
 
 export const ExercisesStyle = styled.div`
-  width: 90vw;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -55,13 +55,6 @@ export const ExercisesStyle = styled.div`
       background-color: #ff8744;
       color: white;
     }
-  }
-
-  .line {
-    margin: 1rem;
-    min-height: 1px;
-    width: 100%;
-    border-bottom: 1px solid grey;
   }
 `;
 

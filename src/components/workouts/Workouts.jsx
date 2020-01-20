@@ -9,7 +9,7 @@ import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
 
-function Workouts({ client }) {
+function Workouts({ client, workoutName }) {
   const toast = useToast();
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
@@ -41,6 +41,18 @@ function Workouts({ client }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const loadMore = () => {
+    // const newLimit = limit + 3;
+    // let limitExercises = exercises.slice(0, newLimit);
+    // if (exerciseQuery === "TOP_RATED_EXERCISES") {
+    //   limitExercises = limitExercises.sort(
+    //     (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
+    //   );
+    // }
+    // setLimitedExercises(limitExercises);
+    // setLimit(newLimit);
+  };
+
   if (isLoading) {
     return (
       <Box>
@@ -63,14 +75,13 @@ function Workouts({ client }) {
   if (data.length > 0) {
     return (
       <WorkoutsStyle>
+        <h3>{workoutName}</h3>
         {data.map(item => (
           <WorkoutCard key={item.id} data={item} />
         ))}
 
-        <div className="more">
-          <Button marginY="50px" variantColor="orange" size="lg">
-            View More
-          </Button>
+        <div className="load-more">
+          <Button onClick={loadMore}>Load More</Button>
         </div>
       </WorkoutsStyle>
     );
