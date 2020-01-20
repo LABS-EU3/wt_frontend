@@ -53,12 +53,11 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
     promise
       .then(res => {
         let limitExercises = res.data.exercises.slice(0, limit);
-        console.log(limitedExercises, "limitedunsort");
+
         if (exerciseQuery === "TOP_RATED_EXERCISES") {
-          limitExercises = limitExercises.sort((a, b) => {
-            console.log(a.rating, b.rating);
-            return parseFloat(a.rating) - parseFloat(b.rating);
-          });
+          limitExercises = limitExercises.sort(
+            (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
+          );
         }
         console.log(limitExercises, "limitedsorted");
         setExercises(res.data.exercises);
@@ -75,7 +74,13 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
 
   const loadMore = () => {
     const newLimit = limit + 3;
-    const limitExercises = exercises.slice(0, newLimit);
+    let limitExercises = exercises.slice(0, newLimit);
+
+    if (exerciseQuery === "TOP_RATED_EXERCISES") {
+      limitExercises = limitExercises.sort(
+        (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
+      );
+    }
     setLimitedExercises(limitExercises);
     setLimit(newLimit);
   };

@@ -10,10 +10,10 @@ const ExerciseList = () => {
       <ExercisesStyle>
         <Search placeholder="Look for a specific exercise" />
 
-        {/* <Exercises
+        <Exercises
           exerciseQuery="RECOMENDED_EXERCISES"
           exerciseName="Recommended Exercises"
-        /> */}
+        />
 
         {/* <div className="line"></div> */}
 
