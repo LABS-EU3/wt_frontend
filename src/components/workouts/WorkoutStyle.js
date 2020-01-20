@@ -66,6 +66,14 @@ export const WorkoutStyle = styled.div`
     width: 65%;
   }
 
+  @media only screen and (max-width: 550px) {
+    width: 85%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 95%;
+  }
+
   img {
     width: 100%;
     height: 250px;
