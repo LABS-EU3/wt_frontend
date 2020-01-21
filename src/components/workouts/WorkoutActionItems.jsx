@@ -43,6 +43,7 @@ const StyledWorkoutItems = styled.div`
   top: 0;
   background-color: #fff;
   z-index: 999;
+  align-items: center;
 
   button {
     margin: 1rem;
@@ -97,7 +98,7 @@ const WorkoutActionItems = ({
           userId: userData.user_id,
           workoutId: workout.id,
           exerciseId: currentExercise.id,
-          exerciseTimer: currentExercise.time
+          exerciseTimer: currTime
         }
       })
       .then(res => {
@@ -153,6 +154,8 @@ const WorkoutActionItems = ({
         }
       })
       .then(res => {
+        setCurrTime(currTime => 0);
+        setTimerExercise(workout.exercises[0].id);
         alert("Workout ended!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
@@ -188,7 +191,7 @@ const WorkoutActionItems = ({
       if (currTime <= currentExercise.time) {
         updateTimer = setTimeout(() => {
           setCurrTime(currTime => currTime + 1);
-        }, 1000);
+        }, 100);
       } else {
         clearTimeout(updateTimer);
         const currIndex = getExerciseIndexById(timerExercise);
