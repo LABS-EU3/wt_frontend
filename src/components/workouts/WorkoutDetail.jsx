@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";

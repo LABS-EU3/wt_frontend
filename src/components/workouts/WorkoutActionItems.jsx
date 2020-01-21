@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
