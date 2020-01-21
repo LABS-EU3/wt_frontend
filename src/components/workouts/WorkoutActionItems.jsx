@@ -191,7 +191,7 @@ const WorkoutActionItems = ({
       if (currTime <= currentExercise.time) {
         updateTimer = setTimeout(() => {
           setCurrTime(currTime => currTime + 1);
-        }, 100);
+        }, 1000);
       } else {
         clearTimeout(updateTimer);
         const currIndex = getExerciseIndexById(timerExercise);
