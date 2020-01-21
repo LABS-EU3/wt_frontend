@@ -66,7 +66,11 @@ export const GET_WORKOUT_DETAIL = gql`
       avgTime
       equipment
       session {
+        startDate
+        endDate
         pause
+        exerciseId
+        exerciseTimer
       }
       muscles
       picture

@@ -109,6 +109,30 @@ export const START_WORKOUT = gql`
   }
 `;
 
+export const PAUSE_WORKOUT = gql`
+  mutation workoutSession(
+    $userId: String!
+    $workoutId: String!
+    $exerciseId: String!
+    $exerciseTimer: Float!
+    $pause: Boolean!
+  ) {
+    workoutSession(
+      input: {
+        userId: $userId
+        workoutId: $workoutId
+        exerciseId: $exerciseId
+        exerciseTimer: $exerciseTimer
+        pause: $pause
+      }
+    ) {
+      startDate
+      endDate
+      pause
+    }
+  }
+`;
+
 export const END_WORKOUT = gql`
   mutation workoutSession(
     $userId: String!
