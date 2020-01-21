@@ -3,7 +3,7 @@ import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
-// import Timer from "../common/Timer";
+import Timer from "../common/Timer";
 
 import Calendar from "../common/Calendar";
 import Time from "../common/Time";
@@ -185,7 +185,7 @@ const WorkoutActionItems = ({
     let updateTimer;
     const currentExercise = getCurrentExercise();
     if (start === "isHidden") {
-      if (currTime < currentExercise.time) {
+      if (currTime <= currentExercise.time) {
         updateTimer = setTimeout(() => {
           setCurrTime(currTime => currTime + 1);
         }, 1000);
@@ -283,7 +283,9 @@ const WorkoutActionItems = ({
       >
         Stop
       </Button>
-      {/* <Timer time={20}/> */}
+
+      <Timer time={currTime} />
+
       <Modal
         blockScrollOnMount={false}
         isOpen={isOpen}
