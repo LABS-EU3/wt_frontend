@@ -42,6 +42,7 @@ const StyledWorkoutItems = styled.div`
   position: sticky;
   top: 0;
   background-color: #fff;
+  z-index: 999;
 
   button {
     margin: 1rem;
@@ -55,7 +56,13 @@ const StyledWorkoutItems = styled.div`
   }
 `;
 
-const WorkoutActionItems = ({ client, workout, timerExercise }) => {
+const WorkoutActionItems = ({
+  client,
+  workout,
+  timerExercise,
+  setTimerExercise,
+  getExerciseIndexById
+}) => {
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");
@@ -77,15 +84,8 @@ const WorkoutActionItems = ({ client, workout, timerExercise }) => {
     });
   };
 
-  const getExerciseIndexById = id => {
-    const exerciseIds = Object.values(workout.exercises).map(
-      exercise => exercise.id
-    );
-    return exerciseIds.indexOf(timerExercise.current);
-  };
-
   const getCurrentExercise = () => {
-    return workout.exercises[getExerciseIndexById(timerExercise.current)];
+    return workout.exercises[getExerciseIndexById(timerExercise)];
   };
 
   const handleStart = () => {
@@ -141,13 +141,6 @@ const WorkoutActionItems = ({ client, workout, timerExercise }) => {
     setStart("isVisible");
     setPause("isHidden");
     setStop("isHidden");
-    console.log({
-      userId: userData.user_id,
-      workoutId: workout.id,
-      exerciseId: currentExercise.id,
-      exerciseTimer: currTime,
-      end: true
-    });
     client
       .mutate({
         mutation: END_WORKOUT,
@@ -191,28 +184,21 @@ const WorkoutActionItems = ({ client, workout, timerExercise }) => {
   useEffect(() => {
     let updateTimer;
     const currentExercise = getCurrentExercise();
-    console.log("current exercise", timerExercise.current, start, pause, stop);
     if (start === "isHidden") {
       if (currTime < currentExercise.time) {
-        console.log("timer", currTime);
         updateTimer = setTimeout(() => {
           setCurrTime(currTime => currTime + 1);
-        }, 1000);
+        }, 100);
       } else {
         clearTimeout(updateTimer);
-        const currIndex = getExerciseIndexById(timerExercise.current);
-        if (currIndex < workout.exercises.length) {
+        const currIndex = getExerciseIndexById(timerExercise);
+        if (currIndex < workout.exercises.length - 1) {
           // go to next exercise
-          console.log("next exercise");
-          timerExercise.current = workout.exercises[currIndex + 1].id;
-          // scroll to timerExercise div
-          console.log("scroll to exercise", timerExercise);
-          // open timerExercise div
-          console.log("open exercise and start over");
+          setTimerExercise(workout.exercises[currIndex + 1].id);
           // continue timer
           setCurrTime(currTime => 0);
         } else {
-          alert("Workout completed!", "🚀", "success");
+          handleStop();
         }
       }
     } else {
@@ -223,11 +209,35 @@ const WorkoutActionItems = ({ client, workout, timerExercise }) => {
   }, [timerExercise, start, pause, stop, currTime]);
 
   useEffect(() => {
-    setStart(workout.session.startDate ? "isVisible" : "isHidden");
-    setPause(workout.session.endDate ? "isVisible" : "isHidden");
-    setStop(workout.session.pause ? "isVisible" : "isHidden");
+    if (workout.session) {
+      setStart(workout.session.startDate ? "isVisible" : "isHidden");
+      setPause(workout.session.endDate ? "isVisible" : "isHidden");
+      setStop(workout.session.pause ? "isVisible" : "isHidden");
+    }
+    // pause workout if you exit the page while workout session is running
+    return handlePause;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    let scrollTimeout;
+    if (workout && workout.exercises && start === "isHidden") {
+      const accordionItem = document.getElementById(
+        `accordion-header-${timerExercise}`
+      );
+      if (accordionItem) {
+        scrollTimeout = setTimeout(function() {
+          const yOffset = -72;
+          const y =
+            accordionItem.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 250);
+      }
+    }
+    return () => clearInterval(scrollTimeout);
+  }, [start, timerExercise, workout]);
 
   return (
     <StyledWorkoutItems>
