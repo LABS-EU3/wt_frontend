@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
@@ -31,6 +31,10 @@ import {
   END_WORKOUT
 } from "../../graphql/mutations";
 import { getUserDetails } from "../../utils";
+
+import BEEP_WAV from "../../assets/ElectronicChimeKevanGC.wav";
+import BEEP_OGG from "../../assets/ElectronicChimeKevanGC.ogg";
+import BEEP_MP3 from "../../assets/ElectronicChimeKevanGC.mp3";
 
 const userData = getUserDetails();
 
@@ -74,7 +78,7 @@ const WorkoutActionItems = ({
   const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currTime, setCurrTime] = useState(0); // used on timer component
-
+  const beep = useRef(null);
   const alert = (title, description, status) => {
     toast({
       title,
@@ -192,6 +196,10 @@ const WorkoutActionItems = ({
         updateTimer = setTimeout(() => {
           setCurrTime(currTime => currTime + 1);
         }, 1000);
+        if (currTime + 4 > currentExercise.time - 1) {
+          beep.current.load();
+          beep.current.play();
+        }
       } else {
         clearTimeout(updateTimer);
         const currIndex = getExerciseIndexById(timerExercise);
@@ -244,6 +252,17 @@ const WorkoutActionItems = ({
 
   return (
     <StyledWorkoutItems>
+      <audio
+        id="beep"
+        ref={beep}
+        volume="1"
+        preload="true"
+        crossOrigin="anonymous"
+      >
+        <source src={BEEP_WAV} type="audio/wav" />
+        <source src={BEEP_OGG} type="audio/ogg" />
+        <source src={BEEP_MP3} type="audio/mpeg" />
+      </audio>
       <Button
         rightIcon={FaCircle}
         variantColor="blue"
