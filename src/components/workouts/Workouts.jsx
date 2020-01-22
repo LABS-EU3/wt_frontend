@@ -4,12 +4,12 @@ import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
-import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
+import { GET_WORKOUTS, GET_WORKOUTS_BY_FIELDS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
 
-function Workouts({ client, workoutName, workoutQuery }) {
+function Workouts({ client, workoutName, workoutQuery, search }) {
   const toast = useToast();
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
@@ -29,10 +29,17 @@ function Workouts({ client, workoutName, workoutQuery }) {
 
   useEffect(() => {
     let promise;
-    if (workoutQuery === "NORMAL") {
+    if (search.length > 0) {
+      promise = client.query({
+        query: GET_WORKOUTS_BY_FIELDS,
+        variables: {
+          search,
+          fields: ["name", "description"]
+        }
+      });
     } else {
       promise = client.query({
-        query: GET_WORKOUT_DETAILS
+        query: GET_WORKOUTS
       });
     }
 
@@ -48,7 +55,7 @@ function Workouts({ client, workoutName, workoutQuery }) {
         setError(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [search]);
 
   const loadMore = () => {
     const newLimit = limit + 3;
