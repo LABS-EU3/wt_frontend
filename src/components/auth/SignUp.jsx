@@ -164,6 +164,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.firstname}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.firstname}
             />
 
             <Input
@@ -179,6 +181,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.lastname}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.lastname}
             />
 
             <Input
@@ -194,6 +198,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.email}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.email}
             />
 
             <Input
@@ -209,6 +215,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.password}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.password}
             />
 
             <Input
@@ -224,6 +232,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.confirmpassword}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.confirmpassword}
             />
 
             <Button

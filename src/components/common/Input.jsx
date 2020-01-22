@@ -25,7 +25,9 @@ function Input({
   type,
   onChange,
   value,
-  error
+  error,
+  onBlur,
+  touchedName
 }) {
   return (
     <CustomStyledInput>
@@ -41,8 +43,10 @@ function Input({
         _hover="black"
         focusBorderColor="#FF8744"
         errorBorderColor="crimson"
+        onBlur={onBlur}
+        touchedName
       />
-      <span>{error}</span>
+      {touchedName && error ? <span>{error}</span> : null}
     </CustomStyledInput>
   );
 }
@@ -57,5 +61,7 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  touchedName: PropTypes.bool,
+  onBlur: PropTypes.func
 };
