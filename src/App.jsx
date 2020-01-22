@@ -13,12 +13,14 @@ import ExerciseDetail from "./components/exercise/ExerciseDetail";
 import Navigation from "./components/common/Navigation";
 import WorkoutHistory from "./components/workouts/WorkoutHistory";
 import ScheduleDetail from "./components/schedule/ScheduleDetail";
+import AccountRecovery from "./components/auth/AccountRecovery";
 
 function App() {
   return (
     <div className="App" data-testid="App">
       <Navigation />
       <Route exact path="/login" component={Login} />
+      <AccountRecovery />
       <PrivateRoute exact path="/exercises" component={Exercises} />
       <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />

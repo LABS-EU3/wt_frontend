@@ -124,6 +124,19 @@ const AuthStyle = styled.div`
         }
       }
 
+      h3 {
+        font-family: roboto;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        text-align: left;
+        width: 100%;
+
+        @media only screen and (max-width: 800px) {
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+      }
+
       .body-status {
         display: flex;
         flex-wrap: wrap;
