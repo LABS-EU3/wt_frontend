@@ -49,7 +49,10 @@ function SignUp({ client, history }) {
       password: yup
         .string()
         .required("Please enter your password")
-        .min(8, "Must be minimum 8 characters"),
+        .matches(
+          /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+          "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character"
+        ),
       confirmpassword: yup
         .string()
         .required("Please confirm your password")
