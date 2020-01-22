@@ -4,7 +4,11 @@ import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
-import { GET_WORKOUTS, GET_WORKOUTS_BY_FIELDS } from "../../graphql/queries";
+import {
+  GET_WORKOUTS,
+  GET_WORKOUTS_BY_FIELDS,
+  GET_CUSTOM_WORKOUTS
+} from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
@@ -29,18 +33,15 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
 
   useEffect(() => {
     let promise;
-    if (search.length > 0) {
+    const query = search ? GET_WORKOUTS_BY_FIELDS : GET_WORKOUTS;
+    const variables = search ? { search, fields: ["name"] } : null;
+
+    if (workoutQuery === "CUSTOM_WORKOUTS") {
       promise = client.query({
-        query: GET_WORKOUTS_BY_FIELDS,
-        variables: {
-          search,
-          fields: ["name", "description"]
-        }
+        query: GET_CUSTOM_WORKOUTS
       });
     } else {
-      promise = client.query({
-        query: GET_WORKOUTS
-      });
+      promise = client.query({ query, variables });
     }
 
     promise

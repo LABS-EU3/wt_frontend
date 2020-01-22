@@ -12,10 +12,13 @@ const WorkoutList = () => {
     <WorkoutsStyleList>
       <Search
         placeholder="Look for a specific workout"
-        search={search}
         setSearch={setSearch}
+        search={search}
       />
-      <Workouts workoutName="New Workouts" search={debouncedSearch} />
+      <Workouts
+        workoutName={search ? `Search results for "${search}"` : `New Workouts`}
+        search={debouncedSearch}
+      />
     </WorkoutsStyleList>
   );
 };
