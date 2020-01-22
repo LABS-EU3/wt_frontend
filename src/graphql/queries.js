@@ -55,6 +55,18 @@ export const GET_WORKOUT_DETAILS = gql`
   }
 `;
 
+export const GET_WORKOUTS_BY_FIELDS = gql`
+  query($search: String!, $fields: [String!]!) {
+    workouts(input: { search: $search, fields: $fields }) {
+      id
+      name
+      types
+      intensity
+      picture
+    }
+  }
+`;
+
 export const GET_WORKOUT_DETAIL = gql`
   query($id: String!) {
     workout(id: $id) {
