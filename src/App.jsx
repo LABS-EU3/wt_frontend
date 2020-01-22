@@ -7,6 +7,7 @@ import Login from "./components/auth/LogIn";
 import Dashboard from "./components/dashboard/Dashboard";
 import SignUp from "./components/auth/SignUp";
 import WorkoutList from "./components/workouts/WorkoutList";
+import CustomWorkoutList from "./components/workouts/CustomWorkoutList";
 import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseDetail from "./components/exercise/ExerciseDetail";
@@ -26,7 +27,9 @@ function App() {
       <PrivateRoute exact path="/" component={Dashboard} />
       <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
       <PrivateRoute exact path="/workouts" component={WorkoutList} />
+      <PrivateRoute exact path="/my/workouts" component={CustomWorkoutList} />
       <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
+      {/* <PrivateRoute exact path="/my/workout/:id" component={CustomWorkoutDetail} /> */}
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
     </div>
   );
