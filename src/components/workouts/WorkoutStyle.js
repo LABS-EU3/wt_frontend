@@ -130,13 +130,6 @@ export const WorkoutDetailStyle = styled.div`
       flex-direction: column;
     }
 
-    .workout-quotes {
-      margin: 1rem 0;
-      width: 80%;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
     .workout-detail {
       width: 45%;
       display: flex;
@@ -180,6 +173,14 @@ export const WorkoutDetailStyle = styled.div`
         height: 400px;
       }
     }
+  }
+
+  .workout-quotes {
+    margin: 1rem 0;
+    width: 80%;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .exercise {
