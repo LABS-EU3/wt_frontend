@@ -25,6 +25,7 @@ import CustomSpinner from "../common/Spinner";
 import { GET_WORKOUT_DETAIL } from "../../graphql/queries";
 import { useRouteMatch } from "react-router-dom";
 import WorkoutActionItems from "./WorkoutActionItems";
+import Quotes from "../common/Quotes";
 
 function WorkoutDetail({ client }) {
   const [workout, setWorkout] = useState([]);
@@ -125,6 +126,10 @@ function WorkoutDetail({ client }) {
         <div className="workout-image">
           <img src={picture} alt="workout" />
         </div>
+      </div>
+
+      <div className="workout-quotes">
+        <Quotes />
       </div>
 
       <Heading size="md" marginTop="60px" textAlign="center">
