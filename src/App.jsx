@@ -14,13 +14,15 @@ import Navigation from "./components/common/Navigation";
 import WorkoutHistory from "./components/workouts/WorkoutHistory";
 import ScheduleDetail from "./components/schedule/ScheduleDetail";
 import AccountRecovery from "./components/auth/AccountRecovery";
+import ProfilePage from "./components/dashboard/ProfilePage";
 
 function App() {
   return (
     <div className="App" data-testid="App">
       <Navigation />
       <Route exact path="/login" component={Login} />
-      <AccountRecovery />
+      <Route exact path="/accountrecovery" component={AccountRecovery} />
+      <PrivateRoute exact path="/profile" component={ProfilePage} />
       <PrivateRoute exact path="/exercises" component={Exercises} />
       <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
