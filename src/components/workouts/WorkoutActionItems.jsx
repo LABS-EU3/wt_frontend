@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, useToast } from "@chakra-ui/core";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
-// import Timer from "../common/Timer";
+import Timer from "../common/Timer";
 
 import Calendar from "../common/Calendar";
 import Time from "../common/Time";
@@ -25,8 +25,16 @@ import {
   ModalContentArea
 } from "./WorkoutHistoryStyle";
 
-import { START_WORKOUT, END_WORKOUT } from "../../graphql/mutations";
+import {
+  START_WORKOUT,
+  PAUSE_WORKOUT,
+  END_WORKOUT
+} from "../../graphql/mutations";
 import { getUserDetails } from "../../utils";
+
+import BEEP_WAV from "../../assets/ElectronicChimeKevanGC.wav";
+import BEEP_OGG from "../../assets/ElectronicChimeKevanGC.ogg";
+import BEEP_MP3 from "../../assets/ElectronicChimeKevanGC.mp3";
 
 const userData = getUserDetails();
 
@@ -35,8 +43,11 @@ const StyledWorkoutItems = styled.div`
   flex-wrap: wrap;
   width: 100%;
 
-  /* position: sticky;
-  top: 0; */
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 999;
+  align-items: center;
 
   button {
     margin: 1rem;
@@ -50,7 +61,13 @@ const StyledWorkoutItems = styled.div`
   }
 `;
 
-const WorkoutActionItems = ({ client, exercises, workout }) => {
+const WorkoutActionItems = ({
+  client,
+  workout,
+  timerExercise,
+  setTimerExercise,
+  getExerciseIndexById
+}) => {
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
   const [pause, setPause] = useState("isHidden");
@@ -60,7 +77,8 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   const [date, setDate] = useState(false);
   const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [currTime, setCurrTime] = useState(0); // used on timer component
+  const beep = useRef(null);
   const alert = (title, description, status) => {
     toast({
       title,
@@ -71,15 +89,20 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
     });
   };
 
+  const getCurrentExercise = () => {
+    return workout.exercises[getExerciseIndexById(timerExercise)];
+  };
+
   const handleStart = () => {
+    const currentExercise = getCurrentExercise();
     client
       .mutate({
         mutation: START_WORKOUT,
         variables: {
           userId: userData.user_id,
           workoutId: workout.id,
-          exerciseId: exercises[0].id,
-          exerciseTimer: exercises[0].time
+          exerciseId: currentExercise.id,
+          exerciseTimer: currTime
         }
       })
       .then(res => {
@@ -94,37 +117,59 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
   };
 
   const handlePause = () => {
+    const currentExercise = getCurrentExercise();
     setStart("isVisible");
     setPause("isHidden");
     setStop("isVisible");
+    client
+      .mutate({
+        mutation: PAUSE_WORKOUT,
+        variables: {
+          userId: userData.user_id,
+          workoutId: workout.id,
+          exerciseId: currentExercise.id,
+          exerciseTimer: currTime,
+          pause: true
+        }
+      })
+      .then(res => {
+        alert("Workout paused!", "🏋🏾‍♀️", "success");
+      })
+      .catch(error => {
+        console.log(error);
+        alert("An error occurred.", "Unable to pause workout ☹️", "error");
+      });
   };
 
   const handleStop = () => {
+    const currentExercise = getCurrentExercise();
+    setStart("isVisible");
+    setPause("isHidden");
+    setStop("isHidden");
     client
       .mutate({
         mutation: END_WORKOUT,
         variables: {
           userId: userData.user_id,
           workoutId: workout.id,
-          exerciseId: exercises[0].id,
-          exerciseTimer: exercises[0].time,
+          exerciseId: currentExercise.id,
+          exerciseTimer: currentExercise.time,
           end: true
         }
       })
       .then(res => {
-        setStart("isVisible");
-        setPause("isHidden");
-        setStop("isHidden");
-        alert("Workout ended", "🏋🏾‍♀️", "success");
+        setCurrTime(currTime => 0);
+        setTimerExercise(workout.exercises[0].id);
+        alert("Workout ended!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
+        console.log(error);
         alert("An error occurred.", "Unable to stop workout ☹️", "error");
       });
   };
 
   const scheduleWorkout = () => {
     let dateTime = `${date} ${time}`;
-
     const startTime = new Date(dateTime).getTime();
     client
       .mutate({
@@ -143,8 +188,81 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       .catch(err => alert("Unable to schedule workout", "☹️", "error"));
   };
 
+  useEffect(() => {
+    let updateTimer;
+    const currentExercise = getCurrentExercise();
+    if (start === "isHidden") {
+      if (currTime <= currentExercise.time) {
+        updateTimer = setTimeout(() => {
+          setCurrTime(currTime => currTime + 1);
+        }, 1000);
+        if (currTime + 4 > currentExercise.time - 1) {
+          beep.current.load();
+          beep.current.play();
+        }
+      } else {
+        clearTimeout(updateTimer);
+        const currIndex = getExerciseIndexById(timerExercise);
+        if (currIndex < workout.exercises.length - 1) {
+          // go to next exercise
+          setTimerExercise(workout.exercises[currIndex + 1].id);
+          // continue timer
+          setCurrTime(currTime => 0);
+        } else {
+          handleStop();
+        }
+      }
+    } else {
+      clearTimeout(updateTimer);
+    }
+    return () => clearTimeout(updateTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timerExercise, start, pause, stop, currTime]);
+
+  useEffect(() => {
+    if (workout.session) {
+      setStart(workout.session.startDate ? "isVisible" : "isHidden");
+      setPause(workout.session.endDate ? "isVisible" : "isHidden");
+      setStop(workout.session.pause ? "isVisible" : "isHidden");
+    }
+    // pause workout if you exit the page while workout session is running
+    return handlePause;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let scrollTimeout;
+    if (workout && workout.exercises && start === "isHidden") {
+      const accordionItem = document.getElementById(
+        `accordion-header-${timerExercise}`
+      );
+      if (accordionItem) {
+        scrollTimeout = setTimeout(function() {
+          const yOffset = -72;
+          const y =
+            accordionItem.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 250);
+      }
+    }
+    return () => clearInterval(scrollTimeout);
+  }, [start, timerExercise, workout]);
+
   return (
     <StyledWorkoutItems>
+      <audio
+        id="beep"
+        ref={beep}
+        volume="1"
+        preload="true"
+        crossOrigin="anonymous"
+      >
+        <source src={BEEP_WAV} type="audio/wav" />
+        <source src={BEEP_OGG} type="audio/ogg" />
+        <source src={BEEP_MP3} type="audio/mpeg" />
+      </audio>
       <Button
         rightIcon={FaCircle}
         variantColor="blue"
@@ -187,7 +305,9 @@ const WorkoutActionItems = ({ client, exercises, workout }) => {
       >
         Stop
       </Button>
-      {/* <Timer time={20}/> */}
+
+      <Timer time={currTime} />
+
       <Modal
         blockScrollOnMount={false}
         isOpen={isOpen}

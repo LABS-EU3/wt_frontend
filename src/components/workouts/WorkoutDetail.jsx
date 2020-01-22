@@ -27,9 +27,10 @@ import { useRouteMatch } from "react-router-dom";
 import WorkoutActionItems from "./WorkoutActionItems";
 
 function WorkoutDetail({ client }) {
-  const [data, setServerData] = useState([]);
+  const [workout, setWorkout] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [timerExercise, setTimerExercise] = useState(null);
 
   const match = useRouteMatch();
   const toast = useToast();
@@ -44,6 +45,13 @@ function WorkoutDetail({ client }) {
     });
   };
 
+  const getExerciseIndexById = id => {
+    const exerciseIds = Object.values(workout.exercises).map(
+      exercise => exercise.id
+    );
+    return exerciseIds.indexOf(timerExercise);
+  };
+
   useEffect(() => {
     client
       .query({
@@ -52,11 +60,15 @@ function WorkoutDetail({ client }) {
           id: match.params.id
         }
       })
-      .then(res => {
-        setServerData(res.data.workout);
+      .then(({ data: { workout } }) => {
+        setWorkout(workout);
+        setTimerExercise(
+          workout.session ? workout.session.exerciseId : workout.exercises[0].id
+        );
         setIsLoading(false);
       })
       .catch(err => {
+        console.log(err);
         setIsLoading(false);
         setError(true);
       });
@@ -93,7 +105,7 @@ function WorkoutDetail({ client }) {
     muscles,
     exercises,
     picture
-  } = data;
+  } = workout;
 
   return (
     <WorkoutDetailStyle>
@@ -120,12 +132,17 @@ function WorkoutDetail({ client }) {
         working out!
       </Heading>
 
-      <WorkoutActionItems timer={20} exercises={exercises} workout={data} />
+      <WorkoutActionItems
+        getExerciseIndexById={getExerciseIndexById}
+        setTimerExercise={setTimerExercise}
+        timerExercise={timerExercise}
+        workout={workout}
+      />
 
-      <Accordion>
+      <Accordion index={getExerciseIndexById(timerExercise)}>
         {exercises &&
           exercises.map(exercise => (
-            <AccordionItem key={exercise.id}>
+            <AccordionItem key={exercise.id} id={exercise.id}>
               <AccordionHeader _expanded={{ bg: "#FFFCF2" }}>
                 <div className="exercise-preview">
                   <img src={exercise.pictureOne} alt={exercise.name} />
