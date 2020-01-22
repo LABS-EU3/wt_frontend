@@ -136,6 +136,7 @@ function WorkoutDetail({ client }) {
         getExerciseIndexById={getExerciseIndexById}
         setTimerExercise={setTimerExercise}
         timerExercise={timerExercise}
+        setWorkout={setWorkout}
         workout={workout}
       />
 
