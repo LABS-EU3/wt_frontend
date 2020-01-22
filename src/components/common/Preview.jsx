@@ -34,13 +34,33 @@ const StyledPreview = styled.div`
     }
   }
 `;
+const previewData = [
+  {
+    id: "1",
+    preview:
+      "https://images.unsplash.com/photo-1576511529803-68e00bdd891a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=668&q=80"
+  },
+  {
+    id: "2",
+    preview:
+      "https://images.unsplash.com/photo-1576511420196-44fe62d67910?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+  },
+  {
+    id: "3",
+    preview:
+      "https://images.unsplash.com/photo-1550259979-ed79b48d2a30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=808&q=80"
+  }
+];
+
+let randomPreview = previewData[Math.floor(Math.random() * previewData.length)];
+
 const Preview = ({ pageName }) => {
   return (
     <StyledPreview>
       <div
         className="view"
         style={{
-          backgroundImage: `url(${banner})`
+          backgroundImage: `url(${randomPreview.preview})`
         }}
       >
         <div className="content">
