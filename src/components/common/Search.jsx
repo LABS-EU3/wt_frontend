@@ -18,9 +18,10 @@ const StyledSearch = styled.div`
   }
 `;
 
-const Search = ({ placeholder, setSearch }) => {
+const Search = ({ placeholder, search, setSearch }) => {
   const onChange = e => {
-    setSearch(s => e.target.value);
+    const inputSearch = e.target.value;
+    setSearch(s => inputSearch);
   };
   return (
     <StyledSearch>
@@ -32,6 +33,7 @@ const Search = ({ placeholder, setSearch }) => {
         name="search"
         variant="filled"
         onChange={onChange}
+        value={search}
       />
     </StyledSearch>
   );

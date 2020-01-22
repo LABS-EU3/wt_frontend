@@ -43,7 +43,7 @@ export const GET_COMPLETED_WORKOUTS = gql`
   }
 `;
 
-export const GET_WORKOUT_DETAILS = gql`
+export const GET_WORKOUTS = gql`
   query {
     workouts {
       name

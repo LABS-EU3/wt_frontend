@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 
 export const isLoggedIn = () => {
@@ -76,4 +77,14 @@ export const userOnboardedSuccessfully = () => {
   } catch (error) {
     return false;
   }
+};
+
+export const useDebounce = (value, timeout) => {
+  const [state, setState] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setState(value), timeout);
+    return () => clearTimeout(handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+  return state;
 };
