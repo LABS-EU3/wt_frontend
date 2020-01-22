@@ -10,7 +10,7 @@ const Exercise = ({ exercise }) => {
       <Link to={`/exercise/${id}`}>
         <img src={pictureOne} alt={name} />
 
-        <div className="exersie-detail">
+        <div className="exercise-detail">
           <h4>{name}</h4>
 
           <div className="exercise-ratings">
