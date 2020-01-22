@@ -88,3 +88,7 @@ export const useDebounce = (value, timeout) => {
   }, [value]);
   return state;
 };
+
+export const generateRandomItem = array => {
+  return array[Math.floor(Math.random() * array.length)];
+};

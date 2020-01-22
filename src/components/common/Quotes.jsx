@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Heading } from "@chakra-ui/core";
+import styled from "styled-components";
 
+import { generateRandomItem } from "../../utils";
 const quotesData = [
   {
     id: "1",
@@ -92,7 +95,22 @@ const quotesData = [
       "You have to think it before you can do it. The mind is what makes it all possible."
   }
 ];
-let randomQuote = quotesData[Math.floor(Math.random() * quotesData.length)];
+let randomQuote = generateRandomItem(quotesData);
+
+const StyledQuotes = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  p {
+    background: #fffcf2;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    font-weight: bolder;
+  }
+`;
 
 const Quotes = () => {
   const [quote, setQuote] = useState(randomQuote);
@@ -105,7 +123,18 @@ const Quotes = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <p>{quote.quote}</p>;
+  return (
+    <StyledQuotes>
+      <Heading fontFamily="initial" textAlign="left" className="alignText">
+        “
+      </Heading>
+      <p>{quote.quote}</p>
+
+      <Heading fontFamily="initial" textAlign="right" width="100%">
+        ”
+      </Heading>
+    </StyledQuotes>
+  );
 };
 
 export default Quotes;

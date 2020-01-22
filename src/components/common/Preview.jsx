@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+import { generateRandomItem } from "../../utils";
+
 const StyledPreview = styled.div`
   display: flex;
   width: 100%;
@@ -16,6 +18,7 @@ const StyledPreview = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    object-fit: cover;
   }
 
   .content {
@@ -61,7 +64,7 @@ const previewData = [
   }
 ];
 
-let randomPreview = previewData[Math.floor(Math.random() * previewData.length)];
+let randomPreview = generateRandomItem(previewData);
 
 const Preview = ({ pageName }) => {
   return (
