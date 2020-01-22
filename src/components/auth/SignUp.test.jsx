@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+import sinon from "sinon";
 
 import SignUp from "./SignUp";
 
@@ -17,6 +18,21 @@ describe("<SignUp />", () => {
   });
 
   it("renders the SignUp component correctly", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("should show error message", () => {
+    const mockState = {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      error: { message: "Invalid credentials" },
+      data: "",
+      isLoading: ""
+    };
+
+    wrapper.setState({ ...mockState });
     expect(wrapper).toMatchSnapshot();
   });
 });
