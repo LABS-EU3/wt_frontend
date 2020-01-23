@@ -9,6 +9,7 @@ export const HistoryStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 100vh;
 
   @media only screen and (max-width: 800px) {
     width: 90vw;
