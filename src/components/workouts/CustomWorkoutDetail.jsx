@@ -7,12 +7,14 @@ import { Redirect, useRouteMatch } from "react-router-dom";
 import {
   Flex,
   Box,
+  Button,
   useToast,
   InputGroup,
   Input,
-  InputLeftElement,
+  Textarea,
   Select,
-  Stack
+  Stack,
+  Heading
 } from "@chakra-ui/core";
 import { CustomWorkoutStyleDetail } from "./WorkoutStyle";
 import CustomSpinner from "./../common/Spinner";
@@ -20,11 +22,18 @@ import {
   GET_WORKOUT_DETAIL,
   EXERCISES_BY_FIELDS
 } from "./../../graphql/queries";
-import { useDebounce } from "./../../utils/index";
+import { UPSERT_CUSTOM_WORKOUT } from "./../../graphql/mutations";
+import { useDebounce, getUserDetails } from "./../../utils/index";
 
-const CustomWorkoutDetail = ({ client }) => {
+const user = getUserDetails();
+
+const CustomWorkoutDetail = ({ client, history }) => {
   const [workout, setWorkout] = useState([]);
   const [exercises, setExercises] = useState([]);
+  const [searchExercise, setSearchExercise] = useState("");
+  const [selectedExercises, setSelectedExercises] = useState(
+    workout.exercises ? workout.exercises.map(e => e.id) : []
+  );
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -42,42 +51,84 @@ const CustomWorkoutDetail = ({ client }) => {
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      name: "",
-      description: "",
-      intensity: "",
-      selectExercise: "",
-      exercises: []
+      name: workout.name || "",
+      description: workout.description || "",
+      intensity: workout.intensity || ""
     },
-    /*validationSchema: yup.object().shape({
-      email: yup
+    validationSchema: yup.object().shape({
+      name: yup
         .string()
-        .email()
-        .required("Please enter your email"),
-      password: yup
+        .min(4)
+        .required("Please enter the name of the workout!"),
+      description: yup
         .string()
-        .required("Please enter your password")
-        .min(8, "Must be minimum 8 characters")
-    }),*/
-    handleChange: (p1, p2) => {
-      console.log(p1, p2);
-    },
-    onSubmit: value => {
+        .min(50)
+        .required("Please enter the description of the workout!"),
+      intensity: yup
+        .string()
+        .required("Please enter the intensity of this workout!")
+    }),
+    onSubmit: values => {
       setIsLoading(true);
-      // client.query
+      console.log(values);
+      client
+        .mutation({
+          query: UPSERT_CUSTOM_WORKOUT,
+          variables: {
+            ...values,
+            userId: user.userId,
+            exercises: selectedExercises
+          }
+        })
+        .then(res => {
+          history.push("/workouts");
+        })
+        .catch(err => {
+          console.log(err);
+          setIsLoading(false);
+          setError(true);
+        });
     }
   });
 
+  const toggleExercise = id => e => {
+    console.log("toggleExercise", id, selectedExercises.includes(id));
+    if (selectedExercises.includes(id)) {
+      setSelectedExercises(ex => ex.filter(ex_id => ex_id !== id));
+    } else {
+      setSelectedExercises(ex => [...ex, id]);
+    }
+  };
+
+  const removeExercise = id => e => {
+    setSelectedExercises(ex => ex.filter(ex_id => ex_id !== id));
+  };
+
+  let exerciseSearch = useDebounce(searchExercise, 700);
+
   useEffect(() => {
-    client
-      .query({
+    let promises = [
+      client.query({
         query: GET_WORKOUT_DETAIL,
         variables: {
           id: match.params.id
         }
+      }),
+      client.query({
+        query: EXERCISES_BY_FIELDS,
+        variables: {
+          search: exerciseSearch,
+          fields: ["name"]
+        }
       })
-      .then(({ data: { workout } }) => {
-        setWorkout(workout);
+    ];
+    Promise.all(promises)
+      .then(([workoutRes, exercisesRes]) => {
+        setWorkout(workoutRes.data.workout);
+        setExercises(exercisesRes.data.exercises);
+        setSelectedExercises(workoutRes.data.workout.exercises.map(e => e.id));
         setIsLoading(false);
       })
       .catch(err => {
@@ -87,31 +138,6 @@ const CustomWorkoutDetail = ({ client }) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const exerciseSearch = useDebounce(formik.values.selectExercise, 700);
-  useEffect(() => {
-    if (exerciseSearch) {
-      client
-        .query({
-          query: EXERCISES_BY_FIELDS,
-          variables: {
-            search: exerciseSearch,
-            fields: ["name"]
-          }
-        })
-        .then(({ data: { exercises } }) => {
-          console.log(exercises);
-          setExercises(exercises);
-          setIsLoading(false);
-        })
-        .catch(err => {
-          console.log(err);
-          setIsLoading(false);
-          setError(true);
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseSearch]);
 
   if (isLoading) {
     return (
@@ -139,78 +165,129 @@ const CustomWorkoutDetail = ({ client }) => {
 
   return (
     <CustomWorkoutStyleDetail>
+      <Heading className="cw-title" textAlign="left">
+        {match.params.id !== "new" ? "Edit workout" : "Create workout"}
+      </Heading>
       <form onSubmit={formik.onSubmit}>
         <Stack spacing={4}>
           <InputGroup>
-            {/* <InputLeftElement children="Name" /> */}
             <Input
               id="name"
               name="name"
               type="text"
+              placeholder="NAME"
               onChange={formik.handleChange}
               value={formik.values.name}
               bg="#FFFCF2"
               variant="flushed"
-              _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.name}
             />
           </InputGroup>
           <InputGroup>
-            {/* <InputLeftElement children="Description" /> */}
-            <Input
+            <Textarea
               id="description"
               name="description"
               type="text"
+              placeholder="DESCRIPTION"
               onChange={formik.handleChange}
               value={formik.values.description}
               variant="flushed"
-              _hover="black"
+              bg="#FFFCF2"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.description}
             />
           </InputGroup>
           <InputGroup>
-            {/* <InputLeftElement children="Description" /> */}
             <Select
               id="intensity"
               name="intensity"
+              placeholder="Select intensity..."
               onChange={formik.handleChange}
               value={formik.values.intensity}
               variant="flushed"
-              _hover="black"
+              bg="#FFFCF2"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.intensity}
             >
-              <option value="">Select intensity...</option>
               <option value="Low">Low</option>
               <option value="Intermediate">Intermediate</option>
               <option value="Expert">Expert</option>
             </Select>
           </InputGroup>
-          <Input
-            id="selectExercise"
-            name="selectExercise"
-            placeholder="Add an exercise to this workout!"
-            onChange={formik.handleChange}
-            value={formik.values.selectExercise}
-            variant="flushed"
-            color="white"
-            focusBorderColor="#FF8744"
-            errorBorderColor="crimson"
-            error={formik.errors.selectExercise}
-            backgroundColor="#FF8744"
-            borderColor="#FF8744"
-          />
-          <div className="search-results">
-            {exercises.map(exercise => (
-              <p key={exercise.id}>{exercise.name}</p>
-            ))}
+          <div className="list-exercises">
+            <Heading size="md" textAlign="left">
+              Exercises
+            </Heading>
+            <div className="search-exercises">
+              <Input
+                id="searchExercise"
+                name="searchExercise"
+                placeholder="SEARCH AND ADD EXERCISES"
+                onChange={e => setSearchExercise(e.target.value)}
+                value={searchExercise}
+                variant="flushed"
+                bg="#FFFCF2"
+                focusBorderColor="#FF8744"
+                autoComplete="off"
+              />
+              <div
+                className="search-results"
+                onMouseLeave={e => setSearchExercise("")}
+              >
+                {exerciseSearch
+                  ? exercises
+                      .filter(e => e.name.includes(exerciseSearch))
+                      .map(exercise => (
+                        <p
+                          key={exercise.id}
+                          id={exercise.id}
+                          onClick={toggleExercise(exercise.id)}
+                          className={
+                            selectedExercises.includes(exercise.id)
+                              ? "selected"
+                              : ""
+                          }
+                        >
+                          {exercise.name} - {exercise.type} -{" "}
+                          {exercise.difficulty}
+                        </p>
+                      ))
+                  : null}
+              </div>
+            </div>
+            {selectedExercises.map(id => {
+              const exercise = exercises.find(e => e.id === id);
+              return (
+                <p key={`list_${id}`}>
+                  {exercise.name} - {exercise.type} - {exercise.difficulty}
+                  <Button
+                    size="sm"
+                    onClick={removeExercise(id)}
+                    leftIcon="close"
+                    variant="outline"
+                    variantColor="red"
+                  >
+                    Remove
+                  </Button>
+                </p>
+              );
+            })}
           </div>
         </Stack>
+        <Button
+          type="submit"
+          className="cw-submit-btn"
+          variantColor="orange"
+          rightIcon="arrow-forward"
+          size="lg"
+          isLoading={isLoading}
+        >
+          Submit
+        </Button>
       </form>
     </CustomWorkoutStyleDetail>
   );
