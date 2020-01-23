@@ -11,7 +11,7 @@ const StyledFooter = styled.footer`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding: 1.5rem 0;
+  padding: 0.8rem 0;
   color: white;
   justify-content: space-between;
   align-items: center;
@@ -42,7 +42,6 @@ const StyledFooter = styled.footer`
     i {
       transition: all 0.4s ease-in-out;
       &:hover {
-        /* .transition(0.4s, 1.2); */
         transform: scale(1.2);
       }
     }
@@ -60,10 +59,11 @@ const StyledFooter = styled.footer`
 
     .scroll-top {
       cursor: pointer;
+      display: flex;
       transition: all 0.3s ease-in-out;
       background-color: black;
       border-radius: 50%;
-      padding: 0.6rem;
+      padding: 0.7rem;
       position: fixed;
       bottom: 20px;
       right: 30px;

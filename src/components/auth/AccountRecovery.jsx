@@ -5,13 +5,13 @@ import * as yup from "yup";
 import Input from "../common/Input";
 import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
-
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjcyMGE3NzhhODE2MDAxN2Q0ZjBiNCIsImZpcnN0bmFtZSI6IkVrdW5vbGEgRWFzeWJ1b3kiLCJpYXQiOjE1Nzk3OTg2NTcsImV4cCI6MTU3OTc5OTg1N30.QGcTulgHNCHnQlVqfQwcaPi3x-3lJ9ombkUqfmyjSDw
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
 import Preview from "../common/Preview";
 import { ACCOUNT_RECOVERY } from "../../graphql/queries";
 
-const AccountRecovery = ({ client, history }) => {
+const AccountRecovery = ({ client, history, location, match }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [successfulRecovery, setSuccessfulRecovery] = useState(false);
@@ -70,25 +70,11 @@ const AccountRecovery = ({ client, history }) => {
     }
   });
 
-  // useEffect(() => {
-  //   const isSignedIn = isLoggedIn();
-  //   // if user is already logged in, redirect to dashboard
-  //   if (isSignedIn === true && loginSuccess === false) {
-  //     setIsSignedIn(true);
-  //   }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // if (loginSuccess) {
-  //   history.push(loginSuccess);
-  //   window.location.reload();
-  // }
-
-  // // if user is already logged in, redirect to dashboard
-  // if (isSignedIn === true) {
-  //   return <Redirect to="/" />;
-  // }
+  useEffect(() => {
+    console.log(history);
+    console.log(location);
+    console.log(match);
+  }, []);
 
   if (successfulRecovery) {
     return <Redirect to="/login" />;
