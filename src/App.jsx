@@ -16,6 +16,7 @@ import ScheduleDetail from "./components/schedule/ScheduleDetail";
 import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
+import Footer from "./components/common/Footer";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
         component={CustomWorkoutDetail}
       />
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+      <Footer />
     </div>
   );
 };

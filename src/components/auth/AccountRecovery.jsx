@@ -9,11 +9,12 @@ import { withApollo } from "react-apollo";
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
 import Preview from "../common/Preview";
-import { ACCOUNT_RECOVERY } from "../../graphql/mutations";
+import { ACCOUNT_RECOVERY } from "../../graphql/queries";
 
 const AccountRecovery = ({ client, history }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const [successfulRecovery, setSuccessfulRecovery] = useState(false);
 
   const alert = (title, description, status) => {
     toast({
@@ -50,9 +51,10 @@ const AccountRecovery = ({ client, history }) => {
 
           alert(
             "Login Successful.",
-            "You can now complete the onboarding process",
+            "Account Recovery Email Sent Successfully",
             "success"
           );
+          setSuccessfulRecovery(true);
         })
         .catch(error => {
           setLoading(false);
@@ -66,28 +68,31 @@ const AccountRecovery = ({ client, history }) => {
           }
         });
     }
-    // });
-
-    // useEffect(() => {
-    //   const isSignedIn = isLoggedIn();
-    //   // if user is already logged in, redirect to dashboard
-    //   if (isSignedIn === true && loginSuccess === false) {
-    //     setIsSignedIn(true);
-    //   }
-
-    //   // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
-    // if (loginSuccess) {
-    //   history.push(loginSuccess);
-    //   window.location.reload();
-    // }
-
-    // // if user is already logged in, redirect to dashboard
-    // if (isSignedIn === true) {
-    //   return <Redirect to="/" />;
-    // }
   });
+
+  // useEffect(() => {
+  //   const isSignedIn = isLoggedIn();
+  //   // if user is already logged in, redirect to dashboard
+  //   if (isSignedIn === true && loginSuccess === false) {
+  //     setIsSignedIn(true);
+  //   }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  // if (loginSuccess) {
+  //   history.push(loginSuccess);
+  //   window.location.reload();
+  // }
+
+  // // if user is already logged in, redirect to dashboard
+  // if (isSignedIn === true) {
+  //   return <Redirect to="/" />;
+  // }
+
+  if (successfulRecovery) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <AuthStyle>
