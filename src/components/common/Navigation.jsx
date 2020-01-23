@@ -75,16 +75,12 @@ const Navigation = ({ location }) => {
             <Link to="/workouts">
               Workouts &nbsp; <i className="fas fa-dumbbell"></i>
             </Link>,
-            <Link to="/my/workouts">
-              Custom Workouts &nbsp; <i className="fas fa-dumbbell"></i>
-            </Link>,
             <Link to="/schedule">
               Schedule &nbsp; <i className="fas fa-calendar-alt"></i>
             </Link>,
             <Link to="/workouthistory">
               Workout History &nbsp; <i className="fas fa-history"></i>
             </Link>,
-
             <Link to="/profile">
               Profile &nbsp; <i className="far fa-user"></i>
             </Link>,
