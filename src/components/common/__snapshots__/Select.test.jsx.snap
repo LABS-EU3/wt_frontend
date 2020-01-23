@@ -11,7 +11,7 @@ exports[`<Select /> renders the Preview component correctly 1`] = `
     name=""
     onChange={[Function]}
     placeholder=""
+    touchedName={true}
   />
-  <span />
 </styled.div>
 `;

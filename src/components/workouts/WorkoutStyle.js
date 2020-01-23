@@ -180,6 +180,14 @@ export const WorkoutDetailStyle = styled.div`
     }
   }
 
+  .workout-quotes {
+    margin: 1rem 0;
+    width: 80%;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .exercise {
     display: flex;
     flex-wrap: wrap;

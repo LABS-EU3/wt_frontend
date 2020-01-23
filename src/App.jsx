@@ -14,12 +14,16 @@ import Navigation from "./components/common/Navigation";
 import WorkoutHistory from "./components/workouts/WorkoutHistory";
 import ScheduleDetail from "./components/schedule/ScheduleDetail";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
+import AccountRecovery from "./components/auth/AccountRecovery";
+import ProfilePage from "./components/dashboard/ProfilePage";
 
-function App() {
+const App = () => {
   return (
     <div className="App" data-testid="App">
       <Navigation />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/accountrecovery" component={AccountRecovery} />
+      <PrivateRoute exact path="/profile" component={ProfilePage} />
       <PrivateRoute exact path="/exercises" component={Exercises} />
       <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
       <PrivateRoute exact path="/onboarding" component={Onboarding} />
@@ -36,6 +40,6 @@ function App() {
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,7 +1,8 @@
 import React from "react";
-import banner from "../../assets/banner.jpg";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+
+import { generateRandomItem } from "../../utils";
 
 const StyledPreview = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const StyledPreview = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    object-fit: cover;
   }
 
   .content {
@@ -34,13 +36,43 @@ const StyledPreview = styled.div`
     }
   }
 `;
+const previewData = [
+  {
+    id: "1",
+    preview:
+      "https://images.unsplash.com/photo-1576511529803-68e00bdd891a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=668&q=80"
+  },
+  {
+    id: "2",
+    preview:
+      "https://images.unsplash.com/photo-1576511420196-44fe62d67910?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+  },
+  {
+    id: "3",
+    preview:
+      "https://images.unsplash.com/photo-1550259979-ed79b48d2a30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=808&q=80"
+  },
+  {
+    id: "4",
+    preview:
+      "https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "5",
+    preview:
+      "https://images.unsplash.com/photo-1434682772747-f16d3ea162c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80"
+  }
+];
+
+let randomPreview = generateRandomItem(previewData);
+
 const Preview = ({ pageName }) => {
   return (
     <StyledPreview>
       <div
         className="view"
         style={{
-          backgroundImage: `url(${banner})`
+          backgroundImage: `url(${randomPreview.preview})`
         }}
       >
         <div className="content">

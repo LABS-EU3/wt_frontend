@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import {
-  Button,
-  RadioButtonGroup,
-  useToast,
-  Box,
-  Flex,
-  Input
-} from "@chakra-ui/core";
+import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
+import Input from "../common/Input";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import PropTypes from "prop-types";
@@ -187,10 +181,15 @@ const Onboarding = ({ client, history }) => {
               name="height"
               error={formik.errors.height}
               value={formik.values.height}
+              placeholder="Enter Height"
               onChange={formik.handleChange}
               type="number"
+              variant="filled"
+              id="height"
               bg="#fffcf2"
               focusBorderColor="#dd6b20"
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.height}
             />
 
             <div className="body-status">
@@ -203,6 +202,7 @@ const Onboarding = ({ client, history }) => {
                 isInline
                 err={formik.errors.heightUnit}
                 value={formik.values.heightUnit}
+                onBlur={formik.handleBlur}
               >
                 {heightUnits.map(heightUnit => (
                   <CustomRadio
@@ -215,7 +215,9 @@ const Onboarding = ({ client, history }) => {
                   </CustomRadio>
                 ))}
               </RadioButtonGroup>
-              <span>{formik.errors.heightUnit}</span>
+              {formik.touched.heightUnit && formik.errors.heightUnit ? (
+                <span>{formik.errors.heightUnit}</span>
+              ) : null}
 
               <p>What is your weight?</p>
               <Input
@@ -223,9 +225,14 @@ const Onboarding = ({ client, history }) => {
                 error={formik.errors.weight}
                 value={formik.values.weight}
                 onChange={formik.handleChange}
+                placeholder="Enter Weight"
+                variant="filled"
+                id="weight"
                 type="number"
                 bg="#fffcf2"
                 focusBorderColor="#dd6b20"
+                onBlur={formik.handleBlur}
+                touchedName={formik.touched.weight}
               />
 
               <p>Which weight measurement unit do you prefer?</p>
@@ -237,6 +244,7 @@ const Onboarding = ({ client, history }) => {
                 isInline
                 value={formik.values.weightUnit}
                 error={formik.errors.weightUnit}
+                onBlur={formik.handleBlur}
               >
                 {weightUnits.map(weightUnit => (
                   <CustomRadio
@@ -249,7 +257,9 @@ const Onboarding = ({ client, history }) => {
                   </CustomRadio>
                 ))}
               </RadioButtonGroup>
-              <span>{formik.errors.weightUnit}</span>
+              {formik.touched.weightUnit && formik.errors.weightUnit ? (
+                <span>{formik.errors.weightUnit}</span>
+              ) : null}
             </div>
             <p>What is your fitness goal?</p>
             <Select
@@ -265,6 +275,8 @@ const Onboarding = ({ client, history }) => {
               error={formik.errors.goal}
               value={formik.values.goal}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.goal}
             />
 
             <p>How experienced are you working out</p>
@@ -279,6 +291,8 @@ const Onboarding = ({ client, history }) => {
               error={formik.errors.experience}
               value={formik.values.experience}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.experience}
             />
 
             <p>What workout equipment do you have?</p>
@@ -293,6 +307,8 @@ const Onboarding = ({ client, history }) => {
               error={formik.errors.equipment}
               value={formik.values.equipment}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.equipment}
             />
 
             <Button

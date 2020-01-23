@@ -215,3 +215,22 @@ export const EXERCISES_BY_FIELDS = gql`
     }
   }
 `;
+
+export const GET_USER_DETAILS = gql`
+  query {
+    user {
+      firstname
+      lastname
+      equipment
+      height
+      weight
+      heightUnit {
+        name
+      }
+      weightUnit {
+        name
+      }
+      email
+    }
+  }
+`;
