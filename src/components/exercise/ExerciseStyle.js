@@ -186,7 +186,7 @@ export const ExerciseStyle = styled.div`
     height: 250px;
   }
 
-  .exersie-detail {
+  .exercise-detail {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

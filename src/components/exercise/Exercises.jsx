@@ -8,7 +8,7 @@ import CustomSpinner from "../common/Spinner";
 import { GET_EXERCISES, EXERCISES_BY_FIELDS } from "../../graphql/queries";
 import Exercise from "./Exercise";
 
-const Exercises = ({ client, exerciseQuery, exerciseName }) => {
+const Exercises = ({ client, exerciseQuery, exerciseName, search }) => {
   const toast = useToast();
 
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
       promise = client.query({
         query: EXERCISES_BY_FIELDS,
         variables: {
-          search: "Beginner",
+          search: "Beginner", // get user experience
           fields: ["difficulty"]
         }
       });
@@ -43,7 +43,15 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
         query: EXERCISES_BY_FIELDS,
         variables: {
           search: "9",
-          fields: ["id", "rating", "name", "pictureOne", "equipment"]
+          fields: ["rating"]
+        }
+      });
+    } else if (search.length > 0) {
+      promise = client.query({
+        query: EXERCISES_BY_FIELDS,
+        variables: {
+          search,
+          fields: ["name", "description"]
         }
       });
     } else {
@@ -71,7 +79,7 @@ const Exercises = ({ client, exerciseQuery, exerciseName }) => {
         setError(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [search]);
 
   const loadMore = () => {
     const newLimit = limit + 3;

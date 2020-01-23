@@ -183,6 +183,8 @@ function Login({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.email}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.email}
             />
 
             <Input
@@ -198,6 +200,8 @@ function Login({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.password}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.password}
             />
 
             <div className="checkbox">

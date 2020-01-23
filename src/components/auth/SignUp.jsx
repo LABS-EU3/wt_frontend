@@ -49,7 +49,10 @@ function SignUp({ client, history }) {
       password: yup
         .string()
         .required("Please enter your password")
-        .min(8, "Must be minimum 8 characters"),
+        .matches(
+          /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+          "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character"
+        ),
       confirmpassword: yup
         .string()
         .required("Please confirm your password")
@@ -161,6 +164,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.firstname}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.firstname}
             />
 
             <Input
@@ -176,6 +181,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.lastname}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.lastname}
             />
 
             <Input
@@ -191,6 +198,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.email}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.email}
             />
 
             <Input
@@ -206,6 +215,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.password}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.password}
             />
 
             <Input
@@ -221,6 +232,8 @@ function SignUp({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.confirmpassword}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.confirmpassword}
             />
 
             <Button
