@@ -26,7 +26,7 @@ import ModalPopup from "../common/ModalPopup";
 import EditProfile from "../common/EditProfile";
 
 const ProfilePage = ({ client, history }) => {
-  const [profileData, setProfileData] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,21 +41,24 @@ const ProfilePage = ({ client, history }) => {
     });
   };
 
-  // useEffect(() => {
-  //   client
-  //     .query({
-  //       query: GET_USER_DETAILS
-  //     })
-  //     .then(res => {
-  //       setProfileData(res.data.profile);
-  //       setIsLoading(false);
-  //     })
-  //     .catch(err => {
-  //       setIsLoading(false);
-  //       alert("An error occurred.", "Unable to load", "error");
-  //     });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const handleSave = () => {};
+
+  useEffect(() => {
+    client
+      .query({
+        query: GET_USER_DETAILS
+      })
+      .then(res => {
+        console.log(res);
+        setUserData(res.data.user);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        alert("An error occurred.", "Unable to load", "error");
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // if (isLoading) {
   //   return (
@@ -72,17 +75,21 @@ const ProfilePage = ({ client, history }) => {
   //   );
   // }
 
+  // if (isLoading) {
+  //   return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+  // }
+
   return (
     <Box>
       {/* <Flex width="100vw" height="100vh" justifyContent="center" align="center">
         <CustomSpinner thickness="6px" size="xl" text="Loading..." />
       </Flex> */}
       <DashboardStyle>
-        <div className="welcome">
-          {/* <Heading marginBottom="25px" textAlign="left">
-            Hello {profileData.user.name}! Welcome to Workout Tracker ...
-          </Heading> */}
-        </div>
+        {/* <div className="welcome">
+          <Heading marginBottom="25px" textAlign="left">
+            Hello {userData.name}! Welcome to Workout Tracker ...
+          </Heading>
+        </div> */}
 
         <div className="dashboard-content">
           <div className="user-detail">
@@ -90,35 +97,47 @@ const ProfilePage = ({ client, history }) => {
               Edit Profile
             </Button>
             <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Profile">
-              <EditProfile />
+              <EditProfile
+                data={userData}
+                onSave={handleSave}
+                onClose={onClose}
+              />
             </ModalPopup>
             <Box paddingLeft="50px">
               <Flex paddingY="30px" alignItems="center">
                 <Box as={IoIosPerson} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">
                   <p>Name</p>
-                  <p>Bryan Ojo</p>
+                  <p>{`${userData.firstname} ${userData.lastname}`}</p>
                 </Box>
               </Flex>
               <Flex paddingY="30px" alignItems="center">
                 <Box as={IoIosMail} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">
                   <p>Email</p>
-                  <p>bryanojo@gmail.com</p>
+                  <p>{userData.email}</p>
                 </Box>
               </Flex>
               <Flex paddingY="30px" alignItems="center">
                 <Box as={IoIosFitness} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">
                   <p>Weight</p>
-                  <p>65kg</p>
+                  <p>
+                    {userData.weight
+                      ? `${userData.weight} ${userData.weightUnit.name}`
+                      : "none"}
+                  </p>
                 </Box>
               </Flex>
               <Flex paddingY="30px" alignItems="center">
                 <Box as={IoIosTrendingUp} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">
                   <p>Height</p>
-                  <p>6 feet</p>
+                  <p>
+                    {userData.height
+                      ? `${userData.height} ${userData.heightUnit.name}`
+                      : "none"}
+                  </p>
                 </Box>
               </Flex>
             </Box>
@@ -135,7 +154,7 @@ const ProfilePage = ({ client, history }) => {
               <span role="img" aria-label="fire-emoji">
                 🔥🔥🔥
               </span>{" "}
-              You have a {profileData.streak} days streak. Keep it up!
+              You have a {userData.streak} days streak. Keep it up!
             </Box>
           </div>
 
@@ -147,7 +166,7 @@ const ProfilePage = ({ client, history }) => {
                 marginLeft="35%"
                 marginBottom="20px"
               />
-              <Heading>Bryan Ojo</Heading>
+              <Heading>{`${userData.firstname} ${userData.lastname}`}</Heading>
             </section>
 
             <section className="goal">
