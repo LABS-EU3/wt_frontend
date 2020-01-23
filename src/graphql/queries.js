@@ -223,6 +223,7 @@ export const GET_USER_DETAILS = gql`
       lastname
       equipment
       height
+      goal
       weight
       heightUnit {
         name

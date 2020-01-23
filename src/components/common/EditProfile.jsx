@@ -10,7 +10,8 @@ import {
   Stack,
   Heading,
   FormLabel,
-  Switch
+  Switch,
+  FormErrorMessage
 } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -38,11 +39,13 @@ const EditProfile = ({ onClose, data, client }) => {
     validationSchema: yup.object().shape({
       firstname: yup.string().required("Please enter your firstname"),
       lastname: yup.string().required("Please enter your lastname"),
+      email: yup.string().email(),
       height: yup.number().required("Please enter your height"),
       heightUnit: yup.string().required("Please select your height unit"),
       weight: yup.number().required("Please enter your weight"),
       weightUnit: yup.string().required("Please select your weight unit"),
-      goal: yup.string().required("Please enter your workout goal")
+      goal: yup.string().required("Please enter your workout goal"),
+      reminderType: yup.string()
     }),
 
     onSubmit: value => {
@@ -53,24 +56,22 @@ const EditProfile = ({ onClose, data, client }) => {
           variables: {
             firstname: value.firstname,
             lastname: value.lastname,
+            password: "IsaIsaIsa1#",
+            experience: "beginner",
+            equipment: data.equipment,
             height: value.height,
             weight: value.weight,
             heightUnit: value.heightUnit,
             weightUnit: value.weightUnit,
             goal: value.goal,
-            reminderType: value.reminderType
+            reminderType: "email"
           }
         })
-
         .then(res => {
           console.log(res);
           setUpdatedData(res.data.user);
           setLoading(false);
           onClose();
-        })
-        .catch(err => {
-          setLoading(false);
-          alert("An error occurred.", "Unable to update", "error");
         })
         .catch(error => {
           setLoading(false);
@@ -111,8 +112,11 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.firstname}
+            isInvalid={formik.errors.lastname}
           />
+          {formik.errors.firstname && (
+            <FormErrorMessage>{formik.errors.firstname}</FormErrorMessage>
+          )}
         </Box>
         <Box paddingTop="30px">
           <Heading size="sm">Last Name</Heading>
@@ -127,8 +131,11 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.lastname}
+            isInvalid={formik.errors.lastname}
           />
+          {formik.errors.lastname && (
+            <FormErrorMessage>{formik.errors.lastname}</FormErrorMessage>
+          )}
         </Box>
         <Box paddingTop="30px">
           <Heading size="sm">Email</Heading>
@@ -144,8 +151,11 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.email}
+            isInvalid={formik.errors.email}
           />
+          {formik.errors.email && (
+            <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+          )}
         </Box>
 
         <Flex paddingTop="15px" alignItems="center">
@@ -162,15 +172,28 @@ const EditProfile = ({ onClose, data, client }) => {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
-              error={formik.errors.height}
+              isInvalid={formik.errors.height}
             />
+            {formik.errors.height && (
+              <FormErrorMessage>{formik.errors.height}</FormErrorMessage>
+            )}
           </Box>
 
           <Box>
-            <Select marginLeft="30px" marginTop="30px">
+            <Select
+              marginLeft="30px"
+              marginTop="30px"
+              name="heightUnit"
+              onChange={formik.handleChange}
+              value={formik.values.heightUnit}
+              isInvalid={formik.errors.heightUnit}
+            >
               <option value="inches">Inches ""</option>
               <option value="meters">Meters m</option>
             </Select>
+            {formik.errors.heightUnit && (
+              <FormErrorMessage>{formik.errors.heightUnit}</FormErrorMessage>
+            )}
           </Box>
         </Flex>
         <Flex paddingTop="15px" alignItems="center">
@@ -187,15 +210,28 @@ const EditProfile = ({ onClose, data, client }) => {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
-              error={formik.errors.weight}
+              isInvalid={formik.errors.weight}
             />
+            {formik.errors.weight && (
+              <FormErrorMessage>{formik.errors.weight}</FormErrorMessage>
+            )}
           </Box>
 
           <Box>
-            <Select marginLeft="30px" marginTop="30px">
+            <Select
+              name="weightUnit"
+              marginLeft="30px"
+              marginTop="30px"
+              onChange={formik.handleChange}
+              value={formik.values.weightUnit}
+              isInvalid={formik.errors.weightUnit}
+            >
               <option value="kilogram">Kilogram kg</option>
               <option value="pounds">Pounds lb</option>
             </Select>
+            {formik.errors.weightUnit && (
+              <FormErrorMessage>{formik.errors.weightUnit}</FormErrorMessage>
+            )}
           </Box>
         </Flex>
         <Box paddingTop="15px">
@@ -211,22 +247,35 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.goal}
+            isInvalid={formik.errors.goal}
           />
+          {formik.errors.goal && (
+            <FormErrorMessage>{formik.errors.goal}</FormErrorMessage>
+          )}
         </Box>
         <Flex paddingTop="15px" alignItems="center">
           <FormLabel htmlFor="email-alerts">Enable email alerts?</FormLabel>
-          <Switch id="email-alerts" />
+          <Switch
+            name="reminderType"
+            id="email-alerts"
+            isChecked={formik.values.reminderType === "email"}
+            onChange={event =>
+              formik.setFieldValue(
+                "reminderType",
+                event.target.checked ? "email" : "none"
+              )
+            }
+          />
         </Flex>
+        <ModalFooter>
+          <Button type="submit" variantColor="orange" mr={3}>
+            Save
+          </Button>
+          <Button variant="ghost" variantColor="orange" onClick={onClose}>
+            Cancel
+          </Button>
+        </ModalFooter>
       </form>
-      <ModalFooter>
-        <Button variantColor="orange" mr={3}>
-          Save
-        </Button>
-        <Button variant="ghost" variantColor="orange" onClick={onClose}>
-          Cancel
-        </Button>
-      </ModalFooter>
     </Box>
   );
 };
