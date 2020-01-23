@@ -277,4 +277,7 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
         name
         type
         difficulty
-      }`;
+      }
+    }
+  }
+`;
