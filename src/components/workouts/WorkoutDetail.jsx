@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Redirect, useRouteMatch } from "react-router-dom";
 import ReactPlayer from "react-player";
 
 import { WorkoutDetailStyle } from "./WorkoutStyle";
@@ -23,7 +23,6 @@ import {
 
 import CustomSpinner from "../common/Spinner";
 import { GET_WORKOUT_DETAIL } from "../../graphql/queries";
-import { useRouteMatch } from "react-router-dom";
 import WorkoutActionItems from "./WorkoutActionItems";
 
 function WorkoutDetail({ client }) {

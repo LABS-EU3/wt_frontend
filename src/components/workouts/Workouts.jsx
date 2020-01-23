@@ -4,14 +4,13 @@ import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
-import {
-  GET_WORKOUTS,
-  GET_WORKOUTS_BY_FIELDS,
-  GET_CUSTOM_WORKOUTS
-} from "../../graphql/queries";
+import { GET_WORKOUTS, GET_WORKOUTS_BY_FIELDS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
+import { getUserDetails } from "../../utils";
+
+const user = getUserDetails();
 
 function Workouts({ client, workoutName, workoutQuery, search }) {
   const toast = useToast();
@@ -38,7 +37,11 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
 
     if (workoutQuery === "CUSTOM_WORKOUTS") {
       promise = client.query({
-        query: GET_CUSTOM_WORKOUTS
+        query: GET_WORKOUTS_BY_FIELDS,
+        variables: {
+          search: user.user_id,
+          fields: ["userId"]
+        }
       });
     } else {
       promise = client.query({ query, variables });
@@ -90,6 +93,18 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
     return <Redirect to="/" />;
   }
 
+  if (workoutQuery === "CUSTOM_WORKOUTS") {
+    return (
+      <WorkoutsStyle>
+        <h3>Custom workouts</h3>
+        <div className="container">
+          {limitedWorkouts.map(item => (
+            <WorkoutCard key={item.id} data={item} cardQuery={workoutQuery} />
+          ))}
+        </div>
+      </WorkoutsStyle>
+    );
+  }
   if (limitedWorkouts.length > 0) {
     return (
       <WorkoutsStyle>

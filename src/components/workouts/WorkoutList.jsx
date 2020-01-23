@@ -15,6 +15,7 @@ const WorkoutList = () => {
         setSearch={setSearch}
         search={search}
       />
+      <Workouts workoutName="Custom Workouts" workoutQuery="CUSTOM_WORKOUTS" />
       <Workouts
         workoutName={search ? `Search results for "${search}"` : `New Workouts`}
         search={debouncedSearch}
