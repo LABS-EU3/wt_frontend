@@ -36,7 +36,6 @@ export const GOOGLE_AUTH_MUTATION = gql`
 
 export const ONBOARDING = gql`
   mutation updateUser(
-    $id: String!
     $heightUnit: String!
     $weightUnit: String!
     $goal: String!
@@ -45,7 +44,6 @@ export const ONBOARDING = gql`
   ) {
     updateUser(
       input: {
-        id: $id
         heightUnit: $heightUnit
         weightUnit: $weightUnit
         goal: $goal
