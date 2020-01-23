@@ -123,7 +123,7 @@ export const GET_EXERCISES = gql`
 `;
 
 export const GET_EXERCISE = gql`
-  query excercise($id: String!) {
+  query exercise($id: String!) {
     exercise(id: $id) {
       id
       video

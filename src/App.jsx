@@ -15,6 +15,7 @@ import WorkoutHistory from "./components/workouts/WorkoutHistory";
 import ScheduleDetail from "./components/schedule/ScheduleDetail";
 import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
+import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 
 const App = () => {
   return (
@@ -31,6 +32,11 @@ const App = () => {
       <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
       <PrivateRoute exact path="/workouts" component={WorkoutList} />
       <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
+      <PrivateRoute
+        exact
+        path="/my/workout/:id"
+        component={CustomWorkoutDetail}
+      />
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
     </div>
   );

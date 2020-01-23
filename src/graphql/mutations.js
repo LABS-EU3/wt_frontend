@@ -246,3 +246,35 @@ export const ACCOUNT_RECOVERY = gql`
     }
   }
 `;
+
+export const UPSERT_CUSTOM_WORKOUT = gql`
+  mutation customWorkout(
+    $userId: String!
+    $name: String!
+    $description: String!
+    $intensity: String!
+    $exercises: [String!]!
+  ) {
+    customWorkout(
+      input: {
+        userId: $userId
+        name: $name
+        description: $description
+        intensity: $intensity
+        exercises: $exercises
+      }
+    ) {
+      id
+      userId
+      avgTime
+      experience
+      intensity
+      muscles
+      types
+      picture
+      exercises {
+        id
+        name
+        type
+        difficulty
+      }`;
