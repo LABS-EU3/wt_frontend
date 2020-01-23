@@ -24,7 +24,6 @@ import {
 } from "./../../graphql/queries";
 import { UPSERT_CUSTOM_WORKOUT } from "./../../graphql/mutations";
 import { useDebounce, getUserDetails } from "./../../utils/index";
-
 const user = getUserDetails();
 
 const CustomWorkoutDetail = ({ client, history }) => {
@@ -72,17 +71,17 @@ const CustomWorkoutDetail = ({ client, history }) => {
     }),
     onSubmit: values => {
       setIsLoading(true);
-      console.log(values);
       client
-        .mutation({
-          query: UPSERT_CUSTOM_WORKOUT,
+        .mutate({
+          mutation: UPSERT_CUSTOM_WORKOUT,
           variables: {
             ...values,
-            userId: user.userId,
+            userId: user.user_id,
             exercises: selectedExercises
           }
         })
         .then(res => {
+          console.log(res);
           history.push("/workouts");
         })
         .catch(err => {
@@ -168,7 +167,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
       <Heading className="cw-title" textAlign="left">
         {match.params.id !== "new" ? "Edit workout" : "Create workout"}
       </Heading>
-      <form onSubmit={formik.onSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Stack spacing={4}>
           <InputGroup>
             <Input
