@@ -13,9 +13,9 @@ import ExerciseDetail from "./components/exercise/ExerciseDetail";
 import Navigation from "./components/common/Navigation";
 import WorkoutHistory from "./components/workouts/WorkoutHistory";
 import ScheduleDetail from "./components/schedule/ScheduleDetail";
-import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
+import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 
 const App = () => {
   return (

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Button, useToast, Input } from "@chakra-ui/core";
+import { Button, useToast } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Input from "../common/Input";
 import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
 import Preview from "../common/Preview";
-import { ACCOUNT_RECOVERY_QUERY } from "../../graphql/queries";
+import { ACCOUNT_RECOVERY } from "../../graphql/mutations";
 
 const AccountRecovery = ({ client, history }) => {
   const toast = useToast();
@@ -33,50 +34,38 @@ const AccountRecovery = ({ client, history }) => {
         .string()
         .email()
         .required("Please enter your email")
-    })
-    //   onSubmit: value => {
-    //     setLoading(true);
-    //     client
-    //       .mutate({
-    //         mutation: ACCOUNT_RECOVERY_QUERY,
-    //         variables: {
-    //           email: value.email
-    //         }
-    //       })
-    //       .then(response => {
-    //         const { token, isNewUser } = response.data.authForm;
-    //         localStorage.setItem(
-    //           "userData",
-    //           JSON.stringify({ token, isNewUser })
-    //         );
-    //         setLoading(false);
-    //         if (isNewUser === true) {
-    //           setLoginSuccess("/onboarding");
-    //           alert(
-    //             "Login Successful.",
-    //             "You can now complete the onboarding process",
-    //             "success"
-    //           );
-    //         } else {
-    //           setLoginSuccess("/");
-    //           alert(
-    //             "Login Successful.",
-    //             "You can now access your dashboard",
-    //             "success"
-    //           );
-    //         }
-    //       })
-    //       .catch(error => {
-    //         setLoading(false);
-    //         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
-    //           alert(
-    //             "An error occurred.",
-    //             error.graphQLErrors[0].message,
-    //             "error"
-    //           );
-    //         }
-    //       });
-    //   }
+    }),
+    onSubmit: value => {
+      setLoading(true);
+      client
+        .mutate({
+          mutation: ACCOUNT_RECOVERY,
+          variables: {
+            email: value.email
+          }
+        })
+        .then(response => {
+          console.log(response);
+          setLoading(false);
+
+          alert(
+            "Login Successful.",
+            "You can now complete the onboarding process",
+            "success"
+          );
+        })
+        .catch(error => {
+          setLoading(false);
+          console.log(error);
+          if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+            alert(
+              "An error occurred.",
+              error.graphQLErrors[0].message,
+              "error"
+            );
+          }
+        });
+    }
     // });
 
     // useEffect(() => {
@@ -99,6 +88,7 @@ const AccountRecovery = ({ client, history }) => {
     //   return <Redirect to="/" />;
     // }
   });
+
   return (
     <AuthStyle>
       <div className="auth-container">
@@ -128,6 +118,8 @@ const AccountRecovery = ({ client, history }) => {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.email}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.email}
             />
 
             <Button
