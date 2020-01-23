@@ -39,20 +39,6 @@ const DashboardStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
 
-      .quotes {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-
-        p {
-          background: #fffcf2;
-          padding: 1.5rem;
-          border-radius: 10px;
-          transition: all 0.2s ease-in-out;
-        }
-      }
-
       .goal {
         display: flex;
         flex-wrap: wrap;

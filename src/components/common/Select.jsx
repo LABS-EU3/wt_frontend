@@ -28,7 +28,16 @@ const CustomStyledSelect = styled.div`
   }
 `;
 
-const Select = ({ options, name, onChange, placeholder, error, value }) => {
+const Select = ({
+  options,
+  name,
+  onChange,
+  placeholder,
+  error,
+  value,
+  onBlur,
+  touchedName
+}) => {
   return (
     <CustomStyledSelect>
       <ChakraSelect
@@ -41,6 +50,8 @@ const Select = ({ options, name, onChange, placeholder, error, value }) => {
         _hover="black"
         focusBorderColor="#FF8744"
         errorBorderColor="crimson"
+        onBlur={onBlur}
+        touchedName
       >
         {options.map(option => (
           <option key={option.text} value={option.value}>
@@ -48,7 +59,7 @@ const Select = ({ options, name, onChange, placeholder, error, value }) => {
           </option>
         ))}
       </ChakraSelect>
-      <span>{error}</span>
+      {touchedName && error ? <span>{error}</span> : null}
     </CustomStyledSelect>
   );
 };
@@ -61,7 +72,9 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   error: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  touchedName: PropTypes.bool,
+  onBlur: PropTypes.func
 };
 
 Select.defaultProps = {
