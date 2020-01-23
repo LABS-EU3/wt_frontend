@@ -5,6 +5,8 @@ exports[`<ExerciseList /> renders the ExerciseList component correctly 1`] = `
   <styled.div>
     <Search
       placeholder="Look for a specific exercise"
+      search=""
+      setSearch={[Function]}
     />
     <withApollo(Exercises)
       exerciseName="Recommended Exercises"

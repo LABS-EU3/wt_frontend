@@ -14,10 +14,10 @@ exports[`<Input /> renders the Input component correctly 1`] = `
     onChange={[MockFunction]}
     placeholder="Search"
     size="md"
+    touchedName={true}
     type="text"
     value=""
     variant="jest.mock()"
   />
-  <span />
 </styled.div>
 `;
