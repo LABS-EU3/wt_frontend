@@ -38,6 +38,11 @@ export const WorkoutsStyle = styled.div`
       color: white;
     }
   }
+
+  .container {
+    width: 100%;
+    padding: 1rem;
+  }
 `;
 
 export const WorkoutStyle = styled.div`
@@ -230,5 +235,110 @@ export const WorkoutDetailStyle = styled.div`
     .exercise-preview-detail {
       padding: 1rem;
     }
+  }
+`;
+
+export const CustomWorkoutStyle = styled.div`
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  h2 {
+    display: inline-block;
+  }
+  .cw-buttons {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    a {
+      margin-right: 0.7rem;
+    }
+  }
+`;
+
+export const CustomWorkoutStyleDetail = styled.div`
+  width: 90vw;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+  text-align: left;
+
+  @media only screen and (max-width: 400px) {
+    width: 97vw;
+  }
+
+  .cw-title {
+    padding-bottom: 1rem;
+  }
+
+  .search-exercises {
+    position: relative;
+  }
+
+  .search-results {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: #fffcf2;
+    height: auto;
+    max-height: 30vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    z-index: 900;
+    p {
+      cursor: pointer;
+      line-height: 2rem;
+      transition: all 0.2s ease-in-out;
+      border-bottom: 1px solid #fffcf2;
+      padding: 0 1rem;
+      &.selected {
+        background: #ff8744;
+        color: white;
+      }
+      &:hover {
+        background: rgba(255, 135, 68, 0.75);
+        color: white;
+      }
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 0 1rem;
+  }
+
+  textarea {
+    padding: 0.8rem 1rem;
+    min-height: 80px;
+    max-height: 30vh;
+  }
+
+  .list-exercises {
+    text-align: left;
+    padding-top: 1.5rem;
+    h2 {
+      padding-bottom: 1rem;
+    }
+    & > p {
+      position: relative;
+      line-height: 3rem;
+      transition: all 0.2s ease-in-out;
+      border-bottom: 1px solid #fffcf2;
+      button {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+
+  .cw-submit-btn {
+    margin-top: 1rem;
   }
 `;

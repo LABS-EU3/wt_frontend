@@ -66,7 +66,8 @@ const WorkoutActionItems = ({
   workout,
   timerExercise,
   setTimerExercise,
-  getExerciseIndexById
+  getExerciseIndexById,
+  setWorkout
 }) => {
   const toast = useToast();
   const [start, setStart] = useState("isVisible");
@@ -77,7 +78,7 @@ const WorkoutActionItems = ({
   const [date, setDate] = useState(false);
   const [time, setTime] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [currTime, setCurrTime] = useState(0); // used on timer component
+  const [currTime, setCurrTime] = useState(0);
   const beep = useRef(null);
   const alert = (title, description, status) => {
     toast({
@@ -109,6 +110,7 @@ const WorkoutActionItems = ({
         setStart("isHidden");
         setPause("isVisible");
         setStop("isVisible");
+        setWorkout(w => ({ ...w, session: res.data.workoutSession }));
         alert("Workout started", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
@@ -118,9 +120,7 @@ const WorkoutActionItems = ({
 
   const handlePause = () => {
     const currentExercise = getCurrentExercise();
-    setStart("isVisible");
-    setPause("isHidden");
-    setStop("isVisible");
+    console.log("handlePause", currTime);
     client
       .mutate({
         mutation: PAUSE_WORKOUT,
@@ -133,6 +133,10 @@ const WorkoutActionItems = ({
         }
       })
       .then(res => {
+        setStart("isVisible");
+        setPause("isHidden");
+        setStop("isVisible");
+        setWorkout(w => ({ ...w, session: res.data.workoutSession }));
         alert("Workout paused!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
@@ -143,9 +147,6 @@ const WorkoutActionItems = ({
 
   const handleStop = () => {
     const currentExercise = getCurrentExercise();
-    setStart("isVisible");
-    setPause("isHidden");
-    setStop("isHidden");
     client
       .mutate({
         mutation: END_WORKOUT,
@@ -158,8 +159,12 @@ const WorkoutActionItems = ({
         }
       })
       .then(res => {
-        setCurrTime(currTime => 0);
+        setStart("isVisible");
+        setPause("isHidden");
+        setStop("isHidden");
+        setWorkout(w => ({ ...w, session: res.data.workoutSession }));
         setTimerExercise(workout.exercises[0].id);
+        setCurrTime(currTime => 0);
         alert("Workout ended!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
@@ -194,7 +199,7 @@ const WorkoutActionItems = ({
     if (start === "isHidden") {
       if (currTime <= currentExercise.time) {
         updateTimer = setTimeout(() => {
-          setCurrTime(currTime => currTime + 1);
+          setCurrTime(t => t + 1);
         }, 1000);
         if (currTime + 4 > currentExercise.time - 1) {
           beep.current.load();
@@ -207,7 +212,7 @@ const WorkoutActionItems = ({
           // go to next exercise
           setTimerExercise(workout.exercises[currIndex + 1].id);
           // continue timer
-          setCurrTime(currTime => 0);
+          setCurrTime(t => 0);
         } else {
           handleStop();
         }
@@ -218,17 +223,6 @@ const WorkoutActionItems = ({
     return () => clearTimeout(updateTimer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerExercise, start, pause, stop, currTime]);
-
-  useEffect(() => {
-    if (workout.session) {
-      setStart(workout.session.startDate ? "isVisible" : "isHidden");
-      setPause(workout.session.endDate ? "isVisible" : "isHidden");
-      setStop(workout.session.pause ? "isVisible" : "isHidden");
-    }
-    // pause workout if you exit the page while workout session is running
-    return handlePause;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     let scrollTimeout;
@@ -249,6 +243,25 @@ const WorkoutActionItems = ({
     }
     return () => clearInterval(scrollTimeout);
   }, [start, timerExercise, workout]);
+
+  useEffect(() => {
+    if (workout.session) {
+      console.log("initial state");
+      setStart(workout.session.startDate ? "isVisible" : "isHidden");
+      setPause(workout.session.endDate ? "isVisible" : "isHidden");
+      setStop(workout.session.pause ? "isVisible" : "isHidden");
+      setCurrTime(workout.session ? workout.session.exerciseTimer : 0);
+    }
+    // pause workout if you exit the page while workout session is running
+    return () => {
+      console.log("pause?", !workout.session.pause, currTime);
+      if (!workout.session.pause) {
+        console.log("pause");
+        handlePause();
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <StyledWorkoutItems>

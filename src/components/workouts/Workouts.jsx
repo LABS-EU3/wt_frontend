@@ -8,6 +8,9 @@ import { GET_WORKOUTS, GET_WORKOUTS_BY_FIELDS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
+import { getUserDetails } from "../../utils";
+
+const user = getUserDetails();
 
 function Workouts({ client, workoutName, workoutQuery, search }) {
   const toast = useToast();
@@ -29,18 +32,19 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
 
   useEffect(() => {
     let promise;
-    if (search.length > 0) {
+    const query = search ? GET_WORKOUTS_BY_FIELDS : GET_WORKOUTS;
+    const variables = search ? { search, fields: ["name"] } : null;
+
+    if (workoutQuery === "CUSTOM_WORKOUTS") {
       promise = client.query({
         query: GET_WORKOUTS_BY_FIELDS,
         variables: {
-          search,
-          fields: ["name", "description"]
+          search: user.user_id,
+          fields: ["userId"]
         }
       });
     } else {
-      promise = client.query({
-        query: GET_WORKOUTS
-      });
+      promise = client.query({ query, variables });
     }
 
     promise
@@ -89,6 +93,18 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
     return <Redirect to="/" />;
   }
 
+  if (workoutQuery === "CUSTOM_WORKOUTS") {
+    return (
+      <WorkoutsStyle>
+        <h3>Custom workouts</h3>
+        <div className="container">
+          {limitedWorkouts.map(item => (
+            <WorkoutCard key={item.id} data={item} cardQuery={workoutQuery} />
+          ))}
+        </div>
+      </WorkoutsStyle>
+    );
+  }
   if (limitedWorkouts.length > 0) {
     return (
       <WorkoutsStyle>
