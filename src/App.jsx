@@ -6,7 +6,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/LogIn";
 import Dashboard from "./components/dashboard/Dashboard";
 import SignUp from "./components/auth/SignUp";
-import WorkoutList from "./components/workouts/WorkoutList";
+// import WorkoutList from "./components/workouts/WorkoutList";
 import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseDetail from "./components/exercise/ExerciseDetail";
@@ -25,6 +25,11 @@ const App = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/accountrecovery" component={AccountRecovery} />
+        <Route
+          exact
+          path="/accountrecovery/:token"
+          component={AccountRecovery}
+        />
         <PrivateRoute exact path="/profile" component={ProfilePage} />
         <PrivateRoute exact path="/exercises" component={Exercises} />
         <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />

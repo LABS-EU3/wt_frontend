@@ -28,6 +28,7 @@ const StyledPreview = styled.div`
     h2 {
       color: white;
       text-transform: uppercase;
+      font-weight: bolder;
     }
 
     i {

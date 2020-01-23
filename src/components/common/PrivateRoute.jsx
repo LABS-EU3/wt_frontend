@@ -4,13 +4,7 @@ import { isLoggedIn } from "../../utils";
 import { isNewUser } from "../../utils";
 
 const isValidPath = path => {
-  console.log(path);
-  if (
-    path === "/login" ||
-    path === "/signup" ||
-    path === "/onboarding" ||
-    path === "accountrecovery"
-  ) {
+  if (path === "/login" || path === "/signup" || path === "/onboarding") {
     return true;
   } else {
     return false;
@@ -18,7 +12,7 @@ const isValidPath = path => {
 };
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isSignedIn = isLoggedIn();
-  console.log(rest.path);
+
   if (isSignedIn) {
     const onBoarded = isNewUser();
 
@@ -27,8 +21,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     else {
       return <Redirect to="/onboarding" />;
     }
-  } else if (rest.path === "/accountrecovery") {
-    return <Route {...rest} render={props => <Component {...props} />} />;
   } else {
     return <Redirect to="/login" />;
   }

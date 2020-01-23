@@ -271,3 +271,13 @@ export const UPDATE_USER_DETAILS = gql`
     }
   }
 `;
+
+export const RESET_PASSWORD = gql`
+  mutation resetPassword($password: String!, $rePassword: String!) {
+    resetPassword(input: { password: $password, rePassword: $rePassword }) {
+      id
+      firstname
+      lastname
+    }
+  }
+`;
