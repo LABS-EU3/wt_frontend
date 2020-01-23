@@ -58,35 +58,35 @@ const Footer = ({ location }) => {
       <StyledFooter>
         <p>&copy; 2020 trackdrills</p>
 
-        <div class="socials">
+        <div className="socials">
           <a href="##">
             <span>
               {" "}
-              <i class="fas fa-2x fa-envelope"></i>
+              <i className="fas fa-2x fa-envelope"></i>
             </span>
           </a>
           <a href="##">
             <span>
-              <i class="fab fa-2x fa-twitter"></i>
-            </span>
-          </a>
-
-          <a href="##">
-            <span>
-              {" "}
-              <i class="fab fa-2x fa-linkedin"></i>
+              <i className="fab fa-2x fa-twitter"></i>
             </span>
           </a>
 
           <a href="##">
             <span>
               {" "}
-              <i class="fab fa-2x fa-facebook-square"></i>
+              <i className="fab fa-2x fa-linkedin"></i>
+            </span>
+          </a>
+
+          <a href="##">
+            <span>
+              {" "}
+              <i className="fab fa-2x fa-facebook-square"></i>
             </span>
           </a>
         </div>
 
-        <div class="scroll"></div>
+        <div className="scroll"></div>
       </StyledFooter>
     );
   } else {

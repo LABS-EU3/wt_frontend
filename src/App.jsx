@@ -6,7 +6,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/LogIn";
 import Dashboard from "./components/dashboard/Dashboard";
 import SignUp from "./components/auth/SignUp";
-// import WorkoutList from "./components/workouts/WorkoutList";
+import WorkoutList from "./components/workouts/WorkoutList";
 import WorkoutDetail from "./components/workouts/WorkoutDetail";
 import Exercises from "./components/exercise/ExerciseList";
 import ExerciseDetail from "./components/exercise/ExerciseDetail";
@@ -36,6 +36,7 @@ const App = () => {
         <PrivateRoute exact path="/onboarding" component={Onboarding} />
         <Route exact path="/signup" component={SignUp} />
         <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute exact path="/workouts" component={WorkoutList} />
         <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
         <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
         <PrivateRoute
