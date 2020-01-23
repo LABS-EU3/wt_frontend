@@ -97,6 +97,9 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
     return (
       <WorkoutsStyle>
         <h3>Custom workouts</h3>
+        <Button variantColor="orange" leftIcon="plus" isLoading={isLoading}>
+          New workout
+        </Button>
         <div className="container">
           {limitedWorkouts.map(item => (
             <WorkoutCard key={item.id} data={item} cardQuery={workoutQuery} />
