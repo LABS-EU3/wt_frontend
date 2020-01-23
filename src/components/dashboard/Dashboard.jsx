@@ -68,7 +68,7 @@ function Dashboard({ client, history }) {
 
         <div className="dashboard-content">
           <div className="user-detail">
-            <Link to={`/profile=`}>Edit</Link>
+            <Link to="/profile">Edit</Link>
             <Avatar
               src={logoImage}
               size="2xl"
