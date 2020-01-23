@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import {
-  Button,
-  RadioButtonGroup,
-  useToast,
-  Box,
-  Flex
-  // Input
-} from "@chakra-ui/core";
+import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
 import Input from "../common/Input";
 import { useFormik } from "formik";
 import * as yup from "yup";
