@@ -132,6 +132,10 @@ const AccountRecovery = ({ client, history }) => {
             >
               Reset Password
             </Button>
+
+            <Link to="/login" className="link-recovery">
+              Back to login
+            </Link>
           </form>
         </div>
       </div>
