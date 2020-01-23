@@ -41,6 +41,8 @@ export const ONBOARDING = gql`
     $goal: String!
     $experience: String!
     $equipment: Boolean!
+    $height: Float!
+    $weight: Float!
   ) {
     updateUser(
       input: {
@@ -49,6 +51,8 @@ export const ONBOARDING = gql`
         goal: $goal
         experience: $experience
         equipment: $equipment
+        height: $height
+        weight: $weight
       }
     ) {
       firstname
