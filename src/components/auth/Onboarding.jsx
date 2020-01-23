@@ -225,7 +225,7 @@ const Onboarding = ({ client, history }) => {
                 error={formik.errors.weight}
                 value={formik.values.weight}
                 onChange={formik.handleChange}
-                placeholder="Enter Height"
+                placeholder="Enter Weight"
                 variant="filled"
                 id="weight"
                 type="number"
