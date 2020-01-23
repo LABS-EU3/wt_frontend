@@ -236,3 +236,13 @@ export const UPDATE_USER_DETAILS = gql`
     }
   }
 `;
+
+export const ACCOUNT_RECOVERY = gql`
+  mutation accountRecovery($email: String!) {
+    accountRecovery(input: { email: $email }) {
+      id
+      firstname
+      lastname
+    }
+  }
+`;
