@@ -16,7 +16,7 @@ export const WorkoutsStyle = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 2rem 0;
-
+  text-align: left;
   h3 {
     display: flex;
     flex-wrap: wrap;

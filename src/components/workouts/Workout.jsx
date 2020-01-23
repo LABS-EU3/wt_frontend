@@ -1,15 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Heading, ButtonGroup, Button } from "@chakra-ui/core";
 import { WorkoutStyle, CustomWorkoutStyle } from "./WorkoutStyle";
 
-function Workout({ data, cardQuery }) {
+function Workout({ data, history, cardQuery }) {
   const { name, intensity, types, id, picture } = data;
 
   const deleteCustomWorkoutOnClick = () => {
     console.log(`DELETE ${id}`);
+  };
+  const editCustomWorkoutOnClick = id => e => {
+    history.push(`/my/workout/${id}`);
   };
 
   if (cardQuery === "CUSTOM_WORKOUTS") {
@@ -19,11 +22,14 @@ function Workout({ data, cardQuery }) {
           {name} - {intensity} - {types}
         </Heading>
         <ButtonGroup className="cw-buttons">
-          <Link to={`/my/workout/${id}`}>
-            <Button leftIcon="edit" variant="outline" variantColor="yellow">
-              Edit
-            </Button>
-          </Link>
+          <Button
+            onClick={editCustomWorkoutOnClick(id)}
+            leftIcon="edit"
+            variant="outline"
+            variantColor="yellow"
+          >
+            Edit
+          </Button>
           <Button
             onClick={deleteCustomWorkoutOnClick}
             leftIcon="delete"
@@ -62,4 +68,4 @@ Workout.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-export default Workout;
+export default withRouter(Workout);
