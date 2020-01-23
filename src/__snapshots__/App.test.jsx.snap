@@ -11,6 +11,7 @@ exports[`<App /> renders the App component correctly 1`] = `
     exact={true}
     path="/login"
   />
+  <withApollo(AccountRecovery) />
   <PrivateRoute
     component={[Function]}
     exact={true}
