@@ -92,7 +92,11 @@ const Navigation = ({ location }) => {
         <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">
+            <DrawerHeader
+              borderBottomWidth="1px"
+              justifyContent="center"
+              display="flex"
+            >
               <Logo />
             </DrawerHeader>
             <DrawerBody>
