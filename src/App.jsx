@@ -16,7 +16,7 @@ import ScheduleDetail from "./components/schedule/ScheduleDetail";
 import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
 
-function App() {
+const App = () => {
   return (
     <div className="App" data-testid="App">
       <Navigation />
@@ -34,6 +34,6 @@ function App() {
       <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
     </div>
   );
-}
+};
 
 export default App;

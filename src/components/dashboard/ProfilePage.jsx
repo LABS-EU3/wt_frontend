@@ -49,7 +49,7 @@ const ProfilePage = ({ client, history }) => {
         query: GET_USER_DETAILS
       })
       .then(res => {
-        console.log(res);
+        console.log(res.data);
         setUserData(res.data.user);
         setIsLoading(false);
       })
