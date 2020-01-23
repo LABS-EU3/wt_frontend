@@ -50,32 +50,6 @@ const StyledFooter = styled.footer`
       padding: 0 0.5rem;
     }
   }
-
-  .scroll {
-    display: flex;
-    align-items: center;
-
-    padding-right: 2.5rem;
-
-    .scroll-top {
-      cursor: pointer;
-      display: flex;
-      transition: all 0.3s ease-in-out;
-      background-color: black;
-      border-radius: 50%;
-      padding: 0.7rem;
-      position: fixed;
-      bottom: 20px;
-      right: 30px;
-      z-index: 99;
-      border: none;
-      outline: none;
-
-      &:hover {
-        background-color: #ff8744;
-      }
-    }
-  }
 `;
 
 const Footer = ({ location }) => {
@@ -112,14 +86,7 @@ const Footer = ({ location }) => {
           </a>
         </div>
 
-        <div class="scroll">
-          <a href="#top">
-            <span class="scroll-top">
-              {" "}
-              <i class="fas fa-chevron-up"></i>{" "}
-            </span>
-          </a>
-        </div>
+        <div class="scroll"></div>
       </StyledFooter>
     );
   } else {
