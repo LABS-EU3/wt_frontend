@@ -255,7 +255,6 @@ export const UPDATE_USER_DETAILS = gql`
       id
       firstname
       email
-      password
       height
       heightUnit {
         id

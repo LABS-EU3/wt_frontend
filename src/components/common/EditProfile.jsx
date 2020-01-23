@@ -10,18 +10,61 @@ import {
   Stack,
   Heading,
   FormLabel,
-  Switch
+  Switch,
+  FormErrorMessage,
+  useToast
 } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { UPDATE_USER_DETAILS } from "../../graphql/mutations";
+import { GET_UNITS } from "../../graphql/queries";
 
 import logoImage from "../../images/login_image.png";
 import { withApollo } from "react-apollo";
 
 const EditProfile = ({ onClose, data, client }) => {
+  console.log(data);
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [updatedData, setUpdatedData] = useState([]);
+  const [heightUnits, setHeightUnits] = useState([]);
+  const [weightUnits, setWeightUnits] = useState([]);
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+  console.log(weightUnits);
+  console.log(heightUnits);
+  useEffect(() => {
+    client
+      .query({
+        query: GET_UNITS
+      })
+      .then(res => {
+        const weightUnit = res.data.units.filter(
+          unit => unit.type === "weight"
+        );
+        const heightUnit = res.data.units.filter(
+          unit => unit.type === "height"
+        );
+        setHeightUnits(heightUnit);
+        setWeightUnits(weightUnit);
+      })
+      .catch(() => {
+        alert(
+          "An error occurred.",
+          "Unable to complete onboarding. Please reload the page and try again",
+          "error"
+        );
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -33,16 +76,20 @@ const EditProfile = ({ onClose, data, client }) => {
       weight: data.weight,
       weightUnit: data.weightUnit.id,
       goal: data.goal,
-      reminderType: data.reminderType
+      reminderType: data.reminderType,
+      experience: data.experience
     },
     validationSchema: yup.object().shape({
       firstname: yup.string().required("Please enter your firstname"),
       lastname: yup.string().required("Please enter your lastname"),
+      email: yup.string().email(),
       height: yup.number().required("Please enter your height"),
       heightUnit: yup.string().required("Please select your height unit"),
       weight: yup.number().required("Please enter your weight"),
       weightUnit: yup.string().required("Please select your weight unit"),
-      goal: yup.string().required("Please enter your workout goal")
+      goal: yup.string().required("Please enter your workout goal"),
+      experience: yup.string().required("Please select your experience"),
+      reminderType: yup.string()
     }),
 
     onSubmit: value => {
@@ -53,26 +100,26 @@ const EditProfile = ({ onClose, data, client }) => {
           variables: {
             firstname: value.firstname,
             lastname: value.lastname,
+            // password: "IsaIsaIsa1#",
+            experience: "beginner",
+            equipment: data.equipment,
             height: value.height,
             weight: value.weight,
             heightUnit: value.heightUnit,
             weightUnit: value.weightUnit,
             goal: value.goal,
-            reminderType: value.reminderType
+            reminderType: "email"
           }
         })
-
         .then(res => {
           console.log(res);
           setUpdatedData(res.data.user);
+          alert("Profile Updates Successfully", "", "success");
           setLoading(false);
           onClose();
         })
-        .catch(err => {
-          setLoading(false);
-          alert("An error occurred.", "Unable to update", "error");
-        })
         .catch(error => {
+          console.log(error);
           setLoading(false);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(
@@ -80,10 +127,13 @@ const EditProfile = ({ onClose, data, client }) => {
               error.graphQLErrors[0].message,
               "error"
             );
+          } else {
+            alert("Unable to update profile", "", "error");
           }
         });
     }
   });
+
   return (
     <Box>
       <Stack>
@@ -111,8 +161,11 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.firstname}
+            isInvalid={formik.errors.lastname}
           />
+          {formik.errors.firstname && (
+            <FormErrorMessage>{formik.errors.firstname}</FormErrorMessage>
+          )}
         </Box>
         <Box paddingTop="30px">
           <Heading size="sm">Last Name</Heading>
@@ -127,8 +180,11 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.lastname}
+            isInvalid={formik.errors.lastname}
           />
+          {formik.errors.lastname && (
+            <FormErrorMessage>{formik.errors.lastname}</FormErrorMessage>
+          )}
         </Box>
         <Box paddingTop="30px">
           <Heading size="sm">Email</Heading>
@@ -144,8 +200,11 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.email}
+            isInvalid={formik.errors.email}
           />
+          {formik.errors.email && (
+            <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+          )}
         </Box>
 
         <Flex paddingTop="15px" alignItems="center">
@@ -162,15 +221,36 @@ const EditProfile = ({ onClose, data, client }) => {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
-              error={formik.errors.height}
+              isInvalid={formik.errors.height}
             />
+            {formik.errors.height && (
+              <FormErrorMessage>{formik.errors.height}</FormErrorMessage>
+            )}
           </Box>
 
           <Box>
-            <Select marginLeft="30px" marginTop="30px">
-              <option value="inches">Inches ""</option>
-              <option value="meters">Meters m</option>
+            <Select
+              marginLeft="30px"
+              marginTop="30px"
+              name="heightUnit"
+              onChange={formik.handleChange}
+              value={formik.values.heightUnit}
+              isInvalid={formik.errors.heightUnit}
+            >
+              {heightUnits.map(heightUnit => (
+                <option
+                  key={heightUnit.name}
+                  className="unitButton"
+                  value={heightUnit.id}
+                >
+                  {heightUnit.name.charAt(0).toUpperCase() +
+                    heightUnit.name.slice(1)}
+                </option>
+              ))}
             </Select>
+            {formik.errors.heightUnit && (
+              <FormErrorMessage>{formik.errors.heightUnit}</FormErrorMessage>
+            )}
           </Box>
         </Flex>
         <Flex paddingTop="15px" alignItems="center">
@@ -187,15 +267,36 @@ const EditProfile = ({ onClose, data, client }) => {
               _hover="black"
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
-              error={formik.errors.weight}
+              isInvalid={formik.errors.weight}
             />
+            {formik.errors.weight && (
+              <FormErrorMessage>{formik.errors.weight}</FormErrorMessage>
+            )}
           </Box>
 
           <Box>
-            <Select marginLeft="30px" marginTop="30px">
-              <option value="kilogram">Kilogram kg</option>
-              <option value="pounds">Pounds lb</option>
+            <Select
+              name="weightUnit"
+              marginLeft="30px"
+              marginTop="30px"
+              onChange={formik.handleChange}
+              value={formik.values.weightUnit}
+              isInvalid={formik.errors.weightUnit}
+            >
+              {weightUnits.map(weightUnit => (
+                <option
+                  key={weightUnit.name}
+                  className="unitButton"
+                  value={weightUnit.id}
+                >
+                  {weightUnit.name.charAt(0).toUpperCase() +
+                    weightUnit.name.slice(1)}
+                </option>
+              ))}
             </Select>
+            {formik.errors.weightUnit && (
+              <FormErrorMessage>{formik.errors.weightUnit}</FormErrorMessage>
+            )}
           </Box>
         </Flex>
         <Box paddingTop="15px">
@@ -211,22 +312,35 @@ const EditProfile = ({ onClose, data, client }) => {
             _hover="black"
             focusBorderColor="#FF8744"
             errorBorderColor="crimson"
-            error={formik.errors.goal}
+            isInvalid={formik.errors.goal}
           />
+          {formik.errors.goal && (
+            <FormErrorMessage>{formik.errors.goal}</FormErrorMessage>
+          )}
         </Box>
         <Flex paddingTop="15px" alignItems="center">
           <FormLabel htmlFor="email-alerts">Enable email alerts?</FormLabel>
-          <Switch id="email-alerts" />
+          <Switch
+            name="reminderType"
+            id="email-alerts"
+            isChecked={formik.values.reminderType === "email"}
+            onChange={event =>
+              formik.setFieldValue(
+                "reminderType",
+                event.target.checked ? "email" : "none"
+              )
+            }
+          />
         </Flex>
+        <ModalFooter>
+          <Button type="submit" variantColor="orange" mr={3}>
+            Save
+          </Button>
+          <Button variant="ghost" variantColor="orange" onClick={onClose}>
+            Cancel
+          </Button>
+        </ModalFooter>
       </form>
-      <ModalFooter>
-        <Button variantColor="orange" mr={3}>
-          Save
-        </Button>
-        <Button variant="ghost" variantColor="orange" onClick={onClose}>
-          Cancel
-        </Button>
-      </ModalFooter>
     </Box>
   );
 };

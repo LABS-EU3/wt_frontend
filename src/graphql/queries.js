@@ -223,11 +223,15 @@ export const GET_USER_DETAILS = gql`
       lastname
       equipment
       height
+      goal
       weight
+      experience
       heightUnit {
+        id
         name
       }
       weightUnit {
+        id
         name
       }
       email
