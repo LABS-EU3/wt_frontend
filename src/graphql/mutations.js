@@ -185,3 +185,54 @@ export const SCHEDULE_WORKOUT = gql`
     }
   }
 `;
+
+export const UPDATE_USER_DETAILS = gql`
+  mutation updatedUser(
+    $firstname: String!
+    $lastname: String!
+    $password: String!
+    $height: Float!
+    $heightUnit: String!
+    $weight: Float!
+    $goal: String!
+    $equipment: Boolean!
+    $experience: String!
+    $reminderType: String!
+  ) {
+    updateUser(
+      input: {
+        firstname: $firstname
+        lastname: $lastname
+        password: $password
+        height: $height
+        heightUnit: $heightUnit
+        weight: $weight
+        goal: $goal
+        equipment: $equipment
+        experience: $experience
+        reminderType: $reminderType
+      }
+    ) {
+      id
+      firstname
+      email
+      password
+      height
+      heightUnit {
+        id
+        name
+        type
+      }
+      goal
+      weight
+      weightUnit {
+        id
+        name
+        type
+      }
+      equipment
+      experience
+      photo
+    }
+  }
+`;

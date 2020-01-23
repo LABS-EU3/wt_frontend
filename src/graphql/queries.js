@@ -216,12 +216,21 @@ export const EXERCISES_BY_FIELDS = gql`
   }
 `;
 
-export const ACCOUNT_RECOVERY_QUERY = gql`
-  query authForm($email: String!) {
-    authForm(input: { email: $email }) {
-      id
-      token
-      isNewUser
+export const GET_USER_DETAILS = gql`
+  query {
+    user {
+      firstname
+      lastname
+      equipment
+      height
+      weight
+      heightUnit {
+        name
+      }
+      weightUnit {
+        name
+      }
+      email
     }
   }
 `;
