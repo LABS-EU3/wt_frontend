@@ -14,12 +14,14 @@ import {
 } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { UPDATE_USER_DETAILS } from "../../graphql/mutations";
 
 import logoImage from "../../images/login_image.png";
 import { withApollo } from "react-apollo";
 
 const EditProfile = ({ onClose, data, client }) => {
   const [loading, setLoading] = useState(false);
+  const [updatedData, setUpdatedData] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -27,10 +29,11 @@ const EditProfile = ({ onClose, data, client }) => {
       lastname: data.lastname,
       email: data.email,
       height: data.height,
-      heightUnit: data.heightUnit.name,
+      heightUnit: data.heightUnit.id,
       weight: data.weight,
-      weightUnit: data.weightUnit.name,
-      goal: data.goal
+      weightUnit: data.weightUnit.id,
+      goal: data.goal,
+      reminderType: data.reminderType
     },
     validationSchema: yup.object().shape({
       firstname: yup.string().required("Please enter your firstname"),
@@ -40,53 +43,46 @@ const EditProfile = ({ onClose, data, client }) => {
       weight: yup.number().required("Please enter your weight"),
       weightUnit: yup.string().required("Please select your weight unit"),
       goal: yup.string().required("Please enter your workout goal")
-    })
+    }),
 
-    // onSubmit: value => {
-    //   setLoading(true);
-    //   client
-    //     .mutate({
-    //       mutation: LOGIN_QUERY,
-    //       variables: {
-    //         email: value.email,
-    //         password: value.password,
-    //         remember: value.remember
-    //       }
-    //     })
-    //     .then(response => {
-    //       const { token, isNewUser } = response.data.authForm;
-    //       localStorage.setItem(
-    //         "userData",
-    //         JSON.stringify({ token, isNewUser })
-    //       );
-    //       setLoading(false);
-    //       if (isNewUser === true) {
-    //         setLoginSuccess("/onboarding");
-    //         alert(
-    //           "Login Successful.",
-    //           "You can now complete the onboarding process",
-    //           "success"
-    //         );
-    //       } else {
-    //         setLoginSuccess("/");
-    //         alert(
-    //           "Login Successful.",
-    //           "You can now access your dashboard",
-    //           "success"
-    //         );
-    //       }
-    //     })
-    //     .catch(error => {
-    //       setLoading(false);
-    //       if (error.graphQLErrors && error.graphQLErrors.length > 0) {
-    //         alert(
-    //           "An error occurred.",
-    //           error.graphQLErrors[0].message,
-    //           "error"
-    //         );
-    //       }
-    //     });
-    // }
+    onSubmit: value => {
+      setLoading(true);
+      client
+        .mutate({
+          mutation: UPDATE_USER_DETAILS,
+          variables: {
+            firstname: value.firstname,
+            lastname: value.lastname,
+            height: value.height,
+            weight: value.weight,
+            heightUnit: value.heightUnit,
+            weightUnit: value.weightUnit,
+            goal: value.goal,
+            reminderType: value.reminderType
+          }
+        })
+
+        .then(res => {
+          console.log(res);
+          setUpdatedData(res.data.user);
+          setLoading(false);
+          onClose();
+        })
+        .catch(err => {
+          setLoading(false);
+          alert("An error occurred.", "Unable to update", "error");
+        })
+        .catch(error => {
+          setLoading(false);
+          if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+            alert(
+              "An error occurred.",
+              error.graphQLErrors[0].message,
+              "error"
+            );
+          }
+        });
+    }
   });
   return (
     <Box>
@@ -172,8 +168,8 @@ const EditProfile = ({ onClose, data, client }) => {
 
           <Box>
             <Select marginLeft="30px" marginTop="30px">
-              <option value="kilogram">Kilogram kg</option>
-              <option value="pounds">Pounds lb</option>
+              <option value="inches">Inches ""</option>
+              <option value="meters">Meters m</option>
             </Select>
           </Box>
         </Flex>
@@ -197,8 +193,8 @@ const EditProfile = ({ onClose, data, client }) => {
 
           <Box>
             <Select marginLeft="30px" marginTop="30px">
-              <option value="kilogram">Inches ""</option>
-              <option value="pounds">Metres m</option>
+              <option value="kilogram">Kilogram kg</option>
+              <option value="pounds">Pounds lb</option>
             </Select>
           </Box>
         </Flex>
