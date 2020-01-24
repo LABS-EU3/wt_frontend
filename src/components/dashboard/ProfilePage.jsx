@@ -9,7 +9,7 @@ import {
   Button,
   useDisclosure
 } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
+
 import {
   IoIosPerson,
   IoIosMail,
