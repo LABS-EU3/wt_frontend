@@ -59,37 +59,24 @@ const ProfilePage = ({ client, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // if (isLoading) {
-  //   return (
-  //     <Box>
-  //       <Flex
-  //         width="100vw"
-  //         height="100vh"
-  //         justifyContent="center"
-  //         align="center"
-  //       >
-  //         <CustomSpinner thickness="6px" size="xl" text="Loading..." />
-  //       </Flex>
-  //     </Box>
-  //   );
-  // }
-
-  // if (isLoading) {
-  //   return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
-  // }
+  if (isLoading) {
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
+    );
+  }
 
   return (
     <Box>
-      {/* <Flex width="100vw" height="100vh" justifyContent="center" align="center">
-        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
-      </Flex> */}
       <DashboardStyle>
-        {/* <div className="welcome">
-          <Heading marginBottom="25px" textAlign="left">
-            Hello {userData.name}! Welcome to Workout Tracker ...
-          </Heading>
-        </div> */}
-
         <div className="dashboard-content">
           <div className="user-detail">
             <Button variant="link" variantColor="orange" onClick={onOpen}>
