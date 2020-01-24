@@ -29,7 +29,10 @@ const cache = new InMemoryCache({
 const link = new createUploadLink({
   uri: REACT_APP_GraphQL_API,
   fetchOptions: {
-    mode: "cors"
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   }
 });
 
