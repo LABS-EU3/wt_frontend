@@ -225,6 +225,7 @@ export const GET_USER_DETAILS = gql`
       height
       goal
       weight
+      reminderType
       experience
       heightUnit {
         id
