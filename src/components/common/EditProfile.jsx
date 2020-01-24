@@ -11,7 +11,6 @@ import {
   Heading,
   FormLabel,
   Switch,
-  FormErrorMessage,
   useToast
 } from "@chakra-ui/core";
 import { useFormik } from "formik";
@@ -269,8 +268,9 @@ const EditProfile = ({ onClose, data, client }) => {
               errorBorderColor="crimson"
               isInvalid={formik.errors.weight}
             />
+
             {formik.errors.weight && (
-              <FormErrorMessage>{formik.errors.weight}</FormErrorMessage>
+              <span className="error">{formik.errors.weight}</span>
             )}
           </Box>
 
