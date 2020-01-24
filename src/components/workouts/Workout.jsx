@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Heading, ButtonGroup, Button } from "@chakra-ui/core";
-import { WorkoutStyle, CustomWorkoutStyle } from "./WorkoutStyle";
+import { WorkoutStyle } from "./WorkoutStyle";
 
 function Workout({ data, history, cardQuery }) {
   const { name, intensity, types, id, picture } = data;

@@ -41,6 +41,8 @@ export const ONBOARDING = gql`
     $goal: String!
     $experience: String!
     $equipment: Boolean!
+    $height: Float!
+    $weight: Float!
   ) {
     updateUser(
       input: {
@@ -49,6 +51,8 @@ export const ONBOARDING = gql`
         goal: $goal
         experience: $experience
         equipment: $equipment
+        height: $height
+        weight: $weight
       }
     ) {
       firstname
@@ -223,22 +227,20 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
 
 export const UPDATE_USER_DETAILS = gql`
   mutation updatedUser(
-    $firstname: String!
-    $lastname: String!
-    $password: String!
-    $height: Float!
-    $heightUnit: String!
-    $weight: Float!
-    $goal: String!
-    $equipment: Boolean!
-    $experience: String!
-    $reminderType: String!
+    $firstname: String
+    $lastname: String
+    $height: Float
+    $heightUnit: String
+    $weight: Float
+    $goal: String
+    $equipment: Boolean
+    $experience: String
+    $reminderType: String
   ) {
     updateUser(
       input: {
         firstname: $firstname
         lastname: $lastname
-        password: $password
         height: $height
         heightUnit: $heightUnit
         weight: $weight
@@ -251,7 +253,6 @@ export const UPDATE_USER_DETAILS = gql`
       id
       firstname
       email
-      password
       height
       heightUnit {
         id
@@ -272,9 +273,9 @@ export const UPDATE_USER_DETAILS = gql`
   }
 `;
 
-export const ACCOUNT_RECOVERY = gql`
-  mutation accountRecovery($email: String!) {
-    accountRecovery(input: { email: $email }) {
+export const RESET_PASSWORD = gql`
+  mutation resetPassword($password: String!, $rePassword: String!) {
+    resetPassword(input: { password: $password, rePassword: $rePassword }) {
       id
       firstname
       lastname

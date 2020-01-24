@@ -223,14 +223,28 @@ export const GET_USER_DETAILS = gql`
       lastname
       equipment
       height
+      goal
       weight
+      experience
       heightUnit {
+        id
         name
       }
       weightUnit {
+        id
         name
       }
       email
+    }
+  }
+`;
+
+export const ACCOUNT_RECOVERY = gql`
+  query accountRecovery($email: String!) {
+    accountRecovery(input: $email) {
+      id
+      firstname
+      lastname
     }
   }
 `;

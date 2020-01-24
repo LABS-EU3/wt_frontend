@@ -139,14 +139,16 @@ function WorkoutHistory({ client, history }) {
           <p>You can upload progress pictures and track your development!</p>
         </header>
 
-        {workouts.map(workout => (
-          <WorkoutHistoryCard
-            onOpen={e => onOpenUpload(workout.id, e)}
-            key={workout.startDate}
-            workout={workout}
-            history={history}
-          />
-        ))}
+        <div>
+          {workouts.map(workout => (
+            <WorkoutHistoryCard
+              onOpen={e => onOpenUpload(workout.id, e)}
+              key={workout.startDate}
+              workout={workout}
+              history={history}
+            />
+          ))}
+        </div>
 
         <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />

@@ -12,6 +12,7 @@ const isValidPath = path => {
 };
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isSignedIn = isLoggedIn();
+
   if (isSignedIn) {
     const onBoarded = isNewUser();
 
