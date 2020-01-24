@@ -227,16 +227,16 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
 
 export const UPDATE_USER_DETAILS = gql`
   mutation updatedUser(
-    $firstname: String!
-    $lastname: String!
-    $password: String!
-    $height: Float!
-    $heightUnit: String!
-    $weight: Float!
-    $goal: String!
-    $equipment: Boolean!
-    $experience: String!
-    $reminderType: String!
+    $firstname: String
+    $lastname: String
+    $password: String
+    $height: Float
+    $heightUnit: String
+    $weight: Float
+    $goal: String
+    $equipment: Boolean
+    $experience: String
+    $reminderType: String
   ) {
     updateUser(
       input: {
