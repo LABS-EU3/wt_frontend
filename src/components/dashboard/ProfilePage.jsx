@@ -9,7 +9,7 @@ import {
   Button,
   useDisclosure
 } from "@chakra-ui/core";
-
+import { Link } from "react-router-dom";
 import {
   IoIosPerson,
   IoIosMail,
@@ -77,8 +77,8 @@ const ProfilePage = ({ client, history }) => {
   return (
     <Box>
       <DashboardStyle>
-        <Box display="flex">
-          <Box width="30%">
+        <div className="dashboard-content">
+          <div className="user-detail">
             <Button variant="link" variantColor="orange" onClick={onOpen}>
               Edit Profile
             </Button>
@@ -94,9 +94,7 @@ const ProfilePage = ({ client, history }) => {
                 <Box as={IoIosPerson} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">
                   <p>Name</p>
-                  <p>{`${userData.firstname ? userData.firstname : ""} ${
-                    userData.lastname ? userData.lastname : ""
-                  }`}</p>
+                  <p>{`${userData.firstname} ${userData.lastname}`}</p>
                 </Box>
               </Flex>
               <Flex paddingY="30px" alignItems="center">
@@ -144,7 +142,7 @@ const ProfilePage = ({ client, history }) => {
               </span>{" "}
               You have a {userData.streak} days streak. Keep it up!
             </Box>
-          </Box>
+          </div>
 
           <div className="dasboard-detail">
             <section className="quotes">
@@ -164,7 +162,7 @@ const ProfilePage = ({ client, history }) => {
               </Heading>
             </section>
           </div>
-        </Box>
+        </div>
       </DashboardStyle>
     </Box>
   );

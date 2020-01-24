@@ -229,7 +229,6 @@ export const UPDATE_USER_DETAILS = gql`
   mutation updatedUser(
     $firstname: String
     $lastname: String
-    $password: String
     $height: Float
     $heightUnit: String
     $weight: Float
@@ -242,7 +241,6 @@ export const UPDATE_USER_DETAILS = gql`
       input: {
         firstname: $firstname
         lastname: $lastname
-        password: $password
         height: $height
         heightUnit: $heightUnit
         weight: $weight
