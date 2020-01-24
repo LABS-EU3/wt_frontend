@@ -77,8 +77,8 @@ const ProfilePage = ({ client, history }) => {
   return (
     <Box>
       <DashboardStyle>
-        <div className="dashboard-content">
-          <div className="user-detail">
+        <Box display="flex">
+          <Box width="30%">
             <Button variant="link" variantColor="orange" onClick={onOpen}>
               Edit Profile
             </Button>
@@ -144,7 +144,7 @@ const ProfilePage = ({ client, history }) => {
               </span>{" "}
               You have a {userData.streak} days streak. Keep it up!
             </Box>
-          </div>
+          </Box>
 
           <div className="dasboard-detail">
             <section className="quotes">
@@ -164,7 +164,7 @@ const ProfilePage = ({ client, history }) => {
               </Heading>
             </section>
           </div>
-        </div>
+        </Box>
       </DashboardStyle>
     </Box>
   );
