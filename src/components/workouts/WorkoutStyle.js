@@ -24,6 +24,13 @@ export const WorkoutsStyle = styled.div`
     font-weight: bolder;
     font-size: 1.2rem;
     padding: 0 2rem;
+    position: relative;
+    a {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
   }
 
   .load-more {
@@ -42,6 +49,9 @@ export const WorkoutsStyle = styled.div`
   .container {
     width: 100%;
     padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 `;
 

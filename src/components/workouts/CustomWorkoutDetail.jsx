@@ -72,6 +72,11 @@ const CustomWorkoutDetail = ({ client, history }) => {
     }),
     onSubmit: values => {
       setIsLoading(true);
+      console.log({
+        ...values,
+        userId: user.user_id,
+        exercises: selectedExercises
+      });
       client
         .mutate({
           mutation: UPSERT_CUSTOM_WORKOUT,

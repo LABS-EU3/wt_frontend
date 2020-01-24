@@ -17,29 +17,40 @@ function Workout({ data, history, cardQuery }) {
 
   if (cardQuery === "CUSTOM_WORKOUTS") {
     return (
-      <CustomWorkoutStyle>
-        <Heading size="sm" textAlign="left">
-          {name} - {intensity} - {types}
-        </Heading>
-        <ButtonGroup className="cw-buttons">
-          <Button
-            onClick={editCustomWorkoutOnClick(id)}
-            leftIcon="edit"
-            variant="outline"
-            variantColor="yellow"
-          >
-            Edit
-          </Button>
-          <Button
-            onClick={deleteCustomWorkoutOnClick}
-            leftIcon="delete"
-            variant="outline"
-            variantColor="red"
-          >
-            Delete
-          </Button>
-        </ButtonGroup>
-      </CustomWorkoutStyle>
+      <WorkoutStyle>
+        <Link to={`/workout/${id}`}>
+          <img src={picture} alt={name} />
+        </Link>
+        <div className="workout-details">
+          <Link to={`/workout/${id}`}>
+            <Heading size="sm" textAlign="left">
+              {name}
+            </Heading>
+            <div className="workout-type">
+              <p>Intensity: {intensity}</p>
+              <p>Type: {types}</p>
+            </div>
+          </Link>
+          <ButtonGroup className="cw-buttons">
+            <Button
+              onClick={editCustomWorkoutOnClick(id)}
+              leftIcon="edit"
+              variant="outline"
+              variantColor="yellow"
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={deleteCustomWorkoutOnClick}
+              leftIcon="delete"
+              variant="outline"
+              variantColor="red"
+            >
+              Delete
+            </Button>
+          </ButtonGroup>
+        </div>
+      </WorkoutStyle>
     );
   }
 
