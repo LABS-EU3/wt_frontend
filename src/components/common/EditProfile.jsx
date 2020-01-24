@@ -27,6 +27,7 @@ const EditProfile = ({ onClose, data, client }) => {
   // const [updatedData, setUpdatedData] = useState([]);
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
+  const [updatedData, setUpdatedData] = useState(data);
 
   const alert = (title, description, status) => {
     toast({
@@ -38,10 +39,7 @@ const EditProfile = ({ onClose, data, client }) => {
     });
   };
 
-  // console.log(weightUnits);
-
   useEffect(() => {
-    console.log(data);
     client
       .query({
         query: GET_UNITS
@@ -68,16 +66,18 @@ const EditProfile = ({ onClose, data, client }) => {
 
   const formik = useFormik({
     initialValues: {
-      firstname: data.firstname ? data.firstname : "",
-      lastname: data.lastname ? data.lastname : "",
-      email: data.email ? data.email : "",
-      height: data.height,
-      heightUnit: data.heightUnit.id,
-      weight: data.weight,
-      weightUnit: data.weightUnit.id,
-      goal: data.goal ? data.goal : "",
-      reminderType: data.reminderType ? data.reminderType : "none",
-      experience: data.experience
+      firstname: updatedData.firstname ? updatedData.firstname : "",
+      lastname: updatedData.lastname ? updatedData.lastname : "",
+      email: updatedData.email ? updatedData.email : "",
+      height: updatedData.height,
+      heightUnit: updatedData.heightUnit.id,
+      weight: updatedData.weight,
+      weightUnit: updatedData.weightUnit.id,
+      goal: updatedData.goal ? updatedData.goal : "",
+      reminderType: updatedData.reminderType
+        ? updatedData.reminderType
+        : "none",
+      experience: updatedData.experience
     },
     validationSchema: yup.object().shape({
       firstname: yup.string().required("Please enter your firstname"),
@@ -102,7 +102,7 @@ const EditProfile = ({ onClose, data, client }) => {
             firstname: value.firstname,
             lastname: value.lastname,
             experience: value.experience,
-            equipment: data.equipment,
+            equipment: value.equipment,
             height: value.height,
             weight: value.weight,
             heightUnit: value.heightUnit,
@@ -112,17 +112,16 @@ const EditProfile = ({ onClose, data, client }) => {
           }
         })
         .then(res => {
-          console.log(value);
-          console.log(res);
           setLoading(false);
-          // setUpdatedData(res.data.user);
+          setUpdatedData(res.data.updateUser);
           alert("Profile Updates Successfully", "", "success");
 
           onClose();
-          // window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         })
         .catch(error => {
-          console.log(error);
           setLoading(false);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(
