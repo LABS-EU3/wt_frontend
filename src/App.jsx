@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Onboarding from "./components/auth/Onboarding";
 import "./App.css";
 import PrivateRoute from "./components/common/PrivateRoute";
@@ -16,28 +16,37 @@ import ScheduleDetail from "./components/schedule/ScheduleDetail";
 import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
+import Footer from "./components/common/Footer";
 
 const App = () => {
   return (
     <div className="App" data-testid="App">
       <Navigation />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/accountrecovery" component={AccountRecovery} />
-      <PrivateRoute exact path="/profile" component={ProfilePage} />
-      <PrivateRoute exact path="/exercises" component={Exercises} />
-      <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
-      <PrivateRoute exact path="/onboarding" component={Onboarding} />
-      <Route exact path="/signup" component={SignUp} />
-      <PrivateRoute exact path="/" component={Dashboard} />
-      <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
-      <PrivateRoute exact path="/workouts" component={WorkoutList} />
-      <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
-      <PrivateRoute
-        exact
-        path="/my/workout/:id"
-        component={CustomWorkoutDetail}
-      />
-      <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/accountrecovery" component={AccountRecovery} />
+        <Route
+          exact
+          path="/accountrecovery/:token"
+          component={AccountRecovery}
+        />
+        <PrivateRoute exact path="/profile" component={ProfilePage} />
+        <PrivateRoute exact path="/exercises" component={Exercises} />
+        <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
+        <PrivateRoute exact path="/onboarding" component={Onboarding} />
+        <Route exact path="/signup" component={SignUp} />
+        <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute exact path="/workouts" component={WorkoutList} />
+        <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
+        <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
+        <PrivateRoute
+          exact
+          path="/my/workout/:id"
+          component={CustomWorkoutDetail}
+        />
+        <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+      </Switch>
+      <Footer />
     </div>
   );
 };
