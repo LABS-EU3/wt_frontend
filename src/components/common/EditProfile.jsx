@@ -24,7 +24,7 @@ import { withApollo } from "react-apollo";
 const EditProfile = ({ onClose, data, client }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
-  const [updatedData, setUpdatedData] = useState([]);
+  // const [updatedData, setUpdatedData] = useState([]);
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
 
@@ -90,8 +90,7 @@ const EditProfile = ({ onClose, data, client }) => {
 
     onSubmit: value => {
       setLoading(true);
-      console.log(value, "==");
-      return;
+
       client
         .mutate({
           mutation: UPDATE_USER_DETAILS,
@@ -111,10 +110,12 @@ const EditProfile = ({ onClose, data, client }) => {
         })
         .then(res => {
           console.log(res);
-          setUpdatedData(res.data.user);
-          alert("Profile Updates Successfully", "", "success");
           setLoading(false);
+          // setUpdatedData(res.data.user);
+          alert("Profile Updates Successfully", "", "success");
+
           onClose();
+          window.location.reload();
         })
         .catch(error => {
           console.log(error);
@@ -131,7 +132,7 @@ const EditProfile = ({ onClose, data, client }) => {
         });
     }
   });
-  console.log(formik.errors, "err");
+
   return (
     <Box>
       <Stack>
@@ -368,7 +369,12 @@ const EditProfile = ({ onClose, data, client }) => {
           />
         </Flex>
         <ModalFooter>
-          <Button type="submit" variantColor="orange" mr={3}>
+          <Button
+            type="submit"
+            variantColor="orange"
+            mr={3}
+            isLoading={loading}
+          >
             Save
           </Button>
           <Button variant="ghost" variantColor="orange" onClick={onClose}>
