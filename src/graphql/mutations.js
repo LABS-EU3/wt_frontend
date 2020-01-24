@@ -254,6 +254,7 @@ export const UPDATE_USER_DETAILS = gql`
       firstname
       email
       height
+      reminderType
       heightUnit {
         id
         name

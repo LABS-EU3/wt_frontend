@@ -37,7 +37,11 @@ const EditProfile = ({ onClose, data, client }) => {
       isClosable: true
     });
   };
+
+  // console.log(weightUnits);
+
   useEffect(() => {
+    console.log(data);
     client
       .query({
         query: GET_UNITS
@@ -97,7 +101,6 @@ const EditProfile = ({ onClose, data, client }) => {
           variables: {
             firstname: value.firstname,
             lastname: value.lastname,
-            // password: "IsaIsaIsa1#",
             experience: value.experience,
             equipment: data.equipment,
             height: value.height,
@@ -109,13 +112,14 @@ const EditProfile = ({ onClose, data, client }) => {
           }
         })
         .then(res => {
+          console.log(value);
           console.log(res);
           setLoading(false);
           // setUpdatedData(res.data.user);
           alert("Profile Updates Successfully", "", "success");
 
           onClose();
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(error => {
           console.log(error);
