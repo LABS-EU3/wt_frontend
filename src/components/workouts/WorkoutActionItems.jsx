@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, useToast } from "@chakra-ui/core";
+import { withRouter } from "react-router-dom";
 import { FaPlayCircle, FaStopCircle, FaCircle, FaPause } from "react-icons/fa";
 import styled from "styled-components";
 import { withApollo } from "react-apollo";
@@ -63,6 +64,7 @@ const StyledWorkoutItems = styled.div`
 
 const WorkoutActionItems = ({
   client,
+  history,
   workout,
   timerExercise,
   setTimerExercise,
@@ -173,6 +175,10 @@ const WorkoutActionItems = ({
       });
   };
 
+  const onCopyEdit = () => {
+    history.push(`/my/workout/${workout.id}`);
+  };
+
   const scheduleWorkout = () => {
     let dateTime = `${date} ${time}`;
     const startTime = new Date(dateTime).getTime();
@@ -254,8 +260,8 @@ const WorkoutActionItems = ({
     }
     // pause workout if you exit the page while workout session is running
     return () => {
-      console.log("pause?", !workout.session.pause, currTime);
-      if (!workout.session.pause) {
+      console.log("pausebug?");
+      if (workout.session && !workout.session.pause) {
         console.log("pause");
         handlePause();
       }
@@ -284,6 +290,15 @@ const WorkoutActionItems = ({
         onClick={onOpen}
       >
         Schedule
+      </Button>
+      <Button
+        rightIcon="copy"
+        variantColor="blue"
+        variant="outline"
+        size="md"
+        onClick={onCopyEdit}
+      >
+        Copy and Edit
       </Button>
 
       <Button
@@ -394,4 +409,4 @@ const WorkoutActionItems = ({
   );
 };
 
-export default withApollo(WorkoutActionItems);
+export default withApollo(withRouter(WorkoutActionItems));
