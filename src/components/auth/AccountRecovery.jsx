@@ -101,6 +101,11 @@ const AccountRecovery = ({ client, match }) => {
           variables: {
             password: value.password,
             rePassword: value.confirmpassword
+          },
+          context: {
+            headers: {
+              authorization: token
+            }
           }
         })
         .then(response => {
@@ -110,6 +115,7 @@ const AccountRecovery = ({ client, match }) => {
           setSuccessfulRecovery(true);
         })
         .catch(error => {
+          console.log(error);
           setLoading(false);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(
