@@ -10,3 +10,11 @@
 .App {
   text-align: center;
 }
+
+.error {
+  display: block;
+  color: red;
+  width: 100%;
+  padding-bottom: 1rem;
+  margin-top: -.5rem;
+}

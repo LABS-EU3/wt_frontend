@@ -188,7 +188,7 @@ export const SCHEDULE_WORKOUT = gql`
 
 export const UPSERT_CUSTOM_WORKOUT = gql`
   mutation customWorkout(
-    $userId: String!
+    $workoutId: String
     $name: String!
     $description: String!
     $intensity: String!
@@ -196,7 +196,7 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
   ) {
     customWorkout(
       input: {
-        userId: $userId
+        workoutId: $workoutId
         name: $name
         description: $description
         intensity: $intensity
@@ -217,6 +217,30 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
         type
         difficulty
       }
+    }
+  }
+`;
+
+export const DELETE_CUSTOM_WORKOUT = gql`
+  mutation customWorkout(
+    $workoutId: String!
+    $remove: Boolean!
+    $name: String!
+    $description: String!
+    $intensity: String!
+    $exercises: [String!]!
+  ) {
+    customWorkout(
+      input: {
+        workoutId: $workoutId
+        remove: $remove
+        name: $name
+        description: $description
+        intensity: $intensity
+        exercises: $exercises
+      }
+    ) {
+      id
     }
   }
 `;
