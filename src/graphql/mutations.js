@@ -231,6 +231,7 @@ export const UPDATE_USER_DETAILS = gql`
     $lastname: String
     $height: Float
     $heightUnit: String
+    $weightUnit: String
     $weight: Float
     $goal: String
     $equipment: Boolean
@@ -243,6 +244,7 @@ export const UPDATE_USER_DETAILS = gql`
         lastname: $lastname
         height: $height
         heightUnit: $heightUnit
+        weightUnit: $weightUnit
         weight: $weight
         goal: $goal
         equipment: $equipment
