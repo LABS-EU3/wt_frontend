@@ -27,7 +27,7 @@ import { useDebounce, getUserDetails } from "./../../utils/index";
 const user = getUserDetails();
 
 const CustomWorkoutDetail = ({ client, history }) => {
-  const [workout, setWorkout] = useState([]);
+  const [workout, setWorkout] = useState({});
   const [exercises, setExercises] = useState([]);
   const [searchExercise, setSearchExercise] = useState("");
   const [selectedExercises, setSelectedExercises] = useState(
@@ -37,6 +37,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const match = useRouteMatch();
+  const workoutId = match.params.id;
   const toast = useToast();
 
   const alert = (title, description, status) => {
@@ -71,6 +72,11 @@ const CustomWorkoutDetail = ({ client, history }) => {
     }),
     onSubmit: values => {
       setIsLoading(true);
+      console.log({
+        ...values,
+        userId: user.user_id,
+        exercises: selectedExercises
+      });
       client
         .mutate({
           mutation: UPSERT_CUSTOM_WORKOUT,
@@ -82,6 +88,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
         })
         .then(res => {
           console.log(res);
+          alert("Success!", "Your custom workout was created!", "success");
           history.push("/workouts");
         })
         .catch(err => {
@@ -107,34 +114,61 @@ const CustomWorkoutDetail = ({ client, history }) => {
 
   let exerciseSearch = useDebounce(searchExercise, 700);
 
+  const resetSearch = e => {
+    setSearchExercise(s => "");
+  };
+
   useEffect(() => {
-    let promises = [
-      client.query({
-        query: GET_WORKOUT_DETAIL,
-        variables: {
-          id: match.params.id
-        }
-      }),
-      client.query({
-        query: EXERCISES_BY_FIELDS,
-        variables: {
-          search: exerciseSearch,
-          fields: ["name"]
-        }
-      })
-    ];
-    Promise.all(promises)
-      .then(([workoutRes, exercisesRes]) => {
-        setWorkout(workoutRes.data.workout);
-        setExercises(exercisesRes.data.exercises);
-        setSelectedExercises(workoutRes.data.workout.exercises.map(e => e.id));
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-        setIsLoading(false);
-        setError(true);
-      });
+    let promises = [];
+    if (workoutId !== "new") {
+      promises = [
+        client.query({
+          query: GET_WORKOUT_DETAIL,
+          variables: {
+            id: workoutId
+          }
+        }),
+        client.query({
+          query: EXERCISES_BY_FIELDS,
+          variables: {
+            search: exerciseSearch,
+            fields: ["name"]
+          }
+        })
+      ];
+      Promise.all(promises)
+        .then(([workoutRes, exercisesRes]) => {
+          setWorkout(workoutRes.data.workout);
+          setExercises(exercisesRes.data.exercises);
+          setSelectedExercises(
+            workoutRes.data.workout.exercises.map(e => e.id)
+          );
+          setIsLoading(false);
+        })
+        .catch(err => {
+          console.log(err);
+          setIsLoading(false);
+          setError(true);
+        });
+    } else {
+      client
+        .query({
+          query: EXERCISES_BY_FIELDS,
+          variables: {
+            search: exerciseSearch,
+            fields: ["name"]
+          }
+        })
+        .then(exercisesRes => {
+          setExercises(exercisesRes.data.exercises);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          console.log(err);
+          setIsLoading(false);
+          setError(true);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -233,10 +267,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 focusBorderColor="#FF8744"
                 autoComplete="off"
               />
-              <div
-                className="search-results"
-                onMouseLeave={e => setSearchExercise("")}
-              >
+              <div className="search-results" onMouseLeave={resetSearch}>
                 {exerciseSearch
                   ? exercises
                       .filter(e => e.name.includes(exerciseSearch))

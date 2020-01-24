@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { GET_WORKOUTS, GET_WORKOUTS_BY_FIELDS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
@@ -55,6 +55,7 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
         setIsLoading(false);
       })
       .catch(err => {
+        console.log(err);
         setIsLoading(false);
         setError(true);
       });
@@ -96,18 +97,27 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   if (workoutQuery === "CUSTOM_WORKOUTS") {
     return (
       <WorkoutsStyle>
-        <h3>Custom workouts</h3>
-        <Button variantColor="orange" leftIcon="plus" isLoading={isLoading}>
-          New workout
-        </Button>
+        <h3>
+          Custom workouts
+          <Link to="/my/workout/new">
+            <Button variantColor="orange" leftIcon="add" isLoading={isLoading}>
+              New workout
+            </Button>
+          </Link>
+        </h3>
+
         <div className="container">
           {limitedWorkouts.map(item => (
             <WorkoutCard key={item.id} data={item} cardQuery={workoutQuery} />
           ))}
         </div>
+        <div className="load-more">
+          <Button onClick={loadMore}>Load More</Button>
+        </div>
       </WorkoutsStyle>
     );
   }
+
   if (limitedWorkouts.length > 0) {
     return (
       <WorkoutsStyle>
