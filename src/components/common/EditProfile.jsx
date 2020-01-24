@@ -363,7 +363,7 @@ const EditProfile = ({ onClose, data, client }) => {
             onChange={event =>
               formik.setFieldValue(
                 "reminderType",
-                event.target.checked ? "email" : "none"
+                event.target.checked ? "email" : "notification"
               )
             }
           />
