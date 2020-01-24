@@ -105,15 +105,23 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
             </Button>
           </Link>
         </h3>
-
-        <div className="container">
-          {limitedWorkouts.map(item => (
-            <WorkoutCard key={item.id} data={item} cardQuery={workoutQuery} />
-          ))}
-        </div>
-        <div className="load-more">
-          <Button onClick={loadMore}>Load More</Button>
-        </div>
+        {limitedWorkouts.length > 0 ? (
+          <>
+            <div className="container">
+              {limitedWorkouts.map(item => (
+                <WorkoutCard
+                  key={item.id}
+                  data={item}
+                  cardQuery={workoutQuery}
+                  setLimitedWorkouts={setLimitedWorkouts}
+                />
+              ))}
+            </div>
+            <div className="load-more">
+              <Button onClick={loadMore}>Load More</Button>
+            </div>
+          </>
+        ) : null}
       </WorkoutsStyle>
     );
   }

@@ -72,17 +72,12 @@ const CustomWorkoutDetail = ({ client, history }) => {
     }),
     onSubmit: values => {
       setIsLoading(true);
-      console.log({
-        ...values,
-        userId: user.user_id,
-        exercises: selectedExercises
-      });
       client
         .mutate({
           mutation: UPSERT_CUSTOM_WORKOUT,
           variables: {
             ...values,
-            userId: user.user_id,
+            workoutId: workoutId === "new" ? null : workoutId,
             exercises: selectedExercises
           }
         })
@@ -90,6 +85,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
           console.log(res);
           alert("Success!", "Your custom workout was created!", "success");
           history.push("/workouts");
+          window.location.reload();
         })
         .catch(err => {
           console.log(err);
@@ -218,21 +214,23 @@ const CustomWorkoutDetail = ({ client, history }) => {
               error={formik.errors.name}
             />
           </InputGroup>
-          <InputGroup>
-            <Textarea
-              id="description"
-              name="description"
-              type="text"
-              placeholder="DESCRIPTION"
-              onChange={formik.handleChange}
-              value={formik.values.description}
-              variant="flushed"
-              bg="#FFFCF2"
-              focusBorderColor="#FF8744"
-              errorBorderColor="crimson"
-              error={formik.errors.description}
-            />
-          </InputGroup>
+          <Textarea
+            id="description"
+            name="description"
+            type="text"
+            placeholder="DESCRIPTION"
+            onChange={formik.handleChange}
+            value={formik.values.description}
+            variant="flushed"
+            bg="#FFFCF2"
+            focusBorderColor="#FF8744"
+            onBlur={formik.handleBlur}
+            errorBorderColor="crimson"
+            error={formik.errors.description}
+          />
+          {formik.touched.description && formik.errors.description ? (
+            <span className="error">{formik.errors.description}</span>
+          ) : null}
           <InputGroup>
             <Select
               id="intensity"

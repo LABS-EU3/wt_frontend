@@ -53,6 +53,9 @@ export const WorkoutsStyle = styled.div`
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
+  .cw-buttons {
+    width: 100%;
+  }
 `;
 
 export const WorkoutStyle = styled.div`
@@ -244,26 +247,6 @@ export const WorkoutDetailStyle = styled.div`
 
     .exercise-preview-detail {
       padding: 1rem;
-    }
-  }
-`;
-
-export const CustomWorkoutStyle = styled.div`
-  width: 100%;
-  padding: 1rem;
-  text-align: left;
-  position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-  h2 {
-    display: inline-block;
-  }
-  .cw-buttons {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translate(0, -50%);
-    a {
-      margin-right: 0.7rem;
     }
   }
 `;
