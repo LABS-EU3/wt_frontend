@@ -23,7 +23,6 @@ import logoImage from "../../images/login_image.png";
 import { withApollo } from "react-apollo";
 
 const EditProfile = ({ onClose, data, client }) => {
-  console.log(data);
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [updatedData, setUpdatedData] = useState([]);
@@ -39,8 +38,6 @@ const EditProfile = ({ onClose, data, client }) => {
       isClosable: true
     });
   };
-  console.log(weightUnits);
-  console.log(heightUnits);
   useEffect(() => {
     client
       .query({
@@ -68,15 +65,15 @@ const EditProfile = ({ onClose, data, client }) => {
 
   const formik = useFormik({
     initialValues: {
-      firstname: data.firstname,
-      lastname: data.lastname,
-      email: data.email,
+      firstname: data.firstname ? data.firstname : "",
+      lastname: data.lastname ? data.lastname : "",
+      email: data.email ? data.email : "",
       height: data.height,
       heightUnit: data.heightUnit.id,
       weight: data.weight,
       weightUnit: data.weightUnit.id,
-      goal: data.goal,
-      reminderType: data.reminderType,
+      goal: data.goal ? data.goal : "",
+      reminderType: data.reminderType ? data.reminderType : "none",
       experience: data.experience
     },
     validationSchema: yup.object().shape({
@@ -94,6 +91,8 @@ const EditProfile = ({ onClose, data, client }) => {
 
     onSubmit: value => {
       setLoading(true);
+      console.log(value, "==");
+      return;
       client
         .mutate({
           mutation: UPDATE_USER_DETAILS,
@@ -101,14 +100,14 @@ const EditProfile = ({ onClose, data, client }) => {
             firstname: value.firstname,
             lastname: value.lastname,
             // password: "IsaIsaIsa1#",
-            experience: "beginner",
+            experience: value.experience,
             equipment: data.equipment,
             height: value.height,
             weight: value.weight,
             heightUnit: value.heightUnit,
             weightUnit: value.weightUnit,
             goal: value.goal,
-            reminderType: "email"
+            reminderType: value.reminderType
           }
         })
         .then(res => {
@@ -133,7 +132,7 @@ const EditProfile = ({ onClose, data, client }) => {
         });
     }
   });
-
+  console.log(formik.errors, "err");
   return (
     <Box>
       <Stack>
@@ -164,7 +163,7 @@ const EditProfile = ({ onClose, data, client }) => {
             isInvalid={formik.errors.lastname}
           />
           {formik.errors.firstname && (
-            <FormErrorMessage>{formik.errors.firstname}</FormErrorMessage>
+            <span className="error">{formik.errors.firstname}</span>
           )}
         </Box>
         <Box paddingTop="30px">
@@ -183,7 +182,7 @@ const EditProfile = ({ onClose, data, client }) => {
             isInvalid={formik.errors.lastname}
           />
           {formik.errors.lastname && (
-            <FormErrorMessage>{formik.errors.lastname}</FormErrorMessage>
+            <span className="error">{formik.errors.lastname}</span>
           )}
         </Box>
         <Box paddingTop="30px">
@@ -203,7 +202,7 @@ const EditProfile = ({ onClose, data, client }) => {
             isInvalid={formik.errors.email}
           />
           {formik.errors.email && (
-            <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+            <span className="error">{formik.errors.email}</span>
           )}
         </Box>
 
@@ -224,7 +223,7 @@ const EditProfile = ({ onClose, data, client }) => {
               isInvalid={formik.errors.height}
             />
             {formik.errors.height && (
-              <FormErrorMessage>{formik.errors.height}</FormErrorMessage>
+              <span className="error">{formik.errors.height}</span>
             )}
           </Box>
 
@@ -248,8 +247,9 @@ const EditProfile = ({ onClose, data, client }) => {
                 </option>
               ))}
             </Select>
+
             {formik.errors.heightUnit && (
-              <FormErrorMessage>{formik.errors.heightUnit}</FormErrorMessage>
+              <span className="error">{formik.errors.heightUnit}</span>
             )}
           </Box>
         </Flex>
@@ -294,11 +294,45 @@ const EditProfile = ({ onClose, data, client }) => {
                 </option>
               ))}
             </Select>
+
             {formik.errors.weightUnit && (
-              <FormErrorMessage>{formik.errors.weightUnit}</FormErrorMessage>
+              <span className="error">{formik.errors.weightUnit}</span>
             )}
           </Box>
         </Flex>
+
+        <Flex paddingTop="15px" alignItems="center">
+          <Box paddingTop="30px">
+            <Heading size="sm">Experience</Heading>
+          </Box>
+
+          <Box>
+            <Select
+              name="experience"
+              marginLeft="30px"
+              marginTop="30px"
+              onChange={formik.handleChange}
+              value={formik.values.experience}
+              isInvalid={formik.errors.experience}
+            >
+              <option className="experience" value="Beginner">
+                Beginner
+              </option>
+
+              <option className="experience" value="Intermediate">
+                Intermediate
+              </option>
+
+              <option className="experience" value="Expert">
+                Expert
+              </option>
+            </Select>
+            {formik.errors.experience && (
+              <span className="error">{formik.errors.experience}</span>
+            )}
+          </Box>
+        </Flex>
+
         <Box paddingTop="15px">
           <Heading size="sm">Goal</Heading>
           <Input
@@ -314,8 +348,9 @@ const EditProfile = ({ onClose, data, client }) => {
             errorBorderColor="crimson"
             isInvalid={formik.errors.goal}
           />
+
           {formik.errors.goal && (
-            <FormErrorMessage>{formik.errors.goal}</FormErrorMessage>
+            <span className="error">{formik.errors.goal}</span>
           )}
         </Box>
         <Flex paddingTop="15px" alignItems="center">

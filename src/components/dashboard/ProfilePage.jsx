@@ -107,7 +107,9 @@ const ProfilePage = ({ client, history }) => {
                 <Box as={IoIosPerson} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">
                   <p>Name</p>
-                  <p>{`${userData.firstname} ${userData.lastname}`}</p>
+                  <p>{`${userData.firstname ? userData.firstname : ""} ${
+                    userData.lastname ? userData.lastname : ""
+                  }`}</p>
                 </Box>
               </Flex>
               <Flex paddingY="30px" alignItems="center">
