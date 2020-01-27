@@ -17,6 +17,7 @@ import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 import Footer from "./components/common/Footer";
+import Buddies from "./components/buddies/Buddies";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
           component={CustomWorkoutDetail}
         />
         <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+        <Route exact path="/buddies" component={Buddies} />
       </Switch>
       <Footer />
     </div>
