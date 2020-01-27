@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
-import { GET_WORKOUT_DETAILS } from "../../graphql/queries";
+import { GET_WORKOUTS, GET_WORKOUTS_BY_FIELDS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import WorkoutCard from "./Workout";
 import { WorkoutsStyle } from "./WorkoutStyle";
+import { getUserDetails } from "../../utils";
 
-function Workouts({ client }) {
+const user = getUserDetails();
+
+function Workouts({ client, workoutName, workoutQuery, search }) {
   const toast = useToast();
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [limitedWorkouts, setLimitedWorkouts] = useState([]);
+  const [limit, setLimit] = useState(3);
 
   const alert = (title, description, status) => {
     toast({
@@ -26,20 +31,48 @@ function Workouts({ client }) {
   };
 
   useEffect(() => {
-    client
-      .query({
-        query: GET_WORKOUT_DETAILS
-      })
+    let promise;
+    const query = search ? GET_WORKOUTS_BY_FIELDS : GET_WORKOUTS;
+    const variables = search ? { search, fields: ["name"] } : null;
+
+    if (workoutQuery === "CUSTOM_WORKOUTS") {
+      promise = client.query({
+        query: GET_WORKOUTS_BY_FIELDS,
+        variables: {
+          search: user.user_id,
+          fields: ["userId"]
+        }
+      });
+    } else {
+      promise = client.query({ query, variables });
+    }
+
+    promise
       .then(res => {
+        let limitWorkouts = res.data.workouts.slice(0, limit);
         setData(res.data.workouts);
+        setLimitedWorkouts(limitWorkouts);
         setIsLoading(false);
       })
       .catch(err => {
+        console.log(err);
         setIsLoading(false);
         setError(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [search]);
+
+  const loadMore = () => {
+    const newLimit = limit + 3;
+    let limitWorkouts = data.slice(0, newLimit);
+    // if (exerciseQuery === "TOP_RATED_EXERCISES") {
+    //   limitExercises = limitExercises.sort(
+    //     (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
+    //   );
+    // }
+    setLimitedWorkouts(limitWorkouts);
+    setLimit(newLimit);
+  };
 
   if (isLoading) {
     return (
@@ -60,17 +93,49 @@ function Workouts({ client }) {
     alert("An error occurred.", "Unable to load workouts", "error");
     return <Redirect to="/" />;
   }
-  if (data.length > 0) {
+
+  if (workoutQuery === "CUSTOM_WORKOUTS") {
     return (
       <WorkoutsStyle>
-        {data.map(item => (
+        <h3>
+          Custom workouts
+          <Link to="/my/workout/new">
+            <Button variantColor="orange" leftIcon="add" isLoading={isLoading}>
+              New workout
+            </Button>
+          </Link>
+        </h3>
+        {limitedWorkouts.length > 0 ? (
+          <>
+            <div className="container">
+              {limitedWorkouts.map(item => (
+                <WorkoutCard
+                  key={item.id}
+                  data={item}
+                  cardQuery={workoutQuery}
+                  setLimitedWorkouts={setLimitedWorkouts}
+                />
+              ))}
+            </div>
+            <div className="load-more">
+              <Button onClick={loadMore}>Load More</Button>
+            </div>
+          </>
+        ) : null}
+      </WorkoutsStyle>
+    );
+  }
+
+  if (limitedWorkouts.length > 0) {
+    return (
+      <WorkoutsStyle>
+        <h3>{workoutName}</h3>
+        {limitedWorkouts.map(item => (
           <WorkoutCard key={item.id} data={item} />
         ))}
 
-        <div className="more">
-          <Button marginY="50px" variantColor="orange" size="lg">
-            View More
-          </Button>
+        <div className="load-more">
+          <Button onClick={loadMore}>Load More</Button>
         </div>
       </WorkoutsStyle>
     );

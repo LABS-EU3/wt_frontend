@@ -68,7 +68,7 @@ function Dashboard({ client, history }) {
 
         <div className="dashboard-content">
           <div className="user-detail">
-            <Link to={`/profile=`}>Edit</Link>
+            <Link to="/profile">Edit</Link>
             <Avatar
               src={logoImage}
               size="2xl"
@@ -114,20 +114,7 @@ function Dashboard({ client, history }) {
           </div>
 
           <div className="dasboard-detail">
-            <section className="quotes">
-              <Heading
-                fontFamily="initial"
-                textAlign="left"
-                className="alignText"
-              >
-                “
-              </Heading>
-              <Quotes />
-
-              <Heading fontFamily="initial" textAlign="right" width="100%">
-                ”
-              </Heading>
-            </section>
+            <Quotes />
 
             <section className="goal">
               <p>Goal</p>

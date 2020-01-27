@@ -36,21 +36,23 @@ export const GOOGLE_AUTH_MUTATION = gql`
 
 export const ONBOARDING = gql`
   mutation updateUser(
-    $id: String!
     $heightUnit: String!
     $weightUnit: String!
     $goal: String!
     $experience: String!
     $equipment: Boolean!
+    $height: Float!
+    $weight: Float!
   ) {
     updateUser(
       input: {
-        id: $id
         heightUnit: $heightUnit
         weightUnit: $weightUnit
         goal: $goal
         experience: $experience
         equipment: $equipment
+        height: $height
+        weight: $weight
       }
     ) {
       firstname
@@ -109,6 +111,30 @@ export const START_WORKOUT = gql`
   }
 `;
 
+export const PAUSE_WORKOUT = gql`
+  mutation workoutSession(
+    $userId: String!
+    $workoutId: String!
+    $exerciseId: String!
+    $exerciseTimer: Float!
+    $pause: Boolean!
+  ) {
+    workoutSession(
+      input: {
+        userId: $userId
+        workoutId: $workoutId
+        exerciseId: $exerciseId
+        exerciseTimer: $exerciseTimer
+        pause: $pause
+      }
+    ) {
+      startDate
+      endDate
+      pause
+    }
+  }
+`;
+
 export const END_WORKOUT = gql`
   mutation workoutSession(
     $userId: String!
@@ -160,6 +186,127 @@ export const SCHEDULE_WORKOUT = gql`
       }
       startDate
       routine
+    }
+  }
+`;
+
+export const UPSERT_CUSTOM_WORKOUT = gql`
+  mutation customWorkout(
+    $workoutId: String
+    $name: String!
+    $description: String!
+    $intensity: String!
+    $exercises: [String!]!
+  ) {
+    customWorkout(
+      input: {
+        workoutId: $workoutId
+        name: $name
+        description: $description
+        intensity: $intensity
+        exercises: $exercises
+      }
+    ) {
+      id
+      userId
+      avgTime
+      experience
+      intensity
+      muscles
+      types
+      picture
+      exercises {
+        id
+        name
+        type
+        difficulty
+      }
+    }
+  }
+`;
+
+export const DELETE_CUSTOM_WORKOUT = gql`
+  mutation customWorkout(
+    $workoutId: String!
+    $remove: Boolean!
+    $name: String!
+    $description: String!
+    $intensity: String!
+    $exercises: [String!]!
+  ) {
+    customWorkout(
+      input: {
+        workoutId: $workoutId
+        remove: $remove
+        name: $name
+        description: $description
+        intensity: $intensity
+        exercises: $exercises
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+export const UPDATE_USER_DETAILS = gql`
+  mutation updatedUser(
+    $firstname: String
+    $lastname: String
+    $height: Float
+    $heightUnit: String
+    $weightUnit: String
+    $weight: Float
+    $goal: String
+    $equipment: Boolean
+    $experience: String
+    $reminderType: String
+  ) {
+    updateUser(
+      input: {
+        firstname: $firstname
+        lastname: $lastname
+        height: $height
+        heightUnit: $heightUnit
+        weightUnit: $weightUnit
+        weight: $weight
+        goal: $goal
+        equipment: $equipment
+        experience: $experience
+        reminderType: $reminderType
+      }
+    ) {
+      id
+      firstname
+      email
+      lastname
+      height
+      reminderType
+      heightUnit {
+        id
+        name
+        type
+      }
+      goal
+      weight
+      weightUnit {
+        id
+        name
+        type
+      }
+      equipment
+      experience
+      photo
+    }
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation resetPassword($password: String!, $rePassword: String!) {
+    resetPassword(input: { password: $password, rePassword: $rePassword }) {
+      id
+      firstname
+      lastname
     }
   }
 `;

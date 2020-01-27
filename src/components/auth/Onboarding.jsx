@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import { Button, RadioButtonGroup, useToast, Box, Flex } from "@chakra-ui/core";
+import Input from "../common/Input";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import PropTypes from "prop-types";
@@ -39,7 +40,9 @@ const Onboarding = ({ client, history }) => {
       equipment: "",
       experience: "",
       heightUnit: "",
-      weightUnit: ""
+      weightUnit: "",
+      height: "",
+      weight: ""
     },
     validationSchema: yup.object().shape({
       goal: yup.string().required("Please select your workout goal"),
@@ -52,7 +55,9 @@ const Onboarding = ({ client, history }) => {
         .required("Please select your workout preferred height unit"),
       weightUnit: yup
         .string()
-        .required("Please select your workout preferred weight unit")
+        .required("Please select your workout preferred weight unit"),
+      weight: yup.number().required("Please enter your weight"),
+      height: yup.number().required("Please enter your height")
     }),
 
     onSubmit: value => {
@@ -65,17 +70,20 @@ const Onboarding = ({ client, history }) => {
             weightUnit: value.weightUnit,
             goal: value.goal,
             experience: value.experience,
-            equipment: JSON.parse(value.equipment)
+            equipment: JSON.parse(value.equipment),
+            weight: value.weight,
+            height: value.height
           }
         })
         .then(res => {
-          userOnboardedSuccessfully();
+          userOnboardedSuccessfully("yes");
           alert(
             "Onboarding Completed.",
             "You can now access your dashboard",
             "success"
           );
           history.push("/");
+          window.location.reload();
         })
         .catch(() => {
           alert(
@@ -168,6 +176,22 @@ const Onboarding = ({ client, history }) => {
           <form onSubmit={formik.handleSubmit}>
             <h2>Preferences</h2>
 
+            <p>What is your height?</p>
+            <Input
+              name="height"
+              error={formik.errors.height}
+              value={formik.values.height}
+              placeholder="Enter Height"
+              onChange={formik.handleChange}
+              type="number"
+              variant="filled"
+              id="height"
+              bg="#fffcf2"
+              focusBorderColor="#dd6b20"
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.height}
+            />
+
             <div className="body-status">
               <p>Which height measurement unit do you prefer?</p>
               <RadioButtonGroup
@@ -178,6 +202,7 @@ const Onboarding = ({ client, history }) => {
                 isInline
                 err={formik.errors.heightUnit}
                 value={formik.values.heightUnit}
+                onBlur={formik.handleBlur}
               >
                 {heightUnits.map(heightUnit => (
                   <CustomRadio
@@ -190,7 +215,25 @@ const Onboarding = ({ client, history }) => {
                   </CustomRadio>
                 ))}
               </RadioButtonGroup>
-              <span>{formik.errors.heightUnit}</span>
+              {formik.touched.heightUnit && formik.errors.heightUnit ? (
+                <span>{formik.errors.heightUnit}</span>
+              ) : null}
+
+              <p>What is your weight?</p>
+              <Input
+                name="weight"
+                error={formik.errors.weight}
+                value={formik.values.weight}
+                onChange={formik.handleChange}
+                placeholder="Enter Weight"
+                variant="filled"
+                id="weight"
+                type="number"
+                bg="#fffcf2"
+                focusBorderColor="#dd6b20"
+                onBlur={formik.handleBlur}
+                touchedName={formik.touched.weight}
+              />
 
               <p>Which weight measurement unit do you prefer?</p>
               <RadioButtonGroup
@@ -201,6 +244,7 @@ const Onboarding = ({ client, history }) => {
                 isInline
                 value={formik.values.weightUnit}
                 error={formik.errors.weightUnit}
+                onBlur={formik.handleBlur}
               >
                 {weightUnits.map(weightUnit => (
                   <CustomRadio
@@ -213,7 +257,9 @@ const Onboarding = ({ client, history }) => {
                   </CustomRadio>
                 ))}
               </RadioButtonGroup>
-              <span>{formik.errors.weightUnit}</span>
+              {formik.touched.weightUnit && formik.errors.weightUnit ? (
+                <span>{formik.errors.weightUnit}</span>
+              ) : null}
             </div>
             <p>What is your fitness goal?</p>
             <Select
@@ -229,6 +275,8 @@ const Onboarding = ({ client, history }) => {
               error={formik.errors.goal}
               value={formik.values.goal}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.goal}
             />
 
             <p>How experienced are you working out</p>
@@ -243,6 +291,8 @@ const Onboarding = ({ client, history }) => {
               error={formik.errors.experience}
               value={formik.values.experience}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.experience}
             />
 
             <p>What workout equipment do you have?</p>
@@ -257,6 +307,8 @@ const Onboarding = ({ client, history }) => {
               error={formik.errors.equipment}
               value={formik.values.equipment}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.equipment}
             />
 
             <Button

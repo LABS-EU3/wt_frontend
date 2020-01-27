@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Select /> renders the Preview component correctly 1`] = `
+<styled.div>
+  <Select
+    _hover="black"
+    bg="#FFFCF2"
+    className="dropdown"
+    errorBorderColor="crimson"
+    focusBorderColor="#FF8744"
+    name=""
+    onChange={[Function]}
+    placeholder=""
+    touchedName={true}
+  />
+</styled.div>
+`;

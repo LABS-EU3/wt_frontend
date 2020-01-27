@@ -1,33 +1,20 @@
 import React from "react";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import styled from "styled-components";
+
+const StyledTimer = styled.p`
+  font-size: 36px;
+  line-height: 64px;
+  padding-bottom: 5px;
+  color: #1a202c;
+`;
 
 function Timer({ time }) {
-  //   const renderTime = value => {
-  //     if (value === 0) {
-  //       return <div className="timer">Too lale...</div>;
-  //     }
-
-  //     return (
-  //       <div className="timer">
-  //         <div className="text">Remaining</div>
-  //         <div className="value">{value}</div>
-  //         <div className="text">seconds</div>
-  //       </div>
-  //     );
-  //   };
-
-  return (
-    <div>
-      {/* <CountdownCircleTimer
-        isPlaying={false}
-        durationSeconds={time}
-        colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-        renderTime={renderTime}
-        // onComplete={() => [true, 1000]}
-      /> */}
-      <p>{time}</p>
-    </div>
-  );
+  const renderTime = () => {
+    const seconds = String(time % 60).padStart(2, "0");
+    const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+  return <StyledTimer>{renderTime()}</StyledTimer>;
 }
 
 export default Timer;

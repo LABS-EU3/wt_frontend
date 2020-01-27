@@ -43,13 +43,25 @@ export const GET_COMPLETED_WORKOUTS = gql`
   }
 `;
 
-export const GET_WORKOUT_DETAILS = gql`
+export const GET_WORKOUTS = gql`
   query {
     workouts {
       name
       intensity
       types
       id
+      picture
+    }
+  }
+`;
+
+export const GET_WORKOUTS_BY_FIELDS = gql`
+  query($search: String!, $fields: [String!]!) {
+    workouts(input: { search: $search, fields: $fields }) {
+      id
+      name
+      types
+      intensity
       picture
     }
   }
@@ -66,7 +78,11 @@ export const GET_WORKOUT_DETAIL = gql`
       avgTime
       equipment
       session {
+        startDate
+        endDate
         pause
+        exerciseId
+        exerciseTimer
       }
       muscles
       picture
@@ -107,7 +123,7 @@ export const GET_EXERCISES = gql`
 `;
 
 export const GET_EXERCISE = gql`
-  query excercise($id: String!) {
+  query exercise($id: String!) {
     exercise(id: $id) {
       id
       video
@@ -178,6 +194,58 @@ export const GET_DASHBOARD_DETAILS = gql`
           name
         }
       }
+    }
+  }
+`;
+
+export const EXERCISES_BY_FIELDS = gql`
+  query exercises($search: String!, $fields: [String!]!) {
+    exercises(input: { search: $search, fields: $fields }) {
+      id
+      video
+      difficulty
+      pictureOne
+      pictureTwo
+      rating
+      equipment
+      type
+      muscle
+      name
+      time
+    }
+  }
+`;
+
+export const GET_USER_DETAILS = gql`
+  query {
+    user {
+      firstname
+      lastname
+      equipment
+      height
+      goal
+      weight
+      reminderType
+      experience
+      heightUnit {
+        id
+        name
+      }
+      weightUnit {
+        id
+        name
+      }
+      email
+    }
+  }
+`;
+
+export const ACCOUNT_RECOVERY = gql`
+  query accountRecovery($email: String!) {
+    accountRecovery(input: $email) {
+      id
+      firstname
+      lastname
     }
   }
 `;

@@ -1,12 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ExerciseList /> renders the ExerciseList component correctly 1`] = `
-<div>
+<styled.div>
   <styled.div>
     <Search
       placeholder="Look for a specific exercise"
+      search=""
+      setSearch={[Function]}
     />
-    <withApollo(Exercises) />
+    <withApollo(Exercises)
+      exerciseName="Recommended Exercises"
+      exerciseQuery="RECOMENDED_EXERCISES"
+    />
+    <withApollo(Exercises)
+      exerciseName="Top Rated Exercises"
+      exerciseQuery="TOP_RATED_EXERCISES"
+    />
   </styled.div>
-</div>
+</styled.div>
 `;

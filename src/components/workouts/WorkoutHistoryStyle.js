@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HistoryStyle = styled.div`
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   margin-bottom: 5rem;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
@@ -9,6 +9,7 @@ export const HistoryStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 100vh;
 
   @media only screen and (max-width: 800px) {
     width: 90vw;
@@ -27,7 +28,7 @@ export const HistoryStyle = styled.div`
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 6rem;
+    margin-bottom: 1rem;
     width: 100%;
 
     h2 {

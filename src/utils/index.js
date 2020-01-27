@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 
 export const isLoggedIn = () => {
@@ -48,6 +49,19 @@ export const getUserDetails = () => {
   }
 };
 
+export const isNewUser = () => {
+  try {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      return null;
+    }
+
+    return userData.isNewUser;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const userOnboardedSuccessfully = () => {
   try {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -59,7 +73,22 @@ export const userOnboardedSuccessfully = () => {
       userData.isNewUser = false;
     }
     localStorage.setItem("userData", JSON.stringify(userData));
+    return true;
   } catch (error) {
     return false;
   }
+};
+
+export const useDebounce = (value, timeout) => {
+  const [state, setState] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setState(value), timeout);
+    return () => clearTimeout(handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+  return state;
+};
+
+export const generateRandomItem = array => {
+  return array[Math.floor(Math.random() * array.length)];
 };

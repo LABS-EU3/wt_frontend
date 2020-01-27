@@ -107,7 +107,6 @@ function Login({ client, history }) {
   }, []);
 
   if (loginSuccess) {
-    console.log(loginSuccess);
     history.push(loginSuccess);
     window.location.reload();
   }
@@ -184,6 +183,8 @@ function Login({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.email}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.email}
             />
 
             <Input
@@ -199,14 +200,17 @@ function Login({ client, history }) {
               focusBorderColor="#FF8744"
               errorBorderColor="crimson"
               error={formik.errors.password}
+              onBlur={formik.handleBlur}
+              touchedName={formik.touched.password}
             />
 
             <div className="checkbox">
               <Checkbox
                 size="md"
                 variantColor="orange"
-                onSelect={formik.handleChange}
-                value={true}
+                onChange={() =>
+                  formik.setFieldValue("remember", !formik.values.remember)
+                }
               >
                 Remember me
               </Checkbox>

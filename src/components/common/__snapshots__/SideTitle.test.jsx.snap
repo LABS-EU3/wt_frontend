@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SideTitle /> renders the Preview component correctly 1`] = `
+<Box
+  marginBottom="60px"
+  textAlign="left"
+>
+  <Heading />
+</Box>
+`;

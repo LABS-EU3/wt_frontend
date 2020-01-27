@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Workouts from "./Workouts";
+import { WorkoutsStyleList } from "./WorkoutStyle";
 
-import { WorkoutsStyle } from "./WorkoutStyle";
 import Search from "../common/Search";
+import { useDebounce } from "./../../utils/index";
 
 const WorkoutList = () => {
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 700);
   return (
-    <WorkoutsStyle>
-      <Search placeholder="Look for a specific workout" />
-      <Workouts />
-    </WorkoutsStyle>
+    <WorkoutsStyleList>
+      <Search
+        placeholder="Look for a specific workout"
+        setSearch={setSearch}
+        search={search}
+      />
+      <Workouts workoutName="Custom Workouts" workoutQuery="CUSTOM_WORKOUTS" />
+      <Workouts
+        workoutName={search ? `Search results for "${search}"` : `New Workouts`}
+        search={debouncedSearch}
+      />
+    </WorkoutsStyleList>
   );
 };
 

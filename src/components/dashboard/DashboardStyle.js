@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const DashboardStyle = styled.div`
   width: 95vw;
-  margin: 0 auto;
+  margin: 1rem auto;
   display: flex;
   flex-wrap: wrap;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
@@ -38,20 +38,6 @@ const DashboardStyle = styled.div`
       width: 65%;
       display: flex;
       flex-wrap: wrap;
-
-      .quotes {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-
-        p {
-          background: #fffcf2;
-          padding: 1.5rem;
-          border-radius: 10px;
-          transition: all 0.2s ease-in-out;
-        }
-      }
 
       .goal {
         display: flex;

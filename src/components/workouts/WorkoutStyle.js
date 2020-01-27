@@ -1,19 +1,60 @@
 import styled from "styled-components";
 
-export const WorkoutsStyle = styled.div`
+export const WorkoutsStyleList = styled.div`
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   width: 90vw;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
-  padding: 2rem 0;
+  justify-content: center;
+`;
 
-  .more {
+export const WorkoutsStyle = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 2rem 0;
+  text-align: left;
+  h3 {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    padding: 0 2rem;
+    position: relative;
+    a {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+
+  .load-more {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
     justify-content: center;
+    margin: 1rem 0;
+
+    button {
+      background-color: #ff8744;
+      color: white;
+    }
+  }
+
+  .container {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  .cw-buttons {
+    width: 100%;
   }
 `;
 
@@ -41,6 +82,14 @@ export const WorkoutStyle = styled.div`
 
   @media only screen and (max-width: 710px) {
     width: 65%;
+  }
+
+  @media only screen and (max-width: 550px) {
+    width: 85%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 95%;
   }
 
   img {
@@ -144,6 +193,14 @@ export const WorkoutDetailStyle = styled.div`
     }
   }
 
+  .workout-quotes {
+    margin: 1rem 0;
+    width: 80%;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .exercise {
     display: flex;
     flex-wrap: wrap;
@@ -191,5 +248,90 @@ export const WorkoutDetailStyle = styled.div`
     .exercise-preview-detail {
       padding: 1rem;
     }
+  }
+`;
+
+export const CustomWorkoutStyleDetail = styled.div`
+  width: 90vw;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+  text-align: left;
+
+  @media only screen and (max-width: 400px) {
+    width: 97vw;
+  }
+
+  .cw-title {
+    padding-bottom: 1rem;
+  }
+
+  .search-exercises {
+    position: relative;
+  }
+
+  .search-results {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: #fffcf2;
+    height: auto;
+    max-height: 30vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    z-index: 900;
+    p {
+      cursor: pointer;
+      line-height: 2rem;
+      transition: all 0.2s ease-in-out;
+      border-bottom: 1px solid #fffcf2;
+      padding: 0 1rem;
+      &.selected {
+        background: #ff8744;
+        color: white;
+      }
+      &:hover {
+        background: rgba(255, 135, 68, 0.75);
+        color: white;
+      }
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 0 1rem;
+  }
+
+  textarea {
+    padding: 0.8rem 1rem;
+    min-height: 80px;
+    max-height: 30vh;
+  }
+
+  .list-exercises {
+    text-align: left;
+    padding-top: 1.5rem;
+    h2 {
+      padding-bottom: 1rem;
+    }
+    & > p {
+      position: relative;
+      line-height: 3rem;
+      transition: all 0.2s ease-in-out;
+      border-bottom: 1px solid #fffcf2;
+      button {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+
+  .cw-submit-btn {
+    margin-top: 1rem;
   }
 `;
