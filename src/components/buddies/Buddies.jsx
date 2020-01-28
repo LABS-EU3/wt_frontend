@@ -17,8 +17,6 @@ const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            {/* <p>Friends</p>
-            <Search placeholder="" /> */}
             <FriendsTab />
           </TabPanel>
           <TabPanel>
