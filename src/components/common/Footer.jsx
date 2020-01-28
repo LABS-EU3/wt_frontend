@@ -60,29 +60,22 @@ const Footer = ({ location }) => {
         <p>&copy; 2020 trackdrills</p>
 
         <div className="socials">
-          <a href="##">
+          <a href="mailto:trackdrillslambdalabs@gmail.com">
             <span>
               {" "}
               <i className="fas fa-2x fa-envelope"></i>
             </span>
           </a>
-          <a href="##">
+          <a href="https://twitter.com/trackdrills">
             <span>
               <i className="fab fa-2x fa-twitter"></i>
             </span>
           </a>
 
-          <a href="##">
+          <a href="https://www.linkedin.com">
             <span>
               {" "}
               <i className="fab fa-2x fa-linkedin"></i>
-            </span>
-          </a>
-
-          <a href="##">
-            <span>
-              {" "}
-              <i className="fab fa-2x fa-facebook-square"></i>
             </span>
           </a>
         </div>

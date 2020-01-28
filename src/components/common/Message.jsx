@@ -31,7 +31,7 @@ const Message = ({ client }) => {
   if (messages.length > 0) {
     messages.forEach(message => {
       if (message.sender === userData.user_id) {
-        addUserMessage(message.message);
+        addUserMessage(message.message, "asd");
       } else {
         addResponseMessage(message.message);
       }
