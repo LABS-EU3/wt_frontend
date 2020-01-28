@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import React from "react";
 import { withApollo } from "react-apollo";
-import {
-  Flex,
-  Box,
-  Heading,
-  Avatar,
-  useToast,
-  Button,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text
-} from "@chakra-ui/core";
-
-import {
-  IoIosPerson,
-  IoIosMail,
-  IoIosFitness,
-  IoIosTrendingUp
-} from "react-icons/io";
-
-import logoImage from "../../images/login_image.png";
 import AddFriendsTab from "./AddFriendsTab";
 import FriendsRequestTab from "./FriendsRequestTab";
 import Search from "../common/Search";
+import FriendsTab from "./FriendsTab";
 
 const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
   return (
@@ -38,8 +17,9 @@ const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>Friends</p>
-            <Search placeholder="" />
+            {/* <p>Friends</p>
+            <Search placeholder="" /> */}
+            <FriendsTab />
           </TabPanel>
           <TabPanel>
             <AddFriendsTab />

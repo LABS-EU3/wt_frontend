@@ -269,6 +269,16 @@ export const GET_FRIENDS_REQUEST = gql`
       firstname
       lastname
       email
+    }
+  }
+`;
+
+export const GET_FRIENDS = gql`
+  query {
+    friends {
+      id
+      firstname
+      lastname
       goal
     }
   }

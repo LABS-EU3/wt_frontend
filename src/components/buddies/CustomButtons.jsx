@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { Button } from "@chakra-ui/core";
+import React from "react";
 import { withApollo } from "react-apollo";
-import { Flex, Box, Heading, Button, Text } from "@chakra-ui/core";
 
-const CustomButtons = ({ icon, text }) => {
+const CustomButtons = ({ icon, text, variant, onClick }) => {
   return (
-    <Button leftIcon={icon} variantColor="orange" variant="solid" size="md">
+    <Button
+      leftIcon={icon}
+      variantColor="orange"
+      variant={variant}
+      size="md"
+      onClick={onClick}
+    >
       {text}
     </Button>
   );

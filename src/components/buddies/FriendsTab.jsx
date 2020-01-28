@@ -2,20 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
 import { Redirect } from "react-router-dom";
-import { GET_USERS } from "../../graphql/queries";
+import { GET_FRIENDS } from "../../graphql/queries";
 import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
 import BuddiesCard from "./BuddiesCard";
 
-const AddFriendsTab = ({
-  client,
-  name,
-  goal,
-  history,
-  text,
-  profilePicture
-}) => {
-  const [buddiesData, setBuddiesData] = useState([]);
+const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
+  const [friendsData, setFriendsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -34,14 +27,14 @@ const AddFriendsTab = ({
   useEffect(() => {
     client
       .query({
-        query: GET_USERS,
+        query: GET_FRIENDS,
         variables: {
           search,
           fields: ["firstname", "lastname", "email"]
         }
       })
       .then(res => {
-        setBuddiesData(res.data.findFriends);
+        setFriendsData(res.data.friends);
         setIsLoading(false);
       })
       .catch(err => {
@@ -78,20 +71,21 @@ const AddFriendsTab = ({
 
   return (
     <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
-      <p>Add Friends</p>
+      <p>Friends</p>
       <Search
-        placeholder="Find someone you know"
+        placeholder="Find friends"
         setSearch={setSearch}
         search={search}
       />
-      {buddiesData.map(buddy => (
+      {friendsData.map(buddy => (
         <div>
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
             goal={buddy.goal}
-            icon="add"
-            text="Add friend"
-            variant="solid"
+            icon="chat"
+            text="Message"
+            variant="outline"
+            onClick={() => {}}
           />
         </div>
       ))}
@@ -99,4 +93,4 @@ const AddFriendsTab = ({
   );
 };
 
-export default withApollo(AddFriendsTab);
+export default withApollo(FriendsTab);
