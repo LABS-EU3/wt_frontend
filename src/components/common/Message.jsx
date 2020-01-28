@@ -145,7 +145,6 @@ const Message = ({ client }) => {
 
   if (messages.length > 0) {
     messages.forEach(message => {
-      console.log(message);
       if (message.sender === "5e2a2c4b2b999a00177da5f4") {
         addUserMessage(message.message);
       } else {
@@ -165,8 +164,6 @@ const Message = ({ client }) => {
     document: SUBSCRIBE_MESSAGE,
     variables: { receiver: "5e2a2c4b2b999a00177da5f4" },
     updateQuery: (prev, { subscriptionData }) => {
-      console.log("prev", prev);
-      console.log("sub", subscriptionData);
       if (!subscriptionData.data) return prev;
       const newMessage = subscriptionData.data.newMessage;
 
@@ -181,7 +178,6 @@ const Message = ({ client }) => {
   });
 
   const handleNewUserMessage = newMessage => {
-    console.log(`New message incoming! ${newMessage}`);
     client
       .mutate({
         mutation: SEND_MESSAGE,
