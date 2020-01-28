@@ -249,3 +249,14 @@ export const ACCOUNT_RECOVERY = gql`
     }
   }
 `;
+
+export const GET_MESSAGE_HISTORY = gql`
+  query friendChat($receiver: String!) {
+    friendChat(receiver: $receiver) {
+      sender
+      receiver
+      message
+      sent
+    }
+  }
+`;

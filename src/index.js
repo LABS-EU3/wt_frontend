@@ -12,7 +12,10 @@ import { split } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
-
+import {
+  SubscriptionClient,
+  addGraphQLSubscriptions
+} from "subscriptions-transport-ws";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -34,6 +37,7 @@ const cache = new InMemoryCache({
     return Math.random();
   }
 });
+
 const httpLink = new createUploadLink({
   uri: REACT_APP_GraphQL_API,
   fetchOptions: {
@@ -60,12 +64,20 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const wsLink = new WebSocketLink({
-  uri: `ws://${REACT_APP_GraphQL_API_SUBSCRIPTIONS}`,
-  options: {
-    reconnect: true
-  }
+const GRAPHQL_ENDPOINT = `ws://${REACT_APP_GraphQL_API_SUBSCRIPTIONS}`;
+
+const serverClient = new SubscriptionClient(GRAPHQL_ENDPOINT, {
+  reconnect: true
 });
+
+const wsLink = new WebSocketLink(serverClient);
+
+// const wsLink = new WebSocketLink({
+//   uri: `ws://${REACT_APP_GraphQL_API_SUBSCRIPTIONS}`,
+//   options: {
+//     reconnect: true
+//   }
+// });
 
 const link = split(
   // split based on operation type

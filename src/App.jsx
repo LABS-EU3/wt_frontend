@@ -17,7 +17,7 @@ import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 import Footer from "./components/common/Footer";
-
+import Message from "./components/common/Message";
 const App = () => {
   return (
     <div className="App" data-testid="App">
@@ -25,6 +25,7 @@ const App = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/accountrecovery" component={AccountRecovery} />
+        <Route exact path="/message" component={Message} />
         <Route
           exact
           path="/accountrecovery/:token"
