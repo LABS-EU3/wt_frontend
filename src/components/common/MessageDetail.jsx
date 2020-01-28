@@ -8,8 +8,6 @@ import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 
 const MessageDetail = ({ handleNewUserMessage, subscribeToMore, user_id }) => {
   useEffect(() => {
-    console.log("noiiccee");
-
     subscribeToMore({
       document: SUBSCRIBE_MESSAGE,
       variables: { receiver: user_id },

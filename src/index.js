@@ -9,13 +9,9 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { setContext } from "apollo-link-context";
 import ReactGA from "react-ga";
 import { split } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
-import {
-  SubscriptionClient,
-  addGraphQLSubscriptions
-} from "subscriptions-transport-ws";
+import { SubscriptionClient } from "subscriptions-transport-ws";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -71,13 +67,6 @@ const serverClient = new SubscriptionClient(GRAPHQL_ENDPOINT, {
 });
 
 const wsLink = new WebSocketLink(serverClient);
-
-// const wsLink = new WebSocketLink({
-//   uri: `ws://${REACT_APP_GraphQL_API_SUBSCRIPTIONS}`,
-//   options: {
-//     reconnect: true
-//   }
-// });
 
 const link = split(
   // split based on operation type
