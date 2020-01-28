@@ -109,17 +109,57 @@
 // }
 // export default withApollo(Message);
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery, withApollo } from "react-apollo";
+import {
+  Widget,
+  addResponseMessage,
+  addLinkSnippet,
+  addUserMessage
+} from "react-chat-widget";
+import { useToast } from "@chakra-ui/core";
+
+import "react-chat-widget/lib/styles.css";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
-import { useQuery } from "react-apollo";
+import { StyledMessage } from "../../styles";
 
-function Message() {
-  const { subscribeToMore, ...result } = useQuery(GET_MESSAGE_HISTORY, {
+const Message = ({ client }) => {
+  const toast = useToast();
+  const [messages, setMessages] = useState([]);
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
+  const { subscribeToMore, data, ...result } = useQuery(GET_MESSAGE_HISTORY, {
     variables: { receiver: "5e2aedba56cf1200175d69c9" }
   });
-  console.log(subscribeToMore);
+
+  if (messages.length > 0) {
+    messages.forEach(message => {
+      console.log(message);
+      if (message.sender === "5e2a2c4b2b999a00177da5f4") {
+        addUserMessage(message.message);
+      } else {
+        addResponseMessage(message.message);
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (typeof data === "object") {
+      setMessages(data.friendChat);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   subscribeToMore({
     document: SUBSCRIBE_MESSAGE,
@@ -132,18 +172,46 @@ function Message() {
 
       if (!prev.friendChat.find(msg => msg.id === newMessage.id)) {
         return Object.assign({}, prev, {
-          //   channel: Object.assign({}, prev.channel, {
           friendChat: [...prev.friendChat, newMessage]
-          //   })
         });
       } else {
         return prev;
       }
-      //   });
     }
   });
 
-  return <div></div>;
-}
+  const handleNewUserMessage = newMessage => {
+    console.log(`New message incoming! ${newMessage}`);
+    client
+      .mutate({
+        mutation: SEND_MESSAGE,
+        variables: {
+          receiver: "5e2aedba56cf1200175d69c9",
+          message: newMessage
+        }
+      })
+      .catch(err => {
+        alert("An error occurred☹️", "Unable to send message", "error");
+      });
+  };
 
-export default Message;
+  return (
+    <StyledMessage>
+      <Widget
+        handleNewUserMessage={handleNewUserMessage}
+        profileAvatar="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg"
+        title="Ezekiel"
+        subtitle=""
+        launcher={handleToggle => {
+          return (
+            <button key={handleToggle} onClick={handleToggle}>
+              Toggle
+            </button>
+          );
+        }}
+      />
+    </StyledMessage>
+  );
+};
+
+export default withApollo(Message);
