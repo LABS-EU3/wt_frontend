@@ -60,11 +60,12 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const GRAPHQL_ENDPOINT = `ws://${REACT_APP_GraphQL_API_SUBSCRIPTIONS}`;
-
-const serverClient = new SubscriptionClient(GRAPHQL_ENDPOINT, {
-  reconnect: true
-});
+const serverClient = new SubscriptionClient(
+  REACT_APP_GraphQL_API_SUBSCRIPTIONS,
+  {
+    reconnect: true
+  }
+);
 
 const wsLink = new WebSocketLink(serverClient);
 
