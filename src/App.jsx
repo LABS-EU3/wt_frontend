@@ -46,7 +46,7 @@ const App = () => {
           component={CustomWorkoutDetail}
         />
         <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
-        <Route exact path="/buddies" component={Buddies} />
+        <PrivateRoute exact path="/buddies" component={Buddies} />
       </Switch>
       <Footer />
     </div>
