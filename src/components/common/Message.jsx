@@ -10,8 +10,6 @@ import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
 
-const { user_id } = userData;
-
 const Message = ({ client }) => {
   const toast = useToast();
   const [messages, setMessages] = useState([]);
@@ -32,7 +30,7 @@ const Message = ({ client }) => {
 
   if (messages.length > 0) {
     messages.forEach(message => {
-      if (message.sender === user_id) {
+      if (message.sender === userData.user_id) {
         addUserMessage(message.message);
       } else {
         addResponseMessage(message.message);
@@ -66,7 +64,7 @@ const Message = ({ client }) => {
     <MessageDetail
       handleNewUserMessage={handleNewUserMessage}
       subscribeToMore={subscribeToMore}
-      user_id={user_id}
+      user_id={userData.user_id}
     />
   );
 };
