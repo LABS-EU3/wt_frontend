@@ -24,6 +24,7 @@ import {
 
 import logoImage from "../../images/login_image.png";
 import AddFriendsTab from "./AddFriendsTab";
+import FriendsRequestTab from "./FriendsRequestTab";
 import Search from "../common/Search";
 
 const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
@@ -44,7 +45,7 @@ const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
             <AddFriendsTab />
           </TabPanel>
           <TabPanel>
-            <p>Friends Request</p>
+            <FriendsRequestTab />
           </TabPanel>
         </TabPanels>
       </Tabs>

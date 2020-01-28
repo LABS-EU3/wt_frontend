@@ -310,3 +310,13 @@ export const RESET_PASSWORD = gql`
     }
   }
 `;
+
+export const MANAGE_FRIENDS = gql`
+  mutation manageFriends($userId: String!, $task: String!) {
+    manageFriends(input: { userId: $userId, task: $task }) {
+      id
+      firstname
+      lastname
+    }
+  }
+`;
