@@ -25,7 +25,6 @@ import {
 import logoImage from "../../images/login_image.png";
 import AddFriendsTab from "./AddFriendsTab";
 import Search from "../common/Search";
-import { GET_UNITS } from "../../graphql/queries";
 
 const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
   return (

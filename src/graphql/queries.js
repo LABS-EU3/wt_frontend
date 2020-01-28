@@ -242,10 +242,22 @@ export const GET_USER_DETAILS = gql`
 
 export const ACCOUNT_RECOVERY = gql`
   query accountRecovery($email: String!) {
-    accountRecovery(input: $email) {
+    accountRecovery(input: { search: $search, fields: $fields }) {
       id
       firstname
       lastname
+    }
+  }
+`;
+
+export const GET_USERS = gql`
+  query findFriends($search: String!, $fields: [String!]!) {
+    findFriends(input: { search: $search, fields: $fields }) {
+      id
+      firstname
+      lastname
+      email
+      goal
     }
   }
 `;
