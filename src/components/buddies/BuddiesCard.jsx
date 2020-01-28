@@ -1,24 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { Avatar, Box, Flex, Heading, Text } from "@chakra-ui/core";
+import React from "react";
 import { withApollo } from "react-apollo";
-import {
-  Flex,
-  Box,
-  Heading,
-  Avatar,
-  useToast,
-  Button,
-  useDisclosure,
-  Text
-} from "@chakra-ui/core";
-
-import {
-  IoIosPerson,
-  IoIosMail,
-  IoIosFitness,
-  IoIosTrendingUp
-} from "react-icons/io";
-
-import logoImage from "../../images/login_image.png";
 import CustomButtons from "./CustomButtons";
 
 const BuddiesCard = ({

@@ -1,25 +1,9 @@
+import { Box } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
-import {
-  Flex,
-  Box,
-  Heading,
-  Avatar,
-  useToast,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-  icon
-} from "@chakra-ui/core";
-
-import logoImage from "../../images/login_image.png";
-import BuddiesCard from "./BuddiesCard";
-import Search from "../common/Search";
 import { GET_UNITS } from "../../graphql/queries";
-import CustomButtons from "./CustomButtons";
+import Search from "../common/Search";
+import BuddiesCard from "./BuddiesCard";
 
 const AddFriendsTab = ({
   client,
