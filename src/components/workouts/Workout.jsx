@@ -1,25 +1,62 @@
 import React from "react";
+import { withApollo } from "react-apollo";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { Heading, ButtonGroup, Button } from "@chakra-ui/core";
+import { Heading, ButtonGroup, Button, useToast } from "@chakra-ui/core";
 import { WorkoutStyle } from "./WorkoutStyle";
+import defaultPicture from "../../assets/banner.jpg";
+import { DELETE_CUSTOM_WORKOUT } from "../../graphql/mutations";
 
-function Workout({ data, history, cardQuery }) {
+function Workout({ client, data, history, cardQuery, setLimitedWorkouts }) {
+  const toast = useToast();
   const { name, intensity, types, id, picture } = data;
 
-  const deleteCustomWorkoutOnClick = () => {
-    console.log(`DELETE ${id}`);
-  };
-  const editCustomWorkoutOnClick = id => e => {
-    history.push(`/my/workout/${id}`);
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
   };
 
+  const deleteCustomWorkout = () => {
+    client
+      .mutate({
+        mutation: DELETE_CUSTOM_WORKOUT,
+        variables: {
+          workoutId: id,
+          remove: true,
+          name: "",
+          description: "",
+          intensity: "",
+          exercises: []
+        }
+      })
+      .then(res => {
+        setLimitedWorkouts(workouts => workouts.filter(w => w.id !== id));
+        alert("Custom workout deleted!", "🏋🏾‍♀️", "success");
+      })
+      .catch(error => {
+        console.log(error);
+        alert(
+          "An error occurred.",
+          "Unable to delete custom workout ☹️",
+          "error"
+        );
+      });
+  };
+  const editCustomWorkout = id => e => {
+    history.push(`/my/workout/${id}`);
+  };
+  const pic = picture ? picture : defaultPicture;
   if (cardQuery === "CUSTOM_WORKOUTS") {
     return (
       <WorkoutStyle>
         <Link to={`/workout/${id}`}>
-          <img src={picture} alt={name} />
+          <img src={pic} alt={name} />
         </Link>
         <div className="workout-details">
           <Link to={`/workout/${id}`}>
@@ -33,7 +70,7 @@ function Workout({ data, history, cardQuery }) {
           </Link>
           <ButtonGroup className="cw-buttons">
             <Button
-              onClick={editCustomWorkoutOnClick(id)}
+              onClick={editCustomWorkout(id)}
               leftIcon="edit"
               variant="outline"
               variantColor="yellow"
@@ -41,7 +78,7 @@ function Workout({ data, history, cardQuery }) {
               Edit
             </Button>
             <Button
-              onClick={deleteCustomWorkoutOnClick}
+              onClick={deleteCustomWorkout}
               leftIcon="delete"
               variant="outline"
               variantColor="red"
@@ -79,4 +116,4 @@ Workout.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-export default withRouter(Workout);
+export default withApollo(withRouter(Workout));
