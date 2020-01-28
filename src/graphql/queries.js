@@ -261,3 +261,15 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const GET_FRIENDS_REQUEST = gql`
+  query {
+    friendRequests {
+      id
+      firstname
+      lastname
+      email
+      goal
+    }
+  }
+`;
