@@ -10,6 +10,7 @@ import Charts from "./Charts";
 import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import Quotes from "../common/Quotes";
+import Streak from "../common/Streak";
 
 function Dashboard({ client, history }) {
   const [dashboardData, setDashboardData] = useState([]);
@@ -97,7 +98,7 @@ function Dashboard({ client, history }) {
               </Box>
             </Flex>
 
-            <Box
+            {/* <Box
               bg="tomato"
               color="white"
               p={4}
@@ -110,7 +111,8 @@ function Dashboard({ client, history }) {
                 🔥🔥🔥
               </span>{" "}
               You have a {dashboardData.streak} days streak. Keep it up!
-            </Box>
+            </Box> */}
+            <Streak streak={dashboardData.streak} />
           </div>
 
           <div className="dasboard-detail">

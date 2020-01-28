@@ -13,3 +13,15 @@
 .error {
   color: red;
 }
+
+.low {
+  background-color: red;
+}
+
+.moderate {
+  background-color: #ff8744;
+}
+
+.high {
+  background-color: green;
+}
