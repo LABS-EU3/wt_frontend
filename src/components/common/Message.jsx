@@ -117,6 +117,11 @@ import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
 import { addResponseMessage, addUserMessage } from "react-chat-widget";
 import MessageDetail from "./MessageDetail";
+import { getUserDetails } from "../../utils";
+
+const userData = getUserDetails();
+
+const { user_id } = userData;
 
 const Message = ({ client }) => {
   const toast = useToast();
@@ -138,7 +143,7 @@ const Message = ({ client }) => {
 
   if (messages.length > 0) {
     messages.forEach(message => {
-      if (message.sender === "5e2a2c4b2b999a00177da5f4") {
+      if (message.sender === user_id) {
         addUserMessage(message.message);
       } else {
         addResponseMessage(message.message);
@@ -189,6 +194,7 @@ const Message = ({ client }) => {
     <MessageDetail
       handleNewUserMessage={handleNewUserMessage}
       subscribeToMore={subscribeToMore}
+      user_id={user_id}
     />
   );
 };

@@ -6,13 +6,13 @@ import "react-chat-widget/lib/styles.css";
 import { StyledMessage } from "../../styles";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 
-const MessageDetail = ({ handleNewUserMessage, subscribeToMore }) => {
+const MessageDetail = ({ handleNewUserMessage, subscribeToMore, user_id }) => {
   useEffect(() => {
     console.log("noiiccee");
 
     subscribeToMore({
       document: SUBSCRIBE_MESSAGE,
-      variables: { receiver: "5e2a2c4b2b999a00177da5f4" },
+      variables: { receiver: user_id },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
         const newMessage = subscriptionData.data.newMessage;
