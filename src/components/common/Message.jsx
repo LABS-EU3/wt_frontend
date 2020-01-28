@@ -111,19 +111,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useQuery, withApollo } from "react-apollo";
-import {
-  Widget,
-  addResponseMessage,
-  addLinkSnippet,
-  addUserMessage
-} from "react-chat-widget";
 import { useToast } from "@chakra-ui/core";
 
-import "react-chat-widget/lib/styles.css";
-import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
-import { StyledMessage } from "../../styles";
+import { addResponseMessage, addUserMessage } from "react-chat-widget";
+import MessageDetail from "./MessageDetail";
 
 const Message = ({ client }) => {
   const toast = useToast();
@@ -154,28 +147,29 @@ const Message = ({ client }) => {
   }
 
   useEffect(() => {
+    console.log("aaaaa");
     if (typeof data === "object") {
       setMessages(data.friendChat);
     }
+
+    // subscribeToMore({
+    //   document: SUBSCRIBE_MESSAGE,
+    //   variables: { receiver: "5e2a2c4b2b999a00177da5f4" },
+    //   updateQuery: (prev, { subscriptionData }) => {
+    //     if (!subscriptionData.data) return prev;
+    //     const newMessage = subscriptionData.data.newMessage;
+
+    //     if (!prev.friendChat.find(msg => msg.id === newMessage.id)) {
+    //       return Object.assign({}, prev, {
+    //         friendChat: [...prev.friendChat, newMessage]
+    //       });
+    //     } else {
+    //       return prev;
+    //     }
+    //   }
+    // });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
-  subscribeToMore({
-    document: SUBSCRIBE_MESSAGE,
-    variables: { receiver: "5e2a2c4b2b999a00177da5f4" },
-    updateQuery: (prev, { subscriptionData }) => {
-      if (!subscriptionData.data) return prev;
-      const newMessage = subscriptionData.data.newMessage;
-
-      if (!prev.friendChat.find(msg => msg.id === newMessage.id)) {
-        return Object.assign({}, prev, {
-          friendChat: [...prev.friendChat, newMessage]
-        });
-      } else {
-        return prev;
-      }
-    }
-  });
 
   const handleNewUserMessage = newMessage => {
     client
@@ -192,21 +186,10 @@ const Message = ({ client }) => {
   };
 
   return (
-    <StyledMessage>
-      <Widget
-        handleNewUserMessage={handleNewUserMessage}
-        profileAvatar="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg"
-        title="Ezekiel"
-        subtitle=""
-        launcher={handleToggle => {
-          return (
-            <button key={handleToggle} onClick={handleToggle}>
-              Toggle
-            </button>
-          );
-        }}
-      />
-    </StyledMessage>
+    <MessageDetail
+      handleNewUserMessage={handleNewUserMessage}
+      subscribeToMore={subscribeToMore}
+    />
   );
 };
 
