@@ -64,15 +64,17 @@ const FriendsRequestTab = ({
   }, []);
 
   const onClick = e => {
+    debugger;
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
         variables: {
-          userId: e.target.id.id,
+          userId: e.target.id,
           task: e.target.value
         }
       })
       .then(res => {
+        debugger;
         setIsLoading(false);
         setBuddiesRequests(buddiesRequests);
         e.target.value === "response_1"
@@ -80,6 +82,7 @@ const FriendsRequestTab = ({
           : alert(`You have rejected ${e.target.id.firstname}'s Buddy request`);
       })
       .catch(error => {
+        debugger;
         setIsLoading(false);
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");

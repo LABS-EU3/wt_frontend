@@ -34,9 +34,9 @@ const BuddiesCard = ({
         debugger;
         setIsLoading(false);
         setBuddiesAction(buddiesAction);
-        e.target.value === "response_1"
-          ? alert(`${e.target.id.firstname} is now your Workout Buddy`)
-          : alert(`You have rejected ${e.target.id.firstname}'s Buddy request`);
+        e.target.value === "add"
+          ? alert(`Buddy request sent to ${e.target.id.firstname}`)
+          : alert(`An error occured`);
       })
       .catch(error => {
         debugger;
