@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Box, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
-import {
-  Flex,
-  Box,
-  Heading,
-  Avatar,
-  useToast,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-  icon
-} from "@chakra-ui/core";
 import { Redirect } from "react-router-dom";
-
-import logoImage from "../../images/login_image.png";
-import BuddiesCard from "./BuddiesCard";
+import { GET_USERS } from "../../graphql/queries";
 import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
-import { GET_USERS } from "../../graphql/queries";
+import BuddiesCard from "./BuddiesCard";
 
 const AddFriendsTab = ({
   client,
@@ -69,7 +54,11 @@ const AddFriendsTab = ({
 
   if (isLoading) {
     return (
-      <Box>
+      <Box
+        boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
+        paddingY="15px"
+        margin="30px"
+      >
         <Flex
           width="100vw"
           height="100vh"
@@ -102,6 +91,7 @@ const AddFriendsTab = ({
             goal={buddy.goal}
             icon="add"
             text="Add friend"
+            variant="solid"
           />
         </div>
       ))}
