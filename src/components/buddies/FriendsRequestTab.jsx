@@ -64,7 +64,6 @@ const FriendsRequestTab = ({
   }, []);
 
   const onClick = e => {
-    debugger;
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -85,7 +84,7 @@ const FriendsRequestTab = ({
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
         } else {
-          alert("Unable to update profile", "", "error");
+          alert("Unable to edit friend request", "", "error");
         }
       });
   };

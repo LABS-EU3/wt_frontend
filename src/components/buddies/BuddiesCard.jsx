@@ -1,19 +1,54 @@
 import { Avatar, Box, Flex, Heading, Text, Divider } from "@chakra-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import CustomButtons from "./CustomButtons";
+import { MANAGE_FRIENDS } from "../../graphql/mutations";
 
 const BuddiesCard = ({
-  clients,
+  client,
   name,
   goal,
   history,
   text,
   icon,
   variant,
-  onClick,
-  profilePicture
+  profilePicture,
+  value,
+  id
 }) => {
+  const [buddiesAction, setBuddiesAction] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const onClick = e => {
+    console.log(e.target.id);
+    debugger;
+    client
+      .mutate({
+        mutation: MANAGE_FRIENDS,
+        variables: {
+          userId: e.target.id,
+          task: e.target.value
+        }
+      })
+      .then(res => {
+        debugger;
+        setIsLoading(false);
+        setBuddiesAction(buddiesAction);
+        e.target.value === "response_1"
+          ? alert(`${e.target.id.firstname} is now your Workout Buddy`)
+          : alert(`You have rejected ${e.target.id.firstname}'s Buddy request`);
+      })
+      .catch(error => {
+        debugger;
+        setIsLoading(false);
+        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+          alert("An error occurred.", error.graphQLErrors[0].message, "error");
+        } else {
+          alert("Unable to update profile", "", "error");
+        }
+      });
+  };
+
   return (
     <Box>
       <Divider borderColor="gray.300" />
@@ -30,6 +65,8 @@ const BuddiesCard = ({
           text={text}
           variant={variant}
           onClick={onClick}
+          value={value}
+          id={id}
         />
       </Flex>
     </Box>

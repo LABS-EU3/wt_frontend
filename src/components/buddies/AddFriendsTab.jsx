@@ -92,6 +92,8 @@ const AddFriendsTab = ({
             icon="add"
             text="Add friend"
             variant="solid"
+            value="add"
+            id={buddy.id}
           />
         </div>
       ))}
