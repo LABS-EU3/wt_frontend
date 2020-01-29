@@ -1,20 +1,11 @@
 {
-  "short_name": "Trackdrills",
-  "name": "Trackdrills",
-  "icons": [
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
+  "background_color": "#FFF",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "name": "trackdrills",
+  "short_name": "trackdrills",
+  "version": "com.trackdrills.app",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "author": "Apache Cordova Team",
+  "icons": [],
+  "start_url": "index.html"
 }

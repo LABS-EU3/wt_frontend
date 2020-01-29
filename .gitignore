@@ -29,4 +29,6 @@ yarn-error.log*
 .nyc_output/
 .env
 
-/www
+www/*
+platforms/*/app/src/main/assets/www/*
+*/static/*
