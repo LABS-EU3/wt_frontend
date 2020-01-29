@@ -13,9 +13,10 @@ const AddFriendsTab = ({
   goal,
   history,
   text,
-  profilePicture
+  profilePicture,
+  users,
+  setUsers
 }) => {
-  const [buddiesData, setBuddiesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -41,7 +42,7 @@ const AddFriendsTab = ({
         }
       })
       .then(res => {
-        setBuddiesData(res.data.findFriends);
+        setUsers(res.data.findFriends);
         setIsLoading(false);
       })
       .catch(err => {
@@ -84,7 +85,7 @@ const AddFriendsTab = ({
         setSearch={setSearch}
         search={search}
       />
-      {buddiesData.map(buddy => (
+      {users.map(buddy => (
         <div>
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
