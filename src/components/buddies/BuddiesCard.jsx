@@ -1,4 +1,12 @@
-import { Avatar, Box, Flex, Heading, Text, Divider } from "@chakra-ui/core";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Divider,
+  useToast
+} from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import CustomButtons from "./CustomButtons";
@@ -17,6 +25,17 @@ const BuddiesCard = ({
   id
 }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
   const onClick = e => {
     e.persist();

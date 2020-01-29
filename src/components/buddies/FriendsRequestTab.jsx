@@ -1,27 +1,18 @@
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useToast
+} from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
-import {
-  Flex,
-  Box,
-  Heading,
-  Avatar,
-  useToast,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-  Button
-} from "@chakra-ui/core";
 import { Redirect } from "react-router-dom";
-
-import logoImage from "../../images/login_image.png";
-import BuddiesCard from "./BuddiesCard";
-import Search from "../common/Search";
-import CustomSpinner from "../common/Spinner";
-import { GET_FRIENDS_REQUEST } from "../../graphql/queries";
 import { MANAGE_FRIENDS } from "../../graphql/mutations";
+import { GET_FRIENDS_REQUEST } from "../../graphql/queries";
+import CustomSpinner from "../common/Spinner";
 
 const FriendsRequestTab = ({
   client,
