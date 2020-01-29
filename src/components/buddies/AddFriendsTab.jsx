@@ -95,6 +95,8 @@ const AddFriendsTab = ({
             variant="solid"
             value="add"
             id={buddy.id}
+            users={users}
+            setUsers={setUsers}
           />
         </div>
       ))}

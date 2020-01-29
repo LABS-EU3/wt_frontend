@@ -22,7 +22,9 @@ const BuddiesCard = ({
   variant,
   profilePicture,
   value,
-  id
+  id,
+  users,
+  setUsers
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
@@ -48,10 +50,13 @@ const BuddiesCard = ({
         }
       })
       .then(res => {
-        setIsLoading(isLoading);
-        e.target.value === "add"
-          ? alert(`Buddy request sent to ${e.target.name}`)
-          : alert(`An error occured`);
+        if (res.data.manageFriends) {
+          setIsLoading(isLoading);
+          setUsers(users);
+          e.target.value === "add"
+            ? alert(`Buddy request sent to ${e.target.name}`)
+            : alert(`An error occured`);
+        } else alert(`Buddy request already sent`);
       })
       .catch(error => {
         setIsLoading(false);
