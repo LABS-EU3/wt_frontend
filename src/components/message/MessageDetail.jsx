@@ -1,7 +1,4 @@
 import React, { useEffect } from "react";
-import { Widget } from "react-chat-widget";
-
-import "react-chat-widget/lib/styles.css";
 
 import { StyledMessageDetail } from "./Styledmessages";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
