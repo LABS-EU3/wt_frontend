@@ -116,7 +116,7 @@ function Dashboard({ client, history }) {
               <RecommendedWorkouts />
             </section>
 
-            {/* <Charts graphs={dashboardData.graphs} /> */}
+            <Charts graphs={dashboardData.graphs} />
           </div>
         </div>
       </DashboardStyle>

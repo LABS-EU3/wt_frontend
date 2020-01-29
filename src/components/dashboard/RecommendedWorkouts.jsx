@@ -43,9 +43,6 @@ const RecommendedWorkouts = ({ client, history }) => {
             <div key={workout.id} className="recomended-workout-detail">
               <Link to={`/workout/${workout.id}`}>
                 <img src={workout.picture} alt={workout.name} />
-                {/* <Heading size="sm" textAlign="left">
-                  {workout.name}
-                </Heading> */}
               </Link>
             </div>
           );

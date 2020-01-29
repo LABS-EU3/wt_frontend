@@ -12,6 +12,14 @@ const DashboardStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+
+    h2 {
+      font-size: 1.8rem;
+
+      @media only screen and (max-width: 800px) {
+        font-size: 1.5rem;
+      }
+    }
   }
 
   .dashboard-content {
@@ -21,7 +29,7 @@ const DashboardStyle = styled.div`
     justify-content: space-between;
 
     @media only screen and (max-width: 900px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: center;
     }
 
@@ -36,7 +44,8 @@ const DashboardStyle = styled.div`
       border: 2px solid grey;
 
       @media only screen and (max-width: 900px) {
-        display: none;
+        width: 100%;
+        margin: 1rem 0;
       }
 
       a {
@@ -50,10 +59,10 @@ const DashboardStyle = styled.div`
       width: 65%;
       display: flex;
       flex-wrap: wrap;
-      border: 1px solid red;
 
       @media only screen and (max-width: 900px) {
         width: 100%;
+        margin: 1rem 0;
       }
 
       .goal {
