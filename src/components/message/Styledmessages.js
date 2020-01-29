@@ -151,23 +151,30 @@ export const StyledMessageDetail = styled.div`
     align-items: center;
     bottom: 0;
 
-    input {
-      width: 70%;
-      padding: 1rem;
-      border: 2px solid #ccc5b9;
-      outline: none;
-      border-radius: 10px;
-      background: rgba(232, 232, 232, 0.25);
-      color: #ff8744;
+    form {
+      width: 100%;
 
-      &:focus {
+      input {
+        width: 70%;
+        padding: 1rem;
+        border: 2px solid #ccc5b9;
         outline: none;
-      }
-    }
+        border-radius: 10px;
+        background: rgba(232, 232, 232, 0.25);
+        color: #ff8744;
 
-    i {
-      transform: rotate(45deg);
-      color: #ff8744;
+        &:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        outline: none;
+        i {
+          transform: rotate(45deg);
+          color: #ff8744;
+        }
+      }
     }
   }
 `;

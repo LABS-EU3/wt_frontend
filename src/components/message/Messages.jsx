@@ -11,10 +11,10 @@ import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
 
-const Message = ({ client, friend }) => {
+const Message = ({ client, friend, subscribeToMore }) => {
   const toast = useToast();
   const [messages, setMessages] = useState([]);
-
+  // const { id, messages: friendMessages } = friend;
   const alert = (title, description, status) => {
     toast({
       title,
@@ -25,9 +25,9 @@ const Message = ({ client, friend }) => {
     });
   };
 
-  const { subscribeToMore, data } = useQuery(GET_MESSAGE_HISTORY, {
-    variables: { receiver: "5e2aedba56cf1200175d69c9" }
-  });
+  // const { subscribeToMore, data } = useQuery(GET_MESSAGE_HISTORY, {
+  //   variables: { receiver: "5e2aedba56cf1200175d69c9" }
+  // });
 
   if (messages.length > 0) {
     messages.forEach(message => {
@@ -39,23 +39,26 @@ const Message = ({ client, friend }) => {
     });
   }
 
-  useEffect(() => {
-    if (typeof data === "object") {
-      setMessages(data.friendChat);
-    }
+  // useEffect(() => {
+  //   if (typeof data === "object") {
+  //     setMessages(data.friendChat);
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [data]);
 
-  const handleNewUserMessage = newMessage => {
+  const handleNewUserMessage = (e, newMessage) => {
+    e.preventDefault();
+
     client
       .mutate({
         mutation: SEND_MESSAGE,
         variables: {
-          receiver: "5e2aedba56cf1200175d69c9",
+          receiver: friend.id,
           message: newMessage
         }
       })
+      .then(res => console.log(res, "sssddd"))
       .catch(err => {
         alert("An error occurred☹️", "Unable to send message", "error");
       });
@@ -76,6 +79,7 @@ const Message = ({ client, friend }) => {
           handleNewUserMessage={handleNewUserMessage}
           subscribeToMore={subscribeToMore}
           user_id={userData.user_id}
+          friend={friend}
         />
       </div>
 

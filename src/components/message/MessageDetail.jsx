@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { StyledMessageDetail } from "./Styledmessages";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
-import { Picker } from "emoji-mart";
+// import { Picker } from "emoji-mart";
 
 import "emoji-mart/css/emoji-mart.css";
 
@@ -10,13 +10,10 @@ const MessageDetail = ({
   handleNewUserMessage,
   subscribeToMore,
   user_id,
-  icon,
-  text,
-  variant,
-  value,
-  id
+  friend
 }) => {
   const [display, setDisplay] = useState("none");
+  const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
     subscribeToMore({
@@ -40,8 +37,35 @@ const MessageDetail = ({
 
   return (
     <StyledMessageDetail>
-      <h3>Melquesdedque</h3>
+      <h3>{friend.name}</h3>
 
+      {friend.messages.map(message => {
+        console.log(message);
+
+        return (
+          <div key={message.id}>
+            {message.sender === user_id ? (
+              <div className="my-message">
+                <div className="mssg">
+                  <p>{message.message}</p>
+                  <p className="time">2 minutes ago</p>
+                </div>
+              </div>
+            ) : (
+              <div className="friend-message">
+                <img src={friend.photo} alt={friend.name} />
+
+                <div className="friend-message-detail">
+                  <div className="mssg">
+                    <p>{message.message}</p>
+                    <span className="time">2 minutes ago</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
       <div className="friend-message">
         <img src="https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg" />
 
@@ -60,8 +84,24 @@ const MessageDetail = ({
       </div>
 
       <div className="new-message">
-        <input type="text" placeholder="Send message..." />
-        <i className="fas fa-location-arrow fa-2x"></i>
+        <form
+          onSubmit={e => {
+            handleNewUserMessage(e, newMessage);
+            setNewMessage("");
+          }}
+        >
+          <input
+            type="text"
+            required
+            onChange={e => setNewMessage(e.target.value)}
+            value={newMessage}
+            placeholder="Send message..."
+          />
+
+          <button type="submit">
+            <i className="fas fa-location-arrow fa-2x"></i>
+          </button>
+        </form>
       </div>
     </StyledMessageDetail>
   );

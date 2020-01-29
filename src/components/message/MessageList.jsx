@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withApollo } from "react-apollo";
+import { withApollo, useQuery } from "react-apollo";
 
 import { StyledMessagesList } from "./Styledmessages";
 import { GET_FRIENDS } from "../../graphql/queries";
@@ -11,17 +11,23 @@ const MessageList = ({ client }) => {
   const [friend, setFriend] = useState(null);
 
   useEffect(() => {
-    client
-      .query({
-        query: GET_FRIENDS
-      })
-      .then(res => {
-        console.log(res.data);
-        setFriends(res.data.friends);
-      })
-      .catch(err => console.log(err));
+    // client
+    //   .query({
+    //     query: GET_FRIENDS
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(res.subscribeToMore);
+    //     setFriends(res.data.friends);
+    //   })
+    //   .catch(err => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const { subscribeToMore, data } = useQuery(GET_FRIENDS);
+  if (data && friends.length === 0) {
+    setFriends(data.friends);
+  }
 
   const searchMessages = () => {};
 
@@ -38,7 +44,6 @@ const MessageList = ({ client }) => {
         />
         {friends.map(friend => {
           const { firstname, photo } = friend;
-          console.log(friend);
           return (
             <div
               key={friend.id}
@@ -54,7 +59,7 @@ const MessageList = ({ client }) => {
 
       <div className="messages-container">
         <div className="messages">
-          <Messages friend={friend} />
+          <Messages friend={friend} subscribeToMore={subscribeToMore} />
         </div>
       </div>
     </StyledMessagesList>
