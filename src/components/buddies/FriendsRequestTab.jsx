@@ -29,9 +29,12 @@ const FriendsRequestTab = ({
   goal,
   history,
   text,
-  profilePicture
+  profilePicture,
+  friendsRequests,
+  setFriendsRequests,
+  setFriends,
+  friends
 }) => {
-  const [buddiesRequests, setBuddiesRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [error, setError] = useState(false);
@@ -46,23 +49,6 @@ const FriendsRequestTab = ({
     });
   };
 
-  useEffect(() => {
-    client
-      .query({
-        query: GET_FRIENDS_REQUEST
-      })
-      .then(res => {
-        setBuddiesRequests(res.data.friendRequests);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        setIsLoading(false);
-        alert("An error occurred.", "Unable to load", "error");
-        setError(true);
-      });
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const onClick = e => {
     debugger;
     client
@@ -76,7 +62,8 @@ const FriendsRequestTab = ({
       .then(res => {
         debugger;
         setIsLoading(false);
-        setBuddiesRequests(buddiesRequests);
+        setFriendsRequests(friendsRequests);
+        setFriends(friends);
         e.target.value === "response_1"
           ? alert(`${e.target.id.firstname} is now your Workout Buddy`)
           : alert(`You have rejected ${e.target.id.firstname}'s Buddy request`);
@@ -91,6 +78,23 @@ const FriendsRequestTab = ({
         }
       });
   };
+
+  useEffect(() => {
+    client
+      .query({
+        query: GET_FRIENDS_REQUEST
+      })
+      .then(res => {
+        setFriendsRequests(res.data.friendRequests);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        alert("An error occurred.", "Unable to load", "error");
+        setError(true);
+      });
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [friendsRequests, onClick, friends]);
 
   if (isLoading) {
     return (
@@ -115,7 +119,7 @@ const FriendsRequestTab = ({
   return (
     <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
       <p>Friends Request</p>
-      {buddiesRequests.map(buddy => (
+      {friendsRequests.map(buddy => (
         <div>
           <Box
             boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
