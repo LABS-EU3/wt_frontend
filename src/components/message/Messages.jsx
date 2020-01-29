@@ -11,7 +11,13 @@ import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
 
-const Message = ({ client, friend, subscribeToMore }) => {
+const Message = ({
+  client,
+  friend,
+  subscribeToMore,
+  refetch,
+  setIsRefetched
+}) => {
   const toast = useToast();
   const [messages, setMessages] = useState([]);
   // const { id, messages: friendMessages } = friend;
@@ -58,12 +64,16 @@ const Message = ({ client, friend, subscribeToMore }) => {
           message: newMessage
         }
       })
-      .then(res => console.log(res, "sssddd"))
+      .then(res => {
+        setIsRefetched(true);
+        refetch();
+        // setIsRefetched(false);
+      })
       .catch(err => {
         alert("An error occurred☹️", "Unable to send message", "error");
       });
   };
-  console.log(friend, "friend");
+
   if (friend === null) {
     return (
       <StyledMessages>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { StyledMessageDetail } from "./Styledmessages";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
-// import { Picker } from "emoji-mart";
+import moment from "moment";
 
 import "emoji-mart/css/emoji-mart.css";
 
@@ -37,18 +37,16 @@ const MessageDetail = ({
 
   return (
     <StyledMessageDetail>
-      <h3>{friend.name}</h3>
+      <h3>{friend.firstname}</h3>
 
       {friend.messages.map(message => {
-        console.log(message);
-
         return (
           <div key={message.id}>
             {message.sender === user_id ? (
               <div className="my-message">
                 <div className="mssg">
                   <p>{message.message}</p>
-                  <p className="time">2 minutes ago</p>
+                  <p className="time"> {moment(message.sent).fromNow()}</p>
                 </div>
               </div>
             ) : (
@@ -58,7 +56,9 @@ const MessageDetail = ({
                 <div className="friend-message-detail">
                   <div className="mssg">
                     <p>{message.message}</p>
-                    <span className="time">2 minutes ago</span>
+                    <span className="time">
+                      {moment(message.sent).fromNow()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@ const MessageDetail = ({
           </div>
         );
       })}
-      <div className="friend-message">
+      {/* <div className="friend-message">
         <img src="https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg" />
 
         <div className="friend-message-detail">
@@ -81,7 +81,7 @@ const MessageDetail = ({
           <p>Hiiii</p>
           <p className="time">2 minutes ago</p>
         </div>
-      </div>
+      </div> */}
 
       <div className="new-message">
         <form
