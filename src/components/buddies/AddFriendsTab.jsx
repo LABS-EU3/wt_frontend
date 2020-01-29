@@ -13,16 +13,10 @@ const AddFriendsTab = ({
   goal,
   history,
   text,
-<<<<<<< HEAD
   profilePicture,
   users,
   setUsers
 }) => {
-=======
-  profilePicture
-}) => {
-  const [buddiesData, setBuddiesData] = useState([]);
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -48,11 +42,7 @@ const AddFriendsTab = ({
         }
       })
       .then(res => {
-<<<<<<< HEAD
         setUsers(res.data.findFriends);
-=======
-        setBuddiesData(res.data.findFriends);
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
         setIsLoading(false);
       })
       .catch(err => {
@@ -95,11 +85,7 @@ const AddFriendsTab = ({
         setSearch={setSearch}
         search={search}
       />
-<<<<<<< HEAD
       {users.map(buddy => (
-=======
-      {buddiesData.map(buddy => (
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
         <div>
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}

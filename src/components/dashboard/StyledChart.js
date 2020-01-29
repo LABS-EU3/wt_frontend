@@ -10,7 +10,6 @@ const StyledCharts = styled.div`
     flex-wrap: wrap;
     width: 100%;
 
-<<<<<<< HEAD
     .recharts-wrapper {
       width: 100% !important;
 
@@ -18,8 +17,6 @@ const StyledCharts = styled.div`
         width: 100%;
       }
     }
-=======
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
     h4 {
       display: flex;
       flex-wrap: wrap;

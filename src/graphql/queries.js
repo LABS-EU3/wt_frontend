@@ -187,10 +187,7 @@ export const GET_DASHBOARD_DETAILS = gql`
         goal
         height
         weight
-<<<<<<< HEAD
         photo
-=======
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
         heightUnit {
           name
         }
@@ -228,10 +225,7 @@ export const GET_USER_DETAILS = gql`
       equipment
       height
       goal
-<<<<<<< HEAD
       photo
-=======
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
       weight
       reminderType
       experience
@@ -258,7 +252,6 @@ export const ACCOUNT_RECOVERY = gql`
   }
 `;
 
-<<<<<<< HEAD
 export const GET_MESSAGE_HISTORY = gql`
   query friendChat($receiver: String!) {
     friendChat(receiver: $receiver) {
@@ -270,8 +263,6 @@ export const GET_MESSAGE_HISTORY = gql`
   }
 `;
 
-=======
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
 export const GET_USERS = gql`
   query findFriends($search: String!, $fields: [String!]!) {
     findFriends(input: { search: $search, fields: $fields }) {
@@ -302,10 +293,7 @@ export const GET_FRIENDS = gql`
       firstname
       lastname
       goal
-<<<<<<< HEAD
       photo
-=======
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
     }
   }
 `;

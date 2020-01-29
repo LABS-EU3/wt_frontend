@@ -43,31 +43,12 @@ const RecommendedWorkouts = ({ client, history }) => {
             <div key={workout.id} className="recomended-workout-detail">
               <Link to={`/workout/${workout.id}`}>
                 <img src={workout.picture} alt={workout.name} />
-<<<<<<< HEAD
-=======
-                {/* <Heading size="sm" textAlign="left">
-                  {workout.name}
-                </Heading> */}
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
               </Link>
             </div>
           );
         }
         return null;
       })}
-<<<<<<< HEAD
-=======
-      {/* <Box>
-        <Link to="/workouts">
-          <IconButton
-            variant="outline"
-            variantColor="teal"
-            aria-label="view more"
-            icon="add"
-          />
-        </Link>
-      </Box> */}
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
     </StyledRecomendedWorkout>
   );
 };

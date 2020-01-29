@@ -60,46 +60,24 @@ const Footer = ({ location }) => {
         <p>&copy; 2020 trackdrills</p>
 
         <div className="socials">
-<<<<<<< HEAD
           <a href="mailto:trackdrillslambdalabs@gmail.com">
-=======
-          <a href="##">
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
             <span>
               {" "}
               <i className="fas fa-2x fa-envelope"></i>
             </span>
           </a>
-<<<<<<< HEAD
           <a href="https://twitter.com/trackdrills">
-=======
-          <a href="##">
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
             <span>
               <i className="fab fa-2x fa-twitter"></i>
             </span>
           </a>
 
-<<<<<<< HEAD
           <a href="https://www.linkedin.com">
-=======
-          <a href="##">
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
             <span>
               {" "}
               <i className="fab fa-2x fa-linkedin"></i>
             </span>
           </a>
-<<<<<<< HEAD
-=======
-
-          <a href="##">
-            <span>
-              {" "}
-              <i className="fab fa-2x fa-facebook-square"></i>
-            </span>
-          </a>
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
         </div>
 
         <div className="scroll"></div>

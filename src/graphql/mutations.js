@@ -311,7 +311,6 @@ export const RESET_PASSWORD = gql`
   }
 `;
 
-<<<<<<< HEAD
 export const SEND_MESSAGE = gql`
   mutation sendMessage($receiver: String!, $message: String!) {
     sendMessage(receiver: $receiver, message: $message) {
@@ -323,8 +322,6 @@ export const SEND_MESSAGE = gql`
   }
 `;
 
-=======
->>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
 export const MANAGE_FRIENDS = gql`
   mutation manageFriends($userId: String!, $task: String!) {
     manageFriends(userId: $userId, task: $task)
