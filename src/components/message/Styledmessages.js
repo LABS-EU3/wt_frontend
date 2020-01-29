@@ -21,7 +21,7 @@ export const StyledMessagesList = styled.div`
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 0.5rem;
       transition: all 0.4s ease-in-out;
 
@@ -51,7 +51,7 @@ export const StyledMessagesList = styled.div`
     border-left: 1px solid grey;
 
     .messages {
-      width: 40%;
+      width: 70%;
       display: flex;
       flex-wrap: wrap;
     }
@@ -74,4 +74,18 @@ export const StyledMessageDetail = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  flex-direction: column;
+
+  .friend-message {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 1rem;
+    /* p {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    } */
+  }
 `;

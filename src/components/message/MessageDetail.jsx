@@ -35,7 +35,14 @@ const MessageDetail = ({
 
   return (
     <StyledMessageDetail>
-      <h1>Hiiiii</h1>
+      <div className="friend-message">
+        <p>Hiiii</p>
+        <p className="time">2 minutes ago</p>
+      </div>
+      <div className="my-message">
+        <p>Hiiii</p>
+        <p className="time">2 minutes ago</p>
+      </div>
     </StyledMessageDetail>
   );
 };
