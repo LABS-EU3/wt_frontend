@@ -35,32 +35,20 @@ const MessageList = ({ client }) => {
       const friendFromFriends = data.friends.filter(
         frnd => frnd.id === friend.id
       );
-      console.log(friendFromFriends[0].messages.length, "dnfalkjdsafibg");
-      console.log(friend.messages.length);
+      console.log(friendFromFriends[0].messages.length, friend.messages.length);
+
       // console.log( friendFromFriends.messages.length)
       if (
         // parseInt(friend.messages.length) + 1 ===
         friendFromFriends[0].messages.length > friend.messages.length
       ) {
         console.log("updated");
-        setFriends(data.friends);
+        setFriend(friendFromFriends[0]);
         setIsRefetched(false);
       }
     }
   }
 
-  //   if (isRefetched === true) {
-  //     // console.log("enterred");
-  //     // console.log(data.friends, "updated");
-  //     // setTimeout(() => {
-  //     // console.log(data, 'am')
-  //     setFriends(data.friends);
-  //     // }, 5000);
-
-  //     setIsRefetched(false);
-  //   }
-  console.log(isRefetched);
-  console.log(data, "aaaaassdd");
   const searchMessages = () => {};
 
   return (
