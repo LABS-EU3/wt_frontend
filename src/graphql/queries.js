@@ -242,7 +242,7 @@ export const GET_USER_DETAILS = gql`
 
 export const ACCOUNT_RECOVERY = gql`
   query accountRecovery($email: String!) {
-    accountRecovery(input: { search: $search, fields: $fields }) {
+    accountRecovery(input: $email) {
       id
       firstname
       lastname
