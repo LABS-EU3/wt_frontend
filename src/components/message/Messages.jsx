@@ -5,13 +5,13 @@ import { useToast } from "@chakra-ui/core";
 import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
 // import { addResponseMessage, addUserMessage } from "react-chat-widget";
-
+import { StyledMessages } from "./Styledmessages";
 import MessageDetail from "./MessageDetail";
 import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
 
-const Message = ({ client, icon, text, variant, value, id }) => {
+const Message = ({ client }) => {
   const toast = useToast();
   const [messages, setMessages] = useState([]);
 
@@ -62,13 +62,13 @@ const Message = ({ client, icon, text, variant, value, id }) => {
   };
 
   return (
-    // <StyledMessages>
-    <MessageDetail
-      handleNewUserMessage={handleNewUserMessage}
-      subscribeToMore={subscribeToMore}
-      user_id={userData.user_id}
-    />
-    // </StyledMessages>
+    <StyledMessages>
+      <MessageDetail
+        handleNewUserMessage={handleNewUserMessage}
+        subscribeToMore={subscribeToMore}
+        user_id={userData.user_id}
+      />
+    </StyledMessages>
   );
 };
 

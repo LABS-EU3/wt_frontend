@@ -14,24 +14,63 @@ export const StyledMessagesList = styled.div`
     width: 25%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+
+    .friend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      padding: 0.5rem;
+      transition: all 0.4s ease-in-out;
+
+      &:hover {
+        border: 1px solid red;
+        cursor: pointer;
+        box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+      }
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+
+      p {
+        padding-left: 1rem;
+      }
+    }
   }
 
-  .messages {
-    width: 45%;
+  .messages-container {
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
-    border-right: 1px solid grey;
+    justify-content: space-between;
     border-left: 1px solid grey;
-  }
 
-  .user-detail {
-    width: 25%;
-    display: flex;
-    flex-wrap: wrap;
+    .messages {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .user-detail {
+      width: 30%;
+      display: flex;
+      flex-wrap: wrap;
+      border-left: 1px solid grey;
+    }
   }
 `;
 
 export const StyledMessages = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
+export const StyledMessageDetail = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Widget } from "react-chat-widget";
 
 import "react-chat-widget/lib/styles.css";
-import CustomButtons from "../buddies/CustomButtons";
-import { StyledMessage } from "../../styles";
+
+import { StyledMessageDetail } from "./Styledmessages";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 
 const MessageDetail = ({
@@ -37,31 +37,9 @@ const MessageDetail = ({
   }, []);
 
   return (
-    <StyledMessage>
-      {/* <Widget
-        handleNewUserMessage={handleNewUserMessage}
-        profileAvatar="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg"
-        title="Ezekiel"
-        subtitle=""
-        showCloseButton={true}
-        autofocus={true}
-        launcher={handleToggle => {
-          return (
-            <CustomButtons
-              icon={icon}
-              text={text}
-              variant={variant}
-              onClick={handleToggle}
-              value={value}
-              id={id}
-            />
-            // <button key={handleToggle} onClick={handleToggle}>
-            //   Toggle
-            // </button>
-          );
-        }}
-      /> */}
-    </StyledMessage>
+    <StyledMessageDetail>
+      <h1>Hiiiii</h1>
+    </StyledMessageDetail>
   );
 };
 
