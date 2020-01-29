@@ -121,7 +121,7 @@ const Navigation = ({ location }) => {
                   Workout History &nbsp; <i className="fas fa-history"></i>
                 </Link>
 
-                <Link to="/friends">
+                <Link to="/buddies">
                   Friends &nbsp; <i className="fas fa-users"></i>
                 </Link>
 

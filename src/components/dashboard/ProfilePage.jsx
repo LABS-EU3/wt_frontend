@@ -17,7 +17,6 @@ import {
   IoIosTrendingUp
 } from "react-icons/io";
 
-import logoImage from "../../images/login_image.png";
 import DashboardStyle from "./DashboardStyle";
 
 import { GET_USER_DETAILS } from "../../graphql/queries";
@@ -149,7 +148,7 @@ const ProfilePage = ({ client, history }) => {
           <div className="dasboard-detail">
             <section className="quotes">
               <Avatar
-                src={logoImage}
+                src={userData.photo}
                 size="2xl"
                 marginLeft="35%"
                 marginBottom="20px"

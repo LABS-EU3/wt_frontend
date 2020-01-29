@@ -10,7 +10,7 @@ import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
 
-const Message = ({ client }) => {
+const Message = ({ client, icon, text, variant, value, id }) => {
   const toast = useToast();
   const [messages, setMessages] = useState([]);
 
@@ -65,6 +65,11 @@ const Message = ({ client }) => {
       handleNewUserMessage={handleNewUserMessage}
       subscribeToMore={subscribeToMore}
       user_id={userData.user_id}
+      icon={icon}
+      text={text}
+      variant={variant}
+      value={value}
+      id={id}
     />
   );
 };

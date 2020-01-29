@@ -2,11 +2,20 @@ import React, { useEffect } from "react";
 import { Widget } from "react-chat-widget";
 
 import "react-chat-widget/lib/styles.css";
-
+import CustomButtons from "../buddies/CustomButtons";
 import { StyledMessage } from "../../styles";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 
-const MessageDetail = ({ handleNewUserMessage, subscribeToMore, user_id }) => {
+const MessageDetail = ({
+  handleNewUserMessage,
+  subscribeToMore,
+  user_id,
+  icon,
+  text,
+  variant,
+  value,
+  id
+}) => {
   useEffect(() => {
     subscribeToMore({
       document: SUBSCRIBE_MESSAGE,
@@ -38,9 +47,17 @@ const MessageDetail = ({ handleNewUserMessage, subscribeToMore, user_id }) => {
         autofocus={true}
         launcher={handleToggle => {
           return (
-            <button key={handleToggle} onClick={handleToggle}>
-              Toggle
-            </button>
+            <CustomButtons
+              icon={icon}
+              text={text}
+              variant={variant}
+              onClick={handleToggle}
+              value={value}
+              id={id}
+            />
+            // <button key={handleToggle} onClick={handleToggle}>
+            //   Toggle
+            // </button>
           );
         }}
       />

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const StyledMessage = styled.div`
+  .rcw-widget-container {
+    position: relative;
+  }
+
   .rcw-conversation-container {
     .rcw-header {
       background-color: #ff8744;

@@ -187,6 +187,7 @@ export const GET_DASHBOARD_DETAILS = gql`
         goal
         height
         weight
+        photo
         heightUnit {
           name
         }
@@ -224,6 +225,7 @@ export const GET_USER_DETAILS = gql`
       equipment
       height
       goal
+      photo
       weight
       reminderType
       experience

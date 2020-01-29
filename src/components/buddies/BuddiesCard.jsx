@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import CustomButtons from "./CustomButtons";
 import { MANAGE_FRIENDS } from "../../graphql/mutations";
-
+import Message from "../common/Message";
 const BuddiesCard = ({
   client,
   name,
@@ -21,7 +21,6 @@ const BuddiesCard = ({
 
   const onClick = e => {
     console.log(e.target.id);
-    debugger;
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -44,7 +43,7 @@ const BuddiesCard = ({
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
         } else {
-          alert("Unable to update profile", "", "error");
+          alert("Unable to send friend request", "", "error");
         }
       });
   };
@@ -60,7 +59,8 @@ const BuddiesCard = ({
             <Text>{goal}</Text>
           </Box>
         </Flex>
-        <CustomButtons
+
+        <Message
           icon={icon}
           text={text}
           variant={variant}
@@ -68,6 +68,14 @@ const BuddiesCard = ({
           value={value}
           id={id}
         />
+        {/* <CustomButtons
+          icon={icon}
+          text={text}
+          variant={variant}
+          onClick={onClick}
+          value={value}
+          id={id}
+        /> */}
       </Flex>
     </Box>
   );

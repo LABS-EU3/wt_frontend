@@ -59,6 +59,7 @@ function Dashboard({ client, history }) {
   }
 
   if (dashboardData) {
+    console.log(dashboardData);
     return (
       <DashboardStyle>
         <div className="welcome">
@@ -71,7 +72,7 @@ function Dashboard({ client, history }) {
           <div className="user-detail">
             <Link to="/profile">Edit</Link>
             <Avatar
-              src={logoImage}
+              src={dashboardData.user.photo}
               size="2xl"
               marginLeft="35%"
               marginBottom="20px"
