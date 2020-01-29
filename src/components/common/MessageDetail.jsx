@@ -38,7 +38,7 @@ const MessageDetail = ({
 
   return (
     <StyledMessage>
-      <Widget
+      {/* <Widget
         handleNewUserMessage={handleNewUserMessage}
         profileAvatar="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg"
         title="Ezekiel"
@@ -60,7 +60,7 @@ const MessageDetail = ({
             // </button>
           );
         }}
-      />
+      /> */}
     </StyledMessage>
   );
 };

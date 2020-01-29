@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import CustomButtons from "./CustomButtons";
 import { MANAGE_FRIENDS } from "../../graphql/mutations";
-import Message from "../common/Message";
+
 const BuddiesCard = ({
   client,
   name,
@@ -60,7 +60,7 @@ const BuddiesCard = ({
           </Box>
         </Flex>
 
-        <Message
+        <CustomButtons
           icon={icon}
           text={text}
           variant={variant}
@@ -68,14 +68,6 @@ const BuddiesCard = ({
           value={value}
           id={id}
         />
-        {/* <CustomButtons
-          icon={icon}
-          text={text}
-          variant={variant}
-          onClick={onClick}
-          value={value}
-          id={id}
-        /> */}
       </Flex>
     </Box>
   );

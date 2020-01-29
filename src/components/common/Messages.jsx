@@ -5,6 +5,7 @@ import { useToast } from "@chakra-ui/core";
 import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
 import { addResponseMessage, addUserMessage } from "react-chat-widget";
+
 import MessageDetail from "./MessageDetail";
 import { getUserDetails } from "../../utils";
 
@@ -61,16 +62,13 @@ const Message = ({ client, icon, text, variant, value, id }) => {
   };
 
   return (
+    // <StyledMessages>
     <MessageDetail
       handleNewUserMessage={handleNewUserMessage}
       subscribeToMore={subscribeToMore}
       user_id={userData.user_id}
-      icon={icon}
-      text={text}
-      variant={variant}
-      value={value}
-      id={id}
     />
+    // </StyledMessages>
   );
 };
 
