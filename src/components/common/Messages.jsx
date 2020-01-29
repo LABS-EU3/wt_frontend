@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/core";
 
 import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
-import { addResponseMessage, addUserMessage } from "react-chat-widget";
+// import { addResponseMessage, addUserMessage } from "react-chat-widget";
 
 import MessageDetail from "./MessageDetail";
 import { getUserDetails } from "../../utils";
@@ -32,9 +32,9 @@ const Message = ({ client, icon, text, variant, value, id }) => {
   if (messages.length > 0) {
     messages.forEach(message => {
       if (message.sender === userData.user_id) {
-        addUserMessage(message.message, "asd");
+        // addUserMessage(message.message, "asd");
       } else {
-        addResponseMessage(message.message);
+        // addResponseMessage(message.message);
       }
     });
   }
