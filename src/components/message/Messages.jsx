@@ -11,7 +11,7 @@ import { getUserDetails } from "../../utils";
 
 const userData = getUserDetails();
 
-const Message = ({ client }) => {
+const Message = ({ client, friend }) => {
   const toast = useToast();
   const [messages, setMessages] = useState([]);
 
@@ -60,14 +60,26 @@ const Message = ({ client }) => {
         alert("An error occurred☹️", "Unable to send message", "error");
       });
   };
+  console.log(friend, "friend");
+  if (friend === null) {
+    return (
+      <StyledMessages>
+        <h2>Select a friend to message</h2>
+      </StyledMessages>
+    );
+  }
 
   return (
     <StyledMessages>
-      <MessageDetail
-        handleNewUserMessage={handleNewUserMessage}
-        subscribeToMore={subscribeToMore}
-        user_id={userData.user_id}
-      />
+      <div className="message-detail">
+        <MessageDetail
+          handleNewUserMessage={handleNewUserMessage}
+          subscribeToMore={subscribeToMore}
+          user_id={userData.user_id}
+        />
+      </div>
+
+      <div className="user-detail"></div>
     </StyledMessages>
   );
 };

@@ -8,6 +8,7 @@ import Messages from "./Messages";
 
 const MessageList = ({ client }) => {
   const [friends, setFriends] = useState([]);
+  const [friend, setFriend] = useState(null);
 
   useEffect(() => {
     client
@@ -39,7 +40,11 @@ const MessageList = ({ client }) => {
           const { firstname, photo } = friend;
           console.log(friend);
           return (
-            <div key={friend.id} className="friend">
+            <div
+              key={friend.id}
+              onClick={() => setFriend(friend)}
+              className="friend"
+            >
               <img src={photo} alt={firstname} />
               <p>{firstname}</p>
             </div>
@@ -49,10 +54,8 @@ const MessageList = ({ client }) => {
 
       <div className="messages-container">
         <div className="messages">
-          <Messages />
+          <Messages friend={friend} />
         </div>
-
-        <div className="user-detail"></div>
       </div>
     </StyledMessagesList>
   );

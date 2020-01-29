@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { StyledMessageDetail } from "./Styledmessages";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
+import { Picker } from "emoji-mart";
+
+import "emoji-mart/css/emoji-mart.css";
 
 const MessageDetail = ({
   handleNewUserMessage,
@@ -13,6 +16,8 @@ const MessageDetail = ({
   value,
   id
 }) => {
+  const [display, setDisplay] = useState("none");
+
   useEffect(() => {
     subscribeToMore({
       document: SUBSCRIBE_MESSAGE,
@@ -55,7 +60,8 @@ const MessageDetail = ({
       </div>
 
       <div className="new-message">
-        <input type="text" />
+        <input type="text" placeholder="Send message..." />
+        <i className="fas fa-location-arrow fa-2x"></i>
       </div>
     </StyledMessageDetail>
   );

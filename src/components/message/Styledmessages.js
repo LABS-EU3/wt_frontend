@@ -7,7 +7,7 @@ export const StyledMessagesList = styled.div`
   height: 100vh;
   justify-content: space-evenly;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   .users-list {
@@ -51,9 +51,22 @@ export const StyledMessagesList = styled.div`
     border-left: 1px solid grey;
 
     .messages {
-      width: 70%;
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
+
+      .message-detail {
+        width: 70%;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .user-detail {
+        width: 30%;
+        display: flex;
+        flex-wrap: wrap;
+        border-left: 1px solid grey;
+      }
     }
     .user-detail {
       width: 30%;
@@ -133,5 +146,28 @@ export const StyledMessageDetail = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    justify-content: space-around;
+    margin: 1rem 0;
+    align-items: center;
+    bottom: 0;
+
+    input {
+      width: 70%;
+      padding: 1rem;
+      border: 2px solid #ccc5b9;
+      outline: none;
+      border-radius: 10px;
+      background: rgba(232, 232, 232, 0.25);
+      color: #ff8744;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    i {
+      transform: rotate(45deg);
+      color: #ff8744;
+    }
   }
 `;
