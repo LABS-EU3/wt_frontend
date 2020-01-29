@@ -52,16 +52,6 @@ const RecommendedWorkouts = ({ client, history }) => {
         }
         return null;
       })}
-      {/* <Box>
-        <Link to="/workouts">
-          <IconButton
-            variant="outline"
-            variantColor="teal"
-            aria-label="view more"
-            icon="add"
-          />
-        </Link>
-      </Box> */}
     </StyledRecomendedWorkout>
   );
 };

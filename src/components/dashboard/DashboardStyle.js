@@ -9,6 +9,8 @@ const DashboardStyle = styled.div`
   padding: 2rem;
 
   .welcome {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
   }
 
@@ -18,6 +20,11 @@ const DashboardStyle = styled.div`
     width: 100%;
     justify-content: space-between;
 
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
     .user-detail {
       width: 30%;
       display: flex;
@@ -26,6 +33,11 @@ const DashboardStyle = styled.div`
       box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
       border-radius: 10px;
       padding: 0.5rem;
+      border: 2px solid grey;
+
+      @media only screen and (max-width: 900px) {
+        display: none;
+      }
 
       a {
         display: flex;
@@ -38,6 +50,11 @@ const DashboardStyle = styled.div`
       width: 65%;
       display: flex;
       flex-wrap: wrap;
+      border: 1px solid red;
+
+      @media only screen and (max-width: 900px) {
+        width: 100%;
+      }
 
       .goal {
         display: flex;

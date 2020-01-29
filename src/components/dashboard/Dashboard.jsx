@@ -99,20 +99,6 @@ function Dashboard({ client, history }) {
               </Box>
             </Flex>
 
-            {/* <Box
-              bg="tomato"
-              color="white"
-              p={4}
-              width="70%"
-              rounded="lg"
-              marginTop="350px"
-              marginLeft="15%"
-            >
-              <span role="img" aria-label="fire-emoji">
-                🔥🔥🔥
-              </span>{" "}
-              You have a {dashboardData.streak} days streak. Keep it up!
-            </Box> */}
             <Streak streak={dashboardData.streak} />
           </div>
 
@@ -130,7 +116,7 @@ function Dashboard({ client, history }) {
               <RecommendedWorkouts />
             </section>
 
-            <Charts graphs={dashboardData.graphs} />
+            {/* <Charts graphs={dashboardData.graphs} /> */}
           </div>
         </div>
       </DashboardStyle>
