@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/core";
 import React from "react";
 import { withApollo } from "react-apollo";
 
-const CustomButtons = ({ icon, text, variant, onClick, value, id }) => {
+const CustomButtons = ({ icon, text, variant, onClick, value, id, name }) => {
   return (
     <Button
       leftIcon={icon}
@@ -12,6 +12,7 @@ const CustomButtons = ({ icon, text, variant, onClick, value, id }) => {
       onClick={onClick}
       value={value}
       id={id}
+      name={name}
     >
       {text}
     </Button>

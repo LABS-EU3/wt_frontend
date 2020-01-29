@@ -47,7 +47,7 @@ const AddFriendsTab = ({
       })
       .catch(err => {
         setIsLoading(false);
-        alert("An error occurred.", "Unable to load", "error");
+        alert("An error occurred.", "Unable to add friend", "error");
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,7 +73,7 @@ const AddFriendsTab = ({
   }
 
   if (error) {
-    alert("An error occurred.", "Unable to load workouts", "error");
+    alert("An error occurred.", "Unable to load suggested friends", "error");
     return <Redirect to="/" />;
   }
 
@@ -95,6 +95,8 @@ const AddFriendsTab = ({
             variant="solid"
             value="add"
             id={buddy.id}
+            users={users}
+            setUsers={setUsers}
           />
         </div>
       ))}

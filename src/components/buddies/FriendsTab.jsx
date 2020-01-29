@@ -46,8 +46,10 @@ const FriendsTab = ({
         setIsLoading(false);
       })
       .catch(err => {
+        console.log(err);
+        debugger;
         setIsLoading(false);
-        alert("An error occurred.", "Unable to load", "error");
+        alert("An error occurred.", "Unable to load friends", "error");
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,7 +75,7 @@ const FriendsTab = ({
   }
 
   if (error) {
-    alert("An error occurred.", "Unable to load workouts", "error");
+    alert("An error occurred.", "Unable to show friends list", "error");
     return <Redirect to="/" />;
   }
 
