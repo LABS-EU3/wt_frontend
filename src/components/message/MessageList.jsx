@@ -21,7 +21,7 @@ const MessageList = ({ client }) => {
     //     console.log(res.subscribeToMore);
     //     setFriends(res.data.friends);
     //   })
-    //   .catch(err => console.log(err));
+    //   .catch(err => console.log(err)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -35,14 +35,8 @@ const MessageList = ({ client }) => {
       const friendFromFriends = data.friends.filter(
         frnd => frnd.id === friend.id
       );
-      console.log(friendFromFriends[0].messages.length, friend.messages.length);
 
-      // console.log( friendFromFriends.messages.length)
-      if (
-        // parseInt(friend.messages.length) + 1 ===
-        friendFromFriends[0].messages.length > friend.messages.length
-      ) {
-        console.log("updated");
+      if (friendFromFriends[0].messages.length > friend.messages.length) {
         setFriend(friendFromFriends[0]);
         setIsRefetched(false);
       }
