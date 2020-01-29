@@ -50,6 +50,7 @@ const FriendsRequestTab = ({
   };
 
   const onClick = e => {
+    e.persist();
     debugger;
     client
       .mutate({
@@ -61,12 +62,12 @@ const FriendsRequestTab = ({
       })
       .then(res => {
         debugger;
-        setIsLoading(false);
+        setIsLoading(isLoading);
         setFriendsRequests(friendsRequests);
         setFriends(friends);
         e.target.value === "response_1"
-          ? alert(`${e.target.id.firstname} is now your Workout Buddy`)
-          : alert(`You have rejected ${e.target.id.firstname}'s Buddy request`);
+          ? alert(`${e.target.name} is now your Workout Buddy`)
+          : alert(`You have rejected ${e.target.name}'s Buddy request`);
       })
       .catch(error => {
         debugger;

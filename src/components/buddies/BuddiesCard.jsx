@@ -16,10 +16,10 @@ const BuddiesCard = ({
   value,
   id
 }) => {
-  const [buddiesAction, setBuddiesAction] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const onClick = e => {
+    e.persist();
     console.log(e.target.id);
     client
       .mutate({
@@ -31,10 +31,9 @@ const BuddiesCard = ({
       })
       .then(res => {
         debugger;
-        setIsLoading(false);
-        setBuddiesAction(buddiesAction);
+        setIsLoading(isLoading);
         e.target.value === "add"
-          ? alert(`Buddy request sent to ${e.target.id.firstname}`)
+          ? alert(`Buddy request sent to ${e.target.name}`)
           : alert(`An error occured`);
       })
       .catch(error => {
@@ -67,6 +66,7 @@ const BuddiesCard = ({
           onClick={onClick}
           value={value}
           id={id}
+          name={name}
         />
       </Flex>
     </Box>
