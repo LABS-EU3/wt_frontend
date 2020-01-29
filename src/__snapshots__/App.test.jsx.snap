@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders the App component correctly 1`] = `
+<div
+  className="App"
+  data-testid="App"
+>
+  <withRouter(Navigation) />
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/login"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/accountrecovery"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/accountrecovery/:token"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/profile"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/exercises"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/exercise/:id"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/onboarding"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/signup"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/workouts"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/schedule"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/workout/:id"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/my/workout/:id"
+    />
+    <PrivateRoute
+      component={[Function]}
+      exact={true}
+      path="/workouthistory"
+    />
+  </Switch>
+  <withRouter(Footer) />
+</div>
+`;

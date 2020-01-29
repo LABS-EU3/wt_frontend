@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders the Input component correctly 1`] = `
+<styled.div>
+  <Input
+    _hover="black"
+    as="input"
+    bg="#FFFCF2"
+    errorBorderColor="crimson"
+    focusBorderColor="#FF8744"
+    id="search"
+    isFullWidth={true}
+    name="search"
+    onChange={[MockFunction]}
+    placeholder="Search"
+    size="md"
+    touchedName={true}
+    type="text"
+    value=""
+    variant="jest.mock()"
+  />
+</styled.div>
+`;

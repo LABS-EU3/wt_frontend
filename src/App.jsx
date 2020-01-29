@@ -1,0 +1,124 @@
+import React from "react";
+import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
+import { Router } from "react-router-dom";
+import { createHashHistory } from "history";
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { createUploadLink } from "apollo-upload-client";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { setContext } from "apollo-link-context";
+import ReactGA from "react-ga";
+
+import "./index.css";
+import { getUserDetails } from "./utils";
+
+import { Route, Switch } from "react-router-dom";
+import Onboarding from "./components/auth/Onboarding";
+import "./App.css";
+import PrivateRoute from "./components/common/PrivateRoute";
+import Login from "./components/auth/LogIn";
+import Dashboard from "./components/dashboard/Dashboard";
+import SignUp from "./components/auth/SignUp";
+import WorkoutList from "./components/workouts/WorkoutList";
+import WorkoutDetail from "./components/workouts/WorkoutDetail";
+import Exercises from "./components/exercise/ExerciseList";
+import ExerciseDetail from "./components/exercise/ExerciseDetail";
+import Navigation from "./components/common/Navigation";
+import WorkoutHistory from "./components/workouts/WorkoutHistory";
+import ScheduleDetail from "./components/schedule/ScheduleDetail";
+import AccountRecovery from "./components/auth/AccountRecovery";
+import ProfilePage from "./components/dashboard/ProfilePage";
+import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
+import Footer from "./components/common/Footer";
+
+const userData = getUserDetails();
+const { REACT_APP_GOOGLE_ANALYTICS_KEY, REACT_APP_GraphQL_API } = process.env;
+
+// Initialize google analytics
+ReactGA.initialize(REACT_APP_GOOGLE_ANALYTICS_KEY);
+ReactGA.pageview(window.location.pathname + window.location.search);
+
+const cache = new InMemoryCache({
+  dataIdFromObject: object => {
+    return Math.random();
+  }
+});
+
+const link = new createUploadLink({
+  uri: REACT_APP_GraphQL_API,
+  fetchOptions: {
+    // mode: "no-cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  }
+});
+
+const authLink = setContext((_, { headers }) => {
+  if (userData) {
+    return {
+      headers: {
+        ...headers,
+        authorization: userData.token
+      }
+    };
+  }
+  return {
+    headers: {
+      ...headers
+    }
+  };
+});
+
+const client = new ApolloClient({
+  cache,
+  link: authLink.concat(link)
+});
+
+const history = createHashHistory();
+const App = ({ cordova }) => {
+  return (
+    <ApolloProvider client={client}>
+      <Router history={history}>
+        <ThemeProvider
+          theme={{
+            ...theme,
+            fonts: { ...theme.fonts, body: "Roboto", heading: "Ubuntu" }
+          }}
+        >
+          <CSSReset />
+          <div className="App" data-testid="App">
+            <Navigation />
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/accountrecovery" component={AccountRecovery} />
+              <Route
+                exact
+                path="/accountrecovery/:token"
+                component={AccountRecovery}
+              />
+              <PrivateRoute exact path="/profile" component={ProfilePage} />
+              <PrivateRoute exact path="/exercises" component={Exercises} />
+              <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
+              <PrivateRoute exact path="/onboarding" component={Onboarding} />
+              <Route exact path="/signup" component={SignUp} />
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute exact path="/workouts" component={WorkoutList} />
+              <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
+              <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
+              <PrivateRoute
+                exact
+                path="/my/workout/:id"
+                component={CustomWorkoutDetail}
+              />
+              <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+            </Switch>
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </Router>
+    </ApolloProvider>
+  );
+};
+
+export default App;

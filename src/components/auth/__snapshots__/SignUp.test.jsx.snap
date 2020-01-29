@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignUp /> renders the SignUp component correctly 1`] = `
+<ApolloConsumer>
+  <Component />
+</ApolloConsumer>
+`;
+
+exports[`<SignUp /> should show error message 1`] = `
+<ApolloConsumer>
+  <Component />
+</ApolloConsumer>
+`;

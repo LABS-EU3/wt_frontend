@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "./static/css/main.af79ba41.chunk.css",
+    "main.js": "./static/js/main.2fe05760.chunk.js",
+    "main.js.map": "./static/js/main.2fe05760.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.76ec83ec.js",
+    "runtime-main.js.map": "./static/js/runtime-main.76ec83ec.js.map",
+    "static/css/2.facec546.chunk.css": "./static/css/2.facec546.chunk.css",
+    "static/js/2.7e59d0bd.chunk.js": "./static/js/2.7e59d0bd.chunk.js",
+    "static/js/2.7e59d0bd.chunk.js.map": "./static/js/2.7e59d0bd.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.c513528f5f521cc9436d1b322e34cf39.js": "./precache-manifest.c513528f5f521cc9436d1b322e34cf39.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.facec546.chunk.css.map": "./static/css/2.facec546.chunk.css.map",
+    "static/css/main.af79ba41.chunk.css.map": "./static/css/main.af79ba41.chunk.css.map",
+    "static/js/2.7e59d0bd.chunk.js.LICENSE": "./static/js/2.7e59d0bd.chunk.js.LICENSE",
+    "static/media/ElectronicChimeKevanGC.ogg": "./static/media/ElectronicChimeKevanGC.7b3f493b.ogg",
+    "static/media/ElectronicChimeKevanGC.mp3": "./static/media/ElectronicChimeKevanGC.972c97d9.mp3",
+    "static/media/ElectronicChimeKevanGC.wav": "./static/media/ElectronicChimeKevanGC.b2a5951b.wav",
+    "static/media/banner.jpg": "./static/media/banner.aa29a244.jpg",
+    "static/media/login_image.png": "./static/media/login_image.c4394dab.png",
+    "static/media/logo.png": "./static/media/logo.4faad313.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.76ec83ec.js",
+    "static/css/2.facec546.chunk.css",
+    "static/js/2.7e59d0bd.chunk.js",
+    "static/css/main.af79ba41.chunk.css",
+    "static/js/main.2fe05760.chunk.js"
+  ]
+}
