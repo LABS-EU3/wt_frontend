@@ -17,6 +17,7 @@
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-link-context": "^1.0.19",
+    "apollo-link-ws": "^1.0.19",
     "apollo-upload-client": "^12.1.0",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.19",
@@ -38,6 +39,7 @@
     "react-scripts": "3.3.0",
     "recharts": "^2.0.0-beta.1",
     "styled-components": "^4.4.1",
+    "subscriptions-transport-ws": "^0.9.16",
     "yup": "^0.28.0"
   },
   "scripts": {

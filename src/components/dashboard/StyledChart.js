@@ -10,6 +10,13 @@ const StyledCharts = styled.div`
     flex-wrap: wrap;
     width: 100%;
 
+    .recharts-wrapper {
+      width: 100% !important;
+
+      svg {
+        width: 100%;
+      }
+    }
     h4 {
       display: flex;
       flex-wrap: wrap;

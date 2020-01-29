@@ -187,6 +187,7 @@ export const GET_DASHBOARD_DETAILS = gql`
         goal
         height
         weight
+        photo
         heightUnit {
           name
         }
@@ -224,6 +225,7 @@ export const GET_USER_DETAILS = gql`
       equipment
       height
       goal
+      photo
       weight
       reminderType
       experience
@@ -246,6 +248,17 @@ export const ACCOUNT_RECOVERY = gql`
       id
       firstname
       lastname
+    }
+  }
+`;
+
+export const GET_MESSAGE_HISTORY = gql`
+  query friendChat($receiver: String!) {
+    friendChat(receiver: $receiver) {
+      sender
+      receiver
+      message
+      sent
     }
   }
 `;
@@ -280,6 +293,7 @@ export const GET_FRIENDS = gql`
       firstname
       lastname
       goal
+      photo
     }
   }
 `;

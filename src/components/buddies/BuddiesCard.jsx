@@ -21,7 +21,6 @@ const BuddiesCard = ({
 
   const onClick = e => {
     console.log(e.target.id);
-    debugger;
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -44,7 +43,7 @@ const BuddiesCard = ({
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
         } else {
-          alert("Unable to update profile", "", "error");
+          alert("Unable to send friend request", "", "error");
         }
       });
   };
@@ -60,6 +59,7 @@ const BuddiesCard = ({
             <Text>{goal}</Text>
           </Box>
         </Flex>
+
         <CustomButtons
           icon={icon}
           text={text}

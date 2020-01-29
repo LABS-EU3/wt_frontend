@@ -9,7 +9,17 @@ const DashboardStyle = styled.div`
   padding: 2rem;
 
   .welcome {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
+
+    h2 {
+      font-size: 1.8rem;
+
+      @media only screen and (max-width: 800px) {
+        font-size: 1.5rem;
+      }
+    }
   }
 
   .dashboard-content {
@@ -17,6 +27,11 @@ const DashboardStyle = styled.div`
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
+
+    @media only screen and (max-width: 1085px) {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
 
     .user-detail {
       width: 30%;
@@ -26,6 +41,16 @@ const DashboardStyle = styled.div`
       box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
       border-radius: 10px;
       padding: 0.5rem;
+      border: 2px solid grey;
+
+      @media only screen and (max-width: 1085px) {
+        width: 70%;
+        margin: 1rem 0;
+      }
+      @media only screen and (max-width: 900px) {
+        width: 100%;
+        margin: 1rem 0;
+      }
 
       a {
         display: flex;
@@ -38,6 +63,15 @@ const DashboardStyle = styled.div`
       width: 65%;
       display: flex;
       flex-wrap: wrap;
+
+      @media only screen and (max-width: 1085px) {
+        width: 90%;
+      }
+
+      @media only screen and (max-width: 900px) {
+        width: 100%;
+        margin: 1rem 0;
+      }
 
       .goal {
         display: flex;

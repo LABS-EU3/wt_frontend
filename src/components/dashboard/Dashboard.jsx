@@ -10,6 +10,7 @@ import Charts from "./Charts";
 import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import Quotes from "../common/Quotes";
+import Streak from "../common/Streak";
 
 function Dashboard({ client, history }) {
   const [dashboardData, setDashboardData] = useState([]);
@@ -58,6 +59,7 @@ function Dashboard({ client, history }) {
   }
 
   if (dashboardData) {
+    console.log(dashboardData);
     return (
       <DashboardStyle>
         <div className="welcome">
@@ -70,7 +72,7 @@ function Dashboard({ client, history }) {
           <div className="user-detail">
             <Link to="/profile">Edit</Link>
             <Avatar
-              src={logoImage}
+              src={dashboardData.user.photo}
               size="2xl"
               marginLeft="35%"
               marginBottom="20px"
@@ -97,20 +99,7 @@ function Dashboard({ client, history }) {
               </Box>
             </Flex>
 
-            <Box
-              bg="tomato"
-              color="white"
-              p={4}
-              width="70%"
-              rounded="lg"
-              marginTop="350px"
-              marginLeft="15%"
-            >
-              <span role="img" aria-label="fire-emoji">
-                🔥🔥🔥
-              </span>{" "}
-              You have a {dashboardData.streak} days streak. Keep it up!
-            </Box>
+            <Streak streak={dashboardData.streak} />
           </div>
 
           <div className="dasboard-detail">
