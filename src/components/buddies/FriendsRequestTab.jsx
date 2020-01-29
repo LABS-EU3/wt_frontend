@@ -42,7 +42,6 @@ const FriendsRequestTab = ({
 
   const onClick = e => {
     e.persist();
-    debugger;
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -52,13 +51,14 @@ const FriendsRequestTab = ({
         }
       })
       .then(res => {
-        debugger;
-        setIsLoading(isLoading);
-        setFriendsRequests(friendsRequests);
-        setFriends(friends);
-        e.target.value === "response_1"
-          ? alert(`${e.target.name} is now your Workout Buddy`)
-          : alert(`You have rejected ${e.target.name}'s Buddy request`);
+        if (res.data.manageFriends) {
+          setIsLoading(isLoading);
+          setFriendsRequests(friendsRequests);
+          setFriends(friends);
+          e.target.value === "response_1"
+            ? alert(`${e.target.name} is now your Workout Buddy`)
+            : alert(`You have rejected ${e.target.name}'s Buddy request`);
+        } else alert(`An error occured`);
       })
       .catch(error => {
         debugger;
@@ -141,20 +141,26 @@ const FriendsRequestTab = ({
                   variant="solid"
                   size="md"
                   id={buddy.id}
+                  name={`${buddy.firstname} ${
+                    !buddy.lastname ? "" : buddy.lastname
+                  }`}
                   value="response_1"
                   onClick={onClick}
                 >
-                  Confirm
+                  Accept
                 </Button>
                 <Button
                   variantColor="orange"
                   variant="outline"
                   size="md"
-                  id={buddy}
+                  id={buddy.id}
+                  name={`${buddy.firstname} ${
+                    !buddy.lastname ? "" : buddy.lastname
+                  }`}
                   value="response_0"
                   onClick={onClick}
                 >
-                  Delete
+                  Reject
                 </Button>
               </div>
             </Flex>

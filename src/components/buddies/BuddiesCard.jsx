@@ -39,7 +39,6 @@ const BuddiesCard = ({
 
   const onClick = e => {
     e.persist();
-    console.log(e.target.id);
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -49,14 +48,12 @@ const BuddiesCard = ({
         }
       })
       .then(res => {
-        debugger;
         setIsLoading(isLoading);
         e.target.value === "add"
           ? alert(`Buddy request sent to ${e.target.name}`)
           : alert(`An error occured`);
       })
       .catch(error => {
-        debugger;
         setIsLoading(false);
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
