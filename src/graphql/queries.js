@@ -293,6 +293,7 @@ export const GET_FRIENDS = gql`
       firstname
       lastname
       goal
+      photo
     }
   }
 `;
