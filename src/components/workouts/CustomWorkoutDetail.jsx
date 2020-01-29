@@ -23,7 +23,12 @@ import {
   EXERCISES_BY_FIELDS
 } from "./../../graphql/queries";
 import { UPSERT_CUSTOM_WORKOUT } from "./../../graphql/mutations";
+<<<<<<< HEAD
 import { useDebounce } from "./../../utils/index";
+=======
+import { useDebounce, getUserDetails } from "./../../utils/index";
+const user = getUserDetails();
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
 
 const CustomWorkoutDetail = ({ client, history }) => {
   const [workout, setWorkout] = useState({});

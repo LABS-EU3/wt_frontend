@@ -1,8 +1,17 @@
 {
-  "name": "workouttracker",
-  "version": "0.1.0",
+  "name": "com.trackdrills.app",
+  "version": "1.0.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
+    "cordova_script": "0.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0",
+    "react.cordova-navigation_controller": "^1.6.6",
+    "cordova-android": "^8.1.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.1.1",
     "@apollo/react-hooks": "^3.1.3",
     "@chakra-ui/core": "^0.5.1",
     "@emotion/core": "^10.0.22",
@@ -26,42 +35,28 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
     "react-apollo": "^3.1.3",
     "react-calendar": "^2.19.2",
     "react-countdown-circle-timer": "^1.0.5",
-    "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-google-login": "^5.0.7",
     "react-icons": "^3.8.0",
     "react-player": "^1.14.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
     "recharts": "^2.0.0-beta.1",
     "styled-components": "^4.4.1",
-    "subscriptions-transport-ws": "^0.9.16",
     "yup": "^0.28.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "reco serve",
+    "reactstart": "react-scripts start",
+    "build": "rmdir /s www && mkdir www && react-scripts build && reco copy && cordova build",
     "test": "react-scripts test --update-snapshot",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint src",
     "format": "prettier --write \"./src/**/*.{js,jsx}\"",
     "coverage": "react-scripts test --update-snapshot --env=jsdom --watchAll=false --coverage",
     "coveralls": "npm run coverage && cat coverage/lcov.info | coveralls"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "eslint-config-prettier"
-    ]
   },
   "browserslist": {
     "production": [
@@ -75,7 +70,16 @@
       "last 1 safari version"
     ]
   },
+  "displayName": "trackdrills",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "DataCyber-OrChuban, react.cordova: Apache Cordova Team and React.js",
+  "license": "Apache-2.0",
   "devDependencies": {
+    "cordova-plugin-whitelist": "^1.3.4",
     "coveralls": "^3.0.9",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
@@ -86,5 +90,26 @@
     "lint-staged": "^9.5.0",
     "nyc": "^14.1.1",
     "prettier": "^1.19.1"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "android",
+      "ios",
+      "browser"
+    ]
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "eslint-config-prettier"
+    ]
   }
 }

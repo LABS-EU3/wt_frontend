@@ -10,7 +10,10 @@ import Charts from "./Charts";
 import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import Quotes from "../common/Quotes";
+<<<<<<< HEAD
 import Streak from "../common/Streak";
+=======
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
 
 function Dashboard({ client, history }) {
   const [dashboardData, setDashboardData] = useState([]);
@@ -59,7 +62,10 @@ function Dashboard({ client, history }) {
   }
 
   if (dashboardData) {
+<<<<<<< HEAD
     console.log(dashboardData);
+=======
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
     return (
       <DashboardStyle>
         <div className="welcome">
@@ -72,7 +78,11 @@ function Dashboard({ client, history }) {
           <div className="user-detail">
             <Link to="/profile">Edit</Link>
             <Avatar
+<<<<<<< HEAD
               src={dashboardData.user.photo}
+=======
+              src={logoImage}
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
               size="2xl"
               marginLeft="35%"
               marginBottom="20px"
@@ -99,7 +109,24 @@ function Dashboard({ client, history }) {
               </Box>
             </Flex>
 
+<<<<<<< HEAD
             <Streak streak={dashboardData.streak} />
+=======
+            <Box
+              bg="tomato"
+              color="white"
+              p={4}
+              width="70%"
+              rounded="lg"
+              marginTop="350px"
+              marginLeft="15%"
+            >
+              <span role="img" aria-label="fire-emoji">
+                🔥🔥🔥
+              </span>{" "}
+              You have a {dashboardData.streak} days streak. Keep it up!
+            </Box>
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
           </div>
 
           <div className="dasboard-detail">

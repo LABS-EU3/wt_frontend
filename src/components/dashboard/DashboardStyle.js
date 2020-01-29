@@ -9,6 +9,7 @@ const DashboardStyle = styled.div`
   padding: 2rem;
 
   .welcome {
+<<<<<<< HEAD
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -20,6 +21,9 @@ const DashboardStyle = styled.div`
         font-size: 1.5rem;
       }
     }
+=======
+    width: 100%;
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
   }
 
   .dashboard-content {
@@ -28,11 +32,14 @@ const DashboardStyle = styled.div`
     width: 100%;
     justify-content: space-between;
 
+<<<<<<< HEAD
     @media only screen and (max-width: 1085px) {
       flex-direction: column-reverse;
       align-items: center;
     }
 
+=======
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
     .user-detail {
       width: 30%;
       display: flex;
@@ -41,6 +48,7 @@ const DashboardStyle = styled.div`
       box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
       border-radius: 10px;
       padding: 0.5rem;
+<<<<<<< HEAD
       border: 2px solid grey;
 
       @media only screen and (max-width: 1085px) {
@@ -51,6 +59,8 @@ const DashboardStyle = styled.div`
         width: 100%;
         margin: 1rem 0;
       }
+=======
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
 
       a {
         display: flex;
@@ -64,6 +74,7 @@ const DashboardStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
 
+<<<<<<< HEAD
       @media only screen and (max-width: 1085px) {
         width: 90%;
       }
@@ -73,6 +84,8 @@ const DashboardStyle = styled.div`
         margin: 1rem 0;
       }
 
+=======
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
       .goal {
         display: flex;
         flex-wrap: wrap;

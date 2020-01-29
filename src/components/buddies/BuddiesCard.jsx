@@ -21,6 +21,10 @@ const BuddiesCard = ({
 
   const onClick = e => {
     console.log(e.target.id);
+<<<<<<< HEAD
+=======
+    debugger;
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -43,7 +47,11 @@ const BuddiesCard = ({
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
         } else {
+<<<<<<< HEAD
           alert("Unable to send friend request", "", "error");
+=======
+          alert("Unable to update profile", "", "error");
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
         }
       });
   };
@@ -59,7 +67,10 @@ const BuddiesCard = ({
             <Text>{goal}</Text>
           </Box>
         </Flex>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ce13601a70daf7a0b362d20f2d16aa0d0a9da02
         <CustomButtons
           icon={icon}
           text={text}
