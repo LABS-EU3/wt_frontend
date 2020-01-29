@@ -12,8 +12,13 @@ const MessageDetail = ({
   user_id,
   friend
 }) => {
-  const [display, setDisplay] = useState("none");
   const [newMessage, setNewMessage] = useState("");
+
+  const messagesEndRef = React.useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     subscribeToMore({
@@ -32,6 +37,7 @@ const MessageDetail = ({
         }
       }
     });
+    scrollToBottom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,6 +69,7 @@ const MessageDetail = ({
                 </div>
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
         );
       })}

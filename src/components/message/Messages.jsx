@@ -19,8 +19,7 @@ const Message = ({
   setIsRefetched
 }) => {
   const toast = useToast();
-  const [messages, setMessages] = useState([]);
-  // const { id, messages: friendMessages } = friend;
+
   const alert = (title, description, status) => {
     toast({
       title,
@@ -35,15 +34,15 @@ const Message = ({
   //   variables: { receiver: "5e2aedba56cf1200175d69c9" }
   // });
 
-  if (messages.length > 0) {
-    messages.forEach(message => {
-      if (message.sender === userData.user_id) {
-        // addUserMessage(message.message, "asd");
-      } else {
-        // addResponseMessage(message.message);
-      }
-    });
-  }
+  // if (messages.length > 0) {
+  //   messages.forEach(message => {
+  //     if (message.sender === userData.user_id) {
+  //       // addUserMessage(message.message, "asd");
+  //     } else {
+  //       // addResponseMessage(message.message);
+  //     }
+  //   });
+  // }
 
   // useEffect(() => {
   //   if (typeof data === "object") {
