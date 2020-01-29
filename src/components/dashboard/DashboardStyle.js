@@ -28,7 +28,7 @@ const DashboardStyle = styled.div`
     width: 100%;
     justify-content: space-between;
 
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 1085px) {
       flex-direction: column-reverse;
       align-items: center;
     }
@@ -43,6 +43,10 @@ const DashboardStyle = styled.div`
       padding: 0.5rem;
       border: 2px solid grey;
 
+      @media only screen and (max-width: 1085px) {
+        width: 70%;
+        margin: 1rem 0;
+      }
       @media only screen and (max-width: 900px) {
         width: 100%;
         margin: 1rem 0;
@@ -59,6 +63,10 @@ const DashboardStyle = styled.div`
       width: 65%;
       display: flex;
       flex-wrap: wrap;
+
+      @media only screen and (max-width: 1085px) {
+        width: 90%;
+      }
 
       @media only screen and (max-width: 900px) {
         width: 100%;
