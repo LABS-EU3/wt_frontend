@@ -18,7 +18,6 @@ import * as yup from "yup";
 import { UPDATE_USER_DETAILS } from "../../graphql/mutations";
 import { GET_UNITS } from "../../graphql/queries";
 
-import logoImage from "../../images/login_image.png";
 import { withApollo } from "react-apollo";
 
 const EditProfile = ({ onClose, data, client }) => {
@@ -140,7 +139,7 @@ const EditProfile = ({ onClose, data, client }) => {
     <Box>
       <Stack>
         <Avatar
-          src={logoImage}
+          src={data.photo}
           size="2xl"
           marginLeft="35%"
           marginBottom="20px"

@@ -311,6 +311,17 @@ export const RESET_PASSWORD = gql`
   }
 `;
 
+export const SEND_MESSAGE = gql`
+  mutation sendMessage($receiver: String!, $message: String!) {
+    sendMessage(receiver: $receiver, message: $message) {
+      sender
+      receiver
+      message
+      sent
+    }
+  }
+`;
+
 export const MANAGE_FRIENDS = gql`
   mutation manageFriends($userId: String!, $task: String!) {
     manageFriends(userId: $userId, task: $task)

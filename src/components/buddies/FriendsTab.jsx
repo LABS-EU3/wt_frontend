@@ -7,8 +7,16 @@ import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
 import BuddiesCard from "./BuddiesCard";
 
-const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
-  const [friendsData, setFriendsData] = useState([]);
+const FriendsTab = ({
+  client,
+  name,
+  goal,
+  history,
+  text,
+  profilePicture,
+  setFriends,
+  friends
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -34,9 +42,7 @@ const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
         }
       })
       .then(res => {
-        console.log(res);
-        debugger;
-        setFriendsData(res.data.friends);
+        setFriends(res.data.friends);
         setIsLoading(false);
       })
       .catch(err => {
@@ -81,7 +87,7 @@ const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
         setSearch={setSearch}
         search={search}
       />
-      {friendsData.map(buddy => (
+      {friends.map(buddy => (
         <div>
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}

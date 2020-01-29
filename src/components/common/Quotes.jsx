@@ -116,10 +116,14 @@ const Quotes = () => {
   const [quote, setQuote] = useState(randomQuote);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       randomQuote = quotesData[Math.floor(Math.random() * quotesData.length)];
       setQuote(randomQuote);
     }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

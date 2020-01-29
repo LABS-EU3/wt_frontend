@@ -17,3 +17,15 @@
   padding-bottom: 1rem;
   margin-top: -.5rem;
 }
+
+.low {
+  background-color: red;
+}
+
+.moderate {
+  background-color: #ff8744;
+}
+
+.high {
+  background-color: green;
+}

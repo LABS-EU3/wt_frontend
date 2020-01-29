@@ -17,6 +17,7 @@ import AccountRecovery from "./components/auth/AccountRecovery";
 import ProfilePage from "./components/dashboard/ProfilePage";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 import Footer from "./components/common/Footer";
+import MessageList from "./components/message/MessageList";
 import Buddies from "./components/buddies/Buddies";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/accountrecovery" component={AccountRecovery} />
+        <PrivateRoute exact path="/messages" component={MessageList} />
         <Route
           exact
           path="/accountrecovery/:token"

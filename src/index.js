@@ -8,14 +8,21 @@ import { createUploadLink } from "apollo-upload-client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { setContext } from "apollo-link-context";
 import ReactGA from "react-ga";
-
+import { split } from "apollo-link";
+import { WebSocketLink } from "apollo-link-ws";
+import { getMainDefinition } from "apollo-utilities";
+import { SubscriptionClient } from "subscriptions-transport-ws";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { getUserDetails } from "./utils";
 
 const userData = getUserDetails();
-const { REACT_APP_GOOGLE_ANALYTICS_KEY, REACT_APP_GraphQL_API } = process.env;
+const {
+  REACT_APP_GOOGLE_ANALYTICS_KEY,
+  REACT_APP_GraphQL_API,
+  REACT_APP_GraphQL_API_SUBSCRIPTIONS
+} = process.env;
 
 // Initialize google analytics
 ReactGA.initialize(REACT_APP_GOOGLE_ANALYTICS_KEY);
@@ -26,7 +33,8 @@ const cache = new InMemoryCache({
     return Math.random();
   }
 });
-const link = new createUploadLink({
+
+const httpLink = new createUploadLink({
   uri: REACT_APP_GraphQL_API,
   fetchOptions: {
     // mode: "no-cors",
@@ -51,6 +59,28 @@ const authLink = setContext((_, { headers }) => {
     }
   };
 });
+
+const serverClient = new SubscriptionClient(
+  REACT_APP_GraphQL_API_SUBSCRIPTIONS,
+  {
+    reconnect: true
+  }
+);
+
+const wsLink = new WebSocketLink(serverClient);
+
+const link = split(
+  // split based on operation type
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLink
+);
 
 const client = new ApolloClient({
   cache,
