@@ -18,6 +18,8 @@ import ProfilePage from "./components/dashboard/ProfilePage";
 import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 import Footer from "./components/common/Footer";
 import Message from "./components/common/Message";
+import Buddies from "./components/buddies/Buddies";
+
 const App = () => {
   return (
     <div className="App" data-testid="App">
@@ -46,6 +48,7 @@ const App = () => {
           component={CustomWorkoutDetail}
         />
         <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+        <PrivateRoute exact path="/buddies" component={Buddies} />
       </Switch>
       <Footer />
     </div>

@@ -260,3 +260,37 @@ export const GET_MESSAGE_HISTORY = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query findFriends($search: String!, $fields: [String!]!) {
+    findFriends(input: { search: $search, fields: $fields }) {
+      id
+      firstname
+      lastname
+      email
+      goal
+    }
+  }
+`;
+
+export const GET_FRIENDS_REQUEST = gql`
+  query {
+    friendRequests {
+      id
+      firstname
+      lastname
+      email
+    }
+  }
+`;
+
+export const GET_FRIENDS = gql`
+  query {
+    friends {
+      id
+      firstname
+      lastname
+      goal
+    }
+  }
+`;
