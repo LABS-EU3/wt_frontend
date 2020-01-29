@@ -2,7 +2,7 @@
 
 platform :ios, '10.0'
 
-target 'C:\www\lambda\LABS\mobileapp2\trackdrills\cordova\platforms\ios\trackdrills' do
-	project 'C:\www\lambda\LABS\mobileapp2\trackdrills\cordova\platforms\ios\trackdrills.xcodeproj'
+target 'C:\www\lambda\LABS\frontend\cordova\platforms\ios\trackdrills' do
+	project 'C:\www\lambda\LABS\frontend\cordova\platforms\ios\trackdrills.xcodeproj'
 
 end
