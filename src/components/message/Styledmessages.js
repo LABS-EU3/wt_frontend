@@ -8,8 +8,14 @@ export const StyledMessagesList = styled.div`
   justify-content: space-evenly;
   margin: 0 auto;
   padding: 1rem 1rem 0 1rem;
-
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+
+  .selected {
+    border: 1px solid red;
+    cursor: pointer;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+  }
+
   .users-list {
     width: 25%;
     display: flex;
@@ -19,17 +25,17 @@ export const StyledMessagesList = styled.div`
     .friend {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
       border-radius: 8px;
       padding: 0.5rem;
       transition: all 0.4s ease-in-out;
 
-      &:hover {
+      /* &:hover {
         border: 1px solid red;
         cursor: pointer;
         box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
-      }
+      } */
 
       img {
         width: 70px;
@@ -37,8 +43,17 @@ export const StyledMessagesList = styled.div`
         border-radius: 50%;
       }
 
-      p {
-        padding-left: 1rem;
+      .friend-dtl {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        p {
+          font-weight: bolder;
+        }
+
+        span {
+        }
       }
     }
   }
@@ -59,6 +74,8 @@ export const StyledMessagesList = styled.div`
         width: 70%;
         display: flex;
         flex-wrap: wrap;
+        overflow: scroll;
+        height: 95vh;
       }
 
       .user-detail {
@@ -66,6 +83,24 @@ export const StyledMessagesList = styled.div`
         display: flex;
         flex-wrap: wrap;
         border-left: 1px solid grey;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+        }
+
+        h3 {
+          font-weight: bolder;
+          margin-top: 1rem;
+          font-family: "Ubuntu", sans-serif;
+        }
+
+        p {
+        }
       }
     }
     .user-detail {
@@ -81,8 +116,6 @@ export const StyledMessages = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  overflow: scroll;
-  height: 95vh;
 `;
 
 export const StyledMessageDetail = styled.div`
@@ -146,13 +179,15 @@ export const StyledMessageDetail = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     margin: 1rem 0;
     align-items: center;
     bottom: 0;
 
     form {
       width: 100%;
+      display: flex;
+      justify-content: space-evenly;
 
       input {
         width: 70%;

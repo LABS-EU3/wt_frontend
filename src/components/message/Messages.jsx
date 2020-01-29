@@ -92,7 +92,13 @@ const Message = ({
         />
       </div>
 
-      <div className="user-detail"></div>
+      <div className="user-detail">
+        <img src={friend.photo} alt={friend.firstname} />
+        <h3>
+          {friend.firstname} {friend.lastname}
+        </h3>
+        <p>Goal: {friend.goal} </p>
+      </div>
     </StyledMessages>
   );
 };
