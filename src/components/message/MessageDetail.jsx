@@ -35,13 +35,27 @@ const MessageDetail = ({
 
   return (
     <StyledMessageDetail>
+      <h3>Melquesdedque</h3>
+
       <div className="friend-message">
-        <p>Hiiii</p>
-        <p className="time">2 minutes ago</p>
+        <img src="https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg" />
+
+        <div className="friend-message-detail">
+          <div className="mssg">
+            <p>Hiiii</p>
+            <span className="time">2 minutes ago</span>
+          </div>
+        </div>
       </div>
       <div className="my-message">
-        <p>Hiiii</p>
-        <p className="time">2 minutes ago</p>
+        <div className="mssg">
+          <p>Hiiii</p>
+          <p className="time">2 minutes ago</p>
+        </div>
+      </div>
+
+      <div className="new-message">
+        <input type="text" />
       </div>
     </StyledMessageDetail>
   );

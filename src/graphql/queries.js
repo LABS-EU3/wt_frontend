@@ -294,6 +294,13 @@ export const GET_FRIENDS = gql`
       lastname
       goal
       photo
+      messages {
+        id
+        sender
+        receiver
+        message
+        sent
+      }
     }
   }
 `;

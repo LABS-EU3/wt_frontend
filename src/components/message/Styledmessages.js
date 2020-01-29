@@ -68,6 +68,8 @@ export const StyledMessages = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  overflow: scroll;
+  height: 95vh;
 `;
 
 export const StyledMessageDetail = styled.div`
@@ -76,16 +78,60 @@ export const StyledMessageDetail = styled.div`
   width: 100%;
   flex-direction: column;
 
+  h3 {
+    width: 100%;
+    color: #ff8744;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-family: "Ubuntu", sans-serif;
+  }
+  .mssg {
+    background: #e2e8f0;
+    border-radius: 5px;
+    padding: 0.5rem;
+
+    .time {
+      color: #ff8744;
+      font-size: 0.9rem;
+    }
+  }
+
   .friend-message {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: flex-start;
     padding: 1rem;
-    /* p {
-      width: 100%;
-      padding: 0;
-      margin: 0;
-    } */
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .friend-message-detail {
+      display: flex;
+      flex-wrap: wrap;
+
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 1rem;
+    }
+  }
+
+  .my-message {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .new-message {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
   }
 `;
