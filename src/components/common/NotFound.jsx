@@ -47,7 +47,15 @@ const StyledNotFound = styled.div`
   }
 `;
 
-const NotFound = ({ message = "Page not found" }) => {
+const NotFound = ({ message }) => {
+  const logout = () => {
+    localStorage.removeItem("userData");
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
   return (
     <StyledNotFound>
       <div>
@@ -56,7 +64,7 @@ const NotFound = ({ message = "Page not found" }) => {
         </div>
 
         <div className="message">
-          <h2>{message}</h2>
+          <h2>{message ? message : "Page not found"}</h2>
 
           <p>
             We’re sorry but the page you requested for could not be found.
@@ -69,6 +77,7 @@ const NotFound = ({ message = "Page not found" }) => {
               className="auth-form-button"
               variantColor="orange"
               size="md"
+              onClick={message ? logout : ""}
             >
               Back to Homepage
             </Button>
