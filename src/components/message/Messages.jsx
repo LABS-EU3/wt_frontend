@@ -16,7 +16,8 @@ const Message = ({
   friend,
   subscribeToMore,
   refetch,
-  setIsRefetched
+  setIsRefetched,
+  setFriends
 }) => {
   const toast = useToast();
 
@@ -89,6 +90,7 @@ const Message = ({
           subscribeToMore={subscribeToMore}
           user_id={userData.user_id}
           friend={friend}
+          setFriends={setFriends}
         />
       </div>
 

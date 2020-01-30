@@ -8,7 +8,8 @@ const MessageDetail = ({
   handleNewUserMessage,
   subscribeToMore,
   user_id,
-  friend
+  friend,
+  setFriends
 }) => {
   const [newMessage, setNewMessage] = useState("");
 
@@ -19,6 +20,23 @@ const MessageDetail = ({
   };
 
   useEffect(() => {
+    // subscribeToMore({
+    //   document: SUBSCRIBE_MESSAGE,
+    //   variables: { receiver: user_id },
+    //   updateQuery: (prev, { subscriptionData }) => {
+    //     if (!subscriptionData.data) return prev;
+    //     const newMessage = subscriptionData.data.newMessage;
+
+    //     if (!prev.friendChat.find(msg => msg.id === newMessage.id)) {
+    //       return Object.assign({}, prev, {
+    //         friendChat: [...prev.friendChat, newMessage]
+    //       });
+    //     } else {
+    //       return prev;
+    //     }
+    //   }
+    // });
+
     subscribeToMore({
       document: SUBSCRIBE_MESSAGE,
       variables: { receiver: user_id },
@@ -26,10 +44,27 @@ const MessageDetail = ({
         if (!subscriptionData.data) return prev;
         const newMessage = subscriptionData.data.newMessage;
 
-        if (!prev.friendChat.find(msg => msg.id === newMessage.id)) {
-          return Object.assign({}, prev, {
-            friendChat: [...prev.friendChat, newMessage]
+        console.log(prev);
+        console.log(subscriptionData);
+        let findFriend = prev.friends.find(frnd => frnd.id === friend.id);
+
+        console.log(findFriend, "find");
+        if (!findFriend.messages.find(msg => msg.id === newMessage.id)) {
+          findFriend = Object.assign({}, findFriend, {
+            messages: [...findFriend.messages, newMessage]
           });
+          // const newMessages = [...findFriend.messages, newMessage];
+          // findFriend.messages = newMessages;
+          console.log(findFriend, "==");
+          const next = Object.assign({}, prev, {
+            friends: [
+              ...prev.friends.filter(frnd => frnd.id !== findFriend.id),
+              findFriend
+            ]
+          });
+          console.log(next, "fff");
+          setFriends(next.friends);
+          return next;
         } else {
           return prev;
         }

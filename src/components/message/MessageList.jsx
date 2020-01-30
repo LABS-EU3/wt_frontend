@@ -91,6 +91,7 @@ const MessageList = ({ client }) => {
             subscribeToMore={subscribeToMore}
             refetch={refetch}
             setIsRefetched={setIsRefetched}
+            setFriends={setFriends}
           />
         </div>
       </div>
