@@ -1,5 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  LinkedinIcon,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon
+} from "react-share";
 
 import DefaultImage from "../../images/login_image.png";
 import { WorkoutHistoryCard as StyledWorkoutHistoryCard } from "./WorkoutHistoryStyle";
@@ -34,6 +42,36 @@ function WorkoutHistoryCard({ workout, onOpen, history }) {
         <Link to={`/workout/${workout.workoutId.id}`}>
           <p className="link">View Details</p>
         </Link>
+        <div className="social-share">
+          <span>
+            <FacebookShareButton
+              url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
+              hashtag="#trackdrills"
+              quote="Get in!"
+            >
+              <FacebookIcon size={35} round={true} />
+            </FacebookShareButton>
+          </span>
+          <span>
+            <TwitterShareButton
+              url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
+              hashtags={["trackdrills"]}
+              title="Get in!"
+            >
+              <TwitterIcon size={35} round={true} />
+            </TwitterShareButton>
+          </span>
+          <span>
+            <LinkedinShareButton
+              url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
+              title="Get in!"
+              summary="Enter dynamic summary here"
+              source="https://app.trackdrills.com"
+            >
+              <LinkedinIcon size={35} round={true} />
+            </LinkedinShareButton>
+          </span>
+        </div>
       </div>
     </StyledWorkoutHistoryCard>
   );
