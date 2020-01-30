@@ -4,14 +4,6 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
-    "cordova_script": "0.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0",
-    "react.cordova-navigation_controller": "^1.6.6",
-    "cordova-android": "^8.1.0",
-    "cordova-browser": "^6.0.0",
-    "cordova-ios": "^5.1.1",
     "@apollo/react-hooks": "^3.1.3",
     "@chakra-ui/core": "^0.5.1",
     "@emotion/core": "^10.0.22",
@@ -28,6 +20,10 @@
     "apollo-link-context": "^1.0.19",
     "apollo-link-ws": "^1.0.19",
     "apollo-upload-client": "^12.1.0",
+    "cordova-android": "^8.1.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.1.1",
+    "cordova_script": "0.0.1",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.19",
     "formik": "^2.0.8",
@@ -35,14 +31,18 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
+    "react": "^16.12.0",
     "react-apollo": "^3.1.3",
     "react-calendar": "^2.19.2",
     "react-countdown-circle-timer": "^1.0.5",
+    "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-google-login": "^5.0.7",
     "react-icons": "^3.8.0",
     "react-player": "^1.14.2",
     "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "react.cordova-navigation_controller": "^1.6.6",
     "recharts": "^2.0.0-beta.1",
     "styled-components": "^4.4.1",
     "yup": "^0.28.0"
@@ -93,7 +93,12 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.970094315674-4edd10559s8so2n023ecnvevogpcf8gh",
+        "WEB_APPLICATION_CLIENT_ID": "970094315674-4edd10559s8so2n023ecnvevogpcf8gh.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "15.0.1"
+      }
     },
     "platforms": [
       "android",

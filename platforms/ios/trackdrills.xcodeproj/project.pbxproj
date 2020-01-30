@@ -14,6 +14,14 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
+		885047CF444949C0ADB75C66 /* GooglePlus.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B99E967ECF499B9ACA9033 /* GooglePlus.m */; };
+		C8A0891C4D3F47B28CAC5AAE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6A60C7A1924FB48F2A85E0 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		612C1CD0C8D3432DBAF54126 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12386FABA6A74401AD1E8311 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D63D9EB810F642128649DE1E /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24559ABB0FD4CB4BB70F7B6 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0D40F98BC8974487B1E2FE94 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBE555C9964433A625A64B /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		01F12F9FA82E49A0AABF696B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843E2BFCB76A459096CA12CB /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A26EBDA609B14C9DBAB26D98 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F941D89095046A9A7E8F737 /* libz.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		4D01FAE790AE4B94B0965A55 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD10E1D93AAE4366B668F915 /* libz.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +69,15 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "trackdrills/config.xml"; sourceTree = "<group>"; };
+		B4B99E967ECF499B9ACA9033 /* GooglePlus.m */ = {isa = PBXFileReference; name = "GooglePlus.m"; path = "cordova-plugin-googleplus/GooglePlus.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		F92C9D86BCEF48BEA18B75EE /* GooglePlus.h */ = {isa = PBXFileReference; name = "GooglePlus.h"; path = "cordova-plugin-googleplus/GooglePlus.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		2E6A60C7A1924FB48F2A85E0 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		12386FABA6A74401AD1E8311 /* CoreText.framework */ = {isa = PBXFileReference; name = "CoreText.framework"; path = "System/Library/Frameworks/CoreText.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		B24559ABB0FD4CB4BB70F7B6 /* SafariServices.framework */ = {isa = PBXFileReference; name = "SafariServices.framework"; path = "System/Library/Frameworks/SafariServices.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		A5BBE555C9964433A625A64B /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		843E2BFCB76A459096CA12CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		5F941D89095046A9A7E8F737 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		CD10E1D93AAE4366B668F915 /* libz.dylib */ = {isa = PBXFileReference; name = "libz.dylib"; path = "usr/lib/libz.dylib"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = compiled.mach-o.dylib; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +86,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
+				C8A0891C4D3F47B28CAC5AAE /* AddressBook.framework in Frameworks */,
+				612C1CD0C8D3432DBAF54126 /* CoreText.framework in Frameworks */,
+				D63D9EB810F642128649DE1E /* SafariServices.framework in Frameworks */,
+				0D40F98BC8974487B1E2FE94 /* Security.framework in Frameworks */,
+				01F12F9FA82E49A0AABF696B /* SystemConfiguration.framework in Frameworks */,
+				A26EBDA609B14C9DBAB26D98 /* libz.tbd in Frameworks */,
+				4D01FAE790AE4B94B0965A55 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +163,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E6A60C7A1924FB48F2A85E0 /* AddressBook.framework */,
+				12386FABA6A74401AD1E8311 /* CoreText.framework */,
+				B24559ABB0FD4CB4BB70F7B6 /* SafariServices.framework */,
+				A5BBE555C9964433A625A64B /* Security.framework */,
+				843E2BFCB76A459096CA12CB /* SystemConfiguration.framework */,
+				5F941D89095046A9A7E8F737 /* libz.tbd */,
+				CD10E1D93AAE4366B668F915 /* libz.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +196,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				B4B99E967ECF499B9ACA9033 /* GooglePlus.m */,
+				F92C9D86BCEF48BEA18B75EE /* GooglePlus.h */,
 			);
 			name = Plugins;
 			path = "trackdrills/Plugins";
@@ -289,6 +322,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
+				885047CF444949C0ADB75C66 /* GooglePlus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

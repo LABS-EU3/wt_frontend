@@ -33,3 +33,4 @@ www/*
 platforms/android/app/src/main/assets/*
 platforms/browser/www/*
 platforms/ios/www/*
+plugins/*/

@@ -9,6 +9,10 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.trackdrills.app"
+    },
+    "cordova-plugin-googleplus": {
+      "WEB_APPLICATION_CLIENT_ID": "970094315674-4edd10559s8so2n023ecnvevogpcf8gh.apps.googleusercontent.com",
+      "PACKAGE_NAME": "com.trackdrills.app"
     }
   },
   "dependent_plugins": {}

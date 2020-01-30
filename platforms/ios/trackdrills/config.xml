@@ -19,6 +19,11 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="GooglePlus">
+        <param name="ios-package" value="GooglePlus" />
+        <param name="onload" value="true" />
+    </feature>
+    <access origin="https://accounts.google.com/*" />
     <name>trackdrills</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
