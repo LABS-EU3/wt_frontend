@@ -128,7 +128,8 @@ function Login({ client, history }) {
       .mutate({
         mutation: GOOGLE_AUTH_MUTATION,
         variables: {
-          accessToken: response.accessToken
+          accessToken: response.accessToken || null,
+          idToken: response.idToken || null
         }
       })
       .then(res => {
@@ -161,8 +162,9 @@ function Login({ client, history }) {
 
   const signIn = async () => {
     const res = await Plugins.GoogleAuth.signIn();
+    console.log(res);
     if (!res.message) {
-      responseGoogle({ accessToken: res.idToken });
+      responseGoogle(res.authentication);
     } else {
       responseFailureGoogle(res.message);
     }

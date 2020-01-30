@@ -7,6 +7,7 @@
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">localhost:4000</domain>
         <domain includeSubdomains="true">trackdrills-staging.herokuapp.com</domain>
         <domain includeSubdomains="true">trackdrills.herokuapp.com</domain>
     </domain-config>
