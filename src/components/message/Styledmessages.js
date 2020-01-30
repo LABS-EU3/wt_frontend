@@ -31,11 +31,11 @@ export const StyledMessagesList = styled.div`
       padding: 0.5rem;
       transition: all 0.4s ease-in-out;
 
-      /* &:hover {
-        border: 1px solid red;
+      &:hover {
+        /* border: 1px solid red; */
         cursor: pointer;
         box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
-      } */
+      }
 
       img {
         width: 70px;
@@ -116,6 +116,14 @@ export const StyledMessages = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-weight: bolder;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.4rem;
+  }
 `;
 
 export const StyledMessageDetail = styled.div`

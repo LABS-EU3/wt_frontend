@@ -72,9 +72,9 @@ const MessageList = ({ client }) => {
               <div className="friend-dtl">
                 <p>{firstname}</p>
                 <span>
-                  {moment
-                    .unix(messages[messages.length - 1].sent)
-                    .format("MM/DD/YYYY")}
+                  {moment(messages[messages.length - 1].sent).format(
+                    "DD/MM/YYYY"
+                  )}
                 </span>
               </div>
             </div>
