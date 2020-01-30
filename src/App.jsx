@@ -28,6 +28,7 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/accountrecovery" component={AccountRecovery} />
         <PrivateRoute exact path="/messages" component={MessageList} />
+        <PrivateRoute exact path="/messages/:id" component={MessageList} />
         <Route
           exact
           path="/accountrecovery/:token"

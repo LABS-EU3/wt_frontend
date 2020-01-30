@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { withApollo } from "react-apollo";
 import AddFriendsTab from "./AddFriendsTab";
 import FriendsRequestTab from "./FriendsRequestTab";
-import Search from "../common/Search";
 import FriendsTab from "./FriendsTab";
 
 const Buddies = ({ client, name, goal, history, text, profilePicture }) => {

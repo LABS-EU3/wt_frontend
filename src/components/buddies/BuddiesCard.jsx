@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -7,7 +8,6 @@ import {
   Divider,
   useToast
 } from "@chakra-ui/core";
-import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import CustomButtons from "./CustomButtons";
 import { MANAGE_FRIENDS } from "../../graphql/mutations";

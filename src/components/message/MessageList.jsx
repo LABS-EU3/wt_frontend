@@ -7,27 +7,23 @@ import { GET_FRIENDS } from "../../graphql/queries";
 import Input from "../common/Input";
 import Messages from "./Messages";
 
-const MessageList = ({ client }) => {
+const MessageList = ({ client, match }) => {
   const [friends, setFriends] = useState([]);
   const [friend, setFriend] = useState(null);
   const [isRefetched, setIsRefetched] = useState(false);
 
   useEffect(() => {
-    // client
-    //   .query({
-    //     query: GET_FRIENDS
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     console.log(res.subscribeToMore);
-    //     setFriends(res.data.friends);
-    //   })
-    //   .catch(err => console.log(err)
+    const { id } = match.params;
+
+    if (friends.length > 0 && friend === null) {
+      const findFriend = friends.find(frnd => frnd.id === id);
+      setFriend(findFriend);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [friends]);
 
   const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
-  console.log(data);
+
   if (data && friends.length === 0) {
     setFriends(data.friends);
   }
@@ -60,7 +56,6 @@ const MessageList = ({ client }) => {
           type="text"
         />
         {friends.map(friend => {
-          console.log(friend);
           const { firstname, photo, messages } = friend;
           return (
             <div

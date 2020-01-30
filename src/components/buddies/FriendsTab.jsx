@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { GET_FRIENDS } from "../../graphql/queries";
 import Search from "../common/Search";
