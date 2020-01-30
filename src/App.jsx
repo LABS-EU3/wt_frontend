@@ -1,7 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Onboarding from "./components/auth/Onboarding";
+
 import "./App.css";
+
+import Onboarding from "./components/auth/Onboarding";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/LogIn";
 import Dashboard from "./components/dashboard/Dashboard";
