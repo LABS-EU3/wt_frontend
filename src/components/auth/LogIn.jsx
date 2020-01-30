@@ -150,6 +150,7 @@ function Login({ client, history }) {
         }
       })
       .catch(error => {
+        console.log(error);
         alert(
           "An error occurred.",
           "Unable to login to your account.",
@@ -159,9 +160,12 @@ function Login({ client, history }) {
   };
 
   const signIn = async () => {
-    await Plugins.GoogleAuth.signIn();
-    // await Plugins.GoogleAuth.signOut();
-    console.log("signIn", signIn);
+    const res = await Plugins.GoogleAuth.signIn();
+    if (!res.message) {
+      responseGoogle({ accessToken: res.idToken });
+    } else {
+      responseFailureGoogle(res.message);
+    }
   };
 
   return (
