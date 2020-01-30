@@ -47,7 +47,7 @@ const StyledNotFound = styled.div`
   }
 `;
 
-const NotFound = () => {
+const NotFound = ({ message = "Page not found" }) => {
   return (
     <StyledNotFound>
       <div>
@@ -56,7 +56,7 @@ const NotFound = () => {
         </div>
 
         <div className="message">
-          <h2>Page not found</h2>
+          <h2>{message}</h2>
 
           <p>
             We’re sorry but the page you requested for could not be found.
