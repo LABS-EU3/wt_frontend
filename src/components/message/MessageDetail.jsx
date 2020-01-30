@@ -4,8 +4,6 @@ import { StyledMessageDetail } from "./Styledmessages";
 import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 import moment from "moment";
 
-import "emoji-mart/css/emoji-mart.css";
-
 const MessageDetail = ({
   handleNewUserMessage,
   subscribeToMore,
