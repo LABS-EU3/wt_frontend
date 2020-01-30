@@ -70,3 +70,11 @@ export const StyledCustomButton = styled.div`
     margin: 1rem 0;
   }
 `;
+
+export const StyledFriendRequestTab = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: column;
+  padding: 1rem;
+`;

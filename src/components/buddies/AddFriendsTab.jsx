@@ -81,8 +81,6 @@ const AddFriendsTab = ({
 
   return (
     <StyledAddFriendsTab>
-      {/* <Box paddingY="5px"> */}
-      <p>Add Friends</p>
       <Search
         placeholder="Find someone you know"
         setSearch={setSearch}
@@ -104,7 +102,6 @@ const AddFriendsTab = ({
           />
         </div>
       ))}
-      {/* </Box> */}
     </StyledAddFriendsTab>
   );
 };
