@@ -107,7 +107,8 @@ const EditProfile = ({ onClose, data, client }) => {
             heightUnit: value.heightUnit,
             weightUnit: value.weightUnit,
             goal: value.goal,
-            reminderType: value.reminderType
+            reminderType: value.reminderType,
+            photo: value.photo
           }
         })
         .then(res => {
