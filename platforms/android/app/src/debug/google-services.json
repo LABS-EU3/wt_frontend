@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "970094315674",
+    "firebase_url": "https://trackdrills.firebaseio.com",
+    "project_id": "trackdrills",
+    "storage_bucket": "trackdrills.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970094315674:android:48ec913b9ed41120863723",
+        "android_client_info": {
+          "package_name": "com.trackdrills.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970094315674-4edd10559s8so2n023ecnvevogpcf8gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCU2m9daPGN7oyxbGELQLozRFClKYpo4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970094315674-4edd10559s8so2n023ecnvevogpcf8gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

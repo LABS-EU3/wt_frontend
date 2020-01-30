@@ -77,8 +77,9 @@ const client = new ApolloClient({
 
 const history = createHashHistory();
 const App = ({ cordova }) => {
+  console.log("cordova", cordova);
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client} cordova={cordova}>
       <Router history={history}>
         <ThemeProvider
           theme={{
@@ -91,7 +92,11 @@ const App = ({ cordova }) => {
             <Navigation />
             <Switch>
               <Route exact path="/login" component={Login} />
-              <Route exact path="/accountrecovery" component={AccountRecovery} />
+              <Route
+                exact
+                path="/accountrecovery"
+                component={AccountRecovery}
+              />
               <Route
                 exact
                 path="/accountrecovery/:token"
@@ -99,19 +104,31 @@ const App = ({ cordova }) => {
               />
               <PrivateRoute exact path="/profile" component={ProfilePage} />
               <PrivateRoute exact path="/exercises" component={Exercises} />
-              <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
+              <PrivateRoute
+                exact
+                path="/exercise/:id"
+                component={ExerciseDetail}
+              />
               <PrivateRoute exact path="/onboarding" component={Onboarding} />
               <Route exact path="/signup" component={SignUp} />
               <PrivateRoute exact path="/" component={Dashboard} />
               <PrivateRoute exact path="/workouts" component={WorkoutList} />
               <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
-              <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
+              <PrivateRoute
+                exact
+                path="/workout/:id"
+                component={WorkoutDetail}
+              />
               <PrivateRoute
                 exact
                 path="/my/workout/:id"
                 component={CustomWorkoutDetail}
               />
-              <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
+              <PrivateRoute
+                exact
+                path="/workouthistory"
+                component={WorkoutHistory}
+              />
             </Switch>
             <Footer />
           </div>

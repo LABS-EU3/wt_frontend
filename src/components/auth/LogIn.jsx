@@ -15,9 +15,12 @@ import Preview from "../common/Preview";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
-const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+const {
+  REACT_APP_GOOGLE_CLIENT_ID,
+  REACT_APP_FIREBASE_GOOGLE_CLIENT_ID
+} = process.env;
 
-function Login({ client, history }) {
+function Login({ client, cordova, history }) {
   const toast = useToast();
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -154,6 +157,22 @@ function Login({ client, history }) {
         );
       });
   };
+  const cordovaGoogleSignIn = e => {
+    e.preventDefault();
+    window.plugins.googleplus.login(
+      {
+        webClientId: REACT_APP_FIREBASE_GOOGLE_CLIENT_ID, // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+        offline: true // optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
+      },
+      function(res) {
+        console.log("window.plugins.googleplus.login", res); // do something useful instead of alerting
+        responseGoogle({ accessToken: res.idToken });
+      },
+      function(msg) {
+        console.error("error: " + msg);
+      }
+    );
+  };
 
   return (
     <AuthStyle>
@@ -227,26 +246,40 @@ function Login({ client, history }) {
               Login
             </Button>
             <div className="auth-linked-profiles">
-              <GoogleLogin
-                clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                render={renderProps => (
-                  <Button
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                    color="white"
-                    bg="#4c8bf5"
-                    rightIcon="arrow-forward"
-                    width="45%"
-                    size="lg"
-                  >
-                    Login with Google
-                  </Button>
-                )}
-                buttonText="Login"
-                onSuccess={responseGoogle}
-                onFailure={responseFailureGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
+              {!cordova ? (
+                <GoogleLogin
+                  clientId={REACT_APP_GOOGLE_CLIENT_ID}
+                  render={renderProps => (
+                    <Button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      color="white"
+                      bg="#4c8bf5"
+                      rightIcon="arrow-forward"
+                      width="45%"
+                      size="lg"
+                    >
+                      Login with Google
+                    </Button>
+                  )}
+                  buttonText="Login"
+                  onSuccess={responseGoogle}
+                  onFailure={responseFailureGoogle}
+                  cookiePolicy={"single_host_origin"}
+                />
+              ) : (
+                <Button
+                  onClick={cordovaGoogleSignIn}
+                  disabled={false}
+                  color="white"
+                  bg="#4c8bf5"
+                  rightIcon="arrow-forward"
+                  width="45%"
+                  size="lg"
+                >
+                  Login with Google
+                </Button>
+              )}
               <Button
                 type="submit"
                 variantColor="facebook"

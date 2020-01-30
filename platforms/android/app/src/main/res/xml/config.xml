@@ -11,11 +11,11 @@
     <access origin="https://accounts.google.com/*" />
     <name>trackdrills</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
+      A workout tracker application
+  </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-    </author>
+      Apache Cordova Team
+  </author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
