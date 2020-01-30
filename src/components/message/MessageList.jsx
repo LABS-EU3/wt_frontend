@@ -27,6 +27,7 @@ const MessageList = ({ client }) => {
   }, []);
 
   const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
+  console.log(data);
   if (data && friends.length === 0) {
     setFriends(data.friends);
   }

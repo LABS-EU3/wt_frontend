@@ -9,7 +9,8 @@ const MessageDetail = ({
   subscribeToMore,
   user_id,
   friend,
-  setFriends
+  setFriends,
+  setIsRefetched
 }) => {
   const [newMessage, setNewMessage] = useState("");
 
@@ -63,7 +64,8 @@ const MessageDetail = ({
             ]
           });
           console.log(next, "fff");
-          setFriends(next.friends);
+          // setFriends(next.friends);
+          setIsRefetched(true);
           return next;
         } else {
           return prev;

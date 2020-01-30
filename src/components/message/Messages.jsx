@@ -91,6 +91,7 @@ const Message = ({
           user_id={userData.user_id}
           friend={friend}
           setFriends={setFriends}
+          setIsRefetched={setIsRefetched}
         />
       </div>
 
