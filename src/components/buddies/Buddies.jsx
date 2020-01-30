@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withApollo } from "react-apollo";
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 
 import AddFriendsTab from "./AddFriendsTab";
 import FriendsRequestTab from "./FriendsRequestTab";
@@ -14,21 +14,24 @@ const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
 
   return (
     <StyledBuddies>
-      {/* <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px"> */}
       <Tabs variant="enclosed" className="tabs">
         <TabList>
-          <Tab>Friends</Tab>
-          <Tab>Add Friends</Tab>
-          <Tab>Friends Request</Tab>
+          <Tab className="tb">Friends</Tab>
+          <Tab className="tb">Add Friends</Tab>
+          <Tab className="tb">Friends Request</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
+            <p className="name">Friends</p>
             <FriendsTab friends={friends} setFriends={setFriends} />
           </TabPanel>
           <TabPanel>
+            <p className="name">Add Friends</p>
             <AddFriendsTab users={users} setUsers={setUsers} />
           </TabPanel>
+
           <TabPanel>
+            <p className="name">Friends Request</p>
             <FriendsRequestTab
               friendsRequests={friendsRequests}
               setFriendsRequests={setFriendsRequests}
@@ -38,7 +41,6 @@ const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      {/* </Box> */}
     </StyledBuddies>
   );
 };

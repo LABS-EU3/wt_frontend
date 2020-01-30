@@ -110,7 +110,6 @@ const FriendsRequestTab = ({
 
   return (
     <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
-      <p>Friends Request</p>
       {friendsRequests.map(buddy => (
         <div key={buddy.id}>
           <Box
@@ -124,7 +123,7 @@ const FriendsRequestTab = ({
               margin="0 30px"
             >
               <Flex justifyContent="space-around" alignItems="center">
-                <Avatar src={profilePicture} size="xl" />
+                <Avatar src={buddy.photo} size="xl" />
                 <Box textAlign="left" marginLeft="30px">
                   <Heading size="md">
                     {`${buddy.firstname} ${

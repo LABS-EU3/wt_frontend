@@ -13,6 +13,25 @@ export const StyledBuddies = styled.div`
     width: 100%;
     padding: 1rem;
   }
+
+  .name {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    margin: 1rem 0;
+    font-family: "Ubuntu";
+    color: #ff8744;
+  }
+  .tb {
+    &:focus {
+      box-shadow: 0 0 0 3px #ff8744;
+    }
+  }
+  .tb[aria-selected="true"] {
+    color: #ff8744;
+    outline: #ff8744;
+  }
 `;
 
 export const StyledAddFriendsTab = styled.div`
@@ -21,10 +40,33 @@ export const StyledAddFriendsTab = styled.div`
   width: 100%;
   flex-direction: column;
   padding: 1rem;
-
-  /* @media only screen and (max-width: 500px) {
-    width: 95vw;
-  } */
 `;
 
-export const StyledBuddiesCard = styled.div``;
+export const StyledBuddiesCard = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  .budddies-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: 550px) {
+      h2 {
+        font-size: 1rem;
+      }
+    }
+
+    @media only screen and (max-width: 450px) {
+      flex-direction: column;
+    }
+  }
+`;
+
+export const StyledCustomButton = styled.div`
+  @media only screen and (max-width: 450px) {
+    margin: 1rem 0;
+  }
+`;

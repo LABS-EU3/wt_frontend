@@ -58,20 +58,9 @@ const FriendsTab = ({
 
   if (isLoading) {
     return (
-      <Box
-        boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
-        paddingY="15px"
-        margin="30px"
-      >
-        <Flex
-          width="100vw"
-          height="100vh"
-          justifyContent="center"
-          align="center"
-        >
-          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
-        </Flex>
-      </Box>
+      <Flex width="100vw" height="100vh" justifyContent="center" align="center">
+        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+      </Flex>
     );
   }
 
@@ -81,8 +70,7 @@ const FriendsTab = ({
   }
 
   return (
-    <Box paddingY="5px">
-      <p>Friends</p>
+    <Box>
       <Search
         placeholder="Find friends"
         setSearch={setSearch}

@@ -57,10 +57,13 @@ const BuddiesCard = ({
         if (res.data.manageFriends) {
           setIsLoading(isLoading);
           setUsers(users);
-          e.target.value === "add"
-            ? alert(`Buddy request sent to ${e.target.name}`)
-            : alert(`An error occured`);
-        } else alert(`Buddy request already sent`);
+          alert(`Buddy request sent to ${e.target.name}`, "", "success");
+        } else
+          alert(
+            `Buddy request already sent to ${e.target.name}`,
+            "",
+            "warning"
+          );
       })
       .catch(error => {
         setIsLoading(false);
@@ -73,9 +76,9 @@ const BuddiesCard = ({
   };
 
   return (
-    <Box>
+    <StyledBuddiesCard>
       <Divider borderColor="gray.300" />
-      <Flex alignItems="center" justifyContent="space-between">
+      <div className="budddies-card">
         <Flex justifyContent="space-around" alignItems="center" paddingY="5px">
           <Avatar src={photo} size="lg" />
           <Box textAlign="left" marginLeft="30px">
@@ -94,8 +97,8 @@ const BuddiesCard = ({
           name={name}
           link={link}
         />
-      </Flex>
-    </Box>
+      </div>
+    </StyledBuddiesCard>
   );
 };
 
