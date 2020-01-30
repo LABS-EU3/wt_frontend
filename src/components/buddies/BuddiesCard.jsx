@@ -25,7 +25,8 @@ const BuddiesCard = ({
   id,
   users,
   link,
-  setUsers
+  setUsers,
+  photo
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
@@ -74,7 +75,7 @@ const BuddiesCard = ({
       <Divider borderColor="gray.300" />
       <Flex alignItems="center" justifyContent="space-between">
         <Flex justifyContent="space-around" alignItems="center" paddingY="5px">
-          <Avatar src={profilePicture} size="xl" />
+          <Avatar src={photo} size="lg" />
           <Box textAlign="left" marginLeft="30px">
             <Heading size="md">{name}</Heading>
             <Text>{goal}</Text>

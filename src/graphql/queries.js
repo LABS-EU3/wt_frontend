@@ -273,6 +273,7 @@ export const GET_USERS = gql`
       lastname
       email
       goal
+      photo
     }
   }
 `;

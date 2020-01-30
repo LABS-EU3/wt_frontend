@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
 import { Redirect } from "react-router-dom";
+
 import { GET_USERS } from "../../graphql/queries";
 import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
 import BuddiesCard from "./BuddiesCard";
+import { StyledAddFriendsTab } from "./BuddiesStyle";
 
 const AddFriendsTab = ({
   client,
@@ -78,7 +80,8 @@ const AddFriendsTab = ({
   }
 
   return (
-    <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
+    <StyledAddFriendsTab>
+      {/* <Box paddingY="5px"> */}
       <p>Add Friends</p>
       <Search
         placeholder="Find someone you know"
@@ -90,6 +93,7 @@ const AddFriendsTab = ({
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
             goal={buddy.goal}
+            photo={buddy.photo}
             icon="add"
             text="Add friend"
             variant="solid"
@@ -100,7 +104,8 @@ const AddFriendsTab = ({
           />
         </div>
       ))}
-    </Box>
+      {/* </Box> */}
+    </StyledAddFriendsTab>
   );
 };
 

@@ -114,7 +114,7 @@ const FriendsRequestTab = ({
       {friendsRequests.map(buddy => (
         <div key={buddy.id}>
           <Box
-            boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
+            // boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
             paddingY="15px"
             margin="30px"
           >

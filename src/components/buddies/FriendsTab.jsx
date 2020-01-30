@@ -81,7 +81,7 @@ const FriendsTab = ({
   }
 
   return (
-    <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
+    <Box paddingY="5px">
       <p>Friends</p>
       <Search
         placeholder="Find friends"
