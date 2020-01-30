@@ -20,40 +20,47 @@ import Footer from "./components/common/Footer";
 import MessageList from "./components/message/MessageList";
 import Buddies from "./components/buddies/Buddies";
 import NotFound from "./components/common/NotFound";
+import ErrorBoundry from "./components/common/ErrorBoundry";
 
 const App = () => {
   return (
     <div className="App" data-testid="App">
-      <Navigation />
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/accountrecovery" component={AccountRecovery} />
-        <PrivateRoute exact path="/messages" component={MessageList} />
-        <PrivateRoute exact path="/messages/:id" component={MessageList} />
-        <Route
-          exact
-          path="/accountrecovery/:token"
-          component={AccountRecovery}
-        />
-        <PrivateRoute exact path="/profile" component={ProfilePage} />
-        <PrivateRoute exact path="/exercises" component={Exercises} />
-        <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
-        <PrivateRoute exact path="/onboarding" component={Onboarding} />
-        <Route exact path="/signup" component={SignUp} />
-        <PrivateRoute exact path="/" component={Dashboard} />
-        <PrivateRoute exact path="/workouts" component={WorkoutList} />
-        <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
-        <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
-        <PrivateRoute
-          exact
-          path="/my/workout/:id"
-          component={CustomWorkoutDetail}
-        />
-        <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
-        <PrivateRoute exact path="/buddies" component={Buddies} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-      <Footer />
+      <ErrorBoundry>
+        <Navigation />
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/accountrecovery" component={AccountRecovery} />
+          <PrivateRoute exact path="/messages" component={MessageList} />
+          <PrivateRoute exact path="/messages/:id" component={MessageList} />
+          <Route
+            exact
+            path="/accountrecovery/:token"
+            component={AccountRecovery}
+          />
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
+          <PrivateRoute exact path="/exercises" component={Exercises} />
+          <PrivateRoute exact path="/exercise/:id" component={ExerciseDetail} />
+          <PrivateRoute exact path="/onboarding" component={Onboarding} />
+          <Route exact path="/signup" component={SignUp} />
+          <PrivateRoute exact path="/" component={Dashboard} />
+          <PrivateRoute exact path="/workouts" component={WorkoutList} />
+          <PrivateRoute exact path="/schedule" component={ScheduleDetail} />
+          <PrivateRoute exact path="/workout/:id" component={WorkoutDetail} />
+          <PrivateRoute
+            exact
+            path="/my/workout/:id"
+            component={CustomWorkoutDetail}
+          />
+          <PrivateRoute
+            exact
+            path="/workouthistory"
+            component={WorkoutHistory}
+          />
+          <PrivateRoute exact path="/buddies" component={Buddies} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+        <Footer />
+      </ErrorBoundry>
     </div>
   );
 };
