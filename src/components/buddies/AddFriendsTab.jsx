@@ -76,6 +76,7 @@ const AddFriendsTab = ({ client, users, setUsers }) => {
         placeholder="Find someone you know"
         setSearch={setSearch}
         search={search}
+        id="add-friends"
       />
       {users.map(buddy => (
         <div key={buddy.id}>
