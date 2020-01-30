@@ -14,8 +14,7 @@ const Message = ({
   friend,
   subscribeToMore,
   refetch,
-  setIsRefetched,
-  setFriends
+  setIsRefetched
 }) => {
   const toast = useToast();
 
