@@ -1,4 +1,12 @@
-import { Avatar, Box, Flex, Heading, Text, Divider } from "@chakra-ui/core";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Divider,
+  useToast
+} from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import CustomButtons from "./CustomButtons";
@@ -14,13 +22,26 @@ const BuddiesCard = ({
   variant,
   profilePicture,
   value,
-  id
+  id,
+  users,
+  link,
+  setUsers
 }) => {
-  const [buddiesAction, setBuddiesAction] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
 
   const onClick = e => {
-    console.log(e.target.id);
+    e.persist();
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -30,15 +51,15 @@ const BuddiesCard = ({
         }
       })
       .then(res => {
-        debugger;
-        setIsLoading(false);
-        setBuddiesAction(buddiesAction);
-        e.target.value === "add"
-          ? alert(`Buddy request sent to ${e.target.id.firstname}`)
-          : alert(`An error occured`);
+        if (res.data.manageFriends) {
+          setIsLoading(isLoading);
+          setUsers(users);
+          e.target.value === "add"
+            ? alert(`Buddy request sent to ${e.target.name}`)
+            : alert(`An error occured`);
+        } else alert(`Buddy request already sent`);
       })
       .catch(error => {
-        debugger;
         setIsLoading(false);
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
@@ -67,6 +88,8 @@ const BuddiesCard = ({
           onClick={onClick}
           value={value}
           id={id}
+          name={name}
+          link={link}
         />
       </Flex>
     </Box>

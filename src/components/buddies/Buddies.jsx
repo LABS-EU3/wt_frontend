@@ -1,5 +1,5 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { withApollo } from "react-apollo";
 import AddFriendsTab from "./AddFriendsTab";
 import FriendsRequestTab from "./FriendsRequestTab";
@@ -7,6 +7,10 @@ import Search from "../common/Search";
 import FriendsTab from "./FriendsTab";
 
 const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
+  const [users, setUsers] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [friendsRequests, setFriendsRequests] = useState([]);
+
   return (
     <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
       <Tabs variant="enclosed">
@@ -17,13 +21,18 @@ const Buddies = ({ client, name, goal, history, text, profilePicture }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <FriendsTab />
+            <FriendsTab friends={friends} setFriends={setFriends} />
           </TabPanel>
           <TabPanel>
-            <AddFriendsTab />
+            <AddFriendsTab users={users} setUsers={setUsers} />
           </TabPanel>
           <TabPanel>
-            <FriendsRequestTab />
+            <FriendsRequestTab
+              friendsRequests={friendsRequests}
+              setFriendsRequests={setFriendsRequests}
+              friends={friends}
+              setFriends={setFriends}
+            />
           </TabPanel>
         </TabPanels>
       </Tabs>

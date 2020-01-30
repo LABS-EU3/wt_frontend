@@ -13,9 +13,10 @@ const AddFriendsTab = ({
   goal,
   history,
   text,
-  profilePicture
+  profilePicture,
+  users,
+  setUsers
 }) => {
-  const [buddiesData, setBuddiesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -41,12 +42,12 @@ const AddFriendsTab = ({
         }
       })
       .then(res => {
-        setBuddiesData(res.data.findFriends);
+        setUsers(res.data.findFriends);
         setIsLoading(false);
       })
       .catch(err => {
         setIsLoading(false);
-        alert("An error occurred.", "Unable to load", "error");
+        alert("An error occurred.", "Unable to add friend", "error");
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +73,7 @@ const AddFriendsTab = ({
   }
 
   if (error) {
-    alert("An error occurred.", "Unable to load workouts", "error");
+    alert("An error occurred.", "Unable to load suggested friends", "error");
     return <Redirect to="/" />;
   }
 
@@ -84,8 +85,8 @@ const AddFriendsTab = ({
         setSearch={setSearch}
         search={search}
       />
-      {buddiesData.map(buddy => (
-        <div>
+      {users.map(buddy => (
+        <div key={buddy.id}>
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
             goal={buddy.goal}
@@ -94,6 +95,8 @@ const AddFriendsTab = ({
             variant="solid"
             value="add"
             id={buddy.id}
+            users={users}
+            setUsers={setUsers}
           />
         </div>
       ))}

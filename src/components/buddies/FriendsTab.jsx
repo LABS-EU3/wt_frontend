@@ -8,8 +8,16 @@ import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
 import BuddiesCard from "./BuddiesCard";
 
-const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
-  const [friendsData, setFriendsData] = useState([]);
+const FriendsTab = ({
+  client,
+  name,
+  goal,
+  history,
+  text,
+  profilePicture,
+  setFriends,
+  friends
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -35,12 +43,14 @@ const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
         }
       })
       .then(res => {
-        setFriendsData(res.data.friends);
+        setFriends(res.data.friends);
         setIsLoading(false);
       })
       .catch(err => {
+        console.log(err);
+        debugger;
         setIsLoading(false);
-        alert("An error occurred.", "Unable to load", "error");
+        alert("An error occurred.", "Unable to load friends", "error");
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,7 +76,7 @@ const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
   }
 
   if (error) {
-    alert("An error occurred.", "Unable to load workouts", "error");
+    alert("An error occurred.", "Unable to show friends list", "error");
     return <Redirect to="/" />;
   }
 
@@ -78,19 +88,17 @@ const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
         setSearch={setSearch}
         search={search}
       />
-      {friendsData.map(buddy => (
-        <div>
-          <Link to={`/messages/${buddy.id}`}>
-            <BuddiesCard
-              name={`${buddy.firstname} ${
-                !buddy.lastname ? "" : buddy.lastname
-              }`}
-              goal={buddy.goal}
-              icon="chat"
-              text="Message"
-              variant="outline"
-            />
-          </Link>
+      {friends.map(buddy => (
+        <div key={buddy.id}>
+          <BuddiesCard
+            name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
+            goal={buddy.goal}
+            icon="chat"
+            text="Message"
+            variant="outline"
+            isMessage={true}
+            link={`/messages/${buddy.id}`}
+          />
         </div>
       ))}
     </Box>

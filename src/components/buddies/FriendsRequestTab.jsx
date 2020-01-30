@@ -1,27 +1,18 @@
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useToast
+} from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
-import {
-  Flex,
-  Box,
-  Heading,
-  Avatar,
-  useToast,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-  Button
-} from "@chakra-ui/core";
 import { Redirect } from "react-router-dom";
-
-import logoImage from "../../images/login_image.png";
-import BuddiesCard from "./BuddiesCard";
-import Search from "../common/Search";
-import CustomSpinner from "../common/Spinner";
-import { GET_FRIENDS_REQUEST } from "../../graphql/queries";
 import { MANAGE_FRIENDS } from "../../graphql/mutations";
+import { GET_FRIENDS_REQUEST } from "../../graphql/queries";
+import CustomSpinner from "../common/Spinner";
 
 const FriendsRequestTab = ({
   client,
@@ -29,9 +20,12 @@ const FriendsRequestTab = ({
   goal,
   history,
   text,
-  profilePicture
+  profilePicture,
+  friendsRequests,
+  setFriendsRequests,
+  setFriends,
+  friends
 }) => {
-  const [buddiesRequests, setBuddiesRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [error, setError] = useState(false);
@@ -46,25 +40,8 @@ const FriendsRequestTab = ({
     });
   };
 
-  useEffect(() => {
-    client
-      .query({
-        query: GET_FRIENDS_REQUEST
-      })
-      .then(res => {
-        setBuddiesRequests(res.data.friendRequests);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        setIsLoading(false);
-        alert("An error occurred.", "Unable to load", "error");
-        setError(true);
-      });
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const onClick = e => {
-    debugger;
+    e.persist();
     client
       .mutate({
         mutation: MANAGE_FRIENDS,
@@ -74,12 +51,14 @@ const FriendsRequestTab = ({
         }
       })
       .then(res => {
-        debugger;
-        setIsLoading(false);
-        setBuddiesRequests(buddiesRequests);
-        e.target.value === "response_1"
-          ? alert(`${e.target.id.firstname} is now your Workout Buddy`)
-          : alert(`You have rejected ${e.target.id.firstname}'s Buddy request`);
+        if (res.data.manageFriends) {
+          setIsLoading(isLoading);
+          setFriendsRequests(friendsRequests);
+          setFriends(friends);
+          e.target.value === "response_1"
+            ? alert(`${e.target.name} is now your Workout Buddy`)
+            : alert(`You have rejected ${e.target.name}'s Buddy request`);
+        } else alert(`An error occured`);
       })
       .catch(error => {
         debugger;
@@ -91,6 +70,23 @@ const FriendsRequestTab = ({
         }
       });
   };
+
+  useEffect(() => {
+    client
+      .query({
+        query: GET_FRIENDS_REQUEST
+      })
+      .then(res => {
+        setFriendsRequests(res.data.friendRequests);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        alert("An error occurred.", "Unable to load", "error");
+        setError(true);
+      });
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [friendsRequests, onClick, friends]);
 
   if (isLoading) {
     return (
@@ -115,8 +111,8 @@ const FriendsRequestTab = ({
   return (
     <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
       <p>Friends Request</p>
-      {buddiesRequests.map(buddy => (
-        <div>
+      {friendsRequests.map(buddy => (
+        <div key={buddy.id}>
           <Box
             boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
             paddingY="15px"
@@ -145,20 +141,26 @@ const FriendsRequestTab = ({
                   variant="solid"
                   size="md"
                   id={buddy.id}
+                  name={`${buddy.firstname} ${
+                    !buddy.lastname ? "" : buddy.lastname
+                  }`}
                   value="response_1"
                   onClick={onClick}
                 >
-                  Confirm
+                  Accept
                 </Button>
                 <Button
                   variantColor="orange"
                   variant="outline"
                   size="md"
-                  id={buddy}
+                  id={buddy.id}
+                  name={`${buddy.firstname} ${
+                    !buddy.lastname ? "" : buddy.lastname
+                  }`}
                   value="response_0"
                   onClick={onClick}
                 >
-                  Delete
+                  Reject
                 </Button>
               </div>
             </Flex>
