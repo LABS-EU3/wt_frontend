@@ -1,0 +1,8 @@
+{
+  "appId": "com.trackdrills.app",
+  "appName": "Trackdrills",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Trackdrills</string>
+    <string name="title_activity_main">Trackdrills</string>
+    <string name="package_name">com.trackdrills.app</string>
+    <string name="custom_url_scheme">com.trackdrills.app</string>
+</resources>
