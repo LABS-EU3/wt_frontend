@@ -9,16 +9,7 @@ import CustomSpinner from "../common/Spinner";
 import BuddiesCard from "./BuddiesCard";
 import { StyledAddFriendsTab } from "./BuddiesStyle";
 
-const AddFriendsTab = ({
-  client,
-  name,
-  goal,
-  history,
-  text,
-  profilePicture,
-  users,
-  setUsers
-}) => {
+const AddFriendsTab = ({ client, users, setUsers }) => {
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");

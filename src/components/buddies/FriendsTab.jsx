@@ -8,16 +8,7 @@ import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
 import BuddiesCard from "./BuddiesCard";
 
-const FriendsTab = ({
-  client,
-  name,
-  goal,
-  history,
-  text,
-  profilePicture,
-  setFriends,
-  friends
-}) => {
+const FriendsTab = ({ client, setFriends, friends }) => {
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const [search, setSearch] = useState("");
@@ -47,8 +38,6 @@ const FriendsTab = ({
         setIsLoading(false);
       })
       .catch(err => {
-        console.log(err);
-        debugger;
         setIsLoading(false);
         alert("An error occurred.", "Unable to load friends", "error");
         setError(true);

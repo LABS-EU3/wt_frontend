@@ -77,4 +77,27 @@ export const StyledFriendRequestTab = styled.div`
   width: 100%;
   flex-direction: column;
   padding: 1rem;
+
+  .friend-request-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .content {
+      @media only screen and (max-width: 450px) {
+        margin: 1rem 0;
+      }
+    }
+
+    @media only screen and (max-width: 550px) {
+      h2 {
+        font-size: 1rem;
+      }
+    }
+
+    @media only screen and (max-width: 450px) {
+      flex-direction: column;
+    }
+  }
 `;

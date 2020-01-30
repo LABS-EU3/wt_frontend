@@ -9,11 +9,9 @@ const MessageDetail = ({
   subscribeToMore,
   user_id,
   friend,
-  setFriends,
   setIsRefetched
 }) => {
   const [newMessage, setNewMessage] = useState("");
-
   const messagesEndRef = React.useRef(null);
 
   const scrollToBottom = () => {
@@ -80,26 +78,10 @@ const MessageDetail = ({
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
           </div>
         );
       })}
-      {/* <div className="friend-message">
-        <img src="https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg" />
-
-        <div className="friend-message-detail">
-          <div className="mssg">
-            <p>Hiiii</p>
-            <span className="time">2 minutes ago</span>
-          </div>
-        </div>
-      </div>
-      <div className="my-message">
-        <div className="mssg">
-          <p>Hiiii</p>
-          <p className="time">2 minutes ago</p>
-        </div>
-      </div> */}
+      <div ref={messagesEndRef} />
 
       <div className="new-message">
         <form

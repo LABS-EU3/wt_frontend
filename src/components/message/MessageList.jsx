@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { withApollo, useQuery } from "react-apollo";
 import moment from "moment";
 
+import { Box, Flex } from "@chakra-ui/core";
+import CustomSpinner from "../common/Spinner";
 import { StyledMessagesList } from "./Styledmessages";
 import { GET_FRIENDS } from "../../graphql/queries";
 import Input from "../common/Input";
@@ -11,6 +13,7 @@ const MessageList = ({ client, match }) => {
   const [friends, setFriends] = useState([]);
   const [friend, setFriend] = useState(null);
   const [isRefetched, setIsRefetched] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const { id } = match.params;
@@ -26,6 +29,7 @@ const MessageList = ({ client, match }) => {
 
   if (data && friends.length === 0) {
     setFriends(data.friends);
+    setLoading(false);
   }
 
   if (data && isRefetched === true) {
@@ -44,54 +48,77 @@ const MessageList = ({ client, match }) => {
 
   const searchMessages = () => {};
 
-  return (
-    <StyledMessagesList>
-      <div className="users-list">
-        <Input
-          placeholder="Search Messages"
-          id="search"
-          name="search"
-          onChange={searchMessages}
-          variant="filled"
-          type="text"
-        />
-        {friends.map(friend => {
-          const { firstname, photo, messages } = friend;
-          return (
-            <div
-              key={friend.id}
-              onClick={() => setFriend(friend)}
-              //   className= {`friend ${selected}`}
-              className="friend"
-            >
-              <img src={photo} alt={firstname} />
-              <div className="friend-dtl">
-                <p>{firstname}</p>
-                <span>
-                  {messages[messages.length - 1]
-                    ? moment(messages[messages.length - 1].sent).format(
-                        "DD/MM/YYYY"
-                      )
-                    : ""}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="messages-container">
-        <div className="messages">
-          <Messages
-            friend={friend}
-            subscribeToMore={subscribeToMore}
-            refetch={refetch}
-            setIsRefetched={setIsRefetched}
-            setFriends={setFriends}
+  if (loading) {
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
+    );
+  }
+  if (friends.length > 0) {
+    return (
+      <StyledMessagesList>
+        <div className="users-list">
+          <Input
+            placeholder="Search Messages"
+            id="search"
+            name="search"
+            onChange={searchMessages}
+            variant="filled"
+            type="text"
           />
+          {friends.map(friend => {
+            const { firstname, photo, messages } = friend;
+            return (
+              <div
+                key={friend.id}
+                onClick={() => setFriend(friend)}
+                //   className= {`friend ${selected}`}
+                className="friend"
+              >
+                <img src={photo} alt={firstname} />
+                <div className="friend-dtl">
+                  <p>{firstname}</p>
+                  <span>
+                    {messages[messages.length - 1]
+                      ? moment(messages[messages.length - 1].sent).format(
+                          "DD/MM/YYYY"
+                        )
+                      : ""}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    </StyledMessagesList>
+
+        <div className="messages-container">
+          <div className="messages">
+            <Messages
+              friend={friend}
+              subscribeToMore={subscribeToMore}
+              refetch={refetch}
+              setIsRefetched={setIsRefetched}
+              setFriends={setFriends}
+            />
+          </div>
+        </div>
+      </StyledMessagesList>
+    );
+  }
+  return (
+    <Box>
+      <Flex width="100vw" height="100vh" justifyContent="center" align="center">
+        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+      </Flex>
+    </Box>
   );
 };
 

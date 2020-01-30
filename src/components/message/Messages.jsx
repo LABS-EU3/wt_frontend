@@ -80,28 +80,31 @@ const Message = ({
     );
   }
 
-  return (
-    <StyledMessages>
-      <div className="message-detail">
-        <MessageDetail
-          handleNewUserMessage={handleNewUserMessage}
-          subscribeToMore={subscribeToMore}
-          user_id={userData.user_id}
-          friend={friend}
-          setFriends={setFriends}
-          setIsRefetched={setIsRefetched}
-        />
-      </div>
+  if (friend) {
+    return (
+      <StyledMessages>
+        <div className="message-detail">
+          <MessageDetail
+            handleNewUserMessage={handleNewUserMessage}
+            subscribeToMore={subscribeToMore}
+            user_id={userData.user_id}
+            friend={friend}
+            setIsRefetched={setIsRefetched}
+          />
+        </div>
 
-      <div className="user-detail">
-        <img src={friend.photo} alt={friend.firstname} />
-        <h3>
-          {friend.firstname} {friend.lastname}
-        </h3>
-        <p>Goal: {friend.goal} </p>
-      </div>
-    </StyledMessages>
-  );
+        <div className="user-detail">
+          <img src={friend.photo} alt={friend.firstname} />
+          <h3>
+            {friend.firstname} {friend.lastname}
+          </h3>
+          <p>Goal: {friend.goal} </p>
+        </div>
+      </StyledMessages>
+    );
+  }
+
+  return "";
 };
 
 export default withApollo(Message);

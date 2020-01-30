@@ -19,11 +19,6 @@ import { StyledFriendRequestTab } from "./BuddiesStyle";
 
 const FriendsRequestTab = ({
   client,
-  name,
-  goal,
-  history,
-  text,
-  profilePicture,
   friendsRequests,
   setFriendsRequests,
   setFriends,
@@ -59,7 +54,7 @@ const FriendsRequestTab = ({
           setFriendsRequests(friendsRequests);
           setFriends(friends);
           e.target.value === "response_1"
-            ? alert(`${e.target.name} is now your Workout Buddy`)
+            ? alert(`${e.target.name} is now your Workout Buddy`, "", "success")
             : alert(`You have rejected ${e.target.name}'s Buddy request`);
         } else alert(`An error occured`);
       })
@@ -117,8 +112,12 @@ const FriendsRequestTab = ({
         <div key={buddy.id}>
           <Divider borderColor="gray.300" />
 
-          <Flex alignItems="center" justifyContent="space-between">
-            <Flex justifyContent="space-around" alignItems="center">
+          <div className="friend-request-card">
+            <Flex
+              justifyContent="space-around"
+              alignItems="center"
+              className="content"
+            >
               <Avatar src={buddy.photo} size="lg" />
               <Box textAlign="left" marginLeft="30px">
                 <Heading size="md">
@@ -158,7 +157,8 @@ const FriendsRequestTab = ({
                 Reject
               </Button>
             </div>
-          </Flex>
+          </div>
+          {/* <Flex alignItems="center" justifyContent="space-between"> */}
         </div>
       ))}
     </StyledFriendRequestTab>
