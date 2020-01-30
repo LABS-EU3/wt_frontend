@@ -22,9 +22,31 @@ export const GET_UNITS = gql`
   }
 `;
 
+// export const GET_COMPLETED_WORKOUTS = gql`
+//   query {
+//     completedWorkouts {
+//       userId
+//       workoutId {
+//         id
+//         name
+//         intensity
+//         avgTime
+//         session {
+//           startDate
+//           endDate
+//         }
+//       }
+//       startDate
+//       endDate
+//       pause
+//     }
+//   }
+// `;
+
 export const GET_COMPLETED_WORKOUTS = gql`
   query {
     completedWorkouts {
+      id
       userId
       workoutId {
         id
