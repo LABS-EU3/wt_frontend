@@ -9,8 +9,10 @@ import {
   useToast
 } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
+
 import CustomButtons from "./CustomButtons";
 import { MANAGE_FRIENDS } from "../../graphql/mutations";
+import { StyledBuddiesCard } from "./BuddiesStyle";
 
 const BuddiesCard = ({
   client,

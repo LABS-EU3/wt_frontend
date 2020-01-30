@@ -21,4 +21,10 @@ export const StyledAddFriendsTab = styled.div`
   width: 100%;
   flex-direction: column;
   padding: 1rem;
+
+  /* @media only screen and (max-width: 500px) {
+    width: 95vw;
+  } */
 `;
+
+export const StyledBuddiesCard = styled.div``;
