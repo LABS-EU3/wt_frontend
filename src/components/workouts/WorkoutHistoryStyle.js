@@ -168,6 +168,7 @@ export const WorkoutHistoryCard = styled.div`
       text-transform: uppercase;
       color: #252422;
       padding: 0 1rem;
+      margin-left: 6rem;
 
       @media only screen and (max-width: 550px) {
         padding: 1rem 0;
@@ -175,6 +176,12 @@ export const WorkoutHistoryCard = styled.div`
       &:hover {
         font-weight: bolder;
       }
+    }
+
+    .social-share {
+      margin-top: 0 auto;
+      display: flex;
+      justify-content: space-evenly;
     }
 
     .history-detail {
