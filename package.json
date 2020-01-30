@@ -9,6 +9,7 @@
     "@capacitor/core": "^1.4.0",
     "@capacitor/ios": "^1.4.0",
     "@chakra-ui/core": "^0.5.1",
+    "@codetrix-studio/capacitor-google-auth": "^1.4.0",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "@fullcalendar/core": "^4.3.1",
@@ -49,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "android": "npm run build && npx cap sync android && npx cap update android && npx cap open android",
+    "android": "npm run build && npx cap update && npx cap sync && npx cap open android",
     "ios": "npm run build && npx cap sync ios",
     "test": "react-scripts test --update-snapshot",
     "eject": "react-scripts eject",

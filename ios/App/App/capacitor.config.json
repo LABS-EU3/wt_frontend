@@ -1,1 +1,17 @@
-{}
+{
+  "appId": "com.trackdrills.app",
+  "appName": "Trackdrills",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {},
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": [
+        "profile",
+        "email"
+      ],
+      "serverClientId": "970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com"
+    }
+  }
+}

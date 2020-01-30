@@ -15,6 +15,9 @@ import Preview from "../common/Preview";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
+import { Plugins } from "@capacitor/core";
+import "@codetrix-studio/capacitor-google-auth";
+
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function Login({ client, history }) {
@@ -155,6 +158,12 @@ function Login({ client, history }) {
       });
   };
 
+  const signIn = async () => {
+    await Plugins.GoogleAuth.signIn();
+    // await Plugins.GoogleAuth.signOut();
+    console.log("signIn", signIn);
+  };
+
   return (
     <AuthStyle>
       <div className="auth-container">
@@ -227,6 +236,7 @@ function Login({ client, history }) {
               Login
             </Button>
             <div className="auth-linked-profiles">
+              {/* 
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
                 render={renderProps => (
@@ -247,6 +257,17 @@ function Login({ client, history }) {
                 onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
               />
+            */}
+              <Button
+                onClick={e => signIn()}
+                color="white"
+                bg="#4c8bf5"
+                rightIcon="arrow-forward"
+                width="45%"
+                size="lg"
+              >
+                Login with Google
+              </Button>
               <Button
                 type="submit"
                 variantColor="facebook"
