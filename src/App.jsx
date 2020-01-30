@@ -19,6 +19,7 @@ import CustomWorkoutDetail from "./components/workouts/CustomWorkoutDetail";
 import Footer from "./components/common/Footer";
 import MessageList from "./components/message/MessageList";
 import Buddies from "./components/buddies/Buddies";
+import NotFound from "./components/common/NotFound";
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
         />
         <PrivateRoute exact path="/workouthistory" component={WorkoutHistory} />
         <PrivateRoute exact path="/buddies" component={Buddies} />
+        <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
     </div>
