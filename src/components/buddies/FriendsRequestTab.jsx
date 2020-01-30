@@ -123,7 +123,7 @@ const FriendsRequestTab = ({
               margin="0 30px"
             >
               <Flex justifyContent="space-around" alignItems="center">
-                <Avatar src={buddy.photo} size="xl" />
+                <Avatar src={buddy.photo} size="lg" />
                 <Box textAlign="left" marginLeft="30px">
                   <Heading size="md">
                     {`${buddy.firstname} ${
