@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+
 import { GET_FRIENDS } from "../../graphql/queries";
 import Search from "../common/Search";
 import CustomSpinner from "../common/Spinner";
@@ -79,14 +80,17 @@ const FriendsTab = ({ client, name, goal, history, text, profilePicture }) => {
       />
       {friendsData.map(buddy => (
         <div>
-          <BuddiesCard
-            name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
-            goal={buddy.goal}
-            icon="chat"
-            text="Message"
-            variant="outline"
-            onClick={() => {}}
-          />
+          <Link to={`/messages/${buddy.id}`}>
+            <BuddiesCard
+              name={`${buddy.firstname} ${
+                !buddy.lastname ? "" : buddy.lastname
+              }`}
+              goal={buddy.goal}
+              icon="chat"
+              text="Message"
+              variant="outline"
+            />
+          </Link>
         </div>
       ))}
     </Box>

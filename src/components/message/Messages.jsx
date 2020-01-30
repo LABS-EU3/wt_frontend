@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useQuery, withApollo } from "react-apollo";
 import { useToast } from "@chakra-ui/core";
 
-import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
+// import { GET_MESSAGE_HISTORY } from "../../graphql/queries";
 import { SEND_MESSAGE } from "../../graphql/mutations";
-// import { addResponseMessage, addUserMessage } from "react-chat-widget";
 import { StyledMessages } from "./Styledmessages";
 import MessageDetail from "./MessageDetail";
 import { getUserDetails } from "../../utils";
