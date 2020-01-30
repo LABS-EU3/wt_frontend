@@ -30,7 +30,7 @@ import { withApollo } from "react-apollo";
 import ModalPopup from "../common/ModalPopup";
 import EditPicture from "../common/EditPicture";
 
-const EditProfile = ({ onClose, data, client }) => {
+const EditProfile = ({ onClose, data, client, setUserData }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   // const [updatedData, setUpdatedData] = useState([]);
@@ -162,6 +162,7 @@ const EditProfile = ({ onClose, data, client }) => {
         <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Picture">
           <EditPicture
             data={data}
+            setUserData={setUserData}
             // onSave={handleSave}
             onClose={onClose}
           />

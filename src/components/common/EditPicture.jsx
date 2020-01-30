@@ -21,14 +21,14 @@ import {
   ModalBody,
   useDisclosure
 } from "@chakra-ui/core";
-import { useFormik } from "formik";
 
 import {
   ModalContentArea,
   ModalFooter as StyledModalFooter
 } from "../workouts/WorkoutHistoryStyle";
+import { UPDATE_USER_DETAILS } from "../../graphql/mutations";
 
-function EditPicture({ client, history, onPictureClose, data }) {
+function EditPicture({ client, history, onPictureClose, data, setUserData }) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
   const [uploadId, setUploadId] = useState("");
@@ -57,78 +57,27 @@ function EditPicture({ client, history, onPictureClose, data }) {
   };
 
   const onUpload = e => {
-    // e.preventDefault();
-    // client
-    //   .mutate({
-    //     variables: {
-    //       sessionId: uploadId,
-    //       file: uploadFile
-    //     },
-    //     mutation: UPLOAD_PROGRESS_PICTURE
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     const { id, picture } = res.data.updateCompletedWorkout;
-    //     setWorkouts(
-    //       workouts.map(workout => {
-    //         if (workout.id === id) return { ...workout, picture };
-    //         return workout;
-    //       })
-    //     );
-    //     alert("Progress picture uploaded successfully", "🚀", "success");
-    //   })
-    //   .catch(err =>
-    //     alert(
-    //       "An error occurred.",
-    //       "Unable to upload your progress picture ☹️.",
-    //       "error"
-    //     )
-    //   );
+    e.preventDefault();
+    client
+      .mutate({
+        variables: {
+          photo: uploadFile
+        },
+        mutation: UPDATE_USER_DETAILS
+      })
+      .then(res => {
+        const updatedUser = res.data.updateUser;
+        setUserData(updatedUser.photo);
+        alert("Profile picture uploaded successfully", "🚀", "success");
+      })
+      .catch(err =>
+        alert(
+          "An error occurred.",
+          "Unable to upload your profile picture ☹️.",
+          "error"
+        )
+      );
   };
-
-  const formik = useFormik({
-    // onSubmit: value => {
-    //   setLoading(true);
-    //   client
-    //     .mutate({
-    //       mutation: UPDATE_USER_DETAILS,
-    //       variables: {
-    //         firstname: value.firstname,
-    //         lastname: value.lastname,
-    //         experience: value.experience,
-    //         equipment: value.equipment,
-    //         height: value.height,
-    //         weight: value.weight,
-    //         heightUnit: value.heightUnit,
-    //         weightUnit: value.weightUnit,
-    //         goal: value.goal,
-    //         reminderType: value.reminderType,
-    //         photo: value.photo
-    //       }
-    //     })
-    //     .then(res => {
-    //       setLoading(false);
-    //       setUpdatedData(res.data.updateUser);
-    //       alert("Profile Updates Successfully", "", "success");
-    //       onClose();
-    //       setTimeout(() => {
-    //         window.location.reload();
-    //       }, 500);
-    //     })
-    //     .catch(error => {
-    //       setLoading(false);
-    //       if (error.graphQLErrors && error.graphQLErrors.length > 0) {
-    //         alert(
-    //           "An error occurred.",
-    //           error.graphQLErrors[0].message,
-    //           "error"
-    //         );
-    //       } else {
-    //         alert("Unable to update profile", "", "error");
-    //       }
-    //     });
-    // }
-  });
 
   return (
     <Box>
@@ -141,16 +90,14 @@ function EditPicture({ client, history, onPictureClose, data }) {
         />
         <input type="file" name="Uplad" onChange={onChange} />
       </Stack>
-      <form onSubmit={formik.handleSubmit}>
-        <ModalFooter>
-          <Button type="submit" variantColor="orange" mr={3}>
-            Save
-          </Button>
-          <Button variant="ghost" variantColor="orange" onClick={onClose}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </form>
+      <ModalFooter>
+        <Button type="submit" variantColor="orange" mr={3} onClick={onUpload}>
+          Save
+        </Button>
+        <Button variant="ghost" variantColor="orange" onClick={onClose}>
+          Cancel
+        </Button>
+      </ModalFooter>
     </Box>
   );
 }
