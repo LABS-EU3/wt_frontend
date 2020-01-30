@@ -30,5 +30,6 @@ yarn-error.log*
 .env
 
 www/*
-platforms/android/app/src/main/assets/*
-*/static/*
+platforms/android/app/assets/*
+platforms/browser/www/*
+platforms/ios/www/*
