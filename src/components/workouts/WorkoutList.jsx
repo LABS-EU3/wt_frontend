@@ -14,6 +14,7 @@ const WorkoutList = () => {
         placeholder="Look for a specific workout"
         setSearch={setSearch}
         search={search}
+        id="search-workout"
       />
       <Workouts workoutName="Custom Workouts" workoutQuery="CUSTOM_WORKOUTS" />
       <Workouts

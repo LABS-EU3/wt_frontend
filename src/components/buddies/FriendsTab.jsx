@@ -75,6 +75,7 @@ const FriendsTab = ({ client, setFriends, friends }) => {
             text="Message"
             variant="outline"
             isMessage={true}
+            photo={buddy.photo}
             link={`/messages/${buddy.id}`}
           />
         </div>

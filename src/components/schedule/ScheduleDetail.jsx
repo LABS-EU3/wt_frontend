@@ -26,7 +26,9 @@ const ScheduleDetail = ({ client }) => {
   };
 
   useEffect(() => {
+    console.log("eee");
     setLoading(true);
+
     client
       .query({
         query: GET_SCHEDULE
@@ -38,18 +40,29 @@ const ScheduleDetail = ({ client }) => {
           return item;
         });
         setSchedule(newSchedule);
-
         setLoading(false);
       })
       .catch(err => {
         alert("An error occurred.", "Unable to load Schedule", "error");
         setLoading(false);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
-    return <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+        </Flex>
+      </Box>
+    );
   }
 
   if (schedule.length > 0) {
@@ -65,12 +78,27 @@ const ScheduleDetail = ({ client }) => {
     );
   }
 
+  if (schedule.length === 0) {
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <div>
+            <h1>You have no Scheduled Workouts</h1>
+          </div>
+        </Flex>
+      </Box>
+    );
+  }
+
   return (
     <Box>
       <Flex width="100vw" height="100vh" justifyContent="center" align="center">
-        <div>
-          <h1>You have no Scheduled Workouts</h1>
-        </div>
+        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
       </Flex>
     </Box>
   );

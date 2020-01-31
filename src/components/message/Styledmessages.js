@@ -131,6 +131,7 @@ export const StyledMessageDetail = styled.div`
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
+  position: relative;
 
   h3 {
     width: 100%;
@@ -191,6 +192,7 @@ export const StyledMessageDetail = styled.div`
     margin: 1rem 0;
     align-items: center;
     bottom: 0;
+    position: absolute;
 
     form {
       width: 100%;
