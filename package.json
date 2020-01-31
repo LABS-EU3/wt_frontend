@@ -50,7 +50,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "android": "npm run build && npx cap update android && npx cap sync android && npx cap open android",
+    "build_android": "npm run build && npx cap update android && npx cap sync android && npx cap open android",
+    "android": "npx cap update android && npx cap sync android && npx cap open android",
     "ios": "npm run build && npx cap sync ios",
     "test": "react-scripts test --update-snapshot",
     "eject": "react-scripts eject",
