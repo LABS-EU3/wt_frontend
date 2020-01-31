@@ -35,6 +35,10 @@ const DashboardStyle = styled.div`
 
     #user-detail {
       width: 30%;
+      @media only screen and (max-width: 1085px) {
+        width: 70%;
+        margin: 1rem 0;
+      }
     }
 
     .user-detail {
