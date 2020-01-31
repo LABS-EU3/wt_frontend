@@ -69,7 +69,7 @@ function Dashboard({ client, history }) {
         </div>
 
         <div className="dashboard-content">
-          <div className="user-detail">
+          <div className="user-detail" id="user-detail">
             <Link to="/profile">Edit</Link>
             <Avatar
               src={dashboardData.user.photo}

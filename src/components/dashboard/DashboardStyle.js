@@ -33,6 +33,10 @@ const DashboardStyle = styled.div`
       align-items: center;
     }
 
+    #user-detail {
+      width: 30%;
+    }
+
     .user-detail {
       width: 70%;
       display: flex;
