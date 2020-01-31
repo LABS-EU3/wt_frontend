@@ -56,7 +56,7 @@ const ProfilePage = ({ client, history }) => {
         alert("An error occurred.", "Unable to load", "error");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userData]);
 
   if (isLoading) {
     return (
@@ -84,6 +84,7 @@ const ProfilePage = ({ client, history }) => {
             <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Profile">
               <EditProfile
                 data={userData}
+                setUserData={setUserData}
                 onSave={handleSave}
                 onClose={onClose}
               />

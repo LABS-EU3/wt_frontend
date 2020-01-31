@@ -34,6 +34,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
   );
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [uploadFile, setUploadFile] = useState(null);
 
   const match = useRouteMatch();
   const workoutId = match.params.id;
@@ -54,7 +55,8 @@ const CustomWorkoutDetail = ({ client, history }) => {
     initialValues: {
       name: workout.name || "",
       description: workout.description || "",
-      intensity: workout.intensity || ""
+      intensity: workout.intensity || "",
+      picture: workout.picture || ""
     },
     validationSchema: yup.object().shape({
       name: yup
@@ -81,7 +83,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
           }
         })
         .then(res => {
-          console.log(res);
           alert("Success!", "Your custom workout was created!", "success");
           history.push("/workouts");
           window.location.reload();
@@ -198,6 +199,14 @@ const CustomWorkoutDetail = ({ client, history }) => {
       </Heading>
       <form onSubmit={formik.handleSubmit}>
         <Stack spacing={4}>
+          <Input
+            id="photo"
+            name="photo"
+            placeholder="PHOTO"
+            type="file"
+            name="picture"
+            onChange={formik.handleChange}
+          />
           <InputGroup>
             <Input
               id="name"

@@ -88,7 +88,7 @@ const FriendsTab = ({
         search={search}
       />
       {friends.map(buddy => (
-        <div>
+        <div key={buddy.id}>
           <BuddiesCard
             name={`${buddy.firstname} ${!buddy.lastname ? "" : buddy.lastname}`}
             goal={buddy.goal}

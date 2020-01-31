@@ -10,6 +10,11 @@
   text-align: center;
 }
 
+img {
+  object-fit: cover;
+  max-width: 100%;
+}
+
 .error {
   display: block;
   color: red;

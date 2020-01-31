@@ -11,7 +11,14 @@ import {
   Heading,
   FormLabel,
   Switch,
-  useToast
+  useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  useDisclosure
 } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -20,13 +27,18 @@ import { GET_UNITS } from "../../graphql/queries";
 
 import { withApollo } from "react-apollo";
 
-const EditProfile = ({ onClose, data, client }) => {
+import ModalPopup from "../common/ModalPopup";
+import EditPicture from "../common/EditPicture";
+
+const EditProfile = ({ onClose, data, client, setUserData }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   // const [updatedData, setUpdatedData] = useState([]);
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
   const [updatedData, setUpdatedData] = useState(data);
+  const { isOpen, onOpen, onPictureClose } = useDisclosure();
+  const [uploadFile, setUploadFile] = useState(null);
 
   const alert = (title, description, status) => {
     toast({
@@ -76,7 +88,8 @@ const EditProfile = ({ onClose, data, client }) => {
       reminderType: updatedData.reminderType
         ? updatedData.reminderType
         : "none",
-      experience: updatedData.experience
+      experience: updatedData.experience,
+      photo: updatedData.photo
     },
     validationSchema: yup.object().shape({
       firstname: yup.string().required("Please enter your firstname"),
@@ -107,10 +120,12 @@ const EditProfile = ({ onClose, data, client }) => {
             heightUnit: value.heightUnit,
             weightUnit: value.weightUnit,
             goal: value.goal,
-            reminderType: value.reminderType
+            reminderType: value.reminderType,
+            photo: uploadFile
           }
         })
         .then(res => {
+          debugger;
           setLoading(false);
           setUpdatedData(res.data.updateUser);
           alert("Profile Updates Successfully", "", "success");
@@ -144,9 +159,15 @@ const EditProfile = ({ onClose, data, client }) => {
           marginLeft="35%"
           marginBottom="20px"
         />
-        <Button variant="outline" variantColor="orange">
-          Edit Profile Picture
-        </Button>
+        <Heading size="sm">Edit Profile Picture</Heading>
+        <EditPicture
+          data={data}
+          setUserData={setUserData}
+          onClose={onClose}
+          uploadFile={uploadFile}
+          setUploadFile={setUploadFile}
+          formik={formik}
+        />
       </Stack>
       <form onSubmit={formik.handleSubmit}>
         <Box paddingTop="30px">
