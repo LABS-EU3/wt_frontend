@@ -81,6 +81,13 @@ const ProfilePage = ({ client, history }) => {
             <Button variant="link" variantColor="orange" onClick={onOpen}>
               Edit Profile
             </Button>
+            <Avatar
+              src={userData.photo}
+              size="2xl"
+              marginLeft="40%"
+              marginTop="30px"
+              marginBottom="20px"
+            />
             <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Profile">
               <EditProfile
                 data={userData}
@@ -145,7 +152,7 @@ const ProfilePage = ({ client, history }) => {
             </Box>
           </div>
 
-          <div className="dasboard-detail">
+          {/* <div className="dasboard-detail">
             <section className="quotes">
               <Avatar
                 src={userData.photo}
@@ -161,10 +168,10 @@ const ProfilePage = ({ client, history }) => {
             <section className="goal">
               <p>Recent Activity</p>
               <Heading as="h4" size="md">
-                {/* {profileData.user.goal} */}
+                {/* {profileData.user.goal} 
               </Heading>
             </section>
-          </div>
+          </div> */}
         </div>
       </DashboardStyle>
     </Box>
