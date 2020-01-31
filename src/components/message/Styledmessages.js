@@ -133,6 +133,10 @@ export const StyledMessageDetail = styled.div`
   flex-direction: column;
   position: relative;
 
+  /* @media only screen and (max-width: 900px) {
+        width: 100%;
+        margin: 1rem 0;
+      } */
   h3 {
     width: 100%;
     color: #ff8744;
