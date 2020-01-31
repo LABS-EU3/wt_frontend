@@ -44,7 +44,7 @@ const AddFriendsTab = ({ client, users, setUsers }) => {
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, []);
 
   if (isLoading) {
     return (

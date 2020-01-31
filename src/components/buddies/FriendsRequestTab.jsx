@@ -84,7 +84,7 @@ const FriendsRequestTab = ({
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [friendsRequests, onClick, friends]);
+  }, []);
 
   if (isLoading) {
     return (
