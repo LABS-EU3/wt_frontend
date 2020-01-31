@@ -25,7 +25,9 @@ export const GET_UNITS = gql`
 export const GET_COMPLETED_WORKOUTS = gql`
   query {
     completedWorkouts {
+      id
       userId
+      picture
       workoutId {
         id
         name
@@ -271,6 +273,7 @@ export const GET_USERS = gql`
       lastname
       email
       goal
+      photo
     }
   }
 `;
@@ -294,6 +297,13 @@ export const GET_FRIENDS = gql`
       lastname
       goal
       photo
+      messages {
+        id
+        sender
+        receiver
+        message
+        sent
+      }
     }
   }
 `;

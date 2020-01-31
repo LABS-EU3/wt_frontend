@@ -55,7 +55,6 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
         setIsLoading(false);
       })
       .catch(err => {
-        console.log(err);
         setIsLoading(false);
         setError(true);
       });
@@ -65,11 +64,7 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   const loadMore = () => {
     const newLimit = limit + 3;
     let limitWorkouts = data.slice(0, newLimit);
-    // if (exerciseQuery === "TOP_RATED_EXERCISES") {
-    //   limitExercises = limitExercises.sort(
-    //     (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
-    //   );
-    // }
+
     setLimitedWorkouts(limitWorkouts);
     setLimit(newLimit);
   };

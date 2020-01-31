@@ -81,10 +81,21 @@ const link = split(
   wsLink,
   httpLink
 );
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "ignore"
+  },
+  query: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all"
+  }
+};
 
 const client = new ApolloClient({
   cache,
-  link: authLink.concat(link)
+  link: authLink.concat(link),
+  defaultOptions: defaultOptions
 });
 
 ReactDOM.render(

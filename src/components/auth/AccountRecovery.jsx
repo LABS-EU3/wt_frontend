@@ -47,7 +47,6 @@ const AccountRecovery = ({ client, match }) => {
           }
         })
         .then(response => {
-          console.log(response);
           setLoading(false);
 
           alert("Account Recovery Email Sent Successfully", "✅", "success");
@@ -55,7 +54,6 @@ const AccountRecovery = ({ client, match }) => {
         })
         .catch(error => {
           setLoading(false);
-          console.log(error);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(
               "An error occurred.",
@@ -115,7 +113,6 @@ const AccountRecovery = ({ client, match }) => {
           setSuccessfulRecovery(true);
         })
         .catch(error => {
-          console.log(error);
           setLoading(false);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(
@@ -127,14 +124,6 @@ const AccountRecovery = ({ client, match }) => {
         });
     }
   });
-
-  // useEffect(() => {
-  //   if (match.params.token) {
-  //     console.log(match.params.token);
-
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   if (successfulRecovery) {
     return <Redirect to="/login" />;

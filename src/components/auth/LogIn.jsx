@@ -61,6 +61,7 @@ function Login({ client, history }) {
           }
         })
         .then(response => {
+          console.log(response);
           const { token, isNewUser } = response.data.authForm;
           localStorage.setItem(
             "userData",
@@ -84,6 +85,7 @@ function Login({ client, history }) {
           }
         })
         .catch(error => {
+          console.log(error);
           setLoading(false);
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {
             alert(

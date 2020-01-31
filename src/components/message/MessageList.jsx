@@ -1,38 +1,164 @@
 import React, { useEffect, useState } from "react";
-import { withApollo } from "react-apollo";
+import { withApollo, useQuery } from "react-apollo";
+import moment from "moment";
 
+import { Box, Flex } from "@chakra-ui/core";
+import CustomSpinner from "../common/Spinner";
 import { StyledMessagesList } from "./Styledmessages";
 import { GET_FRIENDS } from "../../graphql/queries";
+import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
+import Input from "../common/Input";
+import Messages from "./Messages";
 
-const MessageList = ({ client }) => {
+import { getUserDetails } from "../../utils";
+
+const userData = getUserDetails();
+
+const MessageList = ({ client, match }) => {
   const [friends, setFriends] = useState([]);
+  const [friend, setFriend] = useState(null);
+  const [isRefetched, setIsRefetched] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client
-      .query({
-        query: GET_FRIENDS
-      })
-      .then(res => {
-        console.log(res.data);
-        setFriends(res.data.friends);
-      })
-      .catch(err => console.log(err));
+    const { id } = match.params;
+
+    if (friends.length > 0 && friend === null) {
+      const findFriend = friends.find(frnd => frnd.id === id);
+      setFriend(findFriend);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [friends]);
 
+  const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
+  console.log(data, "outside");
+
+  useEffect(() => {
+    if (friend) {
+      subscribeToMore({
+        document: SUBSCRIBE_MESSAGE,
+        variables: { receiver: userData.user_id },
+        updateQuery: (prev, { subscriptionData }) => {
+          if (!subscriptionData.data) return prev;
+          const newMessage = subscriptionData.data.newMessage;
+          let findFriend = prev.friends.find(frnd => frnd.id === friend.id);
+
+          if (!findFriend.messages.find(msg => msg.id === newMessage.id)) {
+            findFriend = Object.assign({}, findFriend, {
+              messages: [...findFriend.messages, newMessage]
+            });
+
+            const next = Object.assign({}, prev, {
+              friends: [
+                ...prev.friends.filter(frnd => frnd.id !== findFriend.id),
+                findFriend
+              ]
+            });
+
+            return next;
+          } else {
+            return prev;
+          }
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [friend]);
+
+  if (data && friends.length === 0) {
+    setFriends(data.friends);
+    setLoading(false);
+  }
+
+  // console.log(data, isRefetched);
+  // if (data && isRefetched === true) {
+  //   if (data.friends.length > 0 && friend) {
+  //     const friendFromFriends = data.friends.filter(
+  //       frnd => frnd.id === friend.id
+  //     );
+
+  //     if (friendFromFriends[0].messages.length > friend.messages.length) {
+  //       setFriend(friendFromFriends[0]);
+  //       setFriends(data.friends);
+  //       setIsRefetched(false);
+  //     }
+  //   }
+  // }
+
+  const searchMessages = () => {};
+
+  if (loading) {
+    return (
+      <Box>
+        <Flex
+          width="100vw"
+          height="100vh"
+          justifyContent="center"
+          align="center"
+        >
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+        </Flex>
+      </Box>
+    );
+  }
+  if (friends.length > 0) {
+    return (
+      <StyledMessagesList>
+        <div className="users-list">
+          <Input
+            placeholder="Search Messages"
+            id="search"
+            name="search"
+            onChange={searchMessages}
+            variant="filled"
+            type="text"
+          />
+          {friends.map(friend => {
+            const { firstname, photo, messages } = friend;
+            return (
+              <div
+                key={friend.id}
+                onClick={() => setFriend(friend)}
+                //   className= {`friend ${selected}`}
+                className="friend"
+              >
+                <img src={photo} alt={firstname} />
+                <div className="friend-dtl">
+                  <p>{firstname}</p>
+                  <span>
+                    {messages[messages.length - 1]
+                      ? moment(messages[messages.length - 1].sent).format(
+                          "DD/MM/YYYY"
+                        )
+                      : ""}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="messages-container">
+          <div className="messages">
+            <Messages
+              friend={friend}
+              subscribeToMore={subscribeToMore}
+              refetch={refetch}
+              setIsRefetched={setIsRefetched}
+              setFriends={setFriends}
+            />
+          </div>
+        </div>
+      </StyledMessagesList>
+    );
+  }
   return (
-    <StyledMessagesList>
-      <div className="users-list">
-        {friends.map(friend => {
-          console.log(friend);
-          return <div className="friend"> </div>;
-        })}
-      </div>
-
-      <div className="messages"></div>
-
-      <div className="user-detail"></div>
-    </StyledMessagesList>
+    <Box>
+      <Flex width="100vw" height="100vh" justifyContent="center" align="center">
+        <CustomSpinner thickness="6px" size="xl" text="Loading..." />
+      </Flex>
+    </Box>
   );
 };
 

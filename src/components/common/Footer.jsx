@@ -15,7 +15,9 @@ const StyledFooter = styled.footer`
   color: white;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 5rem;
+  bottom: 0;
+  position: relative;
 
   @media only screen and (max-width: 500px) {
     flex-direction: column;

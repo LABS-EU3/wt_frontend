@@ -3,7 +3,6 @@ import { withApollo } from "react-apollo";
 import { Flex, Box, Heading, Avatar, useToast } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 
-import logoImage from "../../images/login_image.png";
 import DashboardStyle from "./DashboardStyle";
 import RecommendedWorkouts from "./RecommendedWorkouts";
 import Charts from "./Charts";
@@ -59,7 +58,6 @@ function Dashboard({ client, history }) {
   }
 
   if (dashboardData) {
-    console.log(dashboardData);
     return (
       <DashboardStyle>
         <div className="welcome">

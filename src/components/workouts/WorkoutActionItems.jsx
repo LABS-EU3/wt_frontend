@@ -122,7 +122,6 @@ const WorkoutActionItems = ({
 
   const handlePause = () => {
     const currentExercise = getCurrentExercise();
-    console.log("handlePause", currTime);
     client
       .mutate({
         mutation: PAUSE_WORKOUT,
@@ -142,7 +141,6 @@ const WorkoutActionItems = ({
         alert("Workout paused!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        console.log(error);
         alert("An error occurred.", "Unable to pause workout ☹️", "error");
       });
   };
@@ -170,7 +168,6 @@ const WorkoutActionItems = ({
         alert("Workout ended!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        console.log(error);
         alert("An error occurred.", "Unable to stop workout ☹️", "error");
       });
   };
@@ -252,7 +249,6 @@ const WorkoutActionItems = ({
 
   useEffect(() => {
     if (workout.session) {
-      console.log("initial state");
       setStart(workout.session.startDate ? "isVisible" : "isHidden");
       setPause(workout.session.endDate ? "isVisible" : "isHidden");
       setStop(workout.session.pause ? "isVisible" : "isHidden");
@@ -260,9 +256,7 @@ const WorkoutActionItems = ({
     }
     // pause workout if you exit the page while workout session is running
     return () => {
-      console.log("pausebug?");
       if (workout.session && !workout.session.pause) {
-        console.log("pause");
         handlePause();
       }
     };

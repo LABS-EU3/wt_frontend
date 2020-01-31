@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { withApollo } from "react-apollo";
+import { Redirect } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -5,22 +8,17 @@ import {
   Flex,
   Heading,
   Text,
-  useToast
+  useToast,
+  Divider
 } from "@chakra-ui/core";
-import React, { useEffect, useState } from "react";
-import { withApollo } from "react-apollo";
-import { Redirect } from "react-router-dom";
+
 import { MANAGE_FRIENDS } from "../../graphql/mutations";
 import { GET_FRIENDS_REQUEST } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
+import { StyledFriendRequestTab } from "./BuddiesStyle";
 
 const FriendsRequestTab = ({
   client,
-  name,
-  goal,
-  history,
-  text,
-  profilePicture,
   friendsRequests,
   setFriendsRequests,
   setFriends,
@@ -59,7 +57,7 @@ const FriendsRequestTab = ({
             )
           );
           e.target.value === "response_1"
-            ? alert(`${e.target.name} is now your Workout Buddy`)
+            ? alert(`${e.target.name} is now your Workout Buddy`, "", "success")
             : alert(`You have rejected ${e.target.name}'s Buddy request`);
         } else alert(`An error occured`);
       })
@@ -111,65 +109,61 @@ const FriendsRequestTab = ({
   }
 
   return (
-    <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
-      <p>Friends Request</p>
+    <StyledFriendRequestTab>
       {friendsRequests.map(buddy => (
         <div key={buddy.id}>
-          <Box
-            boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
-            paddingY="15px"
-            margin="30px"
-          >
+          <Divider borderColor="gray.300" />
+
+          <div className="friend-request-card">
             <Flex
+              justifyContent="space-around"
               alignItems="center"
-              justifyContent="space-between"
-              margin="0 30px"
+              className="content"
             >
-              <Flex justifyContent="space-around" alignItems="center">
-                <Avatar src={profilePicture} size="xl" />
-                <Box textAlign="left" marginLeft="30px">
-                  <Heading size="md">
-                    {`${buddy.firstname} ${
-                      !buddy.lastname ? "" : buddy.lastname
-                    }`}
-                  </Heading>
-                  <Text>{buddy.name}</Text>
-                </Box>
-              </Flex>
-              <div>
-                <Button
-                  marginRight="30px"
-                  variantColor="orange"
-                  variant="solid"
-                  size="md"
-                  id={buddy.id}
-                  name={`${buddy.firstname} ${
+              <Avatar src={buddy.photo} size="lg" />
+              <Box textAlign="left" marginLeft="30px">
+                <Heading size="md">
+                  {`${buddy.firstname} ${
                     !buddy.lastname ? "" : buddy.lastname
                   }`}
-                  value="response_1"
-                  onClick={onClick}
-                >
-                  Accept
-                </Button>
-                <Button
-                  variantColor="orange"
-                  variant="outline"
-                  size="md"
-                  id={buddy.id}
-                  name={`${buddy.firstname} ${
-                    !buddy.lastname ? "" : buddy.lastname
-                  }`}
-                  value="response_0"
-                  onClick={onClick}
-                >
-                  Reject
-                </Button>
-              </div>
+                </Heading>
+                <Text>{buddy.name}</Text>
+              </Box>
             </Flex>
-          </Box>
+            <div>
+              <Button
+                marginRight="30px"
+                variantColor="orange"
+                variant="solid"
+                size="sm"
+                id={buddy.id}
+                name={`${buddy.firstname} ${
+                  !buddy.lastname ? "" : buddy.lastname
+                }`}
+                value="response_1"
+                onClick={onClick}
+              >
+                Accept
+              </Button>
+              <Button
+                variantColor="orange"
+                variant="outline"
+                size="sm"
+                id={buddy.id}
+                name={`${buddy.firstname} ${
+                  !buddy.lastname ? "" : buddy.lastname
+                }`}
+                value="response_0"
+                onClick={onClick}
+              >
+                Reject
+              </Button>
+            </div>
+          </div>
+          {/* <Flex alignItems="center" justifyContent="space-between"> */}
         </div>
       ))}
-    </Box>
+    </StyledFriendRequestTab>
   );
 };
 

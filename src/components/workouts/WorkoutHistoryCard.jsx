@@ -14,11 +14,10 @@ import { WorkoutHistoryCard as StyledWorkoutHistoryCard } from "./WorkoutHistory
 
 function WorkoutHistoryCard({ workout, onOpen, history }) {
   const dateCompleted = new Date(workout.endDate).toLocaleDateString();
-
   return (
-    <StyledWorkoutHistoryCard>
+    <StyledWorkoutHistoryCard onClick={onOpen}>
       <div className="history">
-        <section className="history-detail" onClick={onOpen}>
+        <section className="history-detail">
           <div className="history-image">
             <img
               src={workout.picture || DefaultImage}
@@ -39,38 +38,41 @@ function WorkoutHistoryCard({ workout, onOpen, history }) {
             </div>
           </div>
         </section>
-        <Link to={`/workout/${workout.workoutId.id}`}>
-          <p className="link">View Details</p>
-        </Link>
-        <div className="social-share">
-          <span>
-            <FacebookShareButton
-              url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
-              hashtag="#trackdrills"
-              quote="Get in!"
-            >
-              <FacebookIcon size={35} round={true} />
-            </FacebookShareButton>
-          </span>
-          <span>
-            <TwitterShareButton
-              url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
-              hashtags={["trackdrills"]}
-              title="Get in!"
-            >
-              <TwitterIcon size={35} round={true} />
-            </TwitterShareButton>
-          </span>
-          <span>
-            <LinkedinShareButton
-              url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
-              title="Get in!"
-              summary="Enter dynamic summary here"
-              source="https://app.trackdrills.com"
-            >
-              <LinkedinIcon size={35} round={true} />
-            </LinkedinShareButton>
-          </span>
+
+        <div className="history-detail-links">
+          <Link to={`/workout/${workout.workoutId.id}`}>
+            <p className="link">View Details</p>
+          </Link>
+          <div className="social-share">
+            <span>
+              <FacebookShareButton
+                url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
+                hashtag="#trackdrills"
+                quote="Get in!"
+              >
+                <FacebookIcon size={35} round={true} />
+              </FacebookShareButton>
+            </span>
+            <span>
+              <TwitterShareButton
+                url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
+                hashtags={["trackdrills"]}
+                title="Get in!"
+              >
+                <TwitterIcon size={35} round={true} />
+              </TwitterShareButton>
+            </span>
+            <span>
+              <LinkedinShareButton
+                url={`https://app.trackdrills.com/workout/${workout.workoutId.id}`}
+                title="Get in!"
+                summary="Enter dynamic summary here"
+                source="https://app.trackdrills.com"
+              >
+                <LinkedinIcon size={35} round={true} />
+              </LinkedinShareButton>
+            </span>
+          </div>
         </div>
       </div>
     </StyledWorkoutHistoryCard>
