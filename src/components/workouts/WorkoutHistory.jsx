@@ -138,7 +138,7 @@ function WorkoutHistory({ client, history }) {
           <p>You can upload progress pictures and track your development!</p>
         </header>
 
-        <div>
+        <div className="content">
           {workouts.map(workout => (
             <WorkoutHistoryCard
               onOpen={e => onOpenUpload(workout.id, e)}

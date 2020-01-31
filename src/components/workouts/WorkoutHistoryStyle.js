@@ -3,14 +3,9 @@ import styled from "styled-components";
 export const HistoryStyle = styled.div`
   width: 90vw;
   margin: 0 auto;
-  margin-bottom: 5rem;
+  padding: 1rem;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
-  padding: 1rem 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   min-height: 100vh;
-
   @media only screen and (max-width: 800px) {
     width: 90vw;
   }
@@ -52,6 +47,13 @@ export const HistoryStyle = styled.div`
 
       color: #ccc5b9;
     }
+  }
+
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+    justify-content: center;
   }
 `;
 
@@ -146,7 +148,7 @@ export const WorkoutHistoryCard = styled.div`
   width: 100%;
   cursor: pointer;
   border-top: 1px solid #ccc5b9;
-  border-bottom: 1px solid #ccc5b9;
+  flex-direction: column;
 
   .history {
     display: flex;
@@ -154,54 +156,22 @@ export const WorkoutHistoryCard = styled.div`
     width: 100%;
     justify-content: space-between;
     align-items: center;
-
-    @media only screen and (max-width: 550px) {
-      flex-direction: column;
-    }
-
-    .link {
-      font-family: Roboto;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 0.9rem;
-      line-height: 0.9rem;
-      text-transform: uppercase;
-      color: #252422;
-      padding: 0 1rem;
-      margin-left: 6rem;
-
-      @media only screen and (max-width: 550px) {
-        padding: 1rem 0;
-      }
-      &:hover {
-        font-weight: bolder;
-      }
-    }
-
-    .social-share {
-      margin-top: 0 auto;
-      display: flex;
-      justify-content: space-evenly;
-    }
+    padding: 1rem;
 
     .history-detail {
       display: flex;
       flex-wrap: wrap;
-      width: 70%;
       align-items: center;
+      justify-content: center;
+
+      @media only screen and (max-width: 550px) {
+        width: 100%;
+        margin: 1rem 0;
+      }
 
       .history-image {
-        width: 15%;
-
-        @media only screen and (max-width: 1000px) {
-          width: 25%;
-        }
-
-        @media only screen and (max-width: 650px) {
-          display: none;
-        }
         img {
-          width: 100%;
+          width: 100px;
           height: 100px;
         }
       }
@@ -211,9 +181,6 @@ export const WorkoutHistoryCard = styled.div`
         margin: 0 1rem;
         flex-direction: column;
 
-        @media only screen and (max-width: 650px) {
-          margin: 1rem;
-        }
         .workout-name {
           font-family: Roboto;
           font-style: normal;
@@ -238,6 +205,41 @@ export const WorkoutHistoryCard = styled.div`
             margin: 0.5rem 0;
           }
         }
+      }
+    }
+
+    .history-detail-links {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @media only screen and (max-width: 550px) {
+        width: 100%;
+        margin: 1rem 0;
+      }
+
+      .link {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 0.9rem;
+        line-height: 0.9rem;
+        text-transform: uppercase;
+        color: #252422;
+        transition: all 1s ease-in-out;
+
+        &:hover {
+          font-weight: bolder;
+        }
+      }
+
+      .social-share {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 1rem 0;
       }
     }
   }
