@@ -70,13 +70,35 @@ const AddFriendsTab = ({ client, users, setUsers }) => {
     return <Redirect to="/" />;
   }
 
+  const onSearch = e => {
+    const inputSearch = e.target.value;
+    setSearch(inputSearch);
+
+    client
+      .query({
+        query: GET_USERS,
+        variables: {
+          search: inputSearch,
+          fields: ["firstname", "lastname", "email"]
+        }
+      })
+      .then(res => {
+        setUsers(res.data.findFriends);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        alert("An error occurred.", "Unable to add friend", "error");
+        setError(true);
+      });
+  };
   return (
     <StyledAddFriendsTab>
       <Search
         placeholder="Find someone you know"
-        setSearch={setSearch}
         search={search}
         id="add-friends"
+        onChange={onSearch}
       />
       {users.map(buddy => (
         <div key={buddy.id}>

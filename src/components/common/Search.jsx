@@ -18,11 +18,7 @@ const StyledSearch = styled.div`
   }
 `;
 
-const Search = ({ placeholder, search, setSearch, id }) => {
-  const onChange = e => {
-    const inputSearch = e.target.value;
-    setSearch(s => inputSearch);
-  };
+const Search = ({ placeholder, search, id, onChange }) => {
   return (
     <StyledSearch>
       <h3>Search</h3>

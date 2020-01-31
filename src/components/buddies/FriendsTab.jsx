@@ -45,6 +45,29 @@ const FriendsTab = ({ client, setFriends, friends }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onSearch = e => {
+    const inputSearch = e.target.value;
+    setSearch(inputSearch);
+
+    client
+      .query({
+        query: GET_FRIENDS,
+        variables: {
+          search: inputSearch,
+          fields: ["firstname", "lastname", "email"]
+        }
+      })
+      .then(res => {
+        setFriends(res.data.friends);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        alert("An error occurred.", "Unable to add friend", "error");
+        setError(true);
+      });
+  };
+
   if (isLoading) {
     return (
       <Flex width="100vw" height="100vh" justifyContent="center" align="center">
@@ -62,9 +85,9 @@ const FriendsTab = ({ client, setFriends, friends }) => {
     <Box>
       <Search
         placeholder="Find friends"
-        setSearch={setSearch}
         search={search}
         id="search-friends"
+        onChange={onSearch}
       />
       {friends.map(buddy => (
         <div key={buddy.id}>
