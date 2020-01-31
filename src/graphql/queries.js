@@ -284,6 +284,7 @@ export const GET_FRIENDS_REQUEST = gql`
       id
       firstname
       lastname
+      photo
       email
     }
   }
