@@ -95,7 +95,7 @@ const ProfilePage = ({ client, history }) => {
                 onClose={onClose}
               />
             </ModalPopup>
-            <Box paddingLeft="50px">
+            <Box paddingLeft="35%">
               <Flex paddingY="30px" alignItems="center">
                 <Box as={IoIosPerson} size="50px" />
                 <Box textAlign="left" paddingLeft="20px">

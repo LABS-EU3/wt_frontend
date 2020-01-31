@@ -34,7 +34,7 @@ const DashboardStyle = styled.div`
     }
 
     .user-detail {
-      width: 30%;
+      width: 70%;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
@@ -42,6 +42,7 @@ const DashboardStyle = styled.div`
       border-radius: 10px;
       padding: 0.5rem;
       border: 2px solid grey;
+      margin: auto;
 
       @media only screen and (max-width: 1085px) {
         width: 70%;
