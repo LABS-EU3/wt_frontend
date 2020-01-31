@@ -261,6 +261,7 @@ export const UPDATE_USER_DETAILS = gql`
     $equipment: Boolean
     $experience: String
     $reminderType: String
+    $photo: Upload
   ) {
     updateUser(
       input: {
@@ -274,6 +275,7 @@ export const UPDATE_USER_DETAILS = gql`
         equipment: $equipment
         experience: $experience
         reminderType: $reminderType
+        photo: $photo
       }
     ) {
       id

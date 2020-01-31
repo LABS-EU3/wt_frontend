@@ -51,15 +51,17 @@ const FriendsRequestTab = ({
       .then(res => {
         if (res.data.manageFriends) {
           setIsLoading(isLoading);
-          setFriendsRequests(friendsRequests);
-          setFriends(friends);
+          setFriendsRequests(
+            friendsRequests.filter(
+              friendsRequest => friendsRequest.id !== e.target.id
+            )
+          );
           e.target.value === "response_1"
             ? alert(`${e.target.name} is now your Workout Buddy`, "", "success")
             : alert(`You have rejected ${e.target.name}'s Buddy request`);
         } else alert(`An error occured`);
       })
       .catch(error => {
-        debugger;
         setIsLoading(false);
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");

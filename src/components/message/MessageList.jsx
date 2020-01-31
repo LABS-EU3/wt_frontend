@@ -6,8 +6,13 @@ import { Box, Flex } from "@chakra-ui/core";
 import CustomSpinner from "../common/Spinner";
 import { StyledMessagesList } from "./Styledmessages";
 import { GET_FRIENDS } from "../../graphql/queries";
+import { SUBSCRIBE_MESSAGE } from "../../graphql/subscriptions";
 import Input from "../common/Input";
 import Messages from "./Messages";
+
+import { getUserDetails } from "../../utils";
+
+const userData = getUserDetails();
 
 const MessageList = ({ client, match }) => {
   const [friends, setFriends] = useState([]);
@@ -26,25 +31,60 @@ const MessageList = ({ client, match }) => {
   }, [friends]);
 
   const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
+  console.log(data, "outside");
+
+  useEffect(() => {
+    if (friend) {
+      subscribeToMore({
+        document: SUBSCRIBE_MESSAGE,
+        variables: { receiver: userData.user_id },
+        updateQuery: (prev, { subscriptionData }) => {
+          if (!subscriptionData.data) return prev;
+          const newMessage = subscriptionData.data.newMessage;
+          let findFriend = prev.friends.find(frnd => frnd.id === friend.id);
+
+          if (!findFriend.messages.find(msg => msg.id === newMessage.id)) {
+            findFriend = Object.assign({}, findFriend, {
+              messages: [...findFriend.messages, newMessage]
+            });
+
+            const next = Object.assign({}, prev, {
+              friends: [
+                ...prev.friends.filter(frnd => frnd.id !== findFriend.id),
+                findFriend
+              ]
+            });
+
+            return next;
+          } else {
+            return prev;
+          }
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [friend]);
 
   if (data && friends.length === 0) {
     setFriends(data.friends);
     setLoading(false);
   }
 
-  if (data && isRefetched === true) {
-    if (data.friends.length > 0 && friend) {
-      const friendFromFriends = data.friends.filter(
-        frnd => frnd.id === friend.id
-      );
+  // console.log(data, isRefetched);
+  // if (data && isRefetched === true) {
+  //   if (data.friends.length > 0 && friend) {
+  //     const friendFromFriends = data.friends.filter(
+  //       frnd => frnd.id === friend.id
+  //     );
 
-      if (friendFromFriends[0].messages.length > friend.messages.length) {
-        setFriend(friendFromFriends[0]);
-        setFriends(data.friends);
-        setIsRefetched(false);
-      }
-    }
-  }
+  //     if (friendFromFriends[0].messages.length > friend.messages.length) {
+  //       setFriend(friendFromFriends[0]);
+  //       setFriends(data.friends);
+  //       setIsRefetched(false);
+  //     }
+  //   }
+  // }
 
   const searchMessages = () => {};
 
@@ -106,6 +146,7 @@ const MessageList = ({ client, match }) => {
               subscribeToMore={subscribeToMore}
               refetch={refetch}
               setIsRefetched={setIsRefetched}
+              setFriends={setFriends}
             />
           </div>
         </div>

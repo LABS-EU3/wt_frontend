@@ -54,7 +54,7 @@ const BuddiesCard = ({
       .then(res => {
         if (res.data.manageFriends) {
           setIsLoading(isLoading);
-          setUsers(users);
+          setUsers(users.filter(user => user.id !== e.target.id));
           alert(`Buddy request sent to ${e.target.name}`, "", "success");
         } else
           alert(

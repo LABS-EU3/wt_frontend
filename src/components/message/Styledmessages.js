@@ -195,8 +195,8 @@ export const StyledMessageDetail = styled.div`
     /* justify-content: space-around; */
     margin: 1rem 0;
     align-items: center;
-    bottom: 0;
-    position: absolute;
+    /* bottom: 0;
+    position: absolute; */
 
     form {
       width: 100%;
