@@ -163,6 +163,7 @@ export const WorkoutHistoryCard = styled.div`
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
 
       @media only screen and (max-width: 550px) {
         width: 100%;

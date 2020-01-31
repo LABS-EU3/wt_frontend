@@ -15,9 +15,9 @@ import { WorkoutHistoryCard as StyledWorkoutHistoryCard } from "./WorkoutHistory
 function WorkoutHistoryCard({ workout, onOpen, history }) {
   const dateCompleted = new Date(workout.endDate).toLocaleDateString();
   return (
-    <StyledWorkoutHistoryCard onClick={onOpen}>
+    <StyledWorkoutHistoryCard>
       <div className="history">
-        <section className="history-detail">
+        <section className="history-detail" onClick={onOpen}>
           <div className="history-image">
             <img
               src={workout.picture || DefaultImage}
