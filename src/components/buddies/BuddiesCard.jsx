@@ -52,7 +52,7 @@ const BuddiesCard = ({
       .then(res => {
         if (res.data.manageFriends) {
           setIsLoading(isLoading);
-          setUsers(users);
+          setUsers(users.filter(user => user.id !== e.target.id));
           e.target.value === "add"
             ? alert(`Buddy request sent to ${e.target.name}`)
             : alert(`An error occured`);

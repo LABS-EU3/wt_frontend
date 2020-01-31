@@ -53,15 +53,17 @@ const FriendsRequestTab = ({
       .then(res => {
         if (res.data.manageFriends) {
           setIsLoading(isLoading);
-          setFriendsRequests(friendsRequests);
-          setFriends(friends);
+          setFriendsRequests(
+            friendsRequests.filter(
+              friendsRequest => friendsRequest.id !== e.target.id
+            )
+          );
           e.target.value === "response_1"
             ? alert(`${e.target.name} is now your Workout Buddy`)
             : alert(`You have rejected ${e.target.name}'s Buddy request`);
         } else alert(`An error occured`);
       })
       .catch(error => {
-        debugger;
         setIsLoading(false);
         if (error.graphQLErrors && error.graphQLErrors.length > 0) {
           alert("An error occurred.", error.graphQLErrors[0].message, "error");
@@ -86,7 +88,7 @@ const FriendsRequestTab = ({
         setError(true);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [friendsRequests, onClick, friends]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -112,7 +114,7 @@ const FriendsRequestTab = ({
     <Box boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)" paddingY="5px">
       <p>Friends Request</p>
       {friendsRequests.map(buddy => (
-        <div>
+        <div key={buddy.id}>
           <Box
             boxShadow="0px 2px 6px 0px rgba(0, 0, 0, 0.12)"
             paddingY="15px"
