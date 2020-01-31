@@ -131,7 +131,7 @@ export const StyledMessageDetail = styled.div`
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
-  position: relative;
+  /* position: relative; */
 
   /* @media only screen and (max-width: 900px) {
         width: 100%;

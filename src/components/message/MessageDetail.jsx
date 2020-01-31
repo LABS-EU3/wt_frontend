@@ -10,7 +10,7 @@ const MessageDetail = ({
   user_id,
   friend,
   setIsRefetched,
-  setFriends
+  setReceivingMessage
 }) => {
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = React.useRef(null);
@@ -20,34 +20,33 @@ const MessageDetail = ({
   };
 
   useEffect(() => {
-    // subscribeToMore({
-    //   document: SUBSCRIBE_MESSAGE,
-    //   variables: { receiver: user_id },
-    //   updateQuery: (prev, { subscriptionData }) => {
-    //     if (!subscriptionData.data) return prev;
-    //     const newMessage = subscriptionData.data.newMessage;
-    //     let findFriend = prev.friends.find(frnd => frnd.id === friend.id);
+    subscribeToMore({
+      document: SUBSCRIBE_MESSAGE,
+      variables: { receiver: user_id },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const newMessage = subscriptionData.data.newMessage;
+        let findFriend = prev.friends.find(frnd => frnd.id === friend.id);
 
-    //     if (!findFriend.messages.find(msg => msg.id === newMessage.id)) {
-    //       findFriend = Object.assign({}, findFriend, {
-    //         messages: [...findFriend.messages, newMessage]
-    //       });
+        if (!findFriend.messages.find(msg => msg.id === newMessage.id)) {
+          findFriend = Object.assign({}, findFriend, {
+            messages: [...findFriend.messages, newMessage]
+          });
 
-    //       const next = Object.assign({}, prev, {
-    //         friends: [
-    //           ...prev.friends.filter(frnd => frnd.id !== findFriend.id),
-    //           findFriend
-    //         ]
-    //       });
-    //       // console.log(next)
-    //       // setIsRefetched(true);
-    //       setFriends(next.friends)
-    //       return next;
-    //     } else {
-    //       return prev;
-    //     }
-    //   }
-    // });
+          const next = Object.assign({}, prev, {
+            friends: [
+              ...prev.friends.filter(frnd => frnd.id !== findFriend.id),
+              findFriend
+            ]
+          });
+          setReceivingMessage(next.friends);
+          // setIsRefetched(true);
+          return next;
+        } else {
+          return prev;
+        }
+      }
+    });
     scrollToBottom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
