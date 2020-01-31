@@ -26,7 +26,6 @@ const ScheduleDetail = ({ client }) => {
   };
 
   useEffect(() => {
-    console.log("eee");
     setLoading(true);
 
     client

@@ -14,7 +14,6 @@ import { WorkoutHistoryCard as StyledWorkoutHistoryCard } from "./WorkoutHistory
 
 function WorkoutHistoryCard({ workout, onOpen, history }) {
   const dateCompleted = new Date(workout.endDate).toLocaleDateString();
-  console.log(workout);
   return (
     <StyledWorkoutHistoryCard>
       <div className="history">

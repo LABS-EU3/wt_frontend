@@ -68,7 +68,6 @@ function WorkoutDetail({ client }) {
         setIsLoading(false);
       })
       .catch(err => {
-        console.log(err);
         setIsLoading(false);
         setError(true);
       });

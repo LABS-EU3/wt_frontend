@@ -85,7 +85,6 @@ function WorkoutHistory({ client, history }) {
         mutation: UPLOAD_PROGRESS_PICTURE
       })
       .then(res => {
-        console.log(res);
         const { id, picture } = res.data.updateCompletedWorkout;
         setWorkouts(
           workouts.map(workout => {

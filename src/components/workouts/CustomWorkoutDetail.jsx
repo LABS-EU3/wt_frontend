@@ -81,13 +81,11 @@ const CustomWorkoutDetail = ({ client, history }) => {
           }
         })
         .then(res => {
-          console.log(res);
           alert("Success!", "Your custom workout was created!", "success");
           history.push("/workouts");
           window.location.reload();
         })
         .catch(err => {
-          console.log(err);
           setIsLoading(false);
           setError(true);
         });
@@ -95,7 +93,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
   });
 
   const toggleExercise = id => e => {
-    console.log("toggleExercise", id, selectedExercises.includes(id));
     if (selectedExercises.includes(id)) {
       setSelectedExercises(ex => ex.filter(ex_id => ex_id !== id));
     } else {
@@ -141,7 +138,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
           setIsLoading(false);
         })
         .catch(err => {
-          console.log(err);
           setIsLoading(false);
           setError(true);
         });
@@ -159,7 +155,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
           setIsLoading(false);
         })
         .catch(err => {
-          console.log(err);
           setIsLoading(false);
           setError(true);
         });

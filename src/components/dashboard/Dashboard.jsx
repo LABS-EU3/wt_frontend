@@ -58,7 +58,6 @@ function Dashboard({ client, history }) {
   }
 
   if (dashboardData) {
-    console.log(dashboardData);
     return (
       <DashboardStyle>
         <div className="welcome">

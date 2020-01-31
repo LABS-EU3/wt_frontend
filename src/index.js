@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ApolloClient, DefaultOptions } from "apollo-client";
+import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createUploadLink } from "apollo-upload-client";
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -81,7 +81,7 @@ const link = split(
   wsLink,
   httpLink
 );
-const defaultOptions: DefaultOptions = {
+const defaultOptions = {
   watchQuery: {
     fetchPolicy: "no-cache",
     errorPolicy: "ignore"
