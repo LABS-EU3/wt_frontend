@@ -38,6 +38,7 @@ const EditProfile = ({ onClose, data, client, setUserData }) => {
   const [weightUnits, setWeightUnits] = useState([]);
   const [updatedData, setUpdatedData] = useState(data);
   const { isOpen, onOpen, onPictureClose } = useDisclosure();
+  const [uploadFile, setUploadFile] = useState(null);
 
   const alert = (title, description, status) => {
     toast({
@@ -87,7 +88,8 @@ const EditProfile = ({ onClose, data, client, setUserData }) => {
       reminderType: updatedData.reminderType
         ? updatedData.reminderType
         : "none",
-      experience: updatedData.experience
+      experience: updatedData.experience,
+      photo: updatedData.photo
     },
     validationSchema: yup.object().shape({
       firstname: yup.string().required("Please enter your firstname"),
@@ -119,10 +121,11 @@ const EditProfile = ({ onClose, data, client, setUserData }) => {
             weightUnit: value.weightUnit,
             goal: value.goal,
             reminderType: value.reminderType,
-            photo: value.photo
+            photo: uploadFile
           }
         })
         .then(res => {
+          debugger;
           setLoading(false);
           setUpdatedData(res.data.updateUser);
           alert("Profile Updates Successfully", "", "success");
@@ -156,17 +159,15 @@ const EditProfile = ({ onClose, data, client, setUserData }) => {
           marginLeft="35%"
           marginBottom="20px"
         />
-        <Button variant="outline" variantColor="orange" onClick={onOpen}>
-          Edit Profile Picture
-        </Button>
-        <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Picture">
-          <EditPicture
-            data={data}
-            setUserData={setUserData}
-            // onSave={handleSave}
-            onClose={onClose}
-          />
-        </ModalPopup>
+        <Heading size="sm">Edit Profile Picture</Heading>
+        <EditPicture
+          data={data}
+          setUserData={setUserData}
+          onClose={onClose}
+          uploadFile={uploadFile}
+          setUploadFile={setUploadFile}
+          formik={formik}
+        />
       </Stack>
       <form onSubmit={formik.handleSubmit}>
         <Box paddingTop="30px">

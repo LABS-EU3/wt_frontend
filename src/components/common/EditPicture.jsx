@@ -28,13 +28,23 @@ import {
 } from "../workouts/WorkoutHistoryStyle";
 import { UPDATE_USER_DETAILS } from "../../graphql/mutations";
 
-function EditPicture({ client, history, onPictureClose, data, setUserData }) {
+function EditPicture({
+  client,
+  history,
+  onPictureClose,
+  data,
+  setUserData,
+  uploadFile,
+  setUploadFile,
+  formik
+}) {
   const toast = useToast();
   const [workouts, setWorkouts] = useState([]);
   const [uploadId, setUploadId] = useState("");
-  const [uploadFile, setUploadFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  console.log(formik.values, formik);
 
   const alert = (title, description, status) => {
     toast({
@@ -51,53 +61,18 @@ function EditPicture({ client, history, onPictureClose, data, setUserData }) {
     setUploadFile(file);
   };
 
-  const onOpenUpload = (id, e) => {
-    setUploadId(id);
-    onOpen(e);
-  };
-
-  const onUpload = e => {
-    e.preventDefault();
-    client
-      .mutate({
-        variables: {
-          photo: uploadFile
-        },
-        mutation: UPDATE_USER_DETAILS
-      })
-      .then(res => {
-        const updatedUser = res.data.updateUser;
-        setUserData(updatedUser.photo);
-        alert("Profile picture uploaded successfully", "🚀", "success");
-      })
-      .catch(err =>
-        alert(
-          "An error occurred.",
-          "Unable to upload your profile picture ☹️.",
-          "error"
-        )
-      );
-  };
-
   return (
     <Box>
       <Stack>
-        <Avatar
-          src={data.photo}
-          size="2xl"
-          marginLeft="35%"
-          marginBottom="20px"
+        <Input
+          id="photo"
+          name="photo"
+          placeholder="PHOTO"
+          type="file"
+          name="Uplad"
+          onChange={onChange}
         />
-        <input type="file" name="Uplad" onChange={onChange} />
       </Stack>
-      <ModalFooter>
-        <Button type="submit" variantColor="orange" mr={3} onClick={onUpload}>
-          Save
-        </Button>
-        <Button variant="ghost" variantColor="orange" onClick={onClose}>
-          Cancel
-        </Button>
-      </ModalFooter>
     </Box>
   );
 }
