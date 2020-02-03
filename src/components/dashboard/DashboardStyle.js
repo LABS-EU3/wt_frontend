@@ -42,6 +42,7 @@ const DashboardStyle = styled.div`
       border-radius: 10px;
       padding: 0.5rem;
       border: 2px solid grey;
+      position: relative;
 
       @media only screen and (max-width: 1085px) {
         width: 70%;

@@ -10,6 +10,7 @@ import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import Quotes from "../common/Quotes";
 import Streak from "../common/Streak";
+import Notification from "../common/Notification";
 
 function Dashboard({ client, history }) {
   const [dashboardData, setDashboardData] = useState([]);
@@ -96,6 +97,7 @@ function Dashboard({ client, history }) {
                 </p>
               </Box>
             </Flex>
+            <Notification />
 
             <Streak streak={dashboardData.streak} />
           </div>
