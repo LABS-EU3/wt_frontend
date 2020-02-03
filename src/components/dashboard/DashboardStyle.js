@@ -123,6 +123,7 @@ const DashboardStyle = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    justify-content: space-between;
 
     .quotes {
       border: 1px solid green;
