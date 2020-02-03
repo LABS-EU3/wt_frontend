@@ -308,3 +308,12 @@ export const GET_FRIENDS = gql`
     }
   }
 `;
+
+export const GET_NOTIFICATIONS = gql`
+  query {
+    notifications {
+      topic
+      message
+    }
+  }
+`;

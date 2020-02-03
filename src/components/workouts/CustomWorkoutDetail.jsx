@@ -52,13 +52,18 @@ const CustomWorkoutDetail = ({ client, history }) => {
     });
   };
 
+  const onChange = e => {
+    const file = e.target.files[0];
+    setUploadFile(file);
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       name: workout.name || "",
       description: workout.description || "",
       intensity: workout.intensity || "",
-      picture: workout.picture || ""
+      picture: uploadFile || workout.picture || ""
     },
     validationSchema: yup.object().shape({
       name: yup
@@ -73,6 +78,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
         .string()
         .required("Please enter the intensity of this workout!")
     }),
+
     onSubmit: values => {
       setIsLoading(true);
       client
@@ -217,6 +223,9 @@ const CustomWorkoutDetail = ({ client, history }) => {
                   error={formik.errors.name}
                 />
               </InputGroup>
+              {formik.touched.name && formik.errors.name ? (
+                <span className="error">{formik.errors.name}</span>
+              ) : null}
               <Textarea
                 id="description"
                 name="description"
@@ -308,7 +317,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 display={{ base: "block", md: "none" }}
                 mt={5}
               >
-                <Image src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
+                {/* <Image src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
                 <Text color="orange.400" marginTop="10px">
                   Replace photo?
                 </Text>
@@ -321,7 +330,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
                   type="file"
                   name="picture"
                   onChange={formik.handleChange}
-                />
+                /> */}
               </Box>
               <Button
                 type="submit"
@@ -340,7 +349,12 @@ const CustomWorkoutDetail = ({ client, history }) => {
               flex="1"
               display={{ base: "none", md: "block" }}
             >
-              <Image src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
+              <Image
+                src={
+                  `${formik.values.picture}` ||
+                  "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                }
+              />
               <Text color="orange.400" marginTop="10px">
                 Replace photo?
               </Text>
@@ -351,8 +365,8 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 my={3}
                 placeholder="PHOTO"
                 type="file"
-                // name="picture"
-                onChange={formik.handleChange}
+                name="picture"
+                onChange={onChange}
               />
             </Box>
           </Stack>
