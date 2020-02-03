@@ -42,6 +42,7 @@ const DashboardStyle = styled.div`
       border-radius: 10px;
       padding: 0.5rem;
       border: 2px solid grey;
+      border: 1px solid red;
 
       @media only screen and (max-width: 1085px) {
         width: 70%;
@@ -114,6 +115,26 @@ const DashboardStyle = styled.div`
         }
       }
     }
+  }
+
+  .profile-detail {
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+
+    .quotes {
+      border: 1px solid green;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .profile-goal {
+    border: 1px solid black;
   }
 
   /* .colorOrange {

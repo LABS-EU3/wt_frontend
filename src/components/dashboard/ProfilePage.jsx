@@ -146,20 +146,15 @@ const ProfilePage = ({ client, history }) => {
             </Box>
           </div>
 
-          <div className="dasboard-detail">
+          <div className="dasboard-detail profile-detail">
             <section className="quotes">
-              <Avatar
-                src={userData.photo}
-                size="2xl"
-                marginLeft="35%"
-                marginBottom="20px"
-              />
+              <Avatar src={userData.photo} size="2xl" marginBottom="20px" />
               <Heading>{`${userData.firstname ? userData.firstname : ""} ${
                 userData.lastname ? userData.lastname : ""
               }`}</Heading>
             </section>
 
-            <section className="goal">
+            <section className="profile-goal">
               <p>Recent Activity</p>
               <Heading as="h4" size="md">
                 {/* {profileData.user.goal} */}
