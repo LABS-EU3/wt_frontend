@@ -218,8 +218,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
                   placeholder="NAME"
                   onChange={formik.handleChange}
                   value={formik.values.name}
-                  bg="#FFFCF2"
-                  variant="flushed"
                   focusBorderColor="#FF8744"
                   errorBorderColor="crimson"
                   error={formik.errors.name}
@@ -232,8 +230,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 placeholder="DESCRIPTION"
                 onChange={formik.handleChange}
                 value={formik.values.description}
-                variant="flushed"
-                bg="#FFFCF2"
                 focusBorderColor="#FF8744"
                 onBlur={formik.handleBlur}
                 errorBorderColor="crimson"
@@ -249,8 +245,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
                   placeholder="Select intensity..."
                   onChange={formik.handleChange}
                   value={formik.values.intensity}
-                  variant="flushed"
-                  bg="#FFFCF2"
                   focusBorderColor="#FF8744"
                   errorBorderColor="crimson"
                   error={formik.errors.intensity}
