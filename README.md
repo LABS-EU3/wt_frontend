@@ -81,13 +81,13 @@ Trackdrills is a web application that gives you access to over 500 workout and e
 
 For the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-    REACT_APP_GraphQL_API=https://trackdrills-staging.herokuapp.com/api
+    REACT_APP_GraphQL_API=GRAPHQL_API_URL
 
-    REACT_APP_GraphQL_API_SUBSCRIPTIONS=ws://trackdrills-staging.herokuapp.com/graphql
+    REACT_APP_GraphQL_API_SUBSCRIPTIONS=REACT_APP_GraphQL_API_SUBSCRIPTIONS
 
-    REACT_APP_GOOGLE_CLIENT_ID=970094315674-fv6hgk4uta5tmpa91poc6444qlqt9e96.apps.googleusercontent.com
+    REACT_APP_GOOGLE_CLIENT_ID=GOOGLE_CLIENT_ID
 
-    REACT_APP_GOOGLE_ANALYTICS_KEY=UA-154765930-1
+    REACT_APP_GOOGLE_ANALYTICS_KEY=ANALYTICS_KEY
 
 # Tech-Stack
 
