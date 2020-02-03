@@ -15,6 +15,9 @@ import Preview from "../common/Preview";
 import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
+import { Plugins } from "@capacitor/core";
+import "@codetrix-studio/capacitor-google-auth";
+
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 function Login({ client, history }) {
@@ -127,7 +130,8 @@ function Login({ client, history }) {
       .mutate({
         mutation: GOOGLE_AUTH_MUTATION,
         variables: {
-          accessToken: response.accessToken
+          accessToken: response.accessToken || null,
+          idToken: response.idToken || null
         }
       })
       .then(res => {
@@ -149,12 +153,23 @@ function Login({ client, history }) {
         }
       })
       .catch(error => {
+        console.log(error);
         alert(
           "An error occurred.",
           "Unable to login to your account.",
           "error"
         );
       });
+  };
+
+  const signIn = async () => {
+    const res = await Plugins.GoogleAuth.signIn();
+    console.log(res);
+    if (!res.message) {
+      responseGoogle(res.authentication);
+    } else {
+      responseFailureGoogle(res.message);
+    }
   };
 
   return (
@@ -229,6 +244,7 @@ function Login({ client, history }) {
               Login
             </Button>
             <div className="auth-linked-profiles">
+              {/* 
               <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID}
                 render={renderProps => (
@@ -249,6 +265,17 @@ function Login({ client, history }) {
                 onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
               />
+            */}
+              <Button
+                onClick={e => signIn()}
+                color="white"
+                bg="#4c8bf5"
+                rightIcon="arrow-forward"
+                width="45%"
+                size="lg"
+              >
+                Login with Google
+              </Button>
               <Button
                 type="submit"
                 variantColor="facebook"

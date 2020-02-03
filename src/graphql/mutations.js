@@ -25,8 +25,8 @@ export const SIGNUP_MUTATION = gql`
 `;
 
 export const GOOGLE_AUTH_MUTATION = gql`
-  mutation authGoogle($accessToken: String!) {
-    authGoogle(input: { accessToken: $accessToken }) {
+  mutation authGoogle($accessToken: String, $idToken: String) {
+    authGoogle(input: { accessToken: $accessToken, idToken: $idToken }) {
       id
       token
       isNewUser
