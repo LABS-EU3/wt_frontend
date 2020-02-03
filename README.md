@@ -2,12 +2,44 @@
 [![Coverage Status](https://coveralls.io/repos/github/LABS-EU3/wt_frontend/badge.svg)](https://coveralls.io/github/LABS-EU3/wt_frontend)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3f65292d-432b-4ecb-b30d-a9b642a073c1/deploy-status)](https://app.netlify.com/sites/trackdrills/deploys)
 
-
 <img src="src/assets/trackdrills_banner.png" />
 
 # About Trackdrills
 
 Trackdrills is a web application that gives you access to over 500 workout and exercises to choose from to suit your fitness goals. It is a health focused app that also gives you the ability to create your own customised workout plans and track your progress.
+
+# Meet the Team
+
+|                                          [Ezekiel Ekunola](https://github.com/easybuoy)                                          |                                                [Amira Adediran](https://github.com/amxra)                                                 |                                         [Modurotolu Olokode](https://github.com/durotolu)                                          |                                       [Folasade Agbaje](https://github.com/estheragbaje)                                       |                                   [Melquisedeque Pereira](https://github.com/melquip)                                    |
+| :------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: |
+|    [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHQMX3CLS-4607ead88481-512" width = "200" />](https://github.com/easybuoy)     |          [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULJJ9BPPD-e5a7c1cc71bf-512" width = "200" />](https://github.com/amxra)           |     [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULPJMSH9P-eedde51dbb77-512" width = "200" />](https://github.com/durotolu)      | [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULVMV2R29-7103c65528c4-5122" width = "200" />](https://github.com/estheragbaje) | [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULJ9RFUFM-36a61875911d-512" width = "200" />](https://github.com/melquip) |
+|                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/easybuoy)                       |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/amxra)                             |                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/durotolu)                        |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/estheragbaje)                    |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/melquip)                   |
+|     [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/easybuoy)     | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/amira-adediran-8308b4196/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/modurotoluolokode/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/folasadeagbaje) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/melquip/) |
+|                                    [**Sandrava Philips**](https://github.com/Sandravaphilips)                                    |                                           [**Oluwafemi Anjorin**](https://github.com/Leelsmuth)                                           |                                                                                                                                    |
+| [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULVJMEELU-2b21a1df08ff-512" width = "200" />](https://github.com/Sandravaphilips) |        [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULPHCUQF3-48914af04c69-512" width = "200" />](https://github.com/Leelsmuth)         |                                                                                                                                    |
+|                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Sandravaphilips)                   |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Leelsmuth)                           |                                                                                                                                    |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/sandravaphilips)  |     [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/oluwafemi-anjorin)     |
+
+# Project Overview
+
+[Trello Board](https://trello.com/b/iTrFFYwu/labseu3-workout-tracker) <br>
+[Product Canvas](https://www.notion.so/EU3-Workout-Tracker-07d713eeab674a938ea65ce065462384) <br>
+[UX Design files](https://www.figma.com/file/r3J1gqHSg2Mci8tHb6vXdd/Trackdrills) <br>
+[Landing Page](https://trackdrills.com/) <br>
+[API](https://trackdrills.herokuapp.com/) <br>
+
+### Basic Features
+
+- User should be able to sign up and login
+- User should be pick from a list of exercises and view exercise details
+- User should be pick from a list of workouts and view workout details
+- User should be able to access workout history page
+- User should be able to schedule a workout, as a routine or one-time
+- User should be able to access the dashboard
+- User should be able to get dashboard notifications or email notifications
+- User should be able to update profile details
+- User should be able to create custom workouts
+- User should be able to share completed workout with friends on social media
 
 # Table of Contents
 
@@ -21,16 +53,19 @@ Trackdrills is a web application that gives you access to over 500 workout and e
     - [React Apollo](#react-apollo)
     - [Dotenv](#dotenv)
     - [Styled-
-    Components](#styled-components)
+      Components](#styled-components)
     - [Chakra-UI](#chakra-ui)
     - [Prop-Types](#prop-types)
     - [JWT-Decode](#jwt-decode)
     - [Coveralls](#coveralls)
+    - [Formik](#formik)
+    - [Yup](#yup)
+    - [Recharts](#recharts)
 - [Front-End Dependencies `(Development)`](#front-end-dependencies-development)
-    - [Eslint](#eslint-1)
-    - [Prettier](#prettier)
-    - [Lint Staged](#lint-staged)
-    - [Husky](#husky)
+  - [Eslint](#eslint-1)
+  - [Prettier](#prettier)
+  - [Lint Staged](#lint-staged)
+  - [Husky](#husky)
 
 # Scripts
 
@@ -44,7 +79,15 @@ Trackdrills is a web application that gives you access to over 500 workout and e
 
 # Environment Variables
 
-`URL`: The url of the hosted website
+For the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
+
+    REACT_APP_GraphQL_API=GRAPHQL_API_URL
+
+    REACT_APP_GraphQL_API_SUBSCRIPTIONS=REACT_APP_GraphQL_API_SUBSCRIPTIONS
+
+    REACT_APP_GOOGLE_CLIENT_ID=GOOGLE_CLIENT_ID
+
+    REACT_APP_GOOGLE_ANALYTICS_KEY=ANALYTICS_KEY
 
 # Tech-Stack
 
@@ -85,6 +128,18 @@ Jwt-decode is a small browser library that helps decoding JWTs token which are B
 ### Coveralls
 
 Shows which parts of code aren't covered by the test suite | [View Dependency](https://docs.coveralls.io/)
+
+### Formik
+
+Helps to keep track of values/errors/visited fields, orchestrating validation, and handling submission on a from | [View Dependency](https://jaredpalmer.com/formik/docs/overview)
+
+### Yup
+
+Yup is a JavaScript schema builder for value parsing and validation. | [View Dependency](https://www.npmjs.com/package/yup)
+
+### Recharts
+
+A composable charting library built on React components, | [View Dependency](http://recharts.org/en-US/)
 
 ## Front-End Dependencies `(Development)`
 
