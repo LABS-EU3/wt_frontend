@@ -6,7 +6,7 @@
 
 # About Trackdrills
 
-Trackdrills is a web application that gives you access to over 500 workout and exercises to choose from to suit your fitness goals. It is a health focused app that also gives you the ability to create your own customised workout plans and track your progress.
+Trackdrills is an application that gives you access to over 500 workouts and exercises to choose from to suit your fitness goals. It is a health-focused app that also gives you the ability to create your own customized workout plans and track your progress.
 
 # Meet the Team
 
