@@ -50,13 +50,18 @@ const CustomWorkoutDetail = ({ client, history }) => {
     });
   };
 
+  const onChange = e => {
+    const file = e.target.files[0];
+    setUploadFile(file);
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       name: workout.name || "",
       description: workout.description || "",
       intensity: workout.intensity || "",
-      picture: workout.picture || ""
+      picture: uploadFile || ""
     },
     validationSchema: yup.object().shape({
       name: yup
@@ -71,6 +76,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
         .string()
         .required("Please enter the intensity of this workout!")
     }),
+
     onSubmit: values => {
       setIsLoading(true);
       client
@@ -201,7 +207,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
             placeholder="PHOTO"
             type="file"
             name="picture"
-            onChange={formik.handleChange}
+            onChange={onChange}
           />
           <InputGroup>
             <Input
