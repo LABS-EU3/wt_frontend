@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>970094315674-djnc0naictejasidugs517imh2hdjab9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.970094315674-djnc0naictejasidugs517imh2hdjab9</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>970094315674-6j5o1pl9b4de33fhtt240t0bb22fv2k7.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDN1la98vpyhsZ4x0l_4iWdYePzmN4HlTI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>970094315674</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.trackdrills.app</string>
+	<key>PROJECT_ID</key>
+	<string>trackdrills</string>
+	<key>STORAGE_BUCKET</key>
+	<string>trackdrills.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:970094315674:ios:d8ad74a9d6481b40863723</string>
+	<key>DATABASE_URL</key>
+	<string>https://trackdrills.firebaseio.com</string>
+</dict>
+</plist>
