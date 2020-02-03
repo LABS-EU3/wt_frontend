@@ -314,7 +314,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 display={{ base: "block", md: "none" }}
                 mt={5}
               >
-                <Image src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
+                {/* <Image src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
                 <Text color="orange.400" marginTop="10px">
                   Replace photo?
                 </Text>
@@ -327,7 +327,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
                   type="file"
                   name="picture"
                   onChange={formik.handleChange}
-                />
+                /> */}
               </Box>
               <Button
                 type="submit"
@@ -346,7 +346,12 @@ const CustomWorkoutDetail = ({ client, history }) => {
               flex="1"
               display={{ base: "none", md: "block" }}
             >
-              <Image src={formik.values.picture} />
+              <Image
+                src={
+                  `${formik.values.picture}` ||
+                  "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                }
+              />
               <Text color="orange.400" marginTop="10px">
                 Replace photo?
               </Text>
