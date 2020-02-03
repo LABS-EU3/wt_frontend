@@ -154,7 +154,7 @@ const ProfilePage = ({ client, history }) => {
               }`}</Heading>
             </section>
 
-            <section className="profile-goal">
+            <section className="goal">
               <p>Recent Activity</p>
               <Heading as="h4" size="md">
                 {/* {profileData.user.goal} */}

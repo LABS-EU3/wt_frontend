@@ -131,10 +131,9 @@ const DashboardStyle = styled.div`
       flex-direction: column;
       align-items: center;
     }
-  }
-
-  .profile-goal {
-    border: 1px solid black;
+    .goal {
+      border: 1px solid black;
+    }
   }
 
   /* .colorOrange {
