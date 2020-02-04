@@ -117,20 +117,20 @@ const Navigation = ({ location }) => {
                   Schedule &nbsp; <i className="fas fa-calendar-alt"></i>
                 </Link>
 
-                <Link to="/workouthistory">
-                  Workout History &nbsp; <i className="fas fa-history"></i>
-                </Link>
-
                 <Link to="/buddies">
                   Friends &nbsp; <i className="fas fa-users"></i>
                 </Link>
 
-                <Link to="/profile">
-                  Profile &nbsp; <i className="far fa-user"></i>
-                </Link>
-
                 <Link to="/gallery">
                   Gallery &nbsp; <i className="fas fa-image"></i>
+                </Link>
+
+                <Link to="/workouthistory">
+                  History &nbsp; <i className="fas fa-history"></i>
+                </Link>
+
+                <Link to="/profile">
+                  Profile &nbsp; <i className="far fa-user"></i>
                 </Link>
 
                 <Link to="#" onClick={logout}>

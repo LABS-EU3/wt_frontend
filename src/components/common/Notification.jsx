@@ -83,7 +83,7 @@ const Notification = ({ notifications, client }) => {
         <Icon name="bell" size="40px" />
         <Text margin="auto 10px">Notifications</Text>
       </div>
-      <p className="new">New</p>
+      <p className="new">New Messages</p>
       <div className="data">
         {notificationData.map(notification => {
           return (
