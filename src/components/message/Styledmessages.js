@@ -4,8 +4,8 @@ export const StyledMessagesList = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 95vw;
-  height: 100vh;
-  justify-content: space-evenly;
+  min-height: 100vh;
+  justify-content: space-around;
   margin: 0 auto;
   padding: 1rem 1rem 0 1rem;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
@@ -16,12 +16,23 @@ export const StyledMessagesList = styled.div`
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   }
 
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+
   .users-list {
     width: 25%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-
+    /* @media only screen and (max-width: 900px) {
+      width: 100%;
+      align-items: center;
+    } */
+    @media only screen and (max-width: 900px) {
+      display: none;
+      width: 0;
+    }
     .friend {
       display: flex;
       flex-wrap: wrap;
@@ -30,6 +41,7 @@ export const StyledMessagesList = styled.div`
       border-radius: 8px;
       padding: 0.5rem;
       transition: all 0.4s ease-in-out;
+      width: 100%;
 
       &:hover {
         /* border: 1px solid red; */
@@ -64,6 +76,10 @@ export const StyledMessagesList = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     border-left: 1px solid grey;
+    @media only screen and (max-width: 900px) {
+      width: 100%;
+      border-left: none;
+    }
 
     .messages {
       width: 100%;
@@ -76,6 +92,10 @@ export const StyledMessagesList = styled.div`
         flex-wrap: wrap;
         overflow: scroll;
         height: 95vh;
+
+        @media only screen and (max-width: 500px) {
+          width: 100%;
+        }
       }
 
       .user-detail {
@@ -87,9 +107,9 @@ export const StyledMessagesList = styled.div`
         justify-content: center;
         align-items: center;
 
-        @media only screen and (max-width: 900px) {
+        @media only screen and (max-width: 500px) {
           display: none;
-          width: 0%;
+          width: 0;
         }
 
         img {
