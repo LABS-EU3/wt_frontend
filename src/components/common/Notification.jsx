@@ -5,7 +5,6 @@ import { Icon, Text } from "@chakra-ui/core";
 import { GET_NOTIFICATIONS } from "../../graphql/queries";
 
 const StyledNotifications = styled.div`
-  min-height: 300px;
   margin: 3rem auto;
   width: 100%;
 
@@ -18,15 +17,27 @@ const StyledNotifications = styled.div`
   .new {
     font-weight: bold;
     padding: 10px;
-    background-color: #ffebe0;
     margin: 1rem 0;
   }
 
   .data {
-    background-color: #ffebe0;
-    border: 1px solid #ffd5be;
     padding: 2px;
     overflow: scroll;
+    height: 400px;
+
+    .single-message {
+      padding: 1rem 0;
+      background-color: #ffebe0;
+      border-bottom: 1px solid #ffd5be;
+      .topic {
+        font-weight: bolder;
+        font-family: Ubuntu, sans-serif;
+      }
+
+      .message {
+        font-family: Roboto, sans-serif;
+      }
+    }
   }
 
   h3 {
@@ -58,7 +69,7 @@ const Notification = ({ notifications, client }) => {
           <Icon name="bell" size="40px" />
           <Text margin="auto 10px">Notifications</Text>
         </div>
-        <p className="new">New</p>
+        <p className="new">New Messages</p>
 
         <h3>You currently don't have any notifications</h3>
       </StyledNotifications>
@@ -75,9 +86,9 @@ const Notification = ({ notifications, client }) => {
       <div className="data">
         {notificationData.map(notification => {
           return (
-            <div>
-              <div>{notification.topic}</div>
-              <div>{notification.message}</div>
+            <div className="single-message" key={notification.message}>
+              <p className="topic">{notification.topic}</p>
+              <p className="message">{notification.message}</p>
             </div>
           );
         })}

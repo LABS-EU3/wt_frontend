@@ -58,7 +58,7 @@ const ScheduleDetail = ({ client }) => {
           justifyContent="center"
           align="center"
         >
-          <CustomSpinner thickness="6px" size="xl" text="Loading..." />;
+          <CustomSpinner thickness="6px" size="xl" text="Loading..." />
         </Flex>
       </Box>
     );
