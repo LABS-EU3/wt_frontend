@@ -13,7 +13,7 @@ const StyledStreak = styled.div`
   position: absolute;
 `;
 
-const Streak = ({ streak }) => {
+const Streak = ({ streak, position = "absolute" }) => {
   let message = "Fantastic, Great work!";
   let emoji = "🚀🚀🚀";
   let className = "high";
@@ -31,7 +31,7 @@ const Streak = ({ streak }) => {
   }
 
   return (
-    <StyledStreak className={className}>
+    <StyledStreak className={className} style={{ position }}>
       <span role="img" aria-label="fire-emoji">
         {emoji}
       </span>{" "}

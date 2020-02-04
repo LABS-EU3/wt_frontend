@@ -10,7 +10,6 @@ import {
   Button,
   useDisclosure
 } from "@chakra-ui/core";
-
 import {
   IoIosPerson,
   IoIosMail,
@@ -18,14 +17,15 @@ import {
   IoIosTrendingUp
 } from "react-icons/io";
 
-import DashboardStyle from "./DashboardStyle";
+import { StyledProfile } from "./StyledProfile";
 
+import Streak from "../common/Streak";
 import { GET_USER_DETAILS } from "../../graphql/queries";
 import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import ModalPopup from "../common/ModalPopup";
 import EditProfile from "../common/EditProfile";
-import WorkoutHistoryCard from "../workouts/WorkoutHistoryCard";
+// import WorkoutHistoryCard from "../workouts/WorkoutHistoryCard";
 
 const ProfilePage = ({ client, history, workout }) => {
   const [userData, setUserData] = useState([]);
@@ -33,7 +33,6 @@ const ProfilePage = ({ client, history, workout }) => {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [workouts, setWorkouts] = useState([]);
-  const [uploadId, setUploadId] = useState("");
 
   const alert = (title, description, status) => {
     toast({
@@ -46,13 +45,6 @@ const ProfilePage = ({ client, history, workout }) => {
   };
 
   const handleSave = () => {};
-
-  const onOpenUpload = (id, e) => {
-    setUploadId(id);
-    onOpen(e);
-  };
-
-  // const dateCompleted = new Date(workout.endDate).toLocaleDateString();
 
   useEffect(() => {
     client
@@ -71,6 +63,7 @@ const ProfilePage = ({ client, history, workout }) => {
           "error"
         );
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -105,108 +98,96 @@ const ProfilePage = ({ client, history, workout }) => {
   }
 
   return (
-    <Box>
-      <DashboardStyle>
-        <div className="dashboard-content">
-          <div className="user-detail">
-            <Button variant="link" variantColor="orange" onClick={onOpen}>
-              Edit Profile
-            </Button>
-            <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Profile">
-              <EditProfile
-                data={userData}
-                setUserData={setUserData}
-                onSave={handleSave}
-                onClose={onClose}
-              />
-            </ModalPopup>
-            <Box paddingLeft="50px">
-              <Flex paddingY="30px" alignItems="center">
-                <Box as={IoIosPerson} size="50px" />
-                <Box textAlign="left" paddingLeft="20px">
-                  <p>Name</p>
-                  <p>{`${userData.firstname ? userData.firstname : ""} ${
-                    userData.lastname ? userData.lastname : ""
-                  }`}</p>
-                </Box>
-              </Flex>
-              <Flex paddingY="30px" alignItems="center">
-                <Box as={IoIosMail} size="50px" />
-                <Box textAlign="left" paddingLeft="20px">
-                  <p>Email</p>
-                  <p>{userData.email}</p>
-                </Box>
-              </Flex>
-              <Flex paddingY="30px" alignItems="center">
-                <Box as={IoIosFitness} size="50px" />
-                <Box textAlign="left" paddingLeft="20px">
-                  <p>Weight</p>
-                  <p>
-                    {userData.weight
-                      ? `${userData.weight} ${userData.weightUnit.name}`
-                      : "none"}
-                  </p>
-                </Box>
-              </Flex>
-              <Flex paddingY="30px" alignItems="center">
-                <Box as={IoIosTrendingUp} size="50px" />
-                <Box textAlign="left" paddingLeft="20px">
-                  <p>Height</p>
-                  <p>
-                    {userData.height
-                      ? `${userData.height} ${userData.heightUnit.name}`
-                      : "none"}
-                  </p>
-                </Box>
-              </Flex>
-            </Box>
+    <StyledProfile>
+      <div className="dashboard-content">
+        <div className="user-detail">
+          <Button variant="link" variantColor="orange" onClick={onOpen}>
+            Edit Profile
+          </Button>
+          <ModalPopup isOpen={isOpen} onClose={onClose} title="Edit Profile">
+            <EditProfile
+              data={userData}
+              setUserData={setUserData}
+              onSave={handleSave}
+              onClose={onClose}
+            />
+          </ModalPopup>
 
-            <Box
-              bg="tomato"
-              color="white"
-              p={4}
-              width="70%"
-              rounded="lg"
-              marginTop="30px"
-              marginLeft="15%"
-            >
-              <span role="img" aria-label="fire-emoji">
-                🔥🔥🔥
-              </span>{" "}
-              You have a {userData.streak} days streak. Keep it up!
-            </Box>
-          </div>
+          <Box>
+            <Flex paddingY="30px" alignItems="center">
+              <Box as={IoIosPerson} size="50px" />
+              <Box textAlign="left" paddingLeft="20px">
+                <p className="title">Name</p>
+                <p className="content">{`${
+                  userData.firstname ? userData.firstname : ""
+                } ${userData.lastname ? userData.lastname : ""}`}</p>
+              </Box>
+            </Flex>
+            <Flex paddingY="30px" alignItems="center">
+              <Box as={IoIosMail} size="50px" />
+              <Box textAlign="left" paddingLeft="20px">
+                <p className="title">Email</p>
+                <p className="content">{userData.email}</p>
+              </Box>
+            </Flex>
+            <Flex paddingY="30px" alignItems="center">
+              <Box as={IoIosFitness} size="50px" />
+              <Box textAlign="left" paddingLeft="20px">
+                <p className="title">Weight</p>
+                <p className="content">
+                  {userData.weight
+                    ? `${userData.weight} ${userData.weightUnit.name}`
+                    : "none"}
+                </p>
+              </Box>
+            </Flex>
+            <Flex paddingY="30px" alignItems="center">
+              <Box as={IoIosTrendingUp} size="50px" />
+              <Box textAlign="left" paddingLeft="20px">
+                <p className="title">Height</p>
+                <p className="content">
+                  {userData.height
+                    ? `${userData.height} ${userData.heightUnit.name}`
+                    : "none"}
+                </p>
+              </Box>
+            </Flex>
 
-          <div className="dasboard-detail profile-detail">
-            <section className="quotes">
-              <Avatar src={userData.photo} size="2xl" marginBottom="20px" />
-              <Heading>{`${userData.firstname ? userData.firstname : ""} ${
-                userData.lastname ? userData.lastname : ""
-              }`}</Heading>
-            </section>
-
-            <section className="goal">
-              <p>Recent Activity</p>
-              <div className="workout-history">
-                {workouts.map(workout => (
-                  <div className="profile-workouts">
-                    <div
-                      className="workout-history-content"
-                      id="profile-workout-history-name"
-                    >
-                      <p>{workout.workoutId.name} </p>
-                      <Link to={`/workout/${workout.workoutId.id}`}>
-                        <p className="link">View Details</p>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
+            <Flex paddingY="30px" alignItems="center">
+              <Streak streak={userData.streak} position="relative" />
+            </Flex>
+          </Box>
         </div>
-      </DashboardStyle>
-    </Box>
+
+        <div className="dasboard-detail profile-detail">
+          <section className="quotes">
+            <Avatar src={userData.photo} size="2xl" marginBottom="20px" />
+            <Heading>{`${userData.firstname ? userData.firstname : ""} ${
+              userData.lastname ? userData.lastname : ""
+            }`}</Heading>
+          </section>
+
+          <section className="goal">
+            <p>Recent Activity</p>
+            <div className="workout-history">
+              {workouts.map(workout => (
+                <div key={workout.id} className="profile-workouts">
+                  <div
+                    className="workout-history-content"
+                    id="profile-workout-history-name"
+                  >
+                    <p>{workout.workoutId.name} </p>
+                    <Link to={`/workout/${workout.workoutId.id}`}>
+                      <p className="link">View Details</p>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    </StyledProfile>
   );
 };
 

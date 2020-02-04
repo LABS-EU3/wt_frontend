@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const DashboardStyle = styled.div`
+export const StyledProfile = styled.div`
   width: 95vw;
   margin: 1rem auto;
   display: flex;
@@ -8,6 +8,9 @@ const DashboardStyle = styled.div`
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
   padding: 2rem;
 
+  @media only screen and (max-width: 400px) {
+    padding: 0.5rem;
+  }
   .welcome {
     display: flex;
     flex-wrap: wrap;
@@ -29,7 +32,7 @@ const DashboardStyle = styled.div`
     justify-content: space-between;
 
     @media only screen and (max-width: 1085px) {
-      flex-direction: column-reverse;
+      flex-direction: column;
       align-items: center;
     }
 
@@ -53,11 +56,33 @@ const DashboardStyle = styled.div`
         margin: 1rem 0;
       }
 
+      svg {
+        color: black;
+        font-weight: bolder;
+      }
+
+      .title {
+        font-weight: bolder;
+        font-family: Ubuntu;
+      }
+
+      .content {
+        font-family: Roboto;
+      }
+
       a {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
       }
+
+      /* .user-detail-item {
+          display: flex;
+          flex-wrap: wrap;
+          width: 100%;
+          flex-direction: column;
+
+      } */
     }
 
     .dasboard-detail {
@@ -143,12 +168,13 @@ const DashboardStyle = styled.div`
 
   .workout-history {
     width: 95%;
-    min-height: 250px;
+    height: 250px;
     max-height: 280px;
     overflow: hidden;
     margin: 1rem auto;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
+    overflow: scroll;
 
     @media screen and (max-width: 700px) {
       margin: auto;
@@ -189,64 +215,4 @@ const DashboardStyle = styled.div`
       }
     }
   }
-
-  /* .colorOrange {
-    color: orange;
-  }
-
-  .alignText {
-    text-align: left;
-  }
-
-  .pointer {
-    cursor: pointer;
-    background-color: black;
-    color: white;
-
-    &:hover {
-      background-color: #8884d8;
-      color: black;
-    }
-  }
-
-  .slide {
-    -webkit-animation-name: slide;
-    -webkit-animation-duration: 1.5s;
-    animation-name: slide;
-    animation-duration: 1.5s;
-  }
-
-  .mySlides {
-    display: none;
-
-    section {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 0px;
-    }
-  }
-
-  > div {
-    display: flex;
-
-
-    a {
-      margin-left: 90%;
-    }
-
-    > div {
-      section {
-        margin-bottom: 30px;
-      }
-
-      section:first-child {
-        p {
-
-          width: 100%;
-        }
-      }
-    }
-  } */
 `;
-
-export default DashboardStyle;
