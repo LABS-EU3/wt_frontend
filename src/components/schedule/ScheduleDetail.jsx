@@ -36,6 +36,9 @@ const ScheduleDetail = ({ client }) => {
         const newSchedule = res.data.userSchedule.map(item => {
           item["title"] = item.workoutId.name;
           item["date"] = new Date(item.startDate);
+          item[
+            "url"
+          ] = `https://app.trackdrills.com/workout/${item.workoutId.id}`;
           return item;
         });
         setSchedule(newSchedule);
