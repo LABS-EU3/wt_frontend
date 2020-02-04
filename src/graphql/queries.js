@@ -308,3 +308,24 @@ export const GET_FRIENDS = gql`
     }
   }
 `;
+
+export const GET_COMPLETED_WORKOUTS_GALLERY = gql`
+  query {
+    completedWorkoutsGallery {
+      id
+      firstname
+      lastname
+      email
+      goal
+      gallery {
+        id
+        picture
+        endDate
+        workoutId {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
