@@ -42,7 +42,6 @@ const DashboardStyle = styled.div`
       border-radius: 10px;
       padding: 0.5rem;
       border: 2px solid grey;
-      border: 1px solid red;
 
       @media only screen and (max-width: 1085px) {
         width: 70%;
@@ -134,6 +133,11 @@ const DashboardStyle = styled.div`
       width: 100%;
       height: 335px;
       overflow: hidden;
+
+      @media screen and (max-width: 700px){
+        height: 300px;
+        
+      }
     }
   }
 
@@ -146,11 +150,22 @@ const DashboardStyle = styled.div`
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
 
+    @media screen and (max-width: 700px){
+      margin: auto;
+      margin-top: 0;
+      min-height: 200px;
+      max-height: 245px;
+    }
+
     .workout-history-content {
       width: 100%;
       display: flex;
       padding: 1rem;
       justify-content: space-between;
+
+      @media screen and (max-width: 700px){
+        padding: 0.8rem 0.5rem;
+      }
     }
   }
 
@@ -158,6 +173,7 @@ const DashboardStyle = styled.div`
     p {
       color: black;
       width: 70%;
+      text-align: left;
     }
 
     .link {
@@ -167,6 +183,10 @@ const DashboardStyle = styled.div`
 
     a {
       width: 25%;
+
+      @media screen and (max-width: 700px){
+        width: 30%;
+      }
     }
   }
 
