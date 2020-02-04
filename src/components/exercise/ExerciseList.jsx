@@ -14,6 +14,7 @@ const ExerciseList = () => {
         <Search
           placeholder="Look for a specific exercise"
           search={search}
+          id="search-exercise"
           setSearch={setSearch}
         />
         {search.length > 0 ? (

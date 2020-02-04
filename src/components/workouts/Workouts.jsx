@@ -92,14 +92,15 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   if (workoutQuery === "CUSTOM_WORKOUTS") {
     return (
       <WorkoutsStyle>
-        <h3>
-          Custom workouts
+        <div className="header">
+          <h3>Custom workouts</h3>
           <Link to="/my/workout/new">
             <Button variantColor="orange" leftIcon="add" isLoading={isLoading}>
               New workout
             </Button>
           </Link>
-        </h3>
+        </div>
+
         {limitedWorkouts.length > 0 ? (
           <>
             <div className="container">
@@ -124,7 +125,10 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   if (limitedWorkouts.length > 0) {
     return (
       <WorkoutsStyle>
-        <h3>{workoutName}</h3>
+        <div className="header">
+          <h3>{workoutName}</h3>
+        </div>
+
         {limitedWorkouts.map(item => (
           <WorkoutCard key={item.id} data={item} />
         ))}
