@@ -87,6 +87,11 @@ export const StyledMessagesList = styled.div`
         justify-content: center;
         align-items: center;
 
+        @media only screen and (max-width: 900px) {
+          display: none;
+          width: 0%;
+        }
+
         img {
           width: 100px;
           height: 100px;
@@ -131,12 +136,16 @@ export const StyledMessageDetail = styled.div`
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
-  /* position: relative; */
+  position: relative;
 
   /* @media only screen and (max-width: 900px) {
         width: 100%;
         margin: 1rem 0;
       } */
+
+  .scroll {
+    margin-top: 5rem;
+  }
   h3 {
     width: 100%;
     color: #ff8744;
@@ -186,17 +195,18 @@ export const StyledMessageDetail = styled.div`
     align-items: flex-end;
     flex-direction: column;
     padding: 1rem;
+    margin-top: 1rem;
   }
 
   .new-message {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    /* justify-content: space-around; */
     margin: 1rem 0;
     align-items: center;
-    /* bottom: 0;
-    position: absolute; */
+    justify-content: center;
+    bottom: 0;
+    position: absolute;
 
     form {
       width: 100%;
@@ -208,8 +218,7 @@ export const StyledMessageDetail = styled.div`
         padding: 1rem;
         border: 2px solid #ccc5b9;
         outline: none;
-        border-radius: 10px;
-        background: rgba(232, 232, 232, 0.25);
+        border-radius: 5px;
         color: #ff8744;
 
         &:focus {

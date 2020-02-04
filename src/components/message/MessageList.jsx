@@ -46,7 +46,7 @@ const MessageList = ({ client, match }) => {
       }
     }
   }
-  console.log(receivingMessage, "rrrr");
+
   if (receivingMessage) {
     const friendFromFriends = receivingMessage.filter(
       frnd => frnd.id === friend.id
@@ -73,6 +73,7 @@ const MessageList = ({ client, match }) => {
     );
   }
   if (friends.length > 0) {
+    console.log(friend);
     return (
       <StyledMessagesList>
         <div className="users-list">
