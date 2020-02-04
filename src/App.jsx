@@ -23,6 +23,7 @@ import MessageList from "./components/message/MessageList";
 import Buddies from "./components/buddies/Buddies";
 import NotFound from "./components/common/NotFound";
 import ErrorBoundry from "./components/common/ErrorBoundry";
+import CompletedWorkoutsGallery from "./components/gallery/CompletedWorkoutsGallery";
 
 const App = () => {
   return (
@@ -59,6 +60,11 @@ const App = () => {
             component={WorkoutHistory}
           />
           <PrivateRoute exact path="/buddies" component={Buddies} />
+          <PrivateRoute
+            exact
+            path="/gallery"
+            component={CompletedWorkoutsGallery}
+          />
           <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
