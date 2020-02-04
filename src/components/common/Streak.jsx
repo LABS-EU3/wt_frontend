@@ -6,9 +6,11 @@ const StyledStreak = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 25rem 2rem 0 2rem;
-  padding: 1rem 5rem;
+  margin: 1rem;
+  padding: 1rem;
   border-radius: 1rem;
+  bottom: 0;
+  position: absolute;
 `;
 
 const Streak = ({ streak }) => {

@@ -82,7 +82,7 @@ const MessageDetail = ({
           </div>
         );
       })}
-      <div ref={messagesEndRef} />
+      <div className="scroll" ref={messagesEndRef} />
 
       <div className="new-message">
         <form

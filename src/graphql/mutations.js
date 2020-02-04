@@ -197,6 +197,7 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
     $description: String!
     $intensity: String!
     $exercises: [String!]!
+    $picture: Upload!
   ) {
     customWorkout(
       input: {
@@ -205,6 +206,7 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
         description: $description
         intensity: $intensity
         exercises: $exercises
+        picture: $picture
       }
     ) {
       id

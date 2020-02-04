@@ -332,6 +332,6 @@ export const CustomWorkoutStyleDetail = styled.div`
   }
 
   .cw-submit-btn {
-    margin-top: 1rem;
+    margin-top: 3rem;
   }
 `;

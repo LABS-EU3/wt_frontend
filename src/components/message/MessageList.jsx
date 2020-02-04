@@ -46,7 +46,7 @@ const MessageList = ({ client, match }) => {
       }
     }
   }
-  console.log(receivingMessage, "rrrr");
+
   if (receivingMessage) {
     const friendFromFriends = receivingMessage.filter(
       frnd => frnd.id === friend.id
@@ -72,6 +72,7 @@ const MessageList = ({ client, match }) => {
       </Box>
     );
   }
+
   if (friends.length > 0) {
     return (
       <StyledMessagesList>
@@ -84,14 +85,21 @@ const MessageList = ({ client, match }) => {
             variant="filled"
             type="text"
           />
-          {friends.map(friend => {
-            const { firstname, photo, messages } = friend;
+          {friends.map(frnd => {
+            const { firstname, photo, messages } = frnd;
+            let selected;
+
+            if (friend) {
+              if (friend.id === frnd.id) {
+                selected = "selected";
+              }
+            }
+
             return (
               <div
-                key={friend.id}
-                onClick={() => setFriend(friend)}
-                //   className= {`friend ${selected}`}
-                className="friend"
+                key={frnd.id}
+                onClick={() => setFriend(frnd)}
+                className={`friend ${selected}`}
               >
                 <img src={photo} alt={firstname} />
                 <div className="friend-dtl">

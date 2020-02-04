@@ -329,3 +329,12 @@ export const GET_COMPLETED_WORKOUTS_GALLERY = gql`
     }
   }
 `;
+
+export const GET_NOTIFICATIONS = gql`
+  query {
+    notifications {
+      topic
+      message
+    }
+  }
+`;

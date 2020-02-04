@@ -42,6 +42,7 @@ const DashboardStyle = styled.div`
       border-radius: 10px;
       padding: 0.5rem;
       border: 2px solid grey;
+      position: relative;
 
       @media only screen and (max-width: 1085px) {
         width: 70%;
@@ -112,6 +113,80 @@ const DashboardStyle = styled.div`
           font-family: Ubuntu;
           margin: 1rem 0;
         }
+      }
+    }
+  }
+
+  .profile-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+
+    .quotes {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .goal {
+      width: 100%;
+      height: 335px;
+      overflow: hidden;
+
+      @media screen and (max-width: 700px){
+        height: 300px;
+        
+      }
+    }
+  }
+
+  .workout-history {
+    width: 95%;
+    min-height: 250px;
+    max-height: 280px;
+    overflow-hidden;
+    margin: 1rem auto;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+
+    @media screen and (max-width: 700px){
+      margin: auto;
+      margin-top: 0;
+      min-height: 200px;
+      max-height: 245px;
+    }
+
+    .workout-history-content {
+      width: 100%;
+      display: flex;
+      padding: 1rem 2rem;
+      justify-content: space-between;
+
+      @media screen and (max-width: 700px){
+        padding: 0.8rem 0.5rem;
+      }
+    }
+  }
+
+  #profile-workout-history-name {
+    p {
+      color: black;
+      width: 70%;
+      text-align: left;
+    }
+
+    .link {
+      color: #ff8744;
+      width: 100%;
+    }
+
+    a {
+      width: 25%;
+
+      @media screen and (max-width: 700px){
+        width: 30%;
       }
     }
   }
