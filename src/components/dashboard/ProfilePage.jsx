@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
+import { Link } from "react-router-dom";
 import {
   Flex,
   Box,
@@ -20,15 +21,19 @@ import {
 import DashboardStyle from "./DashboardStyle";
 
 import { GET_USER_DETAILS } from "../../graphql/queries";
+import { GET_COMPLETED_WORKOUTS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import ModalPopup from "../common/ModalPopup";
 import EditProfile from "../common/EditProfile";
+import WorkoutHistoryCard from "../workouts/WorkoutHistoryCard";
 
-const ProfilePage = ({ client, history }) => {
+const ProfilePage = ({ client, history, workout }) => {
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [workouts, setWorkouts] = useState([]);
+  const [uploadId, setUploadId] = useState("");
 
   const alert = (title, description, status) => {
     toast({
@@ -41,6 +46,32 @@ const ProfilePage = ({ client, history }) => {
   };
 
   const handleSave = () => {};
+
+  const onOpenUpload = (id, e) => {
+    setUploadId(id);
+    onOpen(e);
+  };
+
+  // const dateCompleted = new Date(workout.endDate).toLocaleDateString();
+
+  useEffect(() => {
+    client
+      .query({
+        query: GET_COMPLETED_WORKOUTS
+      })
+      .then(res => {
+        setWorkouts(res.data.completedWorkouts);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        alert(
+          "An error occurred.",
+          "Unable to load your completed workouts☹️.",
+          "error"
+        );
+      });
+  }, []);
 
   useEffect(() => {
     client
@@ -146,14 +177,9 @@ const ProfilePage = ({ client, history }) => {
             </Box>
           </div>
 
-          <div className="dasboard-detail">
+          <div className="dasboard-detail profile-detail">
             <section className="quotes">
-              <Avatar
-                src={userData.photo}
-                size="2xl"
-                marginLeft="35%"
-                marginBottom="20px"
-              />
+              <Avatar src={userData.photo} size="2xl" marginBottom="20px" />
               <Heading>{`${userData.firstname ? userData.firstname : ""} ${
                 userData.lastname ? userData.lastname : ""
               }`}</Heading>
@@ -161,9 +187,21 @@ const ProfilePage = ({ client, history }) => {
 
             <section className="goal">
               <p>Recent Activity</p>
-              <Heading as="h4" size="md">
-                {/* {profileData.user.goal} */}
-              </Heading>
+              <div className="workout-history">
+                {workouts.map(workout => (
+                  <div className="profile-workouts">
+                    <div
+                      className="workout-history-content"
+                      id="profile-workout-history-name"
+                    >
+                      <p>{workout.workoutId.name} </p>
+                      <Link to={`/workout/${workout.workoutId.id}`}>
+                        <p className="link">View Details</p>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </section>
           </div>
         </div>
