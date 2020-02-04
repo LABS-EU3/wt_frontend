@@ -160,7 +160,7 @@ const DashboardStyle = styled.div`
     .workout-history-content {
       width: 100%;
       display: flex;
-      padding: 1rem;
+      padding: 1rem 2rem;
       justify-content: space-between;
 
       @media screen and (max-width: 700px){
