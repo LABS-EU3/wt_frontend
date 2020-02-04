@@ -316,22 +316,7 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 flex="1"
                 display={{ base: "block", md: "none" }}
                 mt={5}
-              >
-                {/* <Image src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
-                <Text color="orange.400" marginTop="10px">
-                  Replace photo?
-                </Text>
-                <Input
-                  id="photo"
-                  name="photo"
-                  variant="unstyled"
-                  my={3}
-                  placeholder="PHOTO"
-                  type="file"
-                  name="picture"
-                  onChange={formik.handleChange}
-                /> */}
-              </Box>
+              ></Box>
               <Button
                 type="submit"
                 className="cw-submit-btn"
@@ -365,7 +350,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 my={3}
                 placeholder="PHOTO"
                 type="file"
-                name="picture"
                 onChange={onChange}
               />
             </Box>

@@ -29,28 +29,6 @@ const Message = ({
     });
   };
 
-  // const { subscribeToMore, data } = useQuery(GET_MESSAGE_HISTORY, {
-  //   variables: { receiver: "5e2aedba56cf1200175d69c9" }
-  // });
-
-  // if (messages.length > 0) {
-  //   messages.forEach(message => {
-  //     if (message.sender === userData.user_id) {
-  //       // addUserMessage(message.message, "asd");
-  //     } else {
-  //       // addResponseMessage(message.message);
-  //     }
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   if (typeof data === "object") {
-  //     setMessages(data.friendChat);
-  //   }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [data]);
-
   const handleNewUserMessage = (e, newMessage) => {
     e.preventDefault();
 
