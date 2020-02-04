@@ -132,13 +132,16 @@ const DashboardStyle = styled.div`
     }
     .goal {
       width: 100%;
-      height: 300px;
+      height: 335px;
+      overflow: hidden;
     }
   }
 
   .workout-history {
     width: 95%;
-    height: 250px;
+    min-height: 250px;
+    max-height: 280px;
+    overflow-hidden;
     margin: 1rem auto;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
