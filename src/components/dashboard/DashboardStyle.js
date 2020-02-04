@@ -118,7 +118,6 @@ const DashboardStyle = styled.div`
   }
 
   .profile-detail {
-    border: 1px solid blue;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,14 +125,45 @@ const DashboardStyle = styled.div`
     justify-content: space-between;
 
     .quotes {
-      border: 1px solid green;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .goal {
-      border: 1px solid black;
+      width: 100%;
+      height: 300px;
+    }
+  }
+
+  .workout-history {
+    width: 95%;
+    height: 250px;
+    margin: 1rem auto;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+
+    .workout-history-content {
+      width: 100%;
+      display: flex;
+      padding: 1rem;
+      justify-content: space-between;
+    }
+  }
+
+  #profile-workout-history-name {
+    p {
+      color: black;
+      width: 70%;
+    }
+
+    .link {
+      color: #ff8744;
+      width: 100%;
+    }
+
+    a {
+      width: 25%;
     }
   }
 
