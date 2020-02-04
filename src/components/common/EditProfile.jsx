@@ -11,14 +11,7 @@ import {
   Heading,
   FormLabel,
   Switch,
-  useToast,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  useDisclosure
+  useToast
 } from "@chakra-ui/core";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -27,17 +20,14 @@ import { GET_UNITS } from "../../graphql/queries";
 
 import { withApollo } from "react-apollo";
 
-import ModalPopup from "../common/ModalPopup";
 import EditPicture from "../common/EditPicture";
 
 const EditProfile = ({ onClose, data, client, setUserData }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
-  // const [updatedData, setUpdatedData] = useState([]);
   const [heightUnits, setHeightUnits] = useState([]);
   const [weightUnits, setWeightUnits] = useState([]);
   const [updatedData, setUpdatedData] = useState(data);
-  const { isOpen, onOpen, onPictureClose } = useDisclosure();
   const [uploadFile, setUploadFile] = useState(null);
 
   const alert = (title, description, status) => {
@@ -125,10 +115,9 @@ const EditProfile = ({ onClose, data, client, setUserData }) => {
           }
         })
         .then(res => {
-          debugger;
           setLoading(false);
           setUpdatedData(res.data.updateUser);
-          alert("Profile Updates Successfully", "", "success");
+          alert("Profile Updated Successfully", "", "success");
 
           onClose();
           setTimeout(() => {
