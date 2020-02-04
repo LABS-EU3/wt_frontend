@@ -129,6 +129,10 @@ const Navigation = ({ location }) => {
                   Profile &nbsp; <i className="far fa-user"></i>
                 </Link>
 
+                <Link to="/gallery">
+                  Gallery &nbsp; <i className="fas fa-image"></i>
+                </Link>
+
                 <Link to="#" onClick={logout}>
                   Logout &nbsp; <i className="fas fa-sign-out-alt"></i>
                 </Link>
