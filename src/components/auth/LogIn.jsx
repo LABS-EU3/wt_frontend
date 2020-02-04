@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import FacebookLogin from "react-facebook-login";
 
 import Input from "../common/Input";
 import { Button, Checkbox, useToast } from "@chakra-ui/core";
@@ -12,10 +13,13 @@ import { isLoggedIn } from "../../utils";
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
 import Preview from "../common/Preview";
-import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
+import {
+  GOOGLE_AUTH_MUTATION,
+  FACEBOOK_AUTH_MUTATION
+} from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
-const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_FACEBOOK_APP_ID } = process.env;
 
 function Login({ client, history }) {
   const toast = useToast();
@@ -117,6 +121,7 @@ function Login({ client, history }) {
   }
 
   const responseFailureGoogle = error => {
+    console.log(error);
     alert("An error occurred.", "Unable to login to your account.", "error");
   };
 
@@ -147,6 +152,45 @@ function Login({ client, history }) {
         }
       })
       .catch(error => {
+        console.log(error);
+        alert(
+          "An error occurred.",
+          "Unable to login to your account.",
+          "error"
+        );
+      });
+  };
+
+  const responseFacebook = response => {
+    console.log(response);
+    client
+      .mutate({
+        mutation: FACEBOOK_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        console.log(res);
+        const { token, isNewUser, id } = res.data.authFacebook;
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ token, isNewUser, id })
+        );
+        alert(
+          "Login Successful.",
+          "You can now access your dashboard",
+          "success"
+        );
+
+        if (isNewUser === true) {
+          setLoginSuccess("/onboarding");
+        } else {
+          setLoginSuccess("/");
+        }
+      })
+      .catch(error => {
+        console.log(error);
         alert(
           "An error occurred.",
           "Unable to login to your account.",
@@ -247,7 +291,8 @@ function Login({ client, history }) {
                 onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
               />
-              <Button
+
+              {/* <Button
                 type="submit"
                 variantColor="facebook"
                 flexShrink="0"
@@ -255,7 +300,26 @@ function Login({ client, history }) {
                 size="lg"
               >
                 Login with Facebook
-              </Button>
+              </Button> */}
+              <FacebookLogin
+                appId={REACT_APP_FACEBOOK_APP_ID}
+                // autoLoad={true}
+                fields="name,email,picture"
+                callback={responseFacebook}
+                // cssClass="my-facebook-button-class"
+                // icon="fa-facebook"
+                render={renderProps => (
+                  <Button
+                    type="submit"
+                    variantColor="facebook"
+                    flexShrink="0"
+                    rightIcon="arrow-forward"
+                    size="lg"
+                  >
+                    Login with Facebook
+                  </Button>
+                )}
+              />
             </div>
 
             <Link to="/accountrecovery">Forgot Password?</Link>
