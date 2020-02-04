@@ -365,7 +365,6 @@ const CustomWorkoutDetail = ({ client, history }) => {
                 my={3}
                 placeholder="PHOTO"
                 type="file"
-                name="picture"
                 onChange={onChange}
               />
             </Box>

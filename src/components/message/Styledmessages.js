@@ -10,12 +10,6 @@ export const StyledMessagesList = styled.div`
   padding: 1rem 1rem 0 1rem;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
 
-  .selected {
-    border: 1px solid red;
-    cursor: pointer;
-    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
-  }
-
   @media only screen and (max-width: 600px) {
     flex-direction: column;
   }
@@ -25,14 +19,18 @@ export const StyledMessagesList = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    /* @media only screen and (max-width: 900px) {
-      width: 100%;
-      align-items: center;
-    } */
+
     @media only screen and (max-width: 900px) {
       display: none;
       width: 0;
     }
+
+    .selected {
+      border: 1px solid #ff8744;
+      cursor: pointer;
+      box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+    }
+
     .friend {
       display: flex;
       flex-wrap: wrap;

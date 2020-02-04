@@ -60,6 +60,7 @@ const Notification = ({ notifications, client }) => {
       .catch(err => {
         alert("An error occurred.", "Unable to load", "error");
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (notificationData.length === 0) {
