@@ -34,6 +34,16 @@ export const GOOGLE_AUTH_MUTATION = gql`
   }
 `;
 
+export const FACEBOOK_AUTH_MUTATION = gql`
+  mutation authFacebook($accessToken: String!) {
+    authFacebook(input: { accessToken: $accessToken }) {
+      id
+      token
+      isNewUser
+    }
+  }
+`;
+
 export const ONBOARDING = gql`
   mutation updateUser(
     $heightUnit: String!

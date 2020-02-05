@@ -223,6 +223,7 @@ export const EXERCISES_BY_FIELDS = gql`
 export const GET_USER_DETAILS = gql`
   query {
     user {
+      streak
       firstname
       lastname
       equipment

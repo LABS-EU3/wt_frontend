@@ -71,8 +71,9 @@ const Notification = ({ notifications, client }) => {
           <Text margin="auto 10px">Notifications</Text>
         </div>
         <p className="new">New Messages</p>
-
-        <h3>You currently don't have any notifications</h3>
+        <div className="data">
+          <h3>You currently don't have any notifications</h3>
+        </div>
       </StyledNotifications>
     );
   }

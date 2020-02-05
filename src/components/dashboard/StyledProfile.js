@@ -41,7 +41,6 @@ export const StyledProfile = styled.div`
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
-      box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
       border-radius: 10px;
       padding: 0.5rem;
       border: 2px solid grey;
@@ -75,14 +74,6 @@ export const StyledProfile = styled.div`
         flex-wrap: wrap;
         justify-content: flex-end;
       }
-
-      /* .user-detail-item {
-          display: flex;
-          flex-wrap: wrap;
-          width: 100%;
-          flex-direction: column;
-
-      } */
     }
 
     .dasboard-detail {
@@ -175,6 +166,9 @@ export const StyledProfile = styled.div`
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
     overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
     @media screen and (max-width: 700px) {
       margin: auto;
@@ -183,14 +177,31 @@ export const StyledProfile = styled.div`
       max-height: 245px;
     }
 
-    .workout-history-content {
+    h3 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      font-weight: bolder;
+      font-size: 1.2rem;
+    }
+
+    .profile-workouts {
       width: 100%;
       display: flex;
-      padding: 1rem 2rem;
-      justify-content: space-between;
+      flex-wrap: wrap;
 
-      @media screen and (max-width: 700px) {
-        padding: 0.8rem 0.5rem;
+      .workout-history-content {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1rem 2rem;
+        /* justify-content: space-between; */
+        /* flex-direction: column; */
+
+        @media screen and (max-width: 700px) {
+          padding: 0.8rem 0.5rem;
+        }
       }
     }
   }

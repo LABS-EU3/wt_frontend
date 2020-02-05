@@ -80,7 +80,7 @@ const ProfilePage = ({ client, history, workout }) => {
         alert("An error occurred.", "Unable to load", "error");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -170,19 +170,23 @@ const ProfilePage = ({ client, history, workout }) => {
           <section className="goal">
             <p>Recent Activity</p>
             <div className="workout-history">
-              {workouts.map(workout => (
-                <div key={workout.id} className="profile-workouts">
-                  <div
-                    className="workout-history-content"
-                    id="profile-workout-history-name"
-                  >
-                    <p>{workout.workoutId.name} </p>
-                    <Link to={`/workout/${workout.workoutId.id}`}>
-                      <p className="link">View Details</p>
-                    </Link>
+              {workouts.length > 0 ? (
+                workouts.map(workout => (
+                  <div key={workout.id} className="profile-workouts">
+                    <div
+                      className="workout-history-content"
+                      id="profile-workout-history-name"
+                    >
+                      <p>{workout.workoutId.name} </p>
+                      <Link to={`/workout/${workout.workoutId.id}`}>
+                        <p className="link">View Details</p>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <h3>You have no recent workout(s)</h3>
+              )}
             </div>
           </section>
         </div>
