@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Divider, Heading, Text, Image } from "@chakra-ui/core";
+import moment from "moment";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
 import { FriendsGalleryStyle } from "./StyledGallery";
 
 const FriendsGallery = ({ wGallery }) => {
@@ -37,9 +39,9 @@ const FriendsGallery = ({ wGallery }) => {
       </section>
 
       <Carousel responsive={responsive}>
-        {gallery.map((gal, indx) => {
+        {gallery.map(gal => {
           return (
-            <div>
+            <div key={gal.id}>
               <Image
                 src={gal.picture}
                 alt="user-progress"
@@ -50,7 +52,7 @@ const FriendsGallery = ({ wGallery }) => {
               <Box textAlign="left" paddingLeft={3}>
                 <Text>{gal.workoutId.name}</Text>
                 <Text color="orange.400">
-                  {new Date(gal.endDate).toLocaleDateString()}
+                  {moment(gal.endDate).format("LL")}
                 </Text>
               </Box>
             </div>

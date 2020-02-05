@@ -99,6 +99,16 @@ const DashboardStyle = styled.div`
         }
       }
 
+      h4 {
+        width: 100%;
+        padding-left: 1rem;
+        font-family: Ubuntu;
+        font-style: normal;
+        font-weight: normal;
+        margin: 0.5rem 0;
+        font-size: 2rem;
+      }
+
       .recomended-workouts {
         display: flex;
         flex-wrap: wrap;
