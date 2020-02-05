@@ -180,6 +180,7 @@ const AuthStyle = styled.div`
         }
 
         button {
+          border-radius: 10px;
           @media only screen and (max-width: 1300px) {
             font-size: 1rem;
           }

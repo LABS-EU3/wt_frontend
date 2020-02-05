@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import Input from "../common/Input";
 import { Button, Checkbox, useToast } from "@chakra-ui/core";
@@ -121,7 +121,6 @@ function Login({ client, history }) {
   }
 
   const responseFailureGoogle = error => {
-    console.log(error);
     alert("An error occurred.", "Unable to login to your account.", "error");
   };
 
@@ -152,7 +151,6 @@ function Login({ client, history }) {
         }
       })
       .catch(error => {
-        console.log(error);
         alert(
           "An error occurred.",
           "Unable to login to your account.",
@@ -162,7 +160,6 @@ function Login({ client, history }) {
   };
 
   const responseFacebook = response => {
-    console.log(response);
     client
       .mutate({
         mutation: FACEBOOK_AUTH_MUTATION,
@@ -171,7 +168,6 @@ function Login({ client, history }) {
         }
       })
       .then(res => {
-        console.log(res);
         const { token, isNewUser, id } = res.data.authFacebook;
         localStorage.setItem(
           "userData",
@@ -190,7 +186,6 @@ function Login({ client, history }) {
         }
       })
       .catch(error => {
-        console.log(error);
         alert(
           "An error occurred.",
           "Unable to login to your account.",
@@ -292,24 +287,12 @@ function Login({ client, history }) {
                 cookiePolicy={"single_host_origin"}
               />
 
-              {/* <Button
-                type="submit"
-                variantColor="facebook"
-                flexShrink="0"
-                rightIcon="arrow-forward"
-                size="lg"
-              >
-                Login with Facebook
-              </Button> */}
               <FacebookLogin
                 appId={REACT_APP_FACEBOOK_APP_ID}
-                // autoLoad={true}
-                fields="name,email,picture"
                 callback={responseFacebook}
-                // cssClass="my-facebook-button-class"
-                // icon="fa-facebook"
                 render={renderProps => (
                   <Button
+                    onClick={renderProps.onClick}
                     type="submit"
                     variantColor="facebook"
                     flexShrink="0"
