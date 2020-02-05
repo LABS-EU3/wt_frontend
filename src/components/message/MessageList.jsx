@@ -108,7 +108,13 @@ const MessageList = ({ client, match }) => {
                 onClick={() => setFriend(frnd)}
                 className={`friend ${selected}`}
               >
-                <img src={photo} alt={firstname} />
+                <img
+                  src={
+                    photo ||
+                    "https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg"
+                  }
+                  alt={firstname}
+                />
                 <div className="friend-dtl">
                   <p>{firstname}</p>
                   <span>
