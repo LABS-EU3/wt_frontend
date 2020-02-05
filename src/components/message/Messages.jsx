@@ -73,7 +73,13 @@ const Message = ({
         </div>
 
         <div className="user-detail">
-          <img src={friend.photo} alt={friend.firstname} />
+          <img
+            src={
+              friend.photo ||
+              "https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg"
+            }
+            alt={friend.firstname}
+          />
           <h3>
             {friend.firstname} {friend.lastname}
           </h3>

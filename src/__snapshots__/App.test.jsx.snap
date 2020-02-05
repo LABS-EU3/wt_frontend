@@ -93,6 +93,11 @@ exports[`<App /> renders the App component correctly 1`] = `
         exact={true}
         path="/buddies"
       />
+      <PrivateRoute
+        component={[Function]}
+        exact={true}
+        path="/gallery"
+      />
       <Route
         component={[Function]}
         path="*"

@@ -6,6 +6,7 @@ import LogoImage from "../../assets/logo.png";
 import { isLoggedIn } from "../../utils";
 
 const StyledLogo = styled.div`
+  padding: 0 2rem;
   img {
     width: 150px;
   }

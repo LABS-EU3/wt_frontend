@@ -39,9 +39,9 @@ const FriendsGallery = ({ wGallery }) => {
       </section>
 
       <Carousel responsive={responsive}>
-        {gallery.map((gal, indx) => {
+        {gallery.map(gal => {
           return (
-            <div>
+            <div key={gal.id}>
               <Image
                 src={gal.picture}
                 alt="user-progress"
@@ -52,9 +52,7 @@ const FriendsGallery = ({ wGallery }) => {
               <Box textAlign="left" paddingLeft={3}>
                 <Text>{gal.workoutId.name}</Text>
                 <Text color="orange.400">
-                  {moment(new Date(gal.endDate).toLocaleDateString()).format(
-                    "LL"
-                  )}
+                  {moment(gal.endDate).format("LL")}
                 </Text>
               </Box>
             </div>

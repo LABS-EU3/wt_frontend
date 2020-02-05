@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import styled from "styled-components";
-import { Icon, Text } from "@chakra-ui/core";
+
+import { Icon, Text, useToast } from "@chakra-ui/core";
 import { GET_NOTIFICATIONS } from "../../graphql/queries";
 
 const StyledNotifications = styled.div`
@@ -47,6 +48,18 @@ const StyledNotifications = styled.div`
 `;
 
 const Notification = ({ notifications, client }) => {
+  const toast = useToast();
+
+  const alert = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 9000,
+      isClosable: true
+    });
+  };
+
   const [notificationData, setNotificationData] = useState([]);
 
   useEffect(() => {

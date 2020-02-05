@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withApollo, useQuery } from "react-apollo";
 import moment from "moment";
+import { Redirect } from "react-router-dom";
 
 import { Box, Flex } from "@chakra-ui/core";
 import CustomSpinner from "../common/Spinner";
@@ -36,10 +37,16 @@ const MessageList = ({ client, match }) => {
         frnd.firstname.toLowerCase().includes(debounceSearch.toLowerCase())
       )
     );
-    console.log(debounceSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceSearch]);
 
   const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
+
+  if (data) {
+    if (data.friends.length === 0) {
+      return <Redirect to="/" />;
+    }
+  }
 
   if (data && friends.length === 0) {
     setFriends(data.friends);
@@ -68,8 +75,6 @@ const MessageList = ({ client, match }) => {
     setFriend(friendFromFriends[0]);
     setReceivingMessage(false);
   }
-
-  const searchMessages = () => {};
 
   if (loading) {
     return (
@@ -116,7 +121,13 @@ const MessageList = ({ client, match }) => {
                 onClick={() => setFriend(frnd)}
                 className={`friend ${selected}`}
               >
-                <img src={photo} alt={firstname} />
+                <img
+                  src={
+                    photo ||
+                    "https://cdn1.vectorstock.com/i/thumb-large/22/05/male-profile-picture-vector-1862205.jpg"
+                  }
+                  alt={firstname}
+                />
                 <div className="friend-dtl">
                   <p>{firstname}</p>
                   <span>
