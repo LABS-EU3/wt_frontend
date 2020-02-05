@@ -117,8 +117,14 @@ function Dashboard({ client, history }) {
               <p className="colorOrange alignText">Recommended Workouts</p>
               <RecommendedWorkouts />
             </section>
-
-            <Charts graphs={dashboardData.graphs} />
+            {dashboardData.graphs[0].data.length === 0 && (
+              <Heading as="h4" size="md">
+                Start working out to view progress chart
+              </Heading>
+            )}
+            {dashboardData.graphs[0].data.length > 0 && (
+              <Charts graphs={dashboardData.graphs} />
+            )}
           </div>
         </div>
       </DashboardStyle>

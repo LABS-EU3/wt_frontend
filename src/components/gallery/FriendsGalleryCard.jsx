@@ -1,7 +1,9 @@
 import React from "react";
-import { Stack, Box, Divider, Heading, Text, Image } from "@chakra-ui/core";
+import { Box, Divider, Heading, Text, Image } from "@chakra-ui/core";
+import moment from "moment";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
 import { FriendsGalleryStyle } from "./StyledGallery";
 
 const FriendsGallery = ({ wGallery }) => {
@@ -50,7 +52,9 @@ const FriendsGallery = ({ wGallery }) => {
               <Box textAlign="left" paddingLeft={3}>
                 <Text>{gal.workoutId.name}</Text>
                 <Text color="orange.400">
-                  {new Date(gal.endDate).toLocaleDateString()}
+                  {moment(new Date(gal.endDate).toLocaleDateString()).format(
+                    "LL"
+                  )}
                 </Text>
               </Box>
             </div>
