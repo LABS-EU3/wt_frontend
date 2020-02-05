@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Chart from "./Chart";
 
+import Chart from "./Chart";
 import StyledCharts from "./StyledChart";
 
 const Charts = ({ graphs }) => {
