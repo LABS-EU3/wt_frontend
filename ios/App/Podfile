@@ -10,11 +10,16 @@ def capacitor_pods
   # Automatic Capacitor Pod dependencies, do not delete
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
-  pod 'CodetrixStudioCapacitorGoogleAuth', :path => '..\..\node_modules\@codetrix-studio\capacitor-google-auth'
+  pod 'CodetrixStudioCapacitorGoogleAuth', :path => '../../node_modules/@codetrix-studio/capacitor-google-auth'
   # Do not delete
+end
+
+def firebase_pods
+  pod 'Firebase', '>= 6.16.0'
 end
 
 target 'App' do
   capacitor_pods
   # Add your Pods here
+  firebase_pods
 end

@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:970094315674:ios:d8ad74a9d6481b40863723</string>
+	<string>1:970094315674:ios:3e5fc92317c90981863723</string>
 	<key>DATABASE_URL</key>
 	<string>https://trackdrills.firebaseio.com</string>
 </dict>
