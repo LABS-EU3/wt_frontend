@@ -71,8 +71,7 @@ const Notification = ({ notifications, client }) => {
         setNotificationData(res.data.notifications);
       })
       .catch(err => {
-        console.log(err);
-        alert("An error occurred. 23", "Unable to load", "error");
+        alert("An error occurred.", "Unable to load", "error");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
