@@ -80,7 +80,7 @@ const ProfilePage = ({ client, history, workout }) => {
         alert("An error occurred.", "Unable to load", "error");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, []);
 
   if (isLoading) {
     return (
