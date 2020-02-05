@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Flex, useToast } from "@chakra-ui/core";
+import { Flex, Text, useToast } from "@chakra-ui/core";
 import { withApollo } from "react-apollo";
 import { Redirect } from "react-router-dom";
 
@@ -11,7 +11,9 @@ import { CompletedWorkoutsGalleryStyle } from "./StyledGallery";
 
 const CompletedWorkoutsGallery = ({ client }) => {
   const [workoutGallery, setWorkoutGallery] = useState([]);
+  const [staticGallery, setStaticGallery] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [matchFound, setMatchFound] = useState(true);
   const [search, setSearch] = useState("");
   const [error, setError] = useState(false);
   const toast = useToast();
@@ -33,6 +35,7 @@ const CompletedWorkoutsGallery = ({ client }) => {
       })
       .then(res => {
         setWorkoutGallery(res.data.completedWorkoutsGallery);
+        setStaticGallery(res.data.completedWorkoutsGallery);
         setIsLoading(false);
       })
       .catch(() => {
@@ -52,7 +55,16 @@ const CompletedWorkoutsGallery = ({ client }) => {
         friendGallery.email.includes(inputSearch) ||
         friendGallery.lastname.includes(inputSearch)
     );
-    setWorkoutGallery(filteredFriendGallery);
+    if (inputSearch) {
+      if (filteredFriendGallery.length > 0) {
+        setWorkoutGallery(filteredFriendGallery);
+      } else {
+        setMatchFound(false);
+      }
+    } else {
+      setWorkoutGallery(staticGallery);
+      setMatchFound(true);
+    }
   };
 
   if (isLoading) {
@@ -76,9 +88,11 @@ const CompletedWorkoutsGallery = ({ client }) => {
         id="search-friends"
         onChange={onSearch}
       />
-      {workoutGallery.map(wGallery => (
-        <FriendsGallery key={wGallery.id} wGallery={wGallery} />
-      ))}
+      {matchFound &&
+        workoutGallery.map(wGallery => (
+          <FriendsGallery key={wGallery.id} wGallery={wGallery} />
+        ))}
+      {!matchFound && <Text>No match found</Text>}
     </CompletedWorkoutsGalleryStyle>
   );
 };

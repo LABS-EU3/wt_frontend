@@ -1,5 +1,7 @@
 import React from "react";
 import { Stack, Box, Divider, Heading, Text } from "@chakra-ui/core";
+import moment from "moment";
+
 import { FriendsGalleryStyle } from "./StyledGallery";
 
 const FriendsGallery = ({ wGallery }) => {
@@ -22,7 +24,11 @@ const FriendsGallery = ({ wGallery }) => {
               <Box key={gal.id} className="box">
                 <img src={gal.picture} alt="user-progress" />
                 <Text>{gal.workoutId.name}</Text>
-                <Text>{new Date(gal.endDate).toLocaleDateString()}</Text>
+                <Text>
+                  {moment(new Date(gal.endDate).toLocaleDateString()).format(
+                    "LL"
+                  )}
+                </Text>
               </Box>
             );
           }
