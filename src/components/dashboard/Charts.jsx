@@ -33,13 +33,14 @@ const Charts = ({ graphs }) => {
 
   return (
     <StyledCharts>
-      {graphs.map(graphData => (
-        <Chart
-          key={graphData.name}
-          graphData={graphData}
-          changeSlides={changeSlides}
-        />
-      ))}
+      {graphs &&
+        graphs.map(graphData => (
+          <Chart
+            key={graphData.name}
+            graphData={graphData}
+            changeSlides={changeSlides}
+          />
+        ))}
       <p>Data view</p>
     </StyledCharts>
   );

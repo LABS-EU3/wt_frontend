@@ -58,12 +58,14 @@ function Dashboard({ client, history }) {
     );
   }
 
+  const { user } = dashboardData;
+
   if (dashboardData) {
     return (
       <DashboardStyle>
         <div className="welcome">
           <Heading marginBottom="25px" textAlign="left">
-            Hello {dashboardData.user.firstname}! Welcome to Workout Tracker ...
+            Hello {user && user.firstname}! Welcome to Workout Tracker ...
           </Heading>
         </div>
 
@@ -71,7 +73,7 @@ function Dashboard({ client, history }) {
           <div className="user-detail">
             <Link to="/profile">Edit</Link>
             <Avatar
-              src={dashboardData.user.photo}
+              src={user && user.photo}
               size="2xl"
               marginLeft="35%"
               marginBottom="20px"
@@ -80,8 +82,8 @@ function Dashboard({ client, history }) {
               <Box width="50%" d="flex" flexDirection="column">
                 <p className="colorOrange">Weight</p>
                 <p>
-                  {dashboardData.user.weight}
-                  {dashboardData.user.weightUnit.name}
+                  {user && user.weight}
+                  {user && user.weightUnit.name}
                 </p>
               </Box>
               <Box
@@ -92,8 +94,8 @@ function Dashboard({ client, history }) {
               >
                 <p className="colorOrange">Height</p>
                 <p>
-                  {dashboardData.user.height}
-                  {dashboardData.user.heightUnit.name}
+                  {user && user.height}
+                  {user && user.heightUnit.name}
                 </p>
               </Box>
             </Flex>
@@ -108,7 +110,7 @@ function Dashboard({ client, history }) {
             <section className="goal">
               <p>Goal</p>
               <Heading as="h4" size="md">
-                {dashboardData.user.goal}
+                {user && user.goal}
               </Heading>
             </section>
             <section className="recomended-workouts">
