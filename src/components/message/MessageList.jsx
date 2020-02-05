@@ -6,15 +6,19 @@ import { Box, Flex } from "@chakra-ui/core";
 import CustomSpinner from "../common/Spinner";
 import { StyledMessagesList } from "./Styledmessages";
 import { GET_FRIENDS } from "../../graphql/queries";
-import Input from "../common/Input";
+import Search from "../common/Search";
 import Messages from "./Messages";
+import { useDebounce } from "./../../utils/index";
 
 const MessageList = ({ client, match }) => {
   const [friends, setFriends] = useState([]);
+  const [searchFriends, setSearchFriends] = useState([]);
   const [friend, setFriend] = useState(null);
   const [isRefetched, setIsRefetched] = useState(false);
   const [loading, setLoading] = useState(true);
   const [receivingMessage, setReceivingMessage] = useState(false);
+  const [search, setSearch] = useState("");
+  const debounceSearch = useDebounce(search, 700);
 
   useEffect(() => {
     const { id } = match.params;
@@ -25,6 +29,15 @@ const MessageList = ({ client, match }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [friends]);
+
+  useEffect(() => {
+    setSearchFriends(
+      friends.filter(frnd =>
+        frnd.firstname.toLowerCase().includes(debounceSearch.toLowerCase())
+      )
+    );
+    console.log(debounceSearch);
+  }, [debounceSearch]);
 
   const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
 
@@ -73,19 +86,21 @@ const MessageList = ({ client, match }) => {
     );
   }
 
+  const friendsResult = searchFriends.length ? searchFriends : friends;
+
   if (friends.length > 0) {
     return (
       <StyledMessagesList>
         <div className="users-list">
-          <Input
+          <Search
             placeholder="Search Messages"
             id="search"
             name="search"
-            onChange={searchMessages}
+            setSearch={setSearch}
+            search={search}
             variant="filled"
-            type="text"
           />
-          {friends.map(frnd => {
+          {friendsResult.map(frnd => {
             const { firstname, photo, messages } = frnd;
             let selected;
 
