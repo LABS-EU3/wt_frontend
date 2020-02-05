@@ -77,6 +77,7 @@ const Onboarding = ({ client, history }) => {
         })
         .then(res => {
           userOnboardedSuccessfully("yes");
+
           alert(
             "Onboarding Completed.",
             "You can now access your dashboard",
@@ -86,8 +87,9 @@ const Onboarding = ({ client, history }) => {
           window.location.reload();
         })
         .catch(() => {
+          console.log("aaa");
           alert(
-            "An error occurred.",
+            "An error occurred...",
             "Unable to complete onboarding. Please try again",
             "error"
           );
@@ -113,8 +115,9 @@ const Onboarding = ({ client, history }) => {
       })
       .catch(() => {
         setIsLoading(false);
+        console.log("ab");
         alert(
-          "An error occurred.",
+          "An error occurred....",
           "Unable to complete onboarding. Please reload the page and try again",
           "error"
         );
