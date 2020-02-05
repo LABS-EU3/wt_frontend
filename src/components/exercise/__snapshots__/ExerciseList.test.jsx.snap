@@ -4,6 +4,7 @@ exports[`<ExerciseList /> renders the ExerciseList component correctly 1`] = `
 <styled.div>
   <styled.div>
     <Search
+      id="search-exercise"
       placeholder="Look for a specific exercise"
       search=""
       setSearch={[Function]}

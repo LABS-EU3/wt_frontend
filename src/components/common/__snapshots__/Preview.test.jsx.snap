@@ -6,7 +6,7 @@ exports[`<Preview /> renders the Preview component correctly 1`] = `
     className="view"
     style={
       Object {
-        "backgroundImage": "url(https://images.unsplash.com/photo-1466761366829-84fd59a22e0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80)",
+        "backgroundImage": "url(https://images.unsplash.com/photo-1542990254-6a8126153b7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)",
       }
     }
   >
