@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withApollo, useQuery } from "react-apollo";
 import moment from "moment";
+import { Redirect } from "react-router-dom";
 
 import { Box, Flex } from "@chakra-ui/core";
 import CustomSpinner from "../common/Spinner";
@@ -27,6 +28,12 @@ const MessageList = ({ client, match }) => {
   }, [friends]);
 
   const { subscribeToMore, refetch, data } = useQuery(GET_FRIENDS);
+
+  if (data) {
+    if (data.friends.length === 0) {
+      return <Redirect to="/" />;
+    }
+  }
 
   if (data && friends.length === 0) {
     setFriends(data.friends);
