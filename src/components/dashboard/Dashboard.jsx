@@ -38,7 +38,7 @@ function Dashboard({ client, history }) {
       })
       .catch(err => {
         setIsLoading(false);
-        alert("An error occurred....", "Unable to load", "error");
+        alert("An error occurred.", "Unable to load", "error");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
