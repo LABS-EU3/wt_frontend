@@ -35,7 +35,7 @@ const Streak = ({ streak, position = "absolute" }) => {
       <span role="img" aria-label="fire-emoji">
         {emoji}
       </span>{" "}
-      You have a {streak} days streak. {message}
+      You have {streak}(s) days streak. {message}
     </StyledStreak>
   );
 };
