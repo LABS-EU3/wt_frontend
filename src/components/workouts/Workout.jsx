@@ -40,7 +40,6 @@ function Workout({ client, data, history, cardQuery, setLimitedWorkouts }) {
         alert("Custom workout deleted!", "🏋🏾‍♀️", "success");
       })
       .catch(error => {
-        console.log(error);
         alert(
           "An error occurred.",
           "Unable to delete custom workout ☹️",

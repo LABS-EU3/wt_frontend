@@ -6,14 +6,19 @@ import { Button, useToast } from "@chakra-ui/core";
 import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import { isLoggedIn } from "../../utils";
 import Input from "../common/Input";
 import Logo from "../common/Logo";
 import Preview from "../common/Preview";
 import AuthStyle from "./AuthStyle";
-import { GOOGLE_AUTH_MUTATION, SIGNUP_MUTATION } from "../../graphql/mutations";
-const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+import {
+  GOOGLE_AUTH_MUTATION,
+  SIGNUP_MUTATION,
+  FACEBOOK_AUTH_MUTATION
+} from "../../graphql/mutations";
+const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_FACEBOOK_APP_ID } = process.env;
 
 function SignUp({ client, history }) {
   const [signupSuccess, setSignupSuccess] = useState(false);
@@ -136,6 +141,41 @@ function SignUp({ client, history }) {
       })
       .catch(() => {
         alert("An error occurred.", "Unable to signup your account.", "error");
+      });
+  };
+
+  const responseFacebook = response => {
+    client
+      .mutate({
+        mutation: FACEBOOK_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        const { token, isNewUser, id } = res.data.authFacebook;
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ token, isNewUser, id })
+        );
+        alert(
+          "Sign up Successful.",
+          "We've created your account for you.",
+          "success"
+        );
+
+        if (isNewUser === true) {
+          setSignupSuccess("/onboarding");
+        } else {
+          setSignupSuccess("/");
+        }
+      })
+      .catch(error => {
+        alert(
+          "An error occurred.",
+          "Unable to signup to your account.",
+          "error"
+        );
       });
   };
 
@@ -268,15 +308,22 @@ function SignUp({ client, history }) {
                 cookiePolicy={"single_host_origin"}
               />
 
-              <Button
-                type="submit"
-                variantColor="facebook"
-                rightIcon="arrow-forward"
-                size="lg"
-                width="45%"
-              >
-                Facebook
-              </Button>
+              <FacebookLogin
+                appId={REACT_APP_FACEBOOK_APP_ID}
+                callback={responseFacebook}
+                render={renderProps => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    type="submit"
+                    variantColor="facebook"
+                    flexShrink="0"
+                    rightIcon="arrow-forward"
+                    size="lg"
+                  >
+                    Sign Up with Facebook
+                  </Button>
+                )}
+              />
             </div>
             <Link to="/login">Already have an account?</Link>
           </form>

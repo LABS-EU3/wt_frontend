@@ -59,7 +59,7 @@ Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   error: PropTypes.string,
   value: PropTypes.any,
   touchedName: PropTypes.bool,

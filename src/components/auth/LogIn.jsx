@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { withApollo } from "react-apollo";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import Input from "../common/Input";
 import { Button, Checkbox, useToast } from "@chakra-ui/core";
@@ -12,10 +13,13 @@ import { isLoggedIn } from "../../utils";
 import Logo from "../common/Logo";
 import AuthStyle from "./AuthStyle";
 import Preview from "../common/Preview";
-import { GOOGLE_AUTH_MUTATION } from "../../graphql/mutations";
+import {
+  GOOGLE_AUTH_MUTATION,
+  FACEBOOK_AUTH_MUTATION
+} from "../../graphql/mutations";
 import { LOGIN_QUERY } from "../../graphql/queries";
 
-const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_FACEBOOK_APP_ID } = process.env;
 
 function Login({ client, history }) {
   const toast = useToast();
@@ -155,6 +159,41 @@ function Login({ client, history }) {
       });
   };
 
+  const responseFacebook = response => {
+    client
+      .mutate({
+        mutation: FACEBOOK_AUTH_MUTATION,
+        variables: {
+          accessToken: response.accessToken
+        }
+      })
+      .then(res => {
+        const { token, isNewUser, id } = res.data.authFacebook;
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ token, isNewUser, id })
+        );
+        alert(
+          "Login Successful.",
+          "You can now access your dashboard",
+          "success"
+        );
+
+        if (isNewUser === true) {
+          setLoginSuccess("/onboarding");
+        } else {
+          setLoginSuccess("/");
+        }
+      })
+      .catch(error => {
+        alert(
+          "An error occurred.",
+          "Unable to login to your account.",
+          "error"
+        );
+      });
+  };
+
   return (
     <AuthStyle>
       <div className="auth-container">
@@ -247,15 +286,23 @@ function Login({ client, history }) {
                 onFailure={responseFailureGoogle}
                 cookiePolicy={"single_host_origin"}
               />
-              <Button
-                type="submit"
-                variantColor="facebook"
-                flexShrink="0"
-                rightIcon="arrow-forward"
-                size="lg"
-              >
-                Login with Facebook
-              </Button>
+
+              <FacebookLogin
+                appId={REACT_APP_FACEBOOK_APP_ID}
+                callback={responseFacebook}
+                render={renderProps => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    type="submit"
+                    variantColor="facebook"
+                    flexShrink="0"
+                    rightIcon="arrow-forward"
+                    size="lg"
+                  >
+                    Login with Facebook
+                  </Button>
+                )}
+              />
             </div>
 
             <Link to="/accountrecovery">Forgot Password?</Link>

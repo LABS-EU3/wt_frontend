@@ -105,10 +105,6 @@ const Navigation = ({ location }) => {
                   Dashboard &nbsp; <i className="fas fa-chart-line"></i>
                 </Link>
 
-                <Link to="/exercises">
-                  Exercises &nbsp; <i className="fas fa-running"></i>
-                </Link>
-
                 <Link to="/workouts">
                   Workouts &nbsp; <i className="fas fa-dumbbell"></i>
                 </Link>
@@ -117,8 +113,20 @@ const Navigation = ({ location }) => {
                   Schedule &nbsp; <i className="fas fa-calendar-alt"></i>
                 </Link>
 
+                <Link to="/buddies">
+                  Friends &nbsp; <i className="fas fa-users"></i>
+                </Link>
+
+                <Link to="/gallery">
+                  Gallery &nbsp; <i className="fas fa-image"></i>
+                </Link>
+
+                <Link to="/exercises">
+                  Exercises &nbsp; <i className="fas fa-running"></i>
+                </Link>
+
                 <Link to="/workouthistory">
-                  Workout History &nbsp; <i className="fas fa-history"></i>
+                  History &nbsp; <i className="fas fa-history"></i>
                 </Link>
 
                 <Link to="/profile">

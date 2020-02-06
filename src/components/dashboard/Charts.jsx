@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Chart from "./Chart";
 
+import Chart from "./Chart";
 import StyledCharts from "./StyledChart";
 
 const Charts = ({ graphs }) => {
@@ -33,13 +33,14 @@ const Charts = ({ graphs }) => {
 
   return (
     <StyledCharts>
-      {graphs.map(graphData => (
-        <Chart
-          key={graphData.name}
-          graphData={graphData}
-          changeSlides={changeSlides}
-        />
-      ))}
+      {graphs &&
+        graphs.map(graphData => (
+          <Chart
+            key={graphData.name}
+            graphData={graphData}
+            changeSlides={changeSlides}
+          />
+        ))}
       <p>Data view</p>
     </StyledCharts>
   );

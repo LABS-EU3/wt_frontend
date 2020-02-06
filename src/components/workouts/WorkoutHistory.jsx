@@ -85,7 +85,6 @@ function WorkoutHistory({ client, history }) {
         mutation: UPLOAD_PROGRESS_PICTURE
       })
       .then(res => {
-        console.log(res);
         const { id, picture } = res.data.updateCompletedWorkout;
         setWorkouts(
           workouts.map(workout => {
@@ -139,7 +138,7 @@ function WorkoutHistory({ client, history }) {
           <p>You can upload progress pictures and track your development!</p>
         </header>
 
-        <div>
+        <div className="content">
           {workouts.map(workout => (
             <WorkoutHistoryCard
               onOpen={e => onOpenUpload(workout.id, e)}

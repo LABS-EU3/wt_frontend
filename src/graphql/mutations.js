@@ -34,6 +34,16 @@ export const GOOGLE_AUTH_MUTATION = gql`
   }
 `;
 
+export const FACEBOOK_AUTH_MUTATION = gql`
+  mutation authFacebook($accessToken: String!) {
+    authFacebook(input: { accessToken: $accessToken }) {
+      id
+      token
+      isNewUser
+    }
+  }
+`;
+
 export const ONBOARDING = gql`
   mutation updateUser(
     $heightUnit: String!
@@ -197,6 +207,7 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
     $description: String!
     $intensity: String!
     $exercises: [String!]!
+    $picture: Upload!
   ) {
     customWorkout(
       input: {
@@ -205,6 +216,7 @@ export const UPSERT_CUSTOM_WORKOUT = gql`
         description: $description
         intensity: $intensity
         exercises: $exercises
+        picture: $picture
       }
     ) {
       id
@@ -261,6 +273,7 @@ export const UPDATE_USER_DETAILS = gql`
     $equipment: Boolean
     $experience: String
     $reminderType: String
+    $photo: Upload
   ) {
     updateUser(
       input: {
@@ -274,6 +287,7 @@ export const UPDATE_USER_DETAILS = gql`
         equipment: $equipment
         experience: $experience
         reminderType: $reminderType
+        photo: $photo
       }
     ) {
       id
@@ -308,5 +322,22 @@ export const RESET_PASSWORD = gql`
       firstname
       lastname
     }
+  }
+`;
+
+export const SEND_MESSAGE = gql`
+  mutation sendMessage($receiver: String!, $message: String!) {
+    sendMessage(receiver: $receiver, message: $message) {
+      sender
+      receiver
+      message
+      sent
+    }
+  }
+`;
+
+export const MANAGE_FRIENDS = gql`
+  mutation manageFriends($userId: String!, $task: String!) {
+    manageFriends(userId: $userId, task: $task)
   }
 `;

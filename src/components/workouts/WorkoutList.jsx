@@ -8,12 +8,14 @@ import { useDebounce } from "./../../utils/index";
 const WorkoutList = () => {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 700);
+
   return (
     <WorkoutsStyleList>
       <Search
         placeholder="Look for a specific workout"
         setSearch={setSearch}
         search={search}
+        id="search-workout"
       />
       <Workouts workoutName="Custom Workouts" workoutQuery="CUSTOM_WORKOUTS" />
       <Workouts

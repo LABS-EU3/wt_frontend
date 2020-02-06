@@ -55,7 +55,6 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
         setIsLoading(false);
       })
       .catch(err => {
-        console.log(err);
         setIsLoading(false);
         setError(true);
       });
@@ -65,11 +64,7 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   const loadMore = () => {
     const newLimit = limit + 3;
     let limitWorkouts = data.slice(0, newLimit);
-    // if (exerciseQuery === "TOP_RATED_EXERCISES") {
-    //   limitExercises = limitExercises.sort(
-    //     (a, b) => parseFloat(a.rating) - parseFloat(b.rating)
-    //   );
-    // }
+
     setLimitedWorkouts(limitWorkouts);
     setLimit(newLimit);
   };
@@ -97,14 +92,15 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   if (workoutQuery === "CUSTOM_WORKOUTS") {
     return (
       <WorkoutsStyle>
-        <h3>
-          Custom workouts
+        <div className="header">
+          <h3>Custom workouts</h3>
           <Link to="/my/workout/new">
             <Button variantColor="orange" leftIcon="add" isLoading={isLoading}>
               New workout
             </Button>
           </Link>
-        </h3>
+        </div>
+
         {limitedWorkouts.length > 0 ? (
           <>
             <div className="container">
@@ -129,13 +125,26 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   if (limitedWorkouts.length > 0) {
     return (
       <WorkoutsStyle>
-        <h3>{workoutName}</h3>
+        <div className="header">
+          <h3>{workoutName}</h3>
+        </div>
+
         {limitedWorkouts.map(item => (
           <WorkoutCard key={item.id} data={item} />
         ))}
 
         <div className="load-more">
           <Button onClick={loadMore}>Load More</Button>
+        </div>
+      </WorkoutsStyle>
+    );
+  }
+
+  if (limitedWorkouts.length < 1) {
+    return (
+      <WorkoutsStyle>
+        <div className="header">
+          <h3>Ooops! No workout currently matches your search.</h3>
         </div>
       </WorkoutsStyle>
     );

@@ -77,6 +77,7 @@ const Onboarding = ({ client, history }) => {
         })
         .then(res => {
           userOnboardedSuccessfully("yes");
+
           alert(
             "Onboarding Completed.",
             "You can now access your dashboard",

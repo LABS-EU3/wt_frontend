@@ -3,13 +3,14 @@ import { withApollo } from "react-apollo";
 import { Flex, Box, Heading, Avatar, useToast } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 
-import logoImage from "../../images/login_image.png";
 import DashboardStyle from "./DashboardStyle";
 import RecommendedWorkouts from "./RecommendedWorkouts";
 import Charts from "./Charts";
 import { GET_DASHBOARD_DETAILS } from "../../graphql/queries";
 import CustomSpinner from "../common/Spinner";
 import Quotes from "../common/Quotes";
+import Streak from "../common/Streak";
+import Notification from "../common/Notification";
 
 function Dashboard({ client, history }) {
   const [dashboardData, setDashboardData] = useState([]);
@@ -57,12 +58,14 @@ function Dashboard({ client, history }) {
     );
   }
 
+  const { user } = dashboardData;
+
   if (dashboardData) {
     return (
       <DashboardStyle>
         <div className="welcome">
           <Heading marginBottom="25px" textAlign="left">
-            Hello {dashboardData.user.firstname}! Welcome to Workout Tracker ...
+            Hello {user && user.firstname}! Welcome to Workout Tracker ...
           </Heading>
         </div>
 
@@ -70,7 +73,7 @@ function Dashboard({ client, history }) {
           <div className="user-detail">
             <Link to="/profile">Edit</Link>
             <Avatar
-              src={logoImage}
+              src={user && user.photo}
               size="2xl"
               marginLeft="35%"
               marginBottom="20px"
@@ -79,8 +82,8 @@ function Dashboard({ client, history }) {
               <Box width="50%" d="flex" flexDirection="column">
                 <p className="colorOrange">Weight</p>
                 <p>
-                  {dashboardData.user.weight}
-                  {dashboardData.user.weightUnit.name}
+                  {user && user.weight}
+                  {user && user.weightUnit.name}
                 </p>
               </Box>
               <Box
@@ -91,26 +94,14 @@ function Dashboard({ client, history }) {
               >
                 <p className="colorOrange">Height</p>
                 <p>
-                  {dashboardData.user.height}
-                  {dashboardData.user.heightUnit.name}
+                  {user && user.height}
+                  {user && user.heightUnit.name}
                 </p>
               </Box>
             </Flex>
+            <Notification />
 
-            <Box
-              bg="tomato"
-              color="white"
-              p={4}
-              width="70%"
-              rounded="lg"
-              marginTop="350px"
-              marginLeft="15%"
-            >
-              <span role="img" aria-label="fire-emoji">
-                🔥🔥🔥
-              </span>{" "}
-              You have a {dashboardData.streak} days streak. Keep it up!
-            </Box>
+            <Streak streak={dashboardData.streak} />
           </div>
 
           <div className="dasboard-detail">
@@ -119,15 +110,21 @@ function Dashboard({ client, history }) {
             <section className="goal">
               <p>Goal</p>
               <Heading as="h4" size="md">
-                {dashboardData.user.goal}
+                {user && user.goal}
               </Heading>
             </section>
             <section className="recomended-workouts">
               <p className="colorOrange alignText">Recommended Workouts</p>
               <RecommendedWorkouts />
             </section>
-
-            <Charts graphs={dashboardData.graphs} />
+            {dashboardData.graphs[0].data.length === 0 && (
+              <Heading as="h4" size="md">
+                Start working out to view progress chart
+              </Heading>
+            )}
+            {dashboardData.graphs[0].data.length > 0 && (
+              <Charts graphs={dashboardData.graphs} />
+            )}
           </div>
         </div>
       </DashboardStyle>

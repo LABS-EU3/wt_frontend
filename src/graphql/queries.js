@@ -25,7 +25,9 @@ export const GET_UNITS = gql`
 export const GET_COMPLETED_WORKOUTS = gql`
   query {
     completedWorkouts {
+      id
       userId
+      picture
       workoutId {
         id
         name
@@ -158,6 +160,7 @@ export const GET_SCHEDULE = gql`
       userId
       workoutId {
         name
+        id
       }
       startDate
       routine
@@ -187,6 +190,7 @@ export const GET_DASHBOARD_DETAILS = gql`
         goal
         height
         weight
+        photo
         heightUnit {
           name
         }
@@ -219,11 +223,13 @@ export const EXERCISES_BY_FIELDS = gql`
 export const GET_USER_DETAILS = gql`
   query {
     user {
+      streak
       firstname
       lastname
       equipment
       height
       goal
+      photo
       weight
       reminderType
       experience
@@ -246,6 +252,91 @@ export const ACCOUNT_RECOVERY = gql`
       id
       firstname
       lastname
+    }
+  }
+`;
+
+export const GET_MESSAGE_HISTORY = gql`
+  query friendChat($receiver: String!) {
+    friendChat(receiver: $receiver) {
+      sender
+      receiver
+      message
+      sent
+    }
+  }
+`;
+
+export const GET_USERS = gql`
+  query findFriends($search: String!, $fields: [String!]!) {
+    findFriends(input: { search: $search, fields: $fields }) {
+      id
+      firstname
+      lastname
+      email
+      goal
+      photo
+    }
+  }
+`;
+
+export const GET_FRIENDS_REQUEST = gql`
+  query {
+    friendRequests {
+      id
+      firstname
+      lastname
+      photo
+      email
+    }
+  }
+`;
+
+export const GET_FRIENDS = gql`
+  query {
+    friends {
+      id
+      firstname
+      lastname
+      goal
+      photo
+      messages {
+        id
+        sender
+        receiver
+        message
+        sent
+      }
+    }
+  }
+`;
+
+export const GET_COMPLETED_WORKOUTS_GALLERY = gql`
+  query {
+    completedWorkoutsGallery {
+      id
+      firstname
+      lastname
+      email
+      goal
+      gallery {
+        id
+        picture
+        endDate
+        workoutId {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const GET_NOTIFICATIONS = gql`
+  query {
+    notifications {
+      topic
+      message
     }
   }
 `;

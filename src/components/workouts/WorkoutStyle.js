@@ -17,13 +17,30 @@ export const WorkoutsStyle = styled.div`
   justify-content: space-evenly;
   padding: 2rem 0;
   text-align: left;
+
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 1rem;
+
+    @media only screen and (max-width: 605px) {
+      a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
   h3 {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    /* width: 100%; */
     font-weight: bolder;
     font-size: 1.2rem;
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     position: relative;
     a {
       position: absolute;
@@ -32,7 +49,6 @@ export const WorkoutsStyle = styled.div`
       transform: translate(0, -50%);
     }
   }
-
   .load-more {
     display: flex;
     width: 100%;
@@ -332,6 +348,6 @@ export const CustomWorkoutStyleDetail = styled.div`
   }
 
   .cw-submit-btn {
-    margin-top: 1rem;
+    margin-top: 3rem;
   }
 `;
