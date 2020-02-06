@@ -123,9 +123,11 @@ const Onboarding = ({ client, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (userData.isNewUser === false) {
-    alert("Onboarding already completed.", "Proceed to workout", "warning");
-    return <Redirect to="/" />;
+  if (userData) {
+    if (userData.isNewUser === false) {
+      alert("Onboarding already completed.", "Proceed to workout", "warning");
+      return <Redirect to="/" />;
+    }
   }
 
   const CustomRadio = React.forwardRef((props, ref) => {
