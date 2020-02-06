@@ -140,6 +140,16 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
     );
   }
 
+  if (limitedWorkouts.length < 1) {
+    return (
+      <WorkoutsStyle>
+        <div className="header">
+          <h3>Ooops! No workout currently matches your search.</h3>
+        </div>
+      </WorkoutsStyle>
+    );
+  }
+
   return (
     <Box>
       <Flex width="100vw" height="100vh" justifyContent="center" align="center">

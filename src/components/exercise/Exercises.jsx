@@ -129,6 +129,16 @@ const Exercises = ({ client, exerciseQuery, exerciseName, search }) => {
     );
   }
 
+  if (limitedExercises.length < 1) {
+    return (
+      <ExercisesStyle>
+        <div className="header">
+          <h3>Ooops! No Exercise currently matches your search</h3>
+        </div>
+      </ExercisesStyle>
+    );
+  }
+
   return (
     <Box>
       <Flex width="100vw" height="100vh" justifyContent="center" align="center">
