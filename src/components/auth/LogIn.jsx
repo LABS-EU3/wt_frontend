@@ -112,7 +112,7 @@ function Login({ client, history }) {
 
   if (loginSuccess) {
     history.push(loginSuccess);
-    // window.location.reload();
+    window.location.reload();
   }
 
   // if user is already logged in, redirect to dashboard
