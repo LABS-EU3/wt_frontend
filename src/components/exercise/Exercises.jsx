@@ -130,11 +130,10 @@ const Exercises = ({ client, exerciseQuery, exerciseName, search }) => {
   }
 
   if (limitedExercises.length < 1) {
-    const message = "Ooops! No Exercise currently matches your search ";
     return (
       <ExercisesStyle>
         <div className="header">
-          <h3>{message}</h3>
+          <h3>Ooops! No Exercise currently matches your search</h3>
         </div>
       </ExercisesStyle>
     );

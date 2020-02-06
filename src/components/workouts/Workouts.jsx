@@ -141,17 +141,10 @@ function Workouts({ client, workoutName, workoutQuery, search }) {
   }
 
   if (limitedWorkouts.length < 1) {
-    const message =
-      "Ooops! No workout currently matches your search.  \n\n You can create a custom workout of your choice by hitting ";
     return (
       <WorkoutsStyle>
         <div className="header">
-          <h3>
-            {message}
-            <Button variantColor="orange" leftIcon="add" isLoading={isLoading}>
-              ...this BUTTON
-            </Button>
-          </h3>
+          <h3>Ooops! No workout currently matches your search.</h3>
         </div>
       </WorkoutsStyle>
     );
